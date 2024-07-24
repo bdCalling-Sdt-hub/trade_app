@@ -70,38 +70,27 @@ class _UserNavBarState extends State<NavBar> {
           unselectedIcon.length,
           (index) => InkWell(
             onTap: () => onTap(index),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-
-                horizontal: 15.w,
-              ),
-              // decoration: BoxDecoration(
-              //   color: index == bottomNavIndex
-              //       ? Colors.amber
-              //       : null,
-              // ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    index == bottomNavIndex
-                        ? selectedIcon[index]
-                        : unselectedIcon[index],
-                    height: 24.h,
-                    width: 24.w,
-                    color: index == bottomNavIndex?
-                    AppColors.blue:
-                    Colors.black,
-                  ),
-                  SizedBox(height: 4.h),
-                  CustomText(
-                    text: userNavText[index],
-                    color: index == bottomNavIndex
-                        ? AppColors.blue
-                        : Colors.black,
-                  ),
-                ],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  index == bottomNavIndex
+                      ? selectedIcon[index]
+                      : unselectedIcon[index],
+                  height: 24.h,
+                  width: 24.w,
+                  color: index == bottomNavIndex?
+                  AppColors.blue:
+                  Colors.black,
+                ),
+                SizedBox(height: 4.h),
+                CustomText(
+                  text: userNavText[index],
+                  color: index == bottomNavIndex
+                      ? AppColors.blue
+                      : Colors.black,
+                ),
+              ],
             ),
           ),
         ),
