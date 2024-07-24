@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
+import 'package:trade_app/helper/network_controller/network_controller.dart';
 import 'package:trade_app/view/components/device_utils/device_utils.dart';
 
 
@@ -13,6 +14,7 @@ void main() {
   DeviceUtils.lockDevicePortrait();
   DependencyInjection di = DependencyInjection();
   di.dependencies();
+  Get.put(NetworkController());
 
   runApp(
     // DevicePreview(
