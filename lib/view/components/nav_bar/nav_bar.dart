@@ -23,7 +23,7 @@ class NavBar extends StatefulWidget {
 
 class _UserNavBarState extends State<NavBar> {
   late int bottomNavIndex;
-
+///=======================UnselectedIcon====================
   final List<String> unselectedIcon = [
     AppIcons.homeUnselected,
     AppIcons.messageUnSelected,
@@ -31,7 +31,7 @@ class _UserNavBarState extends State<NavBar> {
     AppIcons.postUnselected,
     AppIcons.profileUnselected,
   ];
-
+  ///=======================SelectedIcon====================
   final List<String> selectedIcon = [
     AppIcons.homeSelected,
     AppIcons.messageSelected,
