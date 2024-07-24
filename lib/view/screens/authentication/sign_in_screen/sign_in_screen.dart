@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -17,7 +19,11 @@ class SignInScreen extends StatelessWidget {
 
 
 
-             Text('data')
+             GestureDetector(
+                 onTap: (){
+                   Get.to( ()=> HomeScreen());
+                 },
+                 child: Text('data'))
 
 
             ],
