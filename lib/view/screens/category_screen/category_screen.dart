@@ -16,6 +16,7 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const NavBar(currentIndex: 2),
+      ///===================Categories appbar===============
       appBar:  CustomAppBar(
         appBarContent: AppStrings.categories.tr,
       ),
