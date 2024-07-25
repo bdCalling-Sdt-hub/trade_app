@@ -46,6 +46,13 @@ class AppStrings {
   static const String swapRequests = "Swap Requests";
   static const String swapHistory = "Swap History";
   static const String myRatingAndComments = "My Rating & Comments";
+  static const String totalPointsEarn = "Total Points Earn";
+  static const String monthlySubscriptionFee = "Monthly Subscription Fee ";
+  static const String payNow = "Pay Now";
+  static const String yourMembershipBenefits = "Your Membership Benefits:";
+  static const String canExchangeProducts = "Can exchange products";
+  static const String earnUpTo1000 = "Earn upto 1000 points by a single swap";
+  static const String payYourSubscriptionFeeInTime = "Pay your subscription fee in time otherwise you may lose your points or downgrade your membership.";
 
   ///======================Settings ============================
   static const String settings = "Settings";
@@ -64,6 +71,34 @@ class AppStrings {
   static const String lastName = "Last Name";
   static const String update = "Update";
 
+  ///===========================Address=====================
+  static const String fillUpYourAddressDetails = "Fill up your address details";
+  static const String city = "City";
+  static const String zipCode = "Zip Code";
+  static const String streetAddress = "Street Address";
+
+  ///====================Swap================
+  static const String pointsEarn = "Points Earn";
+  static const String availableProducts = "Available Products";
+  static const String myProductDetails = "My Product Details";
+  static const String edit = "Edit";
+  static const String delete = "Delete";
+  static const String viewDetails = "View Details";
+  static const String accept = "Accept";
+  static const String reject = "Reject";
+  static const String swapItems = "Swap Items";
+  static const String swappedWith = "Swapped with";
+  static const String review = "Review";
+  static const String overallRating = "Overall Rating:";
+  static const String allRatingAndComments = "All Rating & Comments";
+
+  ///==========================Help Center====================
+  static const String howCanWeHelpYou = "How can we help you?";
+  static const String searchYourQuestionHere = "Search your questions here";
+  static const String frequentlyAskedQuestions = "Frequently Asked Questions ";
+  static const String needMoreHelp = "Need More Help?";
+  static const String ourHelpLineServiceIsActive = "Our help line service is active: 24/7";
+
   ///=========================Change Password ==================
   static const String setYourNewPassword = "Set your new password";
   static const String enterCurrentPassword = "Enter Current Password";
@@ -71,5 +106,86 @@ class AppStrings {
   static const String selectYourLanguage = "Select your language";
   static const String english = "English";
   static const String spanish = "Spanish";
+
+///==================================Home section===================
+  static const String whatAreYouLookingFor = "What are you looking for?";
+  static const String topSearch = "Top search";
+  static const String search = "Search";
+  static const String popularCategory = "Popular Category";
+  static const String viewAll = "View All";
+  static const String topProducts = "Top Products";
+  static const String membershipPackages = "Membership Packages";
+  static const String justForYou = "Just For You";
+
+  ///============================Subscription=====================
+  static const String goldMembership = "Gold Membership";
+  static const String applyForMembership = "Apply for Membership";
+  static const String goldMembershipBenefits = "Gold Membership Benefits:";
+  static const String platinumMembership = "Platinum Membership";
+  static const String diamondMembership = "Diamond Membership";
+  static const String preApprovalQuestions = "Pre-Approval Questions";
+  static const String pleaseFillUpThisForm = "Please Fill-up this form:";
+  static const String name = "Name";
+  static const String dateOfBirth = "Date of Birth";
+  static const String placeOfBirth = "Place of Birth";
+  static const String licenceNo = "License No ";
+  static const String passport = "Passport";
+  static const String phoneNumber = "Phone Number";
+  static const String profession = "Profession";
+  static const String whatYourReligion = "What’s your religion? (optional)";
+  static const String next = "Next";
+  static const String back = "Back";
+  static const String datesOfTravel = "Dates of travel?";
+  static const String travelStart = "Travel Start";
+  static const String destination = "Destination";
+  static const String state = "State";
+  static const String country = "Country";
+  static const String county = "County";
+  static const String travelEnd = "Travel End";
+  static const String purposeOfTravel = "Purpose of travel?";
+  static const String business = "Business";
+  static const String pleasure = "Pleasure";
+  static const String recreational = "Recreational";
+  static const String submit = "Submit";
+
+  ///=============================Notifications====================
+  static const String notifications = "Notifications";
+
+  ///========================Categories=======================
+  static const String categories = "Categories";
+  static const String filter = "Filter";
+  static const String value = "Value:";
+
+  ///==========================Products details=================
+  static const String productDetails = "Product Details";
+  static const String postBy = "Post by";
+  static const String condition = "Condition:";
+  static const String used = "Used";
+  static const String description = "Description: ";
+  static const String iWantToSwapFor = "I want to Swap for:";
+  static const String sendSwapRequest = "Send Swap Request";
+  static const String similarProducts = "Similar Products";
+  static const String swapProduct = "Swap Product";
+  static const String selectedProduct = "Selected Product";
+  static const String call = "Call";
+  static const String postedOn = "Posted on";
+  static const String membershipStatus = "Membership status:";
+  static const String memberSince = "Member Since: ";
+  static const String lastSiteVisit = "Last site visit: ";
+  static const String availableItemsForSwap = "Available Items for Swap";
+  static const String ratingAndComments = "Rating & Comments";
+
+  ///==============================Post========================
+  static const String postAnAd = "Post an Ad";
+  static const String pleaseChooseACategory = "Please Choose a Category";
+  static const String productCategory = "Product Category";
+  static const String productTitle = "Product Title";
+  static const String productValue = "Product Value ";
+  static const String editAd = "Edit Ad";
+  static const String addPhoto = "Add Photo";
+  static const String postAd = "Post Ad";
+
+
+
 
 }
