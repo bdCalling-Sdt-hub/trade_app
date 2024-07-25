@@ -24,7 +24,7 @@ class NavBar extends StatefulWidget {
 
 class _UserNavBarState extends State<NavBar> {
   late int bottomNavIndex;
-///=======================UnselectedIcon====================
+  ///=======================UnselectedIcon====================
   final List<String> unselectedIcon = [
     AppIcons.homeUnselected,
     AppIcons.messageUnSelected,
@@ -69,7 +69,7 @@ class _UserNavBarState extends State<NavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           unselectedIcon.length,
-          (index) => InkWell(
+              (index) => InkWell(
             onTap: () => onTap(index),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -92,38 +92,6 @@ class _UserNavBarState extends State<NavBar> {
                       : Colors.black,
                 ),
               ],
-            child: Container(
-              padding: EdgeInsets.symmetric(
-
-                horizontal: 15.w,
-              ),
-              // decoration: BoxDecoration(
-              //   color: index == bottomNavIndex
-              //       ? Colors.amber
-              //       : null,
-              // ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    index == bottomNavIndex
-                        ? selectedIcon[index]
-                        : unselectedIcon[index],
-                    height: 24.h,
-                    width: 24.w,
-                    color: index == bottomNavIndex?
-                    AppColors.blue50:
-                    Colors.black,
-                  ),
-                  SizedBox(height: 4.h),
-                  CustomText(
-                    text: userNavText[index],
-                    color: index == bottomNavIndex
-                        ? AppColors.blue50
-                        : Colors.black,
-                  ),
-                ],
-              ),
             ),
           ),
         ),

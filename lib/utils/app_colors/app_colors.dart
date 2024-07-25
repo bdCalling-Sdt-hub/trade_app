@@ -5,7 +5,6 @@ class AppColors {
   static const Color titleBlack = Color(0xff222222);
   static const Color blue50 = Color(0xffEBF1FE);
   ///<===================== blue ==========================>
-  static const Color blue50 = Color(0xffebf1fe);
   static const Color blue100 = Color(0xffc0d4fb);
   static const Color blue200 = Color(0xffa2c0f9);
   static const Color blue300 = Color(0xff77a3f6);
@@ -16,7 +15,7 @@ class AppColors {
   static const Color blue800 = Color(0xff1d4085);
   static const Color blue900 = Color(0xff163165);
 
-  ///<===================== blue ==========================>
+  ///<===================== green ==========================>
   static const Color green50 = Color(0xffe9faf5);
   static const Color green100 = Color(0xffbaf0df);
   static const Color green200 = Color(0xff99e8d0);
@@ -28,7 +27,7 @@ class AppColors {
   static const Color green800 = Color(0xff127154);
   static const Color green900 = Color(0xff0e5740);
 
-  ///<===================== blue ==========================>
+  ///<===================== white ==========================>
   static const Color white50 = Color(0xfffefefe);
   static const Color white100 = Color(0xfffcfcfc);
   static const Color white200 = Color(0xfffafafa);
@@ -52,7 +51,7 @@ class AppColors {
   static const Color black800 = Color(0xff131313);
   static const Color black900 = Color(0xff0e0e0e);
 
-  ///<===================== black ==========================>
+  ///<===================== gray ==========================>
   static const Color gray50 = Color(0xfff8f8f8);
   static const Color gray100 = Color(0xffeaeaea);
   static const Color gray200 = Color(0xffe0e0e0);
