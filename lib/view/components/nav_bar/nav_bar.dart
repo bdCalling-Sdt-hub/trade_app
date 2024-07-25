@@ -7,6 +7,7 @@ import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/category_screen/category_screen.dart';
 import 'package:trade_app/view/screens/home_screen/home_screen.dart';
+import 'package:trade_app/view/screens/message_screen/inbox_screen.dart';
 import 'package:trade_app/view/screens/message_screen/message_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_screen.dart';
 import 'package:trade_app/view/screens/profile_screen/profile_screen.dart';
@@ -23,7 +24,7 @@ class NavBar extends StatefulWidget {
 
 class _UserNavBarState extends State<NavBar> {
   late int bottomNavIndex;
-
+///=======================UnselectedIcon====================
   final List<String> unselectedIcon = [
     AppIcons.homeUnselected,
     AppIcons.messageUnSelected,
@@ -31,7 +32,7 @@ class _UserNavBarState extends State<NavBar> {
     AppIcons.postUnselected,
     AppIcons.profileUnselected,
   ];
-
+  ///=======================SelectedIcon====================
   final List<String> selectedIcon = [
     AppIcons.homeSelected,
     AppIcons.messageSelected,
@@ -70,6 +71,27 @@ class _UserNavBarState extends State<NavBar> {
           unselectedIcon.length,
           (index) => InkWell(
             onTap: () => onTap(index),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  index == bottomNavIndex
+                      ? selectedIcon[index]
+                      : unselectedIcon[index],
+                  height: 24.h,
+                  width: 24.w,
+                  color: index == bottomNavIndex?
+                  AppColors.blue:
+                  Colors.black,
+                ),
+                SizedBox(height: 4.h),
+                CustomText(
+                  text: userNavText[index],
+                  color: index == bottomNavIndex
+                      ? AppColors.blue
+                      : Colors.black,
+                ),
+              ],
             child: Container(
               padding: EdgeInsets.symmetric(
 
@@ -116,7 +138,7 @@ class _UserNavBarState extends State<NavBar> {
           Get.offAll(() => const HomeScreen());
           break;
         case 1:
-          Get.to(() =>  const MessageScreen());
+          Get.to(() =>   const InboxScreen());
           break;
         case 2:
           Get.to(() => const CategoryScreen());
