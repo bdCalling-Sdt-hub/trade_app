@@ -90,14 +90,14 @@ class _UserNavBarState extends State<NavBar> {
                     height: 24.h,
                     width: 24.w,
                     color: index == bottomNavIndex?
-                    AppColors.blue:
+                    AppColors.blue50:
                     Colors.black,
                   ),
                   SizedBox(height: 4.h),
                   CustomText(
                     text: userNavText[index],
                     color: index == bottomNavIndex
-                        ? AppColors.blue
+                        ? AppColors.blue50
                         : Colors.black,
                   ),
                 ],
