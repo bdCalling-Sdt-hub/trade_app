@@ -23,6 +23,7 @@ class ResetPasswordScreen extends StatelessWidget {
         return SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 44.h),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ///<=================================Title Text=====================================>
               Center(
@@ -37,10 +38,11 @@ class ResetPasswordScreen extends StatelessWidget {
                 maxLines: 3,
                 top: 8,
                 fontSize: 16.h,
+                bottom: 24.h,
               ),
               ///<==============================Password section====================================>
               CustomText(
-                text: AppStrings.password.tr,
+                text: AppStrings.enterNewPassword.tr,
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 bottom: 16.h,
@@ -61,7 +63,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 isPassword: true,
                 textEditingController: controller.newPassController,
-                hintText: AppStrings.password,
+                hintText: AppStrings.enterNewPassword,
               ),
 
               ///<==============================Confirm Password section====================================>
@@ -86,7 +88,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 textEditingController: controller.confirmPassController,
                 textInputAction: TextInputAction.done,
                 isPassword: true,
-                hintText: AppStrings.confirmPassword,
+                hintText: AppStrings.retypeNewPassword.tr,
               ),
 
               SizedBox(

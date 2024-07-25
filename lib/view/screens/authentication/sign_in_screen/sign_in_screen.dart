@@ -10,6 +10,7 @@ import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
+import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -194,7 +195,9 @@ class SignInScreen extends StatelessWidget {
                   ///<======================================= sign in button ======================================>
                   CustomButton(
                     onTap: () {
-                      if (formKey.currentState!.validate()) {}
+                      if (formKey.currentState!.validate()) {
+                        Get.to(()=>const HomeScreen());
+                      }
                     },
                     title: AppStrings.signIn.tr,
                   ),

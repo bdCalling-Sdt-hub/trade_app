@@ -182,7 +182,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ///<==================================Verify Button===========================>
               CustomButton(
                 onTap: () {
-                  Get.toNamed(AppRoutes.signInScreen);
+                  Get.toNamed(AppRoutes.resetPasswordScreen);
                 },
                 title: AppStrings.continues.tr,
               ),
