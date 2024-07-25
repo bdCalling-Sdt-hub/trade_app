@@ -72,4 +72,24 @@ class AuthController extends GetxController{
     signUpLoading = false;
     update();
   }*/
+
+  ///<========================= forgot controller =========================>
+  TextEditingController forgotPassEmailController = TextEditingController();
+
+/*  handleForgetPassword() async {
+    signUpLoading = true;
+    update();
+    var body = {"email": forgotPassEmailController.text.trim()};
+    var response = await ApiClient.postData(
+      ApiConstant.forgetPass,
+      body,
+    );
+    if (response.statusCode == 200) {
+      Get.toNamed(AppRoute.otpScreen);
+    } else {
+      ApiChecker.checkApi(response);
+    }
+    signUpLoading = false;
+    update();
+  }*/
 }

@@ -136,14 +136,6 @@ class SignUpScreen extends StatelessWidget {
                     bottom: 8.h,
                   ),
                   CustomTextField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.fieldCantBeEmpty.tr;
-                      }
-                      else {
-                        return null;
-                      }
-                    },
                     textEditingController: controller.addressSignUp,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.done,
@@ -268,7 +260,9 @@ class SignUpScreen extends StatelessWidget {
                   ///<======================================= sign in button ======================================>
                   CustomButton(
                     onTap: () {
-                      if (formKey.currentState!.validate()) {}
+                      if (formKey.currentState!.validate()) {
+                        Get.toNamed(AppRoutes.signUpOtp);
+                      }
                     },
                     title: AppStrings.signUp.tr,
                   ),
