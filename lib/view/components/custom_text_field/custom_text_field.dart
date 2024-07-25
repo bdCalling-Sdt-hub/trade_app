@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 
 class CustomTextField extends StatefulWidget {
-  const CustomTextField({
+    CustomTextField({
     super.key,
     this.inputFormatters,
     this.onFieldSubmitted,
@@ -20,12 +22,11 @@ class CustomTextField extends StatefulWidget {
     this.maxLines = 1,
     this.validator,
     this.hintText,
-    this.hintStyle,
-    this.fillColor = Colors.red,
+    this.fillColor =const Color(0xffFFFFFF),
     this.suffixIcon,
     this.suffixIconColor,
     this.fieldBorderRadius = 8,
-    this.fieldBorderColor = const Color(0xffB5D8EE),
+    this.fieldBorderColor = AppColors.black300,
     this.isPassword = false,
     this.isPrefixIcon = true,
     this.readOnly = false,
@@ -47,7 +48,6 @@ class CustomTextField extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final FormFieldValidator<String>? validator;
   final String? hintText;
-  final TextStyle? hintStyle;
   final Color? fillColor;
   final Color? suffixIconColor;
   final Widget? suffixIcon;
@@ -92,7 +92,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
       decoration: InputDecoration(
         errorMaxLines: 2,
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle,
+        hintStyle: TextStyle(
+            color: AppColors.black200,
+            fontWeight: FontWeight.w400,
+            fontSize: 16.h
+        ),
         fillColor: widget.fillColor,
         filled: true,
         prefixIcon: widget.prefixIcon,

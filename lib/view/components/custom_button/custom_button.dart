@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trade_app/utils/app_colors/app_colors.dart';
 
 import '../custom_text/custom_text.dart';
 
@@ -11,14 +12,14 @@ class CustomButton extends StatelessWidget {
     this.title = '',
     this.marginVertical = 0,
     this.marginHorizontal = 0,
-    this.fillColor,
+    this.fillColor = AppColors.blue500,
     this.textColor = Colors.white,
     this.isBorder = false,
   });
 
   final double height;
   final double? width;
-  final Color? fillColor;
+  final Color fillColor;
   final Color textColor;
   final VoidCallback onTap;
   final String title;
@@ -38,12 +39,12 @@ class CustomButton extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           border: isBorder ? Border.all(color: textColor) : null,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(8),
           color: fillColor,
         ),
         child: CustomText(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
           color: textColor,
           textAlign: TextAlign.center,
           text: title,
