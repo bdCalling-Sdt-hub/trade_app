@@ -109,8 +109,8 @@ class _ChatBubbleMessageState extends State<ChatBubbleMessage> {
                                           ["sender"] ==
                                               //"0"
                                              "1"
-                                              ? Colors.cyanAccent
-                                              : Colors.green),
+                                              ? Colors.white
+                                              : Colors.blue),
                                       child: CustomText(
                                         maxLines: 10,
                                         textAlign: TextAlign.left,
