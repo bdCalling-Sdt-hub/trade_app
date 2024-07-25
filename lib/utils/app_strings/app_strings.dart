@@ -187,6 +187,7 @@ class AppStrings {
   static const String editAd = "Edit Ad";
   static const String addPhoto = "Add Photo";
   static const String postAd = "Post Ad";
+  static const String chat = "Chat";
 
 
 

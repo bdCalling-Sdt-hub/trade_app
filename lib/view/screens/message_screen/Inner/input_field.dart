@@ -4,90 +4,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
+import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/message_screen/MessgaeController/message_controller.dart';
 
-
-
 class MessageInputField extends StatelessWidget {
-   MessageInputField({super.key});
+  MessageInputField({super.key});
 
- final  MessageController controller=Get.find<MessageController>();
+  final MessageController controller = Get.find<MessageController>();
+
   @override
   Widget build(BuildContext context) {
     return AnimatedPadding(
       padding: MediaQuery.of(context).viewInsets,
       duration: const Duration(milliseconds: 100),
       curve: Curves.decelerate,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-
-            ///============================== Image Pick Design ============================
-
-            //controller.isComment.value==true &&
-            controller.imagePath.value.isNotEmpty?
-
-            Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              height: 120,
-              width: 220,
-              padding: const EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(8.r),
-                // image: DecorationImage(
-                //     fit: BoxFit.cover,
-                //     image: FileImage(
-                //         File(controller.imagePath.value)))
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                      height: 100,
-                      width: 150,
-                      child: Image.file(
-                          File(controller.imagePath.value))),
-                  IconButton(
-                      onPressed: () {
-                        controller.imagePath.value ="";
-                        controller.isComment.value=!controller.isComment.value;
-                        controller.update();
-                        controller.imagePath.refresh();
-                      },
-                      icon: Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white)),
-                        child: const Icon(
-                          Icons.remove,
-                          color: Colors.black,
-                        ),
-                      )),
-                ],
-              ),
-            ):
-
-            SizedBox(height: 1.h,),
-
-
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            height: 89.h,
+            color: AppColors.white,
+            child: Row(
               children: [
-
                 ///=============================== Gallery Button ==========================
 
                 IconButton(
-                  onPressed: (){
+                  onPressed: () {
                     controller.selectImage();
-                    controller.isComment.value=!controller.isComment.value;
+                    controller.isComment.value = !controller.isComment.value;
                     controller.update();
                     controller.isComment.refresh();
-                  print("This is commit value=   ${controller.isComment.value}");
-                 },
+                    print(
+                        "This is commit value=   ${controller.isComment.value}");
+                  },
                   icon: const Icon(
                     Icons.image_outlined,
                     size: 36,
@@ -109,32 +61,32 @@ class MessageInputField extends StatelessWidget {
                 //=============================== Send Button ==========================
 
                 GestureDetector(
-
-                    onTap:(){
-                      if(controller.sendController.value.text.isNotEmpty==true || controller.imagePath.value.isNotEmpty==true){
-                        // controller.sendMessage();
-                      }else{
-                        toastMessage(message:"Please write something");
-                      }
-                    },
-
+                  onTap: () {
+                    if (controller.sendController.value.text.isNotEmpty ==
+                        true ||
+                        controller.imagePath.value.isNotEmpty == true) {
+                      // controller.sendMessage();
+                    } else {
+                      toastMessage(message: "Please write something");
+                    }
+                  },
                   child: Container(
                     margin: EdgeInsets.only(left: 4.w),
                     height: 48,
                     width: 48,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4.r),
-                        color: Colors.cyanAccent),
+                        color: Colors.white),
                     child: const Icon(
                       Icons.send_sharp,
-                      color: Colors.green,
+                      color: Colors.black,
                     ),
                   ),
                 )
               ],
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
