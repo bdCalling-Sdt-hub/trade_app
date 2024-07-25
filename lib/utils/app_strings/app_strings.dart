@@ -19,8 +19,11 @@ class AppStrings {
   static const String welcomeBack = "Welcome Back!";
   static const String email = "Email";
   static const String password = "Password";
+  static const String passwordShould = "Password should match";
   static const String enterYourEmail = "Enter your email";
+  static const String enterYourNumber = "Enter your number";
   static const String enterYourPassword = "Enter your password";
+  static const String retypeYourPassword = "Retype your password";
   static const String rememberMe = "Remember Me";
   static const String forgotPassword = "Forgot password?";
   static const String signUp = "Sign up";

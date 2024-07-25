@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -11,38 +12,59 @@ import 'package:trade_app/view/components/custom_text_field/custom_text_field.da
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
 
 class SignInScreen extends StatelessWidget {
-    SignInScreen({super.key});
-    AuthController controller=Get.find<AuthController>();
+  SignInScreen({super.key});
+  AuthController controller = Get.find<AuthController>();
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: AppColors.white,
-      body: GetBuilder<AuthController>(
-        builder: (controller) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
-            child: SingleChildScrollView(
+      backgroundColor: AppColors.white,
+      body: GetBuilder<AuthController>(builder: (controller) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 44.h,),
+                  SizedBox(
+                    height: 44.h,
+                  ),
                   Align(
                     alignment: Alignment.center,
-                    child: CustomText(text: AppStrings.signIn.tr,fontSize: 30,fontWeight: FontWeight.w600,),
+                    child: CustomText(
+                      text: AppStrings.signIn.tr,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
 
-                  SizedBox(height: 24.h,),
+                  SizedBox(
+                    height: 24.h,
+                  ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomText(text: AppStrings.welcomeBack.tr,fontWeight: FontWeight.w600,fontSize: 18.h,right: 8.w,),
-                      const CustomImage(imageSrc: AppIcons.emoji,)
+                      CustomText(
+                        text: AppStrings.welcomeBack.tr,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.h,
+                        right: 8.w,
+                      ),
+                      const CustomImage(
+                        imageSrc: AppIcons.emoji,
+                      )
                     ],
                   ),
 
-                  CustomText(text: AppStrings.pleaseSignInToContinueAccess,fontWeight: FontWeight.w500 ,top: 4.h,bottom: 24.h,),
+                  CustomText(
+                    text: AppStrings.pleaseSignInToContinueAccess,
+                    fontWeight: FontWeight.w500,
+                    top: 4.h,
+                    bottom: 24.h,
+                  ),
 
-                  ///<=======================================Email section======================================>
+                  ///<======================================= Email section ======================================>
                   CustomText(
                     text: AppStrings.email.tr,
                     fontSize: 16,
@@ -116,7 +138,7 @@ class SignInScreen extends StatelessWidget {
                       /// <===============================================Remember button==============================>
                       GestureDetector(
                         onTap: () {
-                          controller.  isRemember = ! controller.isRemember;
+                          controller.isRemember = !controller.isRemember;
                           controller.update();
                           //SharePrefsHelper.setBool(AppConstants.isRememberMe, controller.isRemember);
                         },
@@ -127,20 +149,18 @@ class SignInScreen extends StatelessWidget {
                               height: 18,
                               width: 18,
                               decoration: BoxDecoration(
-                                color:AppColors.blue500
-                                   ,
+                                color: AppColors.blue500,
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: Center(
                                 child: controller.isRemember
                                     ? Icon(
-                                  Icons.check,
-                                  color: controller.isRemember
-                                      ? AppColors.white50
-                                      : AppColors
-                                      .blue500,
-                                  size: 14,
-                                )
+                                        Icons.check,
+                                        color: controller.isRemember
+                                            ? AppColors.white50
+                                            : AppColors.blue500,
+                                        size: 14,
+                                      )
                                     : const SizedBox(),
                               ),
                             ),
@@ -159,7 +179,7 @@ class SignInScreen extends StatelessWidget {
                         onTap: () {
                           //Get.toNamed(AppRoute.forgotPass);
                         },
-                        child:CustomText(
+                        child: CustomText(
                           text: AppStrings.forgotPassword.tr,
                           fontWeight: FontWeight.w400,
                         ),
@@ -172,9 +192,17 @@ class SignInScreen extends StatelessWidget {
                   ),
 
                   ///<======================================= sign in button ======================================>
-                  CustomButton(onTap: (){},title: AppStrings.signIn.tr,),
+                  CustomButton(
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {}
+                    },
+                    title: AppStrings.signIn.tr,
+                  ),
 
-                  SizedBox(height: 24.h,),
+                  SizedBox(
+                    height: 24.h,
+                  ),
+
                   ///<======================================= dontHaveAnAccount ======================================>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -185,10 +213,11 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(
                         width: 8.w,
                       ),
+
                       /// <============================== Sign Up ==============================>
                       GestureDetector(
                         onTap: () {
-                          //Get.toNamed(AppRoute.signUp);
+                          Get.toNamed(AppRoutes.signUpScreen);
                         },
                         child: CustomText(
                           text: AppStrings.signUp.tr,
@@ -202,9 +231,9 @@ class SignInScreen extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        }
-      ),
+          ),
+        );
+      }),
     );
   }
 }
