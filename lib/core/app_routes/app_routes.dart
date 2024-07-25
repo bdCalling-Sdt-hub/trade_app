@@ -7,7 +7,7 @@ class AppRoutes {
   static const String messageScreen = "/MessageScreen";
 
   static List<GetPage> routes = [
-    GetPage(name: signInScreen, page: () => const SignInScreen()),
+    GetPage(name: signInScreen, page: () => SignInScreen()),
     GetPage(name: messageScreen, page: () =>  MessageScreen()),
   ];
 }

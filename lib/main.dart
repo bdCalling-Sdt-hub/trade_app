@@ -17,10 +17,6 @@ void main() {
   Get.put(NetworkController());
 
   runApp(
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) =>
-    //====================
     const MyApp(), // Wrap your app
   );
   // const MyApp());

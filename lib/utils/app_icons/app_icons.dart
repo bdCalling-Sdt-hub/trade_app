@@ -3,6 +3,7 @@ class AppIcons {
 
   static const String eye = "$basePath/eye.svg";
   static const String eyeOff = "$basePath/eyeOff.svg";
+  static const String emoji = "$basePath/emoji.svg";
 
   ///=========================Nab bar Icon ======================
   static const String profileSelected = "$basePath/profile_Selected.svg";
