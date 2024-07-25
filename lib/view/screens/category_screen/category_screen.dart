@@ -16,8 +16,8 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const NavBar(currentIndex: 2),
-      appBar: const CustomAppBar(
-        appBarContent: AppStrings.categories,
+      appBar:  CustomAppBar(
+        appBarContent: AppStrings.categories.tr,
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
