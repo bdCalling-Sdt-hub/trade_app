@@ -92,4 +92,34 @@ class AuthController extends GetxController{
     signUpLoading = false;
     update();
   }*/
+
+  ///<============================ reset password ==============================>
+  TextEditingController newPassController = TextEditingController();
+  TextEditingController confirmPassController = TextEditingController();
+  //var token='';
+
+/*  handleResetPassword() async {
+    signUpLoading = true;
+    //var bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
+    update();
+
+    Map<String, String> header = {'authorization': token};
+    var body = {
+      "newPassword": newPassController.text,
+      "confirmPassword": confirmPassController.text,
+    };
+
+    var response =
+    await ApiClient.postData(ApiConstant.resetPass, body, headers: header);
+
+    if (response.statusCode == 200) {
+      Get.snackbar("Done", "Successfully updated");
+      Get.offAllNamed(AppRoute.logIn);
+    } else {
+      ApiChecker.checkApi(response);
+    }
+
+    signUpLoading = false;
+    update();
+  }*/
 }

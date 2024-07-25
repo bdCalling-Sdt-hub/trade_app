@@ -89,7 +89,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 CustomButton(
                   onTap: () {
                     if(formKey.currentState!.validate()){
-
+                          Get.toNamed(AppRoutes.otpScreen);
                     }
                     // Get.toNamed(AppRoutes.signInScreen);
                   },
