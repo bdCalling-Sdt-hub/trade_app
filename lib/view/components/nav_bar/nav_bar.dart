@@ -24,7 +24,7 @@ class NavBar extends StatefulWidget {
 
 class _UserNavBarState extends State<NavBar> {
   late int bottomNavIndex;
-///=======================UnselectedIcon====================
+  ///=======================UnselectedIcon====================
   final List<String> unselectedIcon = [
     AppIcons.homeUnselected,
     AppIcons.messageUnSelected,
@@ -69,7 +69,7 @@ class _UserNavBarState extends State<NavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           unselectedIcon.length,
-          (index) => InkWell(
+              (index) => InkWell(
             onTap: () => onTap(index),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
