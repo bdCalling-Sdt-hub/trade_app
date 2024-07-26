@@ -143,7 +143,7 @@ class AccountInfoScreen extends StatelessWidget {
           isPassword: isPassword,
           textEditingController: controller,
           inputTextStyle: const TextStyle(color: AppColors.black500),
-          fillColor: AppColors.white600,
+          fillColor: AppColors.white200,
           fieldBorderColor: AppColors.gray201,
           keyboardType: isPassword ? TextInputType.phone : TextInputType.name,
         ),
