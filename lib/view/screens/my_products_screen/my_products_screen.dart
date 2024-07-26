@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -46,7 +47,7 @@ class MyProductsScreen extends StatelessWidget {
                     image: AppConstants.electronics,
                     name: 'Samsung Galaxy s22'.tr,
                     onTap: () {
-                      print('full======');
+                      Get.toNamed(AppRoutes.myProductDetailsScreen);
 
                     },
                     value: '\$825+', editOnTap: () {
