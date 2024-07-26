@@ -70,7 +70,10 @@ class ProfileScreen extends StatelessWidget {
 
               ///=========================myMembership==============
               CustomProfileCard(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.myMembershipScreen);
+
+                },
                 text: AppStrings.myMembership.tr,
                 leadingIcon: AppIcons.cardMembership, isCevron: true,
               ),
