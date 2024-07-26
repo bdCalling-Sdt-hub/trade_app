@@ -78,7 +78,10 @@ class ProfileScreen extends StatelessWidget {
               ///=====================My Products===============
               CustomProfileCard(
                 isCevron: true,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.myProductsScreen);
+
+                },
                 text: AppStrings.myProducts.tr,
                 leadingIcon: AppIcons.package_2,
               ),
