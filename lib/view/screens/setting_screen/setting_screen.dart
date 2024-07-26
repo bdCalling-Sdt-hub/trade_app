@@ -38,7 +38,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  // Get.toNamed(AppRoutes.signInScreen);
+                  Get.toNamed(AppRoutes.accountInfoScreen);
                 },
                 text: AppStrings.accountInfo.tr,
                 leadingIcon: AppIcons.person,
