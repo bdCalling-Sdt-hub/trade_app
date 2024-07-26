@@ -58,7 +58,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  // Get.toNamed(AppRoutes.signInScreen);
+                  Get.toNamed(AppRoutes.changeLanguageScreen);
                 },
                 text: AppStrings.language.tr,
                 leadingIcon: AppIcons.language,
@@ -68,7 +68,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  // Get.toNamed(AppRoutes.signInScreen);
+                  Get.toNamed(AppRoutes.addressScreen);
                 },
                 text: AppStrings.addresss.tr,
                 leadingIcon: AppIcons.myLocation,

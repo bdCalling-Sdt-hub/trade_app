@@ -28,6 +28,9 @@ TextEditingController phoneController = TextEditingController();
 TextEditingController currentPasswordController = TextEditingController();
 TextEditingController newPasswordController = TextEditingController();
 TextEditingController reTypePasswordController = TextEditingController();
+TextEditingController cityController = TextEditingController();
+TextEditingController zipCodeController = TextEditingController();
+TextEditingController addressController = TextEditingController();
 
 
 }
