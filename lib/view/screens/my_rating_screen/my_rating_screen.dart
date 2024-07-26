@@ -41,6 +41,7 @@ class MyRatingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white50,
+
       ///========================myRatingAndComments Appbar==============
       appBar: CustomAppBar(
         appBarContent: AppStrings.myRatingAndComments.tr,
@@ -62,7 +63,10 @@ class MyRatingScreen extends StatelessWidget {
                         color: AppColors.black500,
                       ),
                       const Spacer(),
-                      const Icon(Icons.star,color: Colors.amber,),
+                      const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
                       CustomText(
                         textAlign: TextAlign.start,
                         text: '4.7/5.0'.tr,
