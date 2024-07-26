@@ -14,6 +14,7 @@ class MyProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
+      ///============================My Product Appbar===============
       appBar: CustomAppBar(
         appBarContent: AppStrings.myProducts.tr,
       ),
@@ -44,8 +45,13 @@ class MyProductsScreen extends StatelessWidget {
                     isEdit: true,
                     image: AppConstants.electronics,
                     name: 'Samsung Galaxy s22'.tr,
-                    onTap: () {},
-                    value: '\$825+', editOnTap: () {  },
+                    onTap: () {
+                      print('full======');
+
+                    },
+                    value: '\$825+', editOnTap: () {
+                      print('edit======');
+                  },
                   );
                 },
               ),
