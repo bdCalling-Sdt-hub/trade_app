@@ -10,6 +10,7 @@ import 'package:trade_app/view/screens/message_screen/message_screen.dart';
 import 'package:trade_app/view/screens/my_membership_screen/my_membership_screen.dart';
 import 'package:trade_app/view/screens/my_products_screen/my_product_details_screen/my_product_details_screen.dart';
 import 'package:trade_app/view/screens/my_products_screen/my_products_screen.dart';
+import 'package:trade_app/view/screens/my_rating_screen/my_rating_screen.dart';
 import 'package:trade_app/view/screens/points_earn_screen/points_earn_screen.dart';
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/setting_screen.dart';
@@ -36,6 +37,7 @@ class AppRoutes {
   static const String myProductDetailsScreen = "/MyProductDetailsScreen";
   static const String myMembershipScreen = "/MyMembershipScreen";
   static const String pointsEarnedScreen = "/PointsEarnedScreen";
+  static const String myRatingScreen = "/MyRatingScreen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -57,5 +59,6 @@ class AppRoutes {
     GetPage(name: myProductDetailsScreen, page: () =>    const MyProductDetailsScreen()),
     GetPage(name: myMembershipScreen, page: () =>    const MyMembershipScreen()),
     GetPage(name: pointsEarnedScreen, page: () =>    const PointsEarnedScreen()),
+    GetPage(name: myRatingScreen, page: () =>     MyRatingScreen()),
   ];
 }

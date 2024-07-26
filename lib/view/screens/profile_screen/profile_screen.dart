@@ -113,7 +113,10 @@ class ProfileScreen extends StatelessWidget {
               ///====================myRatingAndComments================
               CustomProfileCard(
                 isCevron: true,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.myRatingScreen);
+
+                },
                 text: AppStrings.myRatingAndComments.tr,
                 leadingIcon: AppIcons.reviews,
               ),
