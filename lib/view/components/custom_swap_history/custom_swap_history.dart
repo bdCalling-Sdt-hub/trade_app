@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -9,24 +10,20 @@ import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
-class CustomSwapRequests extends StatelessWidget {
+class CustomSwapHistory extends StatelessWidget {
   final String image;
   final String name;
   final String date;
   final String firstProductName;
   final String exchangeProductName;
-  final String acceptButton;
-  final String rejectButton;
   final Color backgroundColor;
   final VoidCallback onTap;
 
-  const CustomSwapRequests({
+  const CustomSwapHistory({
     super.key,
     required this.image,
     required this.name,
     required this.date,
-    required this.acceptButton,
-    required this.rejectButton,
     this.backgroundColor = AppColors.white200,
     required this.onTap,
     required this.firstProductName,
@@ -47,6 +44,13 @@ class CustomSwapRequests extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const CustomText(
+               bottom: 10,
+                text: AppStrings.swappedWith,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: AppColors.black500,
+              ),
               Row(
                 children: [
                   CustomNetworkImage(
@@ -76,22 +80,21 @@ class CustomSwapRequests extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  GestureDetector(
-                    onTap: onTap,
-                    child: const CustomText(
-                      decoration: TextDecoration.underline,
-                      text: AppStrings.viewDetails,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.blue500,
+                  Expanded(
+                    child: CustomButton(
+                      onTap: onTap,
+                      title: AppStrings.review.tr,
+                      fillColor: AppColors.white,
+                      textColor: AppColors.blue500,
+                      isBorder: true,
                     ),
-                  )
+                  ),
                 ],
               ),
-              const CustomText(
+               CustomText(
                 top: 10,
                 left: 7,
-                text: AppStrings.swapItems,
+                text: AppStrings.swapItems.tr,
                 fontWeight: FontWeight.w500,
                 fontSize: 14,
                 color: AppColors.black500,
@@ -120,29 +123,7 @@ class CustomSwapRequests extends StatelessWidget {
               SizedBox(
                 height: 12.h,
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomButton(
-                      onTap: (){},
-                      title: acceptButton,
-                      fillColor: AppColors.white,
-                      textColor: AppColors.green600,
-                      isBorder: true,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: CustomButton(
-                      onTap: (){},
-                      title: rejectButton,
-                      fillColor: AppColors.white,
-                      textColor: AppColors.red500,
-                      isBorder: true,
-                    ),
-                  ),
-                ],
-              ),
+
             ],
           ),
         ),

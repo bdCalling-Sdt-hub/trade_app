@@ -97,6 +97,8 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
+                  Get.toNamed(AppRoutes.swapHistoryScreen);
+
                 },
                 text: AppStrings.swapHistory.tr,
                 leadingIcon: AppIcons.history,

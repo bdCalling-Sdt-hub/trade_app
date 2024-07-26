@@ -9,6 +9,7 @@ import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 import 'package:trade_app/view/screens/message_screen/message_screen.dart';
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/setting_screen.dart';
+import 'package:trade_app/view/screens/swap_history_screen/swap_history_screen.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_screen.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/terms_and_condition_screen.dart';
 
@@ -26,6 +27,7 @@ class AppRoutes {
   static const String addressScreen = "/AddressScreen";
   static const String helpCenterScreen = "/HelpCenterScreen";
   static const String swapRequestScreen = "/SwapRequestScreen";
+  static const String swapHistoryScreen = "/SwapHistoryScreen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -42,5 +44,6 @@ class AppRoutes {
     GetPage(name: addressScreen, page: () =>    AddressScreen()),
     GetPage(name: helpCenterScreen, page: () =>    const HelpCenterScreen()),
     GetPage(name: swapRequestScreen, page: () =>    const SwapRequestScreen()),
+    GetPage(name: swapHistoryScreen, page: () =>    const SwapHistoryScreen()),
   ];
 }

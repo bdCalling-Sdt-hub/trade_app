@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
@@ -40,9 +42,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
         decoration: BoxDecoration(color: widget.appBarBgColor),
         child: Row(
           children: [
-            const CustomImage(
-                imageSrc: AppIcons.logo,
-                imageType: ImageType.svg),
+            GestureDetector(
+              onTap: (){
+                Get.toNamed(AppRoutes.homeScreen);
+              },
+              child: const CustomImage(
+                  imageSrc: AppIcons.logo,
+                  imageType: ImageType.svg),
+            ),
             IconButton(
               icon: const CustomImage(imageSrc: AppIcons.arrowLeftAlt),
               color: AppColors.blue,
