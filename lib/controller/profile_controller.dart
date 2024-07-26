@@ -25,6 +25,9 @@ TextEditingController firstNameController = TextEditingController();
 TextEditingController lastNameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
 TextEditingController phoneController = TextEditingController();
+TextEditingController currentPasswordController = TextEditingController();
+TextEditingController newPasswordController = TextEditingController();
+TextEditingController reTypePasswordController = TextEditingController();
 
 
 }

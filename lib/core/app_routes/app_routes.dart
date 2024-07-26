@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:trade_app/view/screens/account_info_screen/account_info_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_screen.dart';
+import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
 import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 import 'package:trade_app/view/screens/message_screen/message_screen.dart';
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
@@ -16,6 +17,7 @@ class AppRoutes {
   static const String termsAndConditionScreen = "/TermsAndConditionScreen";
   static const String privacyPolicyScreen = "/PrivacyPolicyScreen";
   static const String accountInfoScreen = "/AccountInfoScreen";
+  static const String changePasswordScreen = "/ChangePasswordScreen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -27,5 +29,6 @@ class AppRoutes {
     GetPage(name: termsAndConditionScreen, page: () =>  const TermsAndConditionScreen()),
     GetPage(name: privacyPolicyScreen, page: () =>  const PrivacyPolicyScreen()),
     GetPage(name: accountInfoScreen, page: () =>   AccountInfoScreen()),
+    GetPage(name: changePasswordScreen, page: () =>   ChangePasswordScreen()),
   ];
 }
