@@ -5,7 +5,6 @@ import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_swap_history/custom_swap_history.dart';
-import 'package:trade_app/view/components/custom_swap_requests/custom_swap_requests.dart';
 
 class SwapHistoryScreen extends StatelessWidget {
   const SwapHistoryScreen({super.key});
@@ -15,7 +14,7 @@ class SwapHistoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
 
-      ///==================Terms ANd Condition Appbar===============
+      ///==================swapHistory Appbar===============
       appBar: CustomAppBar(
         appBarContent: AppStrings.swapHistory.tr,
       ),

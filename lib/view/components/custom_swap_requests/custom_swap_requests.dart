@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -78,9 +79,9 @@ class CustomSwapRequests extends StatelessWidget {
                   const Spacer(),
                   GestureDetector(
                     onTap: onTap,
-                    child: const CustomText(
+                    child:  CustomText(
                       decoration: TextDecoration.underline,
-                      text: AppStrings.viewDetails,
+                      text: AppStrings.viewDetails.tr,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: AppColors.blue500,
@@ -88,10 +89,10 @@ class CustomSwapRequests extends StatelessWidget {
                   )
                 ],
               ),
-              const CustomText(
+               CustomText(
                 top: 10,
                 left: 7,
-                text: AppStrings.swapItems,
+                text: AppStrings.swapItems.tr,
                 fontWeight: FontWeight.w500,
                 fontSize: 14,
                 color: AppColors.black500,

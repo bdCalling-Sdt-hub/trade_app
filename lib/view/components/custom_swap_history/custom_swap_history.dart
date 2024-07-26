@@ -44,9 +44,9 @@ class CustomSwapHistory extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CustomText(
+               CustomText(
                bottom: 10,
-                text: AppStrings.swappedWith,
+                text: AppStrings.swappedWith.tr,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: AppColors.black500,
