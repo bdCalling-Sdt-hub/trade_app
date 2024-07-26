@@ -98,7 +98,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  // Get.toNamed(AppRoutes.signInScreen);
+                  Get.toNamed(AppRoutes.helpCenterScreen);
                 },
                 text: AppStrings.helpCenter.tr,
                 leadingIcon: AppIcons.help,

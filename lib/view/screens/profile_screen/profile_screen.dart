@@ -86,7 +86,9 @@ class ProfileScreen extends StatelessWidget {
               ///====================Swap Request================
               CustomProfileCard(
                 isCevron: true,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.swapRequestScreen);
+                },
                 text: AppStrings.swapRequests.tr,
                 leadingIcon: AppIcons.swapHoriz,
               ),
@@ -94,7 +96,8 @@ class ProfileScreen extends StatelessWidget {
               ///====================Swap History================
               CustomProfileCard(
                 isCevron: true,
-                onTap: () {},
+                onTap: () {
+                },
                 text: AppStrings.swapHistory.tr,
                 leadingIcon: AppIcons.history,
               ),
