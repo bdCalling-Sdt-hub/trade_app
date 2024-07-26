@@ -50,8 +50,9 @@ class CustomText extends StatelessWidget {
           fontWeight: fontWeight,
           color: color,
           decoration: decoration,
-          decorationColor: Colors.black,
-          decorationThickness:1,
+          decorationColor: AppColors.blue500,
+          decorationThickness:2,
+
 
         ),
       ),

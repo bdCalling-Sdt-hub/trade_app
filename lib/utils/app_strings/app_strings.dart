@@ -48,7 +48,9 @@ class AppStrings {
 
 ///=========================My Profile String=======================
   static const String myProfile = "My Profile";
+  static const String logOut = "Log Out";
   static const String myMembership = "My Membership";
+  static const String uploadPhoto = "Upload Photo";
   static const String myProducts = "My Products";
   static const String swapRequests = "Swap Requests";
   static const String swapHistory = "Swap History";

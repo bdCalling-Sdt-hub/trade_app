@@ -15,7 +15,6 @@ void main() {
   DependencyInjection di = DependencyInjection();
   di.dependencies();
   Get.put(NetworkController());
-
   runApp(
     const MyApp(), // Wrap your app
   );
