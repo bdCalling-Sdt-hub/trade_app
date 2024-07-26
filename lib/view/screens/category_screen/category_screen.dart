@@ -55,6 +55,7 @@ class CategoryScreen extends StatelessWidget {
                 height: 124.h,
                 width: 166.w,
               ),
+
               CustomText(
                 top: 6,
                 color: AppColors.black500,
