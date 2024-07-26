@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -71,11 +72,12 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 onTap: () {},
                 text: AppStrings.myMembership.tr,
-                leadingIcon: AppIcons.cardMembership,
+                leadingIcon: AppIcons.cardMembership, isCevron: true,
               ),
 
               ///=====================My Products===============
               CustomProfileCard(
+                isCevron: true,
                 onTap: () {},
                 text: AppStrings.myProducts.tr,
                 leadingIcon: AppIcons.package_2,
@@ -83,6 +85,7 @@ class ProfileScreen extends StatelessWidget {
 
               ///====================Swap Request================
               CustomProfileCard(
+                isCevron: true,
                 onTap: () {},
                 text: AppStrings.swapRequests.tr,
                 leadingIcon: AppIcons.swapHoriz,
@@ -90,6 +93,7 @@ class ProfileScreen extends StatelessWidget {
 
               ///====================Swap History================
               CustomProfileCard(
+                isCevron: true,
                 onTap: () {},
                 text: AppStrings.swapHistory.tr,
                 leadingIcon: AppIcons.history,
@@ -97,6 +101,7 @@ class ProfileScreen extends StatelessWidget {
 
               ///====================myRatingAndComments================
               CustomProfileCard(
+                isCevron: true,
                 onTap: () {},
                 text: AppStrings.myRatingAndComments.tr,
                 leadingIcon: AppIcons.reviews,
@@ -104,9 +109,19 @@ class ProfileScreen extends StatelessWidget {
 
               ///====================settings================
               CustomProfileCard(
+                isCevron: true,
                 onTap: () {},
                 text: AppStrings.settings.tr,
                 leadingIcon: AppIcons.settings,
+              ),
+              ///====================LogOut================
+              CustomProfileCard(
+                isCevron: false,
+                onTap: () {
+                  Get.toNamed(AppRoutes.signInScreen);
+                },
+                text: AppStrings.logOut.tr,
+                leadingIcon: AppIcons.vector,
               ),
             ],
           ),

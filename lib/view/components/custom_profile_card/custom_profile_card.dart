@@ -13,12 +13,13 @@ class CustomProfileCard extends StatelessWidget {
   final String leadingIcon;
   final Color backgroundColor;
   final VoidCallback onTap;
+  final bool isCevron;
 
   const CustomProfileCard({
     super.key,
     required this.text,
     required this.leadingIcon,
-    this.backgroundColor = AppColors.blue50, required this.onTap,
+    this.backgroundColor = AppColors.blue50, required this.onTap, required this.isCevron,
   });
 
   @override
@@ -45,6 +46,7 @@ class CustomProfileCard extends StatelessWidget {
                   color: AppColors.black500,
                 ),
                 const Spacer(),
+                if(isCevron)
                 const CustomImage(imageSrc: AppIcons.chevronForward),
               ],
             ),
