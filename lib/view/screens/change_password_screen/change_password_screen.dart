@@ -64,7 +64,7 @@ SizedBox(
                 onTap: () {
                   Get.back();
                 },
-                title: AppStrings.changePassword,
+                title: AppStrings.changePassword.tr,
               )
             ],
           ),

@@ -114,7 +114,7 @@ class AccountInfoScreen extends StatelessWidget {
                 onTap: () {
                   Get.back();
                 },
-                title: AppStrings.update,
+                title: AppStrings.update.tr,
               )
             ],
           ),
