@@ -51,5 +51,6 @@ class AppIcons {
   static const String swapHoriz = "$basePath/swap_horiz.svg";
   static const String verifiedUser = "$basePath/verified_user.svg";
   static const String vector = "$basePath/Vector.svg";
+  static const String help = "$basePath/help.svg";
 
 }

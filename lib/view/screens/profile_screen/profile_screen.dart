@@ -110,7 +110,10 @@ class ProfileScreen extends StatelessWidget {
               ///====================settings================
               CustomProfileCard(
                 isCevron: true,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.settingScreen);
+
+                },
                 text: AppStrings.settings.tr,
                 leadingIcon: AppIcons.settings,
               ),
