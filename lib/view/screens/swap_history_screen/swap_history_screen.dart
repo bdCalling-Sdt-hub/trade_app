@@ -24,7 +24,6 @@ class SwapHistoryScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Column(
                   children:List.generate(4, (index){
                     return     CustomSwapHistory(
