@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -29,6 +30,7 @@ class MyProductDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ///======================Image Here=============
               CustomNetworkImage(
                 imageUrl: AppConstants.electronics,
                 height: 252.h,
@@ -138,26 +140,32 @@ class MyProductDetailsScreen extends StatelessWidget {
           children: [
             ///==========================Edit Button=============
             Expanded(
-              child: CustomDetailContainer(
-                  color: AppColors.blue500,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CustomImage(
-                        imageSrc: AppIcons.borderColor,
-                        imageColor: AppColors.white,
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      CustomText(
-                        text: AppStrings.edit.tr,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: AppColors.white,
-                      )
-                    ],
-                  )),
+              child: GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRoutes.postEditScreen);
+                },
+                child: CustomDetailContainer(
+
+                    color: AppColors.blue500,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CustomImage(
+                          imageSrc: AppIcons.borderColor,
+                          imageColor: AppColors.white,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        CustomText(
+                          text: AppStrings.edit.tr,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: AppColors.white,
+                        )
+                      ],
+                    )),
+              ),
             ),
             SizedBox(
               width: 10.w,
