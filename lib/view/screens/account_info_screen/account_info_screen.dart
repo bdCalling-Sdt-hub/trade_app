@@ -32,91 +32,95 @@ class AccountInfoScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                text: AppStrings.uploadPhoto.tr,
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: AppColors.black500,
-                bottom: 10,
-              ),
+          child: Obx(
+            () {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    text: AppStrings.uploadPhoto.tr,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black500,
+                    bottom: 10,
+                  ),
 
-              ///=====================Image Upload============
-              Align(
-                alignment: Alignment.center,
-                child: GestureDetector(
-                    onTap: () {
-                      profileController.selectImage();
-                    },
-                    child: profileController.image.isNotEmpty
-                        ? Container(
-                            height: 100.h,
-                            width: 100.w,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: FileImage(
-                                    File(profileController.image.value),
+                  ///=====================Image Upload============
+                  Align(
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                        onTap: () {
+                          profileController.selectImage();
+                        },
+                        child: profileController.image.isNotEmpty
+                            ? Container(
+                                height: 100.h,
+                                width: 100.w,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: FileImage(
+                                        File(profileController.image.value),
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    shape: BoxShape.circle),
+                              )
+                            : Stack(
+                                children: [
+                                  CustomNetworkImage(
+                                    boxShape: BoxShape.circle,
+                                    imageUrl: AppConstants.userNtr,
+                                    height: 85.h,
+                                    width: 84.w,
                                   ),
-                                  fit: BoxFit.cover,
-                                ),
-                                shape: BoxShape.circle),
-                          )
-                        : Stack(
-                            children: [
-                              CustomNetworkImage(
-                                boxShape: BoxShape.circle,
-                                imageUrl: AppConstants.userNtr,
-                                height: 85.h,
-                                width: 84.w,
-                              ),
-                              Positioned(
-                                  right: 0,
-                                  bottom: 0,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(2),
-                                    decoration: const BoxDecoration(
-                                        color: AppColors.blue500,
-                                        shape: BoxShape.circle),
-                                    child: const CustomImage(
-                                        imageSrc: AppIcons.photoCamera),
-                                  ))
-                            ],
-                          )),
-              ),
-              SizedBox(
-                height: 23.h,
-              ),
+                                  Positioned(
+                                      right: 0,
+                                      bottom: 0,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(2),
+                                        decoration: const BoxDecoration(
+                                            color: AppColors.blue500,
+                                            shape: BoxShape.circle),
+                                        child: const CustomImage(
+                                            imageSrc: AppIcons.photoCamera),
+                                      ))
+                                ],
+                              )),
+                  ),
+                  SizedBox(
+                    height: 23.h,
+                  ),
 
-              ///==========================First Name==============
-              customEditProfile(
-                  title: AppStrings.firstName.tr,
-                  controller: profileController.firstNameController),
+                  ///==========================First Name==============
+                  customEditProfile(
+                      title: AppStrings.firstName.tr,
+                      controller: profileController.firstNameController),
 
-              ///==========================lastName==============
-              customEditProfile(
-                  title: AppStrings.lastName.tr,
-                  controller: profileController.lastNameController),
+                  ///==========================lastName==============
+                  customEditProfile(
+                      title: AppStrings.lastName.tr,
+                      controller: profileController.lastNameController),
 
-              ///==========================email==============
-              customEditProfile(
-                  title: AppStrings.email.tr,
-                  controller: profileController.emailController),
+                  ///==========================email==============
+                  customEditProfile(
+                      title: AppStrings.email.tr,
+                      controller: profileController.emailController),
 
-              ///==========================phoneNumber==============
-              customEditProfile(
-                  title: AppStrings.phoneNumber.tr,
-                  controller: profileController.phoneController),
+                  ///==========================phoneNumber==============
+                  customEditProfile(
+                      title: AppStrings.phoneNumber.tr,
+                      controller: profileController.phoneController),
 
-              ///==========================Update Button==============
-              CustomButton(
-                onTap: () {
-                  Get.back();
-                },
-                title: AppStrings.update.tr,
-              )
-            ],
+                  ///==========================Update Button==============
+                  CustomButton(
+                    onTap: () {
+                      Get.back();
+                    },
+                    title: AppStrings.update.tr,
+                  )
+                ],
+              );
+            }
           ),
         ),
       ),

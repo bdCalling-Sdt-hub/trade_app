@@ -69,7 +69,7 @@ class MyRatingScreen extends StatelessWidget {
                       ),
                       CustomText(
                         textAlign: TextAlign.start,
-                        text: '4.7/5.0'.tr,
+                        text: ' 4.7/5.0'.tr,
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: AppColors.black500,
