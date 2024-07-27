@@ -36,7 +36,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
                 color: AppColors.black500,
-                bottom: 10,
+                bottom: 18,
               ),
 
               ///==========================EnterCurrentPassword==============
@@ -99,7 +99,7 @@ SizedBox(
           isPassword: isPassword,
           textEditingController: controller,
           inputTextStyle: const TextStyle(color: AppColors.black500),
-          fillColor: AppColors.white,
+          fillColor: AppColors.white200,
           fieldBorderColor: AppColors.black300,
           keyboardType: isPassword ? TextInputType.text : TextInputType.name,
         ),

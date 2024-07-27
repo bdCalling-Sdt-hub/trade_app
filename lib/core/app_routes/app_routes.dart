@@ -7,6 +7,7 @@ import 'package:trade_app/view/screens/address_screen/address_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.dart';
+import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
 import 'package:trade_app/view/screens/change_language_screen/change_language_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
@@ -34,6 +35,7 @@ class AppRoutes {
   static const String resetPasswordScreen = "/reset_password_screen";
   static const String splashScreen = "/splash_screen";
   static const String homeScreen = "/HomeScreen";
+
   ///===================Profile section===============
   static const String settingScreen = "/SettingScreen";
   static const String termsAndConditionScreen = "/TermsAndConditionScreen";
@@ -50,6 +52,7 @@ class AppRoutes {
   static const String myMembershipScreen = "/MyMembershipScreen";
   static const String pointsEarnedScreen = "/PointsEarnedScreen";
   static const String myRatingScreen = "/MyRatingScreen";
+  static const String postAddScreen = "/PostAddScreen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -78,5 +81,6 @@ class AppRoutes {
     GetPage(name: myMembershipScreen, page: () =>    const MyMembershipScreen()),
     GetPage(name: pointsEarnedScreen, page: () =>    const PointsEarnedScreen()),
     GetPage(name: myRatingScreen, page: () =>     MyRatingScreen()),
+    GetPage(name: postAddScreen, page: () =>     const PostAddScreen()),
   ];
 }

@@ -10,10 +10,10 @@ import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
+import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
-import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 
 class AccountInfoScreen extends StatelessWidget {
   AccountInfoScreen({super.key});
@@ -92,22 +92,22 @@ class AccountInfoScreen extends StatelessWidget {
                   ),
 
                   ///==========================First Name==============
-                  customEditProfile(
+                  CustomFromCard(
                       title: AppStrings.firstName.tr,
                       controller: profileController.firstNameController),
 
                   ///==========================lastName==============
-                  customEditProfile(
+                  CustomFromCard(
                       title: AppStrings.lastName.tr,
                       controller: profileController.lastNameController),
 
                   ///==========================email==============
-                  customEditProfile(
+                  CustomFromCard(
                       title: AppStrings.email.tr,
                       controller: profileController.emailController),
 
                   ///==========================phoneNumber==============
-                  customEditProfile(
+                  CustomFromCard(
                       title: AppStrings.phoneNumber.tr,
                       controller: profileController.phoneController),
 
@@ -127,34 +127,5 @@ class AccountInfoScreen extends StatelessWidget {
     );
   }
 
-  ///================================Custom EditProfile===================
-  Widget customEditProfile({
-    required String title,
-    required TextEditingController controller,
-    bool isPassword = false,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomText(
-          color: AppColors.black500,
-          text: title,
-          fontWeight: FontWeight.w500,
-          fontSize: 16.w,
-          bottom: 8,
-        ),
-        CustomTextField(
-          isPassword: isPassword,
-          textEditingController: controller,
-          inputTextStyle: const TextStyle(color: AppColors.black500),
-          fillColor: AppColors.white200,
-          fieldBorderColor: AppColors.gray201,
-          keyboardType: isPassword ? TextInputType.phone : TextInputType.name,
-        ),
-        SizedBox(
-          height: 15.h,
-        )
-      ],
-    );
-  }
+
 }
