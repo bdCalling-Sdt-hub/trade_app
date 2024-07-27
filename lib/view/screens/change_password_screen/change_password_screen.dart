@@ -36,7 +36,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
                 color: AppColors.black500,
-                bottom: 18,
+                bottom: 10,
               ),
 
               ///==========================EnterCurrentPassword==============
