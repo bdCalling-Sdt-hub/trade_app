@@ -8,7 +8,6 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/category_screen/category_screen.dart';
 import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 import 'package:trade_app/view/screens/message_screen/chat_screen.dart';
-import 'package:trade_app/view/screens/message_screen/message_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_screen.dart';
 import 'package:trade_app/view/screens/profile_screen/profile_screen.dart';
 
@@ -42,11 +41,11 @@ class _UserNavBarState extends State<NavBar> {
   ];
 
   final List<String> userNavText = [
-    'Home',
-    'Chat',
-    'Category',
-    'Post',
-    'Profile',
+    'Home'.tr,
+    'Chat'.tr,
+    'Category'.tr,
+    'Post'.tr,
+    'Profile'.tr,
   ];
 
   @override
