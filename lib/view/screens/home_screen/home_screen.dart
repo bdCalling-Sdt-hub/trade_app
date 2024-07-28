@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavBar(currentIndex: 0),
+      bottomNavigationBar: const NavBar(currentIndex: 0),
       backgroundColor: AppColors.white,
       body: Obx(() {
         return SingleChildScrollView(
@@ -95,7 +95,114 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () {},
+                    child: CustomText(
+                      text: AppStrings.viewAll,
+                      fontSize: 16.h,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blue500,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(6, (index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        margin: EdgeInsets.only(right: 16.w),
+                        child: Column(
+                          children: [
+                            CustomNetworkImage(
+                              imageUrl: AppImages.mobile,
+                              height: 64.h,
+                              width: 64.h,
+                              borderRadius: BorderRadius.circular(8.sp),
+                            ),
+                            CustomText(
+                              text: 'Mobile',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16.w,
+                              top: 8.h,
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+
+              SizedBox(
+                height: 16.h,
+              ),
+
+              ///============================ top product =============================>
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    text: AppStrings.topProducts,
+                    fontSize: 16.h,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: CustomText(
+                      text: AppStrings.viewAll,
+                      fontSize: 16.h,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.blue500,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+
+              ///============================ top product =============================>
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(4, (index) {
+                    return Container(
+                      margin: EdgeInsets.only(right: 10.w),
+                      child: CustomMyProduct(
+                        isEdit: controller.isEdit,
+                        image: AppConstants.electronics,
+                        name: 'Samsung Galaxy s22'.tr,
+                        onTap: () {
+                          Get.toNamed(AppRoutes.myProductDetailsScreen);
+                        },
+                        value: '\$825+',
+                        editOnTap: () {},
+                      ),
+                    );
+                  }),
+                ),
+              ),
+
+              SizedBox(
+                height: 16.h,
+              ),
+
+              ///============================ membershipPackages =============================>
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    text: AppStrings.membershipPackages,
+                    fontSize: 16.h,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
@@ -109,35 +216,54 @@ class _HomeScreenState extends State<HomeScreen> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(6, (index){
-                    return GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        margin: EdgeInsets.only(right: 16.w),
-                        child: Column(
-                          children: [
-                            CustomNetworkImage(imageUrl: AppImages.mobile, height: 64.h, width: 64.h,borderRadius: BorderRadius.circular(8.sp),),
-                            CustomText(text: 'Mobile',fontWeight: FontWeight.w500,fontSize: 16.w,top: 8.h,)
-                          ],
-                        ),
+                  children: List.generate(4, (index) {
+                    return Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      width: MediaQuery.of(context).size.width * .43,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.orange,
+                      ),
+                      child: Column(
+                        children: [
+                          const CustomText(
+                            text: "Gold",
+                            color: AppColors.white50,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          CustomText(
+                            text: "\$19.99",
+                            color: AppColors.white50,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24.h,
+                            top: 4.h,
+                            bottom: 4.h,
+                          ),
+                          const CustomText(
+                            text: "Per Months",
+                            color: AppColors.white50,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ],
                       ),
                     );
                   }),
                 ),
               ),
-
               SizedBox(height: 16.h,),
-              ///============================ top product =============================>
+              ///============================ just for you =============================>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    text: AppStrings.topProducts,
+                    text: AppStrings.justForYou,
                     fontSize: 16.h,
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () {},
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
@@ -147,18 +273,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 8.h,),
-            /*  Container(
-                height: 500,
+
+              ///============================ just for you =============================>
+              Container(
+                height: 450.h,
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                     mainAxisExtent:controller.isEdit? 240 : 190
-                     // Adjust the aspect ratio as needed
-                  ),
-                  itemCount: 2,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      mainAxisExtent: controller.isEdit ? 240 : 190
+                      // Adjust the aspect ratio as needed
+                      ),
+                  itemCount: 4,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     return CustomMyProduct(
@@ -172,28 +299,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       editOnTap: () {},
                     );
                   },
-                ),
-              )*/
-              ///============================ top product =============================>
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-
-                  children: List.generate(4, (index){
-                    return Container(
-                      margin: EdgeInsets.only(right: 16.w),
-                      child: CustomMyProduct(
-                        isEdit: controller.isEdit,
-                        image: AppConstants.electronics,
-                        name: 'Samsung Galaxy s22'.tr,
-                        onTap: () {
-                          Get.toNamed(AppRoutes.myProductDetailsScreen);
-                        },
-                        value: '\$825+',
-                        editOnTap: () {},
-                      ),
-                    );
-                  }),
                 ),
               )
             ],
