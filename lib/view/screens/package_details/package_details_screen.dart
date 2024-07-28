@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -23,7 +24,7 @@ class PackageDetailsScreen extends StatelessWidget {
         appBarContent: data["memberShip"],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24.h,horizontal: 20.w),
+        padding: EdgeInsets.symmetric(vertical: 16.h,horizontal: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -97,7 +98,9 @@ class PackageDetailsScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(vertical: 24.h,horizontal: 20.w),
-        child: CustomButton(onTap: (){},title:  AppStrings.applyForMembership,),
+        child: CustomButton(onTap: (){
+          Get.toNamed(AppRoutes.preApprovalQuestionScreen);
+        },title:  AppStrings.applyForMembership,),
       ),
     );
   }
