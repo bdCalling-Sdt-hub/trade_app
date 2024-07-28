@@ -34,7 +34,7 @@ class MyProductsScreen extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
@@ -49,7 +49,6 @@ class MyProductsScreen extends StatelessWidget {
                     name: 'Samsung Galaxy s22'.tr,
                     onTap: () {
                       Get.toNamed(AppRoutes.myProductDetailsScreen);
-
                     },
                     value: '\$825+', editOnTap: () {
                       print('edit======');

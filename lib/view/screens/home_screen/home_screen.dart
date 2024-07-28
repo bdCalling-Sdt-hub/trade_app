@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 8.h,),
-              Container(
+            /*  Container(
                 height: 500,
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -172,6 +172,28 @@ class _HomeScreenState extends State<HomeScreen> {
                       editOnTap: () {},
                     );
                   },
+                ),
+              )*/
+              ///============================ top product =============================>
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+
+                  children: List.generate(4, (index){
+                    return Container(
+                      margin: EdgeInsets.only(right: 16.w),
+                      child: CustomMyProduct(
+                        isEdit: controller.isEdit,
+                        image: AppConstants.electronics,
+                        name: 'Samsung Galaxy s22'.tr,
+                        onTap: () {
+                          Get.toNamed(AppRoutes.myProductDetailsScreen);
+                        },
+                        value: '\$825+',
+                        editOnTap: () {},
+                      ),
+                    );
+                  }),
                 ),
               )
             ],
