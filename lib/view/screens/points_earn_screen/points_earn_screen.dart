@@ -43,8 +43,11 @@ class PointsEarnedScreen extends StatelessWidget {
         appBarContent: AppStrings.pointsEarn.tr,
       ),
       body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w,),
+          padding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+          ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ///=======================Total points=============
               CustomDetailContainer(
@@ -66,9 +69,15 @@ class PointsEarnedScreen extends StatelessWidget {
                       ),
                     ],
                   )),
+              CustomText(
+                text: '${AppStrings.pointsEarn}:'.tr,
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                color: AppColors.black500,
+                bottom: 10,
+              ),
               Column(
-                children: List.generate(
-                    pointsData.length, (index) {
+                children: List.generate(pointsData.length, (index) {
                   final item = pointsData[index];
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.h),
@@ -89,14 +98,14 @@ class PointsEarnedScreen extends StatelessWidget {
                               CustomText(
                                 text: item['action']!,
                                 fontWeight: FontWeight.w500,
-                                fontSize: 14.sp,
+                                fontSize: 14,
                                 color: AppColors.black500,
                               ),
                               CustomText(
                                 text: item['date']!,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12.sp,
-                                color: AppColors.gray500,
+                                color: AppColors.black500,
                               ),
                             ],
                           ),
@@ -104,7 +113,7 @@ class PointsEarnedScreen extends StatelessWidget {
                             text: item['points']!,
                             fontWeight: FontWeight.w500,
                             fontSize: 14.sp,
-                            color: AppColors.green500,
+                            color: AppColors.black500,
                           ),
                         ],
                       ),

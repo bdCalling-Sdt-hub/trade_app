@@ -34,51 +34,55 @@ class CustomRatingCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomNetworkImage(
                 boxShape: BoxShape.circle,
-                  imageUrl: imageUrl,
-                  height: 36.h,
-                  width: 36.h),
-              SizedBox(width: 10.w),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    text: name,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
-                    color: AppColors.black500,
-                  ),
-                  SizedBox(height: 2.h),
-                  Row(
-                    children: List.generate(5, (index) {
-                      return Icon(
-                        index < rating ? Icons.star : Icons.star_border,
-                        color: AppColors.gold,
-                        size: 16.h,
-                      );
-                    }),
-                  ),
-                ],
+                imageUrl: imageUrl,
+                height: 36.h,
+                width: 36.h,
               ),
-              const Spacer(),
+              SizedBox(width: 10.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: name,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: AppColors.black500,
+                    ),
+                    SizedBox(height: 2.h),
+                    Row(
+                      children: List.generate(5, (index) {
+                        return Icon(
+                          index < rating ? Icons.star : Icons.star_border,
+                          color: AppColors.gold,
+                          size: 16.h,
+                        );
+                      }),
+                    ),
+                    SizedBox(height: 10.h),
+                    CustomText(
+                      textAlign: TextAlign.start,
+                      maxLines: 10,
+                      text: review,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                      color: AppColors.black500,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 10.w), // Add some space between the review and the date
               CustomText(
                 text: date,
                 fontWeight: FontWeight.w400,
-                fontSize: 12.sp,
-                color: AppColors.gray500,
+                fontSize: 12,
+                color: AppColors.black500,
               ),
             ],
-          ),
-          SizedBox(height: 10.h),
-          CustomText(
-            textAlign: TextAlign.start,
-            maxLines: 10,
-            text: review,
-            fontWeight: FontWeight.w400,
-            fontSize: 14.sp,
-            color: AppColors.black500,
           ),
         ],
       ),

@@ -25,6 +25,7 @@ class MyProductsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ///========================Available Products============
             CustomText(
               text: AppStrings.availableProducts.tr,
               fontWeight: FontWeight.w500,
@@ -50,8 +51,9 @@ class MyProductsScreen extends StatelessWidget {
                     onTap: () {
                       Get.toNamed(AppRoutes.myProductDetailsScreen);
                     },
-                    value: '\$825+', editOnTap: () {
-                      print('edit======');
+                    value: '\$825+',
+                    editOnTap: () {
+                      Get.toNamed(AppRoutes.postEditScreen);
                   },
                   );
                 },

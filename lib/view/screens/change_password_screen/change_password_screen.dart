@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -40,25 +41,27 @@ class ChangePasswordScreen extends StatelessWidget {
 
               ///==========================EnterCurrentPassword==============
               customEditProfile(
+                  isPassword: true,
                   title: AppStrings.enterCurrentPassword.tr,
                   controller: profileController.currentPasswordController,
                   validator: (String? value) {}),
 
               ///==========================enterNewPassword==============
               customEditProfile(
+                  isPassword: true,
                   title: AppStrings.enterNewPassword.tr,
                   controller: profileController.newPasswordController,
                   validator: (String? value) {}),
 
               ///==========================retypeNewPassword==============
               customEditProfile(
+                isPassword: true,
                   title: AppStrings.retypeNewPassword.tr,
                   controller: profileController.reTypePasswordController,
                   validator: (String? value) {}),
-              SizedBox(
-                height: 20.h,
-              ),
-
+SizedBox(
+  height: 20.h,
+),
               ///==========================changePassword==============
               CustomButton(
                 onTap: () {
@@ -95,8 +98,8 @@ class ChangePasswordScreen extends StatelessWidget {
           prefixIcon: const Icon(Icons.lock),
           isPassword: isPassword,
           textEditingController: controller,
-          inputTextStyle: const TextStyle(color:  AppColors.black500),
-          fillColor: AppColors.white,
+          inputTextStyle: const TextStyle(color: AppColors.black500),
+          fillColor: AppColors.white200,
           fieldBorderColor: AppColors.black300,
           keyboardType: isPassword ? TextInputType.text : TextInputType.name,
         ),

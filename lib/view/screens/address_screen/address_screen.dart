@@ -7,6 +7,7 @@ import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
+import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 
@@ -38,7 +39,7 @@ class AddressScreen extends StatelessWidget {
                 bottom: 10,
               ),
               ///========================Country===============
-              customAddressCart(
+              CustomFromCard(
                   readOnly: true,
                 onTap: (){
                   print(' This is Tap================');
@@ -48,17 +49,17 @@ class AddressScreen extends StatelessWidget {
                   controller: profileController.cityController),
 
               ///========================City===============
-              customAddressCart(
+              CustomFromCard(
                   title: AppStrings.city.tr,
                   controller: profileController.cityController),
 
               ///========================Zip Code===============
-              customAddressCart(
+              CustomFromCard(
                   title: AppStrings.zipCode.tr,
                   controller: profileController.cityController),
 
               ///========================Street Address===============
-              customAddressCart(
+              CustomFromCard(
                   title: AppStrings.streetAddress.tr,
                   controller: profileController.cityController),
 
@@ -79,39 +80,5 @@ class AddressScreen extends StatelessWidget {
       ),
     );
   }
-   Widget customAddressCart({
-     required String title,
-     required TextEditingController controller,
-     bool isPassword = false,
-     bool isIcon = false,
-     bool readOnly = false,
-     VoidCallback? onTap,
-   }) {
-     return Column(
-       crossAxisAlignment: CrossAxisAlignment.start,
-       children: [
-         CustomText(
-           color: AppColors.black500,
-           text: title,
-           fontWeight: FontWeight.w500,
-           fontSize: 16.w,
-           bottom: 8,
-         ),
-         CustomTextField(
-           readOnly: readOnly,
-           suffixIcon: isIcon ? const Icon(Icons.keyboard_arrow_down) : null,
-           isPassword: isPassword,
-           textEditingController: controller,
-           inputTextStyle: const TextStyle(color: AppColors.black500),
-           fillColor: AppColors.white600,
-           fieldBorderColor: AppColors.gray201,
-           keyboardType: isPassword ? TextInputType.phone : TextInputType.name,
-           onTap: onTap,
-         ),
-         SizedBox(
-           height: 15.h,
-         ),
-       ],
-     );
-   }
+
 }

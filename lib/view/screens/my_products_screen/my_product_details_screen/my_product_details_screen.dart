@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -29,6 +30,7 @@ class MyProductDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ///======================Image Here=============
               CustomNetworkImage(
                 imageUrl: AppConstants.electronics,
                 height: 252.h,
@@ -39,6 +41,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    ///======================Item Name==============
                     CustomText(
                       text: 'Samsung Galaxy S22 Ultra 5G'.tr,
                       fontWeight: FontWeight.w500,
@@ -48,6 +51,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
+                        ///=========================Price=============
                         CustomText(
                           text: '\$820+'.tr,
                           fontWeight: FontWeight.w500,
@@ -63,6 +67,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                           color: AppColors.black500,
                           bottom: 10.h,
                         ),
+                        ///======================Posted on===========
                         CustomText(
                           text: ' : 21 Mar 2:45 PM'.tr,
                           fontWeight: FontWeight.w400,
@@ -75,6 +80,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              ///=========================This is Condition==============
               CustomDetailContainer(
                 color: AppColors.white200,
                 child: Row(
@@ -88,7 +94,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     CustomText(
-                      text: AppStrings.used.tr,
+                      text: 'Used',
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: AppColors.black500,
@@ -97,6 +103,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              ///===================This is Description===============
               CustomDetailContainer(
                 color: AppColors.white200,
                 child: Column(
@@ -133,26 +140,32 @@ class MyProductDetailsScreen extends StatelessWidget {
           children: [
             ///==========================Edit Button=============
             Expanded(
-              child: CustomDetailContainer(
-                  color: AppColors.blue500,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CustomImage(
-                        imageSrc: AppIcons.borderColor,
-                        imageColor: AppColors.white,
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      CustomText(
-                        text: AppStrings.edit.tr,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: AppColors.white,
-                      )
-                    ],
-                  )),
+              child: GestureDetector(
+                onTap: (){
+                  Get.toNamed(AppRoutes.postEditScreen);
+                },
+                child: CustomDetailContainer(
+
+                    color: AppColors.blue500,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CustomImage(
+                          imageSrc: AppIcons.borderColor,
+                          imageColor: AppColors.white,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        CustomText(
+                          text: AppStrings.edit.tr,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: AppColors.white,
+                        )
+                      ],
+                    )),
+              ),
             ),
             SizedBox(
               width: 10.w,
