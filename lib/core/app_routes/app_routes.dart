@@ -7,6 +7,8 @@ import 'package:trade_app/view/screens/address_screen/address_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.dart';
+import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
+import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
@@ -57,6 +59,8 @@ class AppRoutes {
   ///=============================Post Edit Screen============
   static const String postAddScreen = "/PostAddScreen";
   static const String postEditScreen = "/PostEditScreen";
+  static const String membershipPackageScreen = "/membership_package_screen";
+  static const String packageDetailsScreen = "/package_details_screen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -89,5 +93,7 @@ class AppRoutes {
     ///============================Post Edit Screen=================
     GetPage(name: postAddScreen, page: () =>     const PostAddScreen()),
     GetPage(name: postEditScreen, page: () =>     const PostEditScreen()),
+    GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
+    GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),
   ];
 }

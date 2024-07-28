@@ -6,14 +6,11 @@ import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/helper/const/const.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
-import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_images/app_images.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
-import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
-import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/home_screen/inner/home_appbar.dart';
@@ -32,6 +29,28 @@ class _HomeScreenState extends State<HomeScreen> {
     AppImages.slider,
     AppImages.slider,
   ];
+
+  List<Map<String,dynamic>> packageList=[
+    {
+      "packageName" : "Gold",
+      "price" : "19.99",
+      "limit" : "Per Months",
+      "color" :const Color(0xffFAA316),
+    },
+    {
+      "packageName" : "Platinum",
+      "price" : "25,000",
+      "limit" : "Points need to auto upgrade",
+      "color" : AppColors.gray800,
+    },
+    {
+      "packageName" : "Diamond",
+      "price" : "100,000",
+      "limit" : "Points need to auto upgrade",
+      "color" :AppColors.blue300,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -202,7 +221,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.membershipPackageScreen);
+                    },
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
@@ -213,10 +234,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 16.h,),
+              ///============================ membershipPackages =============================>
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(4, (index) {
+                  children: List.generate(packageList.length, (index) {
                     return Container(
                       margin: const EdgeInsets.only(right: 8),
                       width: MediaQuery.of(context).size.width * .43,
@@ -224,27 +246,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: Colors.orange,
+                        color: packageList[index]["color"],
                       ),
                       child: Column(
                         children: [
-                          const CustomText(
-                            text: "Gold",
+                            CustomText(
+                            text: packageList[index]["packageName"],
                             color: AppColors.white50,
                             fontWeight: FontWeight.w600,
                           ),
                           CustomText(
-                            text: "\$19.99",
+                            text: packageList[index]["price"],
                             color: AppColors.white50,
                             fontWeight: FontWeight.w700,
                             fontSize: 24.h,
                             top: 4.h,
                             bottom: 4.h,
                           ),
-                          const CustomText(
-                            text: "Per Months",
+                            CustomText(
+                            text: packageList[index]["limit"],
                             color: AppColors.white50,
                             fontWeight: FontWeight.w500,
+                              fontSize: 12.h,
                           ),
                         ],
                       ),
