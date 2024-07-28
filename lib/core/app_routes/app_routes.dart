@@ -73,7 +73,7 @@ class AppRoutes {
     GetPage(name: helpCenterScreen, page: () =>    const HelpCenterScreen()),
     GetPage(name: swapRequestScreen, page: () =>    const SwapRequestScreen()),
     GetPage(name: swapHistoryScreen, page: () =>    const SwapHistoryScreen()),
-    GetPage(name: myProductsScreen, page: () =>    const MyProductsScreen()),
+    GetPage(name: myProductsScreen, page: () =>  MyProductsScreen()),
     GetPage(name: myProductDetailsScreen, page: () =>    const MyProductDetailsScreen()),
     GetPage(name: myMembershipScreen, page: () =>    const MyMembershipScreen()),
     GetPage(name: pointsEarnedScreen, page: () =>    const PointsEarnedScreen()),

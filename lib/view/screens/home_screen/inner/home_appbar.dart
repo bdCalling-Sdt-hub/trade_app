@@ -63,6 +63,7 @@ class HomeAppbar extends StatelessWidget {
         SizedBox(height: 16.h,),
         ///<========================== search ============================>
         CustomTextField(
+          fieldBorderColor: AppColors.gray300,
           fillColor: AppColors.white200,
           onChanged: (val){},
           readOnly: true,
