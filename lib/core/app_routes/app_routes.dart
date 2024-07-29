@@ -12,6 +12,7 @@ import 'package:trade_app/view/screens/package_details/package_details_screen.da
 import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
 import 'package:trade_app/view/screens/pre_approval_question/pre_approval_question_screen.dart';
+import 'package:trade_app/view/screens/setting_screen/language_screen/language_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
 import 'package:trade_app/view/screens/help_center_screen/help_center_screen.dart';
@@ -61,6 +62,7 @@ class AppRoutes {
   static const String membershipPackageScreen = "/membership_package_screen";
   static const String packageDetailsScreen = "/package_details_screen";
   static const String preApprovalQuestionScreen = "/pre_approval_question_screen";
+  static const String languageScreen = "/LanguageScreen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -95,5 +97,6 @@ class AppRoutes {
     GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
     GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),
     GetPage(name: preApprovalQuestionScreen, page: () =>   PreApprovalQuestionScreen()),
+    GetPage(name: languageScreen, page: () =>   LanguageScreen()),
   ];
 }
