@@ -197,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       margin: EdgeInsets.only(right: 10.w),
                       child: CustomMyProduct(
+                        isMargin: false,
                         isEdit: controller.isEdit,
                         image: AppConstants.electronics,
                         name: 'Samsung Galaxy s22'.tr,
@@ -316,6 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     return CustomMyProduct(
+                      isMargin: false,
                       isEdit: controller.isEdit,
                       image: AppConstants.electronics,
                       name: 'Samsung Galaxy s22'.tr,

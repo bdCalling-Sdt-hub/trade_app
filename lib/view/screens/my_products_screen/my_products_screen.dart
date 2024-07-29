@@ -45,6 +45,7 @@ class MyProductsScreen extends StatelessWidget {
                 physics: const PageScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return CustomMyProduct(
+                    isMargin: false,
                     isEdit: true,
                     image: AppConstants.electronics,
                     name: 'Samsung Galaxy s22'.tr,

@@ -18,6 +18,7 @@ class CustomMyProduct extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback editOnTap;
   final bool isEdit;
+  final bool isMargin;
 
    CustomMyProduct({
     super.key,
@@ -25,7 +26,7 @@ class CustomMyProduct extends StatelessWidget {
     required this.name,
     this.backgroundColor = AppColors.white200,
     required this.onTap,
-    required this.value, required this.editOnTap, this.isEdit=false,
+    required this.value, required this.editOnTap, this.isEdit=false, required this.isMargin,
   });
 
   @override
@@ -33,6 +34,7 @@ class CustomMyProduct extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin:isMargin?  EdgeInsets.all(10): null,
         width: MediaQuery.of(context).size.width *.43,
         padding: EdgeInsets.symmetric(vertical: 12.h,horizontal: 8.h),
         decoration: BoxDecoration(
