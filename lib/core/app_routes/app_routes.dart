@@ -10,6 +10,7 @@ import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.da
 import 'package:trade_app/view/screens/category_screen/category_screen.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
 import 'package:trade_app/view/screens/notification_screen/notification_screen.dart';
+import 'package:trade_app/view/screens/other_profile/other_profile.dart';
 import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
@@ -59,6 +60,7 @@ class AppRoutes {
   static const String myRatingScreen = "/MyRatingScreen";
   static const String categoryScreen = "/CategoryScreen";
   static const String notificationScreen = "/NotificationScreen";
+  static const String otherProfile = "/OtherProfile";
 
   ///=============================Post Edit Screen============
   static const String postAddScreen = "/PostAddScreen";
@@ -80,7 +82,7 @@ class AppRoutes {
     GetPage(name: homeScreen, page: () =>  const HomeScreen()),
 
     ///========================Setting section==============
-    GetPage(name: settingScreen, page: () =>   SettingScreen()),
+    GetPage(name: settingScreen, page: () =>   const SettingScreen()),
     GetPage(name: termsAndConditionScreen, page: () =>  const TermsAndConditionScreen()),
     GetPage(name: privacyPolicyScreen, page: () =>  const PrivacyPolicyScreen()),
     GetPage(name: accountInfoScreen, page: () =>   AccountInfoScreen()),
@@ -104,5 +106,6 @@ class AppRoutes {
     GetPage(name: languageScreen, page: () =>   LanguageScreen()),
     GetPage(name: categoryScreen, page: () =>   const CategoryScreen()),
     GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
+    GetPage(name: otherProfile, page: () =>   const OtherProfile()),
   ];
 }

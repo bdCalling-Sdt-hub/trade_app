@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -28,6 +29,9 @@ class SwapHistoryScreen extends StatelessWidget {
               Column(
                   children:List.generate(4, (index){
                     return     CustomSwapHistory(
+                      onTapName: (){
+                        Get.toNamed(AppRoutes.otherProfile);
+                      },
                       image: AppConstants.userNtr,
                       name: 'Zahid '.tr,
                       date: '12/06/24'.tr,
