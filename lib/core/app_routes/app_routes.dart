@@ -13,7 +13,6 @@ import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_scre
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
 import 'package:trade_app/view/screens/pre_approval_question/pre_approval_question_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
-import 'package:trade_app/view/screens/change_language_screen/change_language_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
 import 'package:trade_app/view/screens/help_center_screen/help_center_screen.dart';
 import 'package:trade_app/view/screens/home_screen/home_screen.dart';
@@ -46,7 +45,6 @@ class AppRoutes {
   static const String privacyPolicyScreen = "/PrivacyPolicyScreen";
   static const String accountInfoScreen = "/AccountInfoScreen";
   static const String changePasswordScreen = "/ChangePasswordScreen";
-  static const String changeLanguageScreen = "/ChangeLanguageScreen";
   static const String addressScreen = "/AddressScreen";
   static const String helpCenterScreen = "/HelpCenterScreen";
   static const String swapRequestScreen = "/SwapRequestScreen";
@@ -81,7 +79,6 @@ class AppRoutes {
     GetPage(name: privacyPolicyScreen, page: () =>  const PrivacyPolicyScreen()),
     GetPage(name: accountInfoScreen, page: () =>   AccountInfoScreen()),
     GetPage(name: changePasswordScreen, page: () =>   ChangePasswordScreen()),
-    GetPage(name: changeLanguageScreen, page: () =>   const ChangeLanguageScreen()),
     GetPage(name: addressScreen, page: () =>    AddressScreen()),
     GetPage(name: helpCenterScreen, page: () =>    const HelpCenterScreen()),
     GetPage(name: swapRequestScreen, page: () =>    const SwapRequestScreen()),

@@ -54,11 +54,10 @@ class SettingScreen extends StatelessWidget {
                 leadingIcon: AppIcons.key,
               ),
 
-              ///====================Change Password================
+              ///====================Language================
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.changeLanguageScreen);
                 },
                 text: AppStrings.language.tr,
                 leadingIcon: AppIcons.language,
