@@ -54,5 +54,6 @@ class AppIcons {
   static const String help = "$basePath/help.svg";
   static const String arrowForwardIos = "$basePath/arrow_forward_ios.svg";
   static const String checkCircle = "$basePath/check_circle.svg";
+  static const String closeSmall = "$basePath/close_small.svg";
 
 }

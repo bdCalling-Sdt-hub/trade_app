@@ -51,6 +51,7 @@ dependencies:
   connectivity_plus: ^5.0.2
   image_picker: ^1.1.2
   country_picker: ^2.0.26
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
