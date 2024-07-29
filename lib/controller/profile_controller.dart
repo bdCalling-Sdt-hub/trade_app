@@ -31,6 +31,13 @@ TextEditingController reTypePasswordController = TextEditingController();
 TextEditingController cityController = TextEditingController();
 TextEditingController zipCodeController = TextEditingController();
 TextEditingController addressController = TextEditingController();
+TextEditingController countryController = TextEditingController();
 
+///==========================Update Country Picker================
+  var selectedCountry = ''.obs;
+
+  void updateCountry(String country) {
+    selectedCountry.value = country;
+  }
 
 }
