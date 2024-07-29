@@ -74,7 +74,7 @@ class AppRoutes {
     GetPage(name: homeScreen, page: () =>  const HomeScreen()),
 
     ///========================Setting section==============
-    GetPage(name: settingScreen, page: () =>  const SettingScreen()),
+    GetPage(name: settingScreen, page: () =>   SettingScreen()),
     GetPage(name: termsAndConditionScreen, page: () =>  const TermsAndConditionScreen()),
     GetPage(name: privacyPolicyScreen, page: () =>  const PrivacyPolicyScreen()),
     GetPage(name: accountInfoScreen, page: () =>   AccountInfoScreen()),
