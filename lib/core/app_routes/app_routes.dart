@@ -10,6 +10,7 @@ import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.da
 import 'package:trade_app/view/screens/category_screen/category_screen.dart';
 import 'package:trade_app/view/screens/just_for_you/just_for_you.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
+import 'package:trade_app/view/screens/my_membership_screen/membership_details_screen/membership_details_screen.dart';
 import 'package:trade_app/view/screens/notification_screen/notification_screen.dart';
 import 'package:trade_app/view/screens/other_profile/other_profile.dart';
 import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
@@ -67,6 +68,7 @@ class AppRoutes {
   static const String categoryScreen = "/CategoryScreen";
   static const String notificationScreen = "/NotificationScreen";
   static const String otherProfile = "/OtherProfile";
+  static const String membershipDetailsScreen = "/MembershipDetailsScreen";
 
   ///=============================Post Edit Screen============
   static const String postAddScreen = "/PostAddScreen";
@@ -108,6 +110,7 @@ class AppRoutes {
     GetPage(name: myMembershipScreen, page: () =>     MyMembershipScreen()),
     GetPage(name: pointsEarnedScreen, page: () =>    const PointsEarnedScreen()),
     GetPage(name: myRatingScreen, page: () =>     MyRatingScreen()),
+    GetPage(name: membershipDetailsScreen, page: () =>      MembershipDetailsScreen()),
 
     ///============================Post Edit Screen=================
     GetPage(name: postAddScreen, page: () =>     const PostAddScreen()),

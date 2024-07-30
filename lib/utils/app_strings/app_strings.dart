@@ -13,6 +13,7 @@ class AppStrings {
   ///===========================Authentication All Strings Here==============
   static const String enterAValidName = "Enter a valid name";
   static const String enterValidEamil = "Please Enter Your Email Address";
+  static const String swapPointsHistory = "Swap Points History:";
   static const String passwordLengthAndContain =
       "Password must be 8 characters long & must include one capital letter";
   static const String signIn = "Sign in";
@@ -82,6 +83,9 @@ class AppStrings {
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
   static const String update = "Update";
+  static const String gold = "Gold";
+  static const String platinum = "Platinum";
+  static const String diamond = "Diamond";
 
   ///===========================Address=====================
   static const String fillUpYourAddressDetails = "Fill up your address details";

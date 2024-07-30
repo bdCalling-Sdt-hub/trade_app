@@ -6,18 +6,19 @@ class CustomDetailContainer extends StatelessWidget {
   final Widget child;
   final Color color;
   final bool isBorder;
+  final double? height;  // Changed from bool to double
 
   const CustomDetailContainer({
     super.key,
     required this.child,
     required this.color,
-    this.isBorder = false,
+    this.isBorder = false, this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      height: height,
       margin: EdgeInsets.symmetric(vertical: 10.h),
       padding: EdgeInsets.all(10.h),
       decoration: BoxDecoration(
