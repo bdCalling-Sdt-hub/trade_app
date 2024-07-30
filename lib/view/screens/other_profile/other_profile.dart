@@ -4,7 +4,12 @@ import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
+import 'package:trade_app/view/components/custom_details_container/custom_details_container.dart';
 import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
+import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
+import 'package:trade_app/view/components/custom_other_profile_date/custom_other_profile_date.dart';
+import 'package:trade_app/view/components/custom_other_profile_header/custom_other_profile_header.dart';
+import 'package:trade_app/view/components/custom_other_profile_location/custom_other_profile_location.dart';
 import 'package:trade_app/view/components/custom_rating_card/custom_rating_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
@@ -25,7 +30,27 @@ class OtherProfile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            // CustomDetailContainer(child: child, color: color),
+           CustomDetailContainer(
+               isBorder: true,
+               color: AppColors.white200, child: Column(
+             children: [
+               CustomOtherProfileHeader(
+                 imageUrl:AppConstants.userNtr ,
+                 name: 'Zahid Hossain',
+                 rating: 4.5,
+                 membershipStatus: 'Gold',
+               ),
+               SizedBox(height: 10.h),
+               const CustomOtherProfileLocation(
+                 location: '47 W ,13th Street, New York',
+               ),
+               SizedBox(height: 10.h),
+               const CustomOtherProfileDate(
+                 memberSince: 'Nov, 2022',
+                 lastSiteVisit: '24 Jun, 2024',
+               ),
+             ],
+           )),
               ///=====================Avaiable Items for swap===============
               const CustomText(
                 text: AppStrings.availableItemsForSwap,

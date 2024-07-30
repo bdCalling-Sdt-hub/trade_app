@@ -18,8 +18,8 @@ import 'package:trade_app/view/screens/home_screen/home_controller/home_controll
 
 class ProductDetailsScreen extends StatelessWidget {
     ProductDetailsScreen({super.key});
-    HomeController controller = Get.find<HomeController>();
-    List<String> swapList=[
+   final HomeController controller = Get.find<HomeController>();
+  final  List<String> swapList=[
       "Samsung Galaxy s22",
       "Redmi Note 11"
     ];
@@ -102,7 +102,13 @@ class ProductDetailsScreen extends StatelessWidget {
                           Row(
                             children: [
                               CustomText(text: AppStrings.postBy,right: 4.w,),
-                              CustomText(text: "${'Nadim hasan'} ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,),
+                              GestureDetector(
+                                onTap: (){
+                                  Get.toNamed(AppRoutes.otherProfile);
+                                },
+                                child: const CustomText(
+                                  text: "${'Nadim hasan'} ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,),
+                              ),
                             ],
                           ),
                           const Row(
