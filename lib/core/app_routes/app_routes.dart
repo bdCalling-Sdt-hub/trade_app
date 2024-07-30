@@ -8,6 +8,7 @@ import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_scr
 import 'package:trade_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.dart';
 import 'package:trade_app/view/screens/category_screen/category_screen.dart';
+import 'package:trade_app/view/screens/just_for_you/just_for_you.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
 import 'package:trade_app/view/screens/my_membership_screen/membership_details_screen/membership_details_screen.dart';
 import 'package:trade_app/view/screens/notification_screen/notification_screen.dart';
@@ -15,7 +16,10 @@ import 'package:trade_app/view/screens/other_profile/other_profile.dart';
 import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
-import 'package:trade_app/view/screens/pre_approval_question/pre_approval_question_screen.dart';
+import 'package:trade_app/view/screens/product_details/product_details_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question/pre_approval_question_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question2/pre_approval_question2_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question3/pre_approval_question3_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/language_screen/language_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
@@ -30,8 +34,10 @@ import 'package:trade_app/view/screens/points_earn_screen/points_earn_screen.dar
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/setting_screen.dart';
 import 'package:trade_app/view/screens/swap_history_screen/swap_history_screen.dart';
+import 'package:trade_app/view/screens/swap_product/swap_product_screen.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_screen.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/terms_and_condition_screen.dart';
+import 'package:trade_app/view/screens/top_products/top_products_screen.dart';
 
 class AppRoutes {
   static const String signInScreen = "/SignInScreen";
@@ -70,7 +76,13 @@ class AppRoutes {
   static const String membershipPackageScreen = "/membership_package_screen";
   static const String packageDetailsScreen = "/package_details_screen";
   static const String preApprovalQuestionScreen = "/pre_approval_question_screen";
+  static const String preApprovalQuestion2Screen = "/pre_approval_question2_screen";
+  static const String preApprovalQuestion3Screen = "/pre_approval_question3_screen";
   static const String languageScreen = "/LanguageScreen";
+  static const String productDetailsScreen = "/product_details_screen";
+  static const String swapProductScreen = "/swap_product_screen";
+  static const String topProductsScreen = "/top_products_screen";
+  static const String justForYou = "/just_for_you";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -106,9 +118,15 @@ class AppRoutes {
     GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
     GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),
     GetPage(name: preApprovalQuestionScreen, page: () =>   PreApprovalQuestionScreen()),
+    GetPage(name: preApprovalQuestion2Screen, page: () =>   PreApprovalQuestion2Screen()),
+    GetPage(name: preApprovalQuestion3Screen, page: () =>   PreApprovalQuestion3Screen()),
     GetPage(name: languageScreen, page: () =>   LanguageScreen()),
     GetPage(name: categoryScreen, page: () =>   const CategoryScreen()),
     GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
     GetPage(name: otherProfile, page: () =>   const OtherProfile()),
+    GetPage(name: productDetailsScreen, page: () =>  ProductDetailsScreen()),
+    GetPage(name: swapProductScreen, page: () =>  SwapProductScreen()),
+    GetPage(name: topProductsScreen, page: () =>  TopProductsScreen()),
+    GetPage(name: justForYou, page: () =>  JustForYou()),
   ];
 }

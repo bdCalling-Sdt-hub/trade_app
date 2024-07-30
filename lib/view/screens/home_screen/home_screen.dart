@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    text: AppStrings.popularCategory,
+                    text: AppStrings.popularCategory.tr,
                     fontSize: 16.h,
                     fontWeight: FontWeight.w500,
                   ),
@@ -175,7 +175,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.topProductsScreen);
+                    },
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
@@ -202,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: AppConstants.electronics,
                         name: 'Samsung Galaxy s22'.tr,
                         onTap: () {
-                          Get.toNamed(AppRoutes.myProductDetailsScreen);
+                          Get.toNamed(AppRoutes.productDetailsScreen);
                         },
                         value: '\$825+',
                         editOnTap: () {},
@@ -291,7 +293,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.justForYou);
+                    },
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
@@ -322,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       image: AppConstants.electronics,
                       name: 'Samsung Galaxy s22'.tr,
                       onTap: () {
-                        Get.toNamed(AppRoutes.myProductDetailsScreen);
+                        Get.toNamed(AppRoutes.productDetailsScreen);
                       },
                       value: '\$825+',
                       editOnTap: () {},

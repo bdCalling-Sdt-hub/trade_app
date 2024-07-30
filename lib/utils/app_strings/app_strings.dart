@@ -17,6 +17,8 @@ class AppStrings {
   static const String passwordLengthAndContain =
       "Password must be 8 characters long & must include one capital letter";
   static const String signIn = "Sign in";
+  static const String thankYou = "Thank You!";
+  static const String youSuccess = "You successfully applied for gold membership. Please wait for the approval. We will send you a confirmation email.";
   static const String welcomeBack = "Welcome Back!";
   static const String email = "Email";
   static const String rating = "Rating";
