@@ -80,6 +80,9 @@ class AppStrings {
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
   static const String update = "Update";
+  static const String gold = "Gold";
+  static const String platinum = "Platinum";
+  static const String diamond = "Diamond";
 
   ///===========================Address=====================
   static const String fillUpYourAddressDetails = "Fill up your address details";

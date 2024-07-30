@@ -1,5 +1,6 @@
 
 import 'package:get/get.dart';
+import 'package:trade_app/controller/membership_controller/membership_controller.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
@@ -17,5 +18,6 @@ class DependencyInjection extends Bindings {
    Get.lazyPut(() => ProfileController(), fenix: true);
    Get.lazyPut(() => HomeController(), fenix: true);
    Get.lazyPut(() => PackageController(), fenix: true);
+   Get.lazyPut(() => MembershipController(), fenix: true);
   }
 }
