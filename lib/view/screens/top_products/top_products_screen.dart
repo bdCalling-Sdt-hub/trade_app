@@ -23,7 +23,7 @@ class TopProductsScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 24.h,horizontal: 20.w),
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
