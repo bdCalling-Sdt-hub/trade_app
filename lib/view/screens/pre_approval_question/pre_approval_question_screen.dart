@@ -107,8 +107,6 @@ class PreApprovalQuestionScreen extends StatelessWidget {
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
-
-
           ],
         ),
       ),
