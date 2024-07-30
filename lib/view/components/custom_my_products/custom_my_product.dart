@@ -18,6 +18,7 @@ class CustomMyProduct extends StatelessWidget {
   final VoidCallback onTap;
   final VoidCallback editOnTap;
   final bool isEdit;
+  final bool isMargin;
 
    CustomMyProduct({
     super.key,
@@ -25,7 +26,7 @@ class CustomMyProduct extends StatelessWidget {
     required this.name,
     this.backgroundColor = AppColors.white200,
     required this.onTap,
-    required this.value, required this.editOnTap, this.isEdit=false,
+    required this.value, required this.editOnTap, this.isEdit=false, required this.isMargin,
   });
 
   @override
@@ -33,6 +34,7 @@ class CustomMyProduct extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin:isMargin?  EdgeInsets.all(10): null,
         width: MediaQuery.of(context).size.width *.43,
         padding: EdgeInsets.symmetric(vertical: 12.h,horizontal: 8.h),
         decoration: BoxDecoration(
@@ -40,55 +42,58 @@ class CustomMyProduct extends StatelessWidget {
           color: backgroundColor,
           border: Border.all(color: AppColors.gray300),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Align(
-              alignment: Alignment.bottomRight,
-              child:  isEdit?
-              IconButton(
-                onPressed: editOnTap,
-                icon: const CustomImage(
-                    imageSrc: AppIcons.borderColor),
-              ):SizedBox(),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: CustomNetworkImage(
-                imageUrl: image,
-                height: 106.h,
-                width: 100.w,
+        child: SingleChildScrollView
+          (
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child:  isEdit?
+                IconButton(
+                  onPressed: editOnTap,
+                  icon: const CustomImage(
+                      imageSrc: AppIcons.borderColor),
+                ):SizedBox(),
               ),
-            ),
-            SizedBox(height: 10.h),
-            CustomText(
-              textAlign: TextAlign.start,
-              text: name,
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: AppColors.black500,
-              maxLines: 3,
-            ),
-            SizedBox(height: 5.h),
-            Row(
-              children: [
-                CustomText(
-                  text: AppStrings.value.tr,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: AppColors.gray700,
+              Align(
+                alignment: Alignment.center,
+                child: CustomNetworkImage(
+                  imageUrl: image,
+                  height: 106.h,
+                  width: 100.w,
                 ),
-                CustomText(
-                  text: value,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                  color: AppColors.blue500,
-                ),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(height: 10.h),
+              CustomText(
+                textAlign: TextAlign.start,
+                text: name,
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: AppColors.black500,
+                maxLines: 3,
+              ),
+              SizedBox(height: 5.h),
+              Row(
+                children: [
+                  CustomText(
+                    text: AppStrings.value.tr,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                    color: AppColors.gray700,
+                  ),
+                  CustomText(
+                    text: value,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: AppColors.blue500,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

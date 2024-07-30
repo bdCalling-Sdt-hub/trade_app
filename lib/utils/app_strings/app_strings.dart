@@ -18,6 +18,7 @@ class AppStrings {
   static const String signIn = "Sign in";
   static const String welcomeBack = "Welcome Back!";
   static const String email = "Email";
+  static const String rating = "Rating";
   static const String password = "Password";
   static const String resendOtp = "Resend Otp";
   static const String passwordShould = "Password should match";

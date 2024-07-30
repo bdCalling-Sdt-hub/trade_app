@@ -9,7 +9,7 @@ import 'package:trade_app/view/components/custom_profile_card/custom_profile_car
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+   const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SettingScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-               CustomText(text: AppStrings.general.tr,
+              CustomText(text: AppStrings.general.tr,
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
                 color: AppColors.black500,
@@ -54,15 +54,17 @@ class SettingScreen extends StatelessWidget {
                 leadingIcon: AppIcons.key,
               ),
 
-              ///====================Change Password================
+              ///====================Language================
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.changeLanguageScreen);
+                  Get.toNamed(AppRoutes.languageScreen);
                 },
                 text: AppStrings.language.tr,
                 leadingIcon: AppIcons.language,
               ),
+
+
 
               ///====================Address================
               CustomProfileCard(
@@ -104,9 +106,12 @@ class SettingScreen extends StatelessWidget {
                 leadingIcon: AppIcons.help,
               ),
             ],
-          ),
+          )
         ),
       ),
     );
   }
+
+
+
 }

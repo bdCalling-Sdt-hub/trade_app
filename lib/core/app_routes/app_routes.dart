@@ -7,13 +7,16 @@ import 'package:trade_app/view/screens/address_screen/address_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.dart';
+import 'package:trade_app/view/screens/category_screen/category_screen.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
+import 'package:trade_app/view/screens/notification_screen/notification_screen.dart';
+import 'package:trade_app/view/screens/other_profile/other_profile.dart';
 import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
 import 'package:trade_app/view/screens/pre_approval_question/pre_approval_question_screen.dart';
+import 'package:trade_app/view/screens/setting_screen/language_screen/language_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
-import 'package:trade_app/view/screens/change_language_screen/change_language_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
 import 'package:trade_app/view/screens/help_center_screen/help_center_screen.dart';
 import 'package:trade_app/view/screens/home_screen/home_screen.dart';
@@ -46,7 +49,6 @@ class AppRoutes {
   static const String privacyPolicyScreen = "/PrivacyPolicyScreen";
   static const String accountInfoScreen = "/AccountInfoScreen";
   static const String changePasswordScreen = "/ChangePasswordScreen";
-  static const String changeLanguageScreen = "/ChangeLanguageScreen";
   static const String addressScreen = "/AddressScreen";
   static const String helpCenterScreen = "/HelpCenterScreen";
   static const String swapRequestScreen = "/SwapRequestScreen";
@@ -56,6 +58,9 @@ class AppRoutes {
   static const String myMembershipScreen = "/MyMembershipScreen";
   static const String pointsEarnedScreen = "/PointsEarnedScreen";
   static const String myRatingScreen = "/MyRatingScreen";
+  static const String categoryScreen = "/CategoryScreen";
+  static const String notificationScreen = "/NotificationScreen";
+  static const String otherProfile = "/OtherProfile";
 
   ///=============================Post Edit Screen============
   static const String postAddScreen = "/PostAddScreen";
@@ -63,6 +68,7 @@ class AppRoutes {
   static const String membershipPackageScreen = "/membership_package_screen";
   static const String packageDetailsScreen = "/package_details_screen";
   static const String preApprovalQuestionScreen = "/pre_approval_question_screen";
+  static const String languageScreen = "/LanguageScreen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -76,14 +82,13 @@ class AppRoutes {
     GetPage(name: homeScreen, page: () =>  const HomeScreen()),
 
     ///========================Setting section==============
-    GetPage(name: settingScreen, page: () =>  const SettingScreen()),
+    GetPage(name: settingScreen, page: () =>   const SettingScreen()),
     GetPage(name: termsAndConditionScreen, page: () =>  const TermsAndConditionScreen()),
     GetPage(name: privacyPolicyScreen, page: () =>  const PrivacyPolicyScreen()),
     GetPage(name: accountInfoScreen, page: () =>   AccountInfoScreen()),
     GetPage(name: changePasswordScreen, page: () =>   ChangePasswordScreen()),
-    GetPage(name: changeLanguageScreen, page: () =>   const ChangeLanguageScreen()),
     GetPage(name: addressScreen, page: () =>    AddressScreen()),
-    GetPage(name: helpCenterScreen, page: () =>    const HelpCenterScreen()),
+    GetPage(name: helpCenterScreen, page: () =>     HelpCenterScreen()),
     GetPage(name: swapRequestScreen, page: () =>    const SwapRequestScreen()),
     GetPage(name: swapHistoryScreen, page: () =>    const SwapHistoryScreen()),
     GetPage(name: myProductsScreen, page: () =>  MyProductsScreen()),
@@ -98,5 +103,9 @@ class AppRoutes {
     GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
     GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),
     GetPage(name: preApprovalQuestionScreen, page: () =>   PreApprovalQuestionScreen()),
+    GetPage(name: languageScreen, page: () =>   LanguageScreen()),
+    GetPage(name: categoryScreen, page: () =>   const CategoryScreen()),
+    GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
+    GetPage(name: otherProfile, page: () =>   const OtherProfile()),
   ];
 }

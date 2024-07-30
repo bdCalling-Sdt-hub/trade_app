@@ -114,7 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.categoryScreen);
+                    },
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
@@ -132,13 +134,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   children: List.generate(6, (index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(AppRoutes.categoryScreen);
+                      },
                       child: Container(
                         margin: EdgeInsets.only(right: 16.w),
                         child: Column(
                           children: [
                             CustomNetworkImage(
-                              imageUrl: AppImages.mobile,
+                              imageUrl: AppConstants.mobile,
                               height: 64.h,
                               width: 64.h,
                               borderRadius: BorderRadius.circular(8.sp),
@@ -193,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container(
                       margin: EdgeInsets.only(right: 10.w),
                       child: CustomMyProduct(
+                        isMargin: false,
                         isEdit: controller.isEdit,
                         image: AppConstants.electronics,
                         name: 'Samsung Galaxy s22'.tr,
@@ -312,6 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     return CustomMyProduct(
+                      isMargin: false,
                       isEdit: controller.isEdit,
                       image: AppConstants.electronics,
                       name: 'Samsung Galaxy s22'.tr,

@@ -31,6 +31,21 @@ TextEditingController reTypePasswordController = TextEditingController();
 TextEditingController cityController = TextEditingController();
 TextEditingController zipCodeController = TextEditingController();
 TextEditingController addressController = TextEditingController();
+TextEditingController countryController = TextEditingController();
+
+///==========================Update Country Picker================
+  var selectedCountry = ''.obs;
+
+  void updateCountry(String country) {
+    selectedCountry.value = country;
+  }
 
 
+  final List<String> faqs = [
+    "What is your exchange policy?",
+    "How do I exchange a product?",
+    "Are there any items that cannot be exchanged?",
+    "Do I have to pay for return shipping?",
+    "How long does the exchange process take?"
+  ];
 }
