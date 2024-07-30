@@ -8,6 +8,7 @@ import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_scr
 import 'package:trade_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.dart';
 import 'package:trade_app/view/screens/category_screen/category_screen.dart';
+import 'package:trade_app/view/screens/just_for_you/just_for_you.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
 import 'package:trade_app/view/screens/notification_screen/notification_screen.dart';
 import 'package:trade_app/view/screens/other_profile/other_profile.dart';
@@ -35,6 +36,7 @@ import 'package:trade_app/view/screens/swap_history_screen/swap_history_screen.d
 import 'package:trade_app/view/screens/swap_product/swap_product_screen.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_screen.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/terms_and_condition_screen.dart';
+import 'package:trade_app/view/screens/top_products/top_products_screen.dart';
 
 class AppRoutes {
   static const String signInScreen = "/SignInScreen";
@@ -77,6 +79,8 @@ class AppRoutes {
   static const String languageScreen = "/LanguageScreen";
   static const String productDetailsScreen = "/product_details_screen";
   static const String swapProductScreen = "/swap_product_screen";
+  static const String topProductsScreen = "/top_products_screen";
+  static const String justForYou = "/just_for_you";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -119,5 +123,7 @@ class AppRoutes {
     GetPage(name: otherProfile, page: () =>   const OtherProfile()),
     GetPage(name: productDetailsScreen, page: () =>  ProductDetailsScreen()),
     GetPage(name: swapProductScreen, page: () =>  SwapProductScreen()),
+    GetPage(name: topProductsScreen, page: () =>  TopProductsScreen()),
+    GetPage(name: justForYou, page: () =>  JustForYou()),
   ];
 }

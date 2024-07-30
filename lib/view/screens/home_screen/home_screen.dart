@@ -175,7 +175,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.topProductsScreen);
+                    },
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
@@ -291,7 +293,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(AppRoutes.justForYou);
+                    },
                     child: CustomText(
                       text: AppStrings.viewAll,
                       fontSize: 16.h,
