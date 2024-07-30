@@ -1,11 +1,14 @@
 import 'package:get/get.dart';
 
 class MembershipController extends GetxController {
+
+  RxBool isLoader = false.obs;
   var sliderValue = 25000.0.obs;
 
   void updateSliderValue(double value) {
     sliderValue.value = value;
   }
+
 
 
   final List<String> membershipItem = [
