@@ -7,14 +7,10 @@ import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
-import 'package:trade_app/view/components/custom_button/custom_button.dart';
 import 'package:trade_app/view/components/custom_details_container/custom_details_container.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
-import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
-import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
-import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class SwapProductScreen extends StatelessWidget {
   const SwapProductScreen({super.key});
@@ -97,7 +93,11 @@ class SwapProductScreen extends StatelessWidget {
                         Row(
                           children: [
                             CustomText(text: AppStrings.postBy,right: 4.w,),
-                            CustomText(text: "${'Nadim hasan'} ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,),
+                            GestureDetector(
+                                onTap: (){
+                                  Get.toNamed(AppRoutes.otherProfile);
+                                },
+                                child: const CustomText(text: "${'Nadim hasan'} ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,)),
                           ],
                         ),
                         const Row(

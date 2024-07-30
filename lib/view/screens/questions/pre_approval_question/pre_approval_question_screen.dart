@@ -14,7 +14,7 @@ import 'package:trade_app/view/screens/membership_package/package_controller.dar
 class PreApprovalQuestionScreen extends StatelessWidget {
     PreApprovalQuestionScreen({super.key});
 
-    PackageController controller=Get.find<PackageController>();
+   final PackageController controller=Get.find<PackageController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

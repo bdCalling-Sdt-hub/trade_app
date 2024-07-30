@@ -29,6 +29,9 @@ class SwapRequestScreen extends StatelessWidget {
           Column(
             children:List.generate(4, (index){
               return     CustomSwapRequests(
+                onTapName: (){
+                  Get.toNamed(AppRoutes.otherProfile);
+                },
                 image: AppConstants.userNtr,
                 name: 'Zahid Hossain'.tr,
                 date: '12/06/24'.tr,

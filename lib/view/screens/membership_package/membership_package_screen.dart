@@ -10,7 +10,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 class MembershipPackageScreen extends StatelessWidget {
     MembershipPackageScreen({super.key});
 
-    List<Map<String,dynamic>> packageList=[
+   final List<Map<String,dynamic>> packageList=[
       {
         "packageName" : "Gold",
         "points" : "From 0-24,999 points",

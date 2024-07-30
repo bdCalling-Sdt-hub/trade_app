@@ -20,6 +20,7 @@ class CustomSwapRequests extends StatelessWidget {
   final String rejectButton;
   final Color backgroundColor;
   final VoidCallback onTap;
+  final VoidCallback onTapName;
 
   const CustomSwapRequests({
     super.key,
@@ -31,7 +32,7 @@ class CustomSwapRequests extends StatelessWidget {
     this.backgroundColor = AppColors.white200,
     required this.onTap,
     required this.firstProductName,
-    required this.exchangeProductName,
+    required this.exchangeProductName, required this.onTapName,
   });
 
   @override
@@ -59,12 +60,15 @@ class CustomSwapRequests extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(
-                          left: 8,
-                          text: name,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.blue500,
+                        GestureDetector(
+                          onTap: onTapName,
+                          child: CustomText(
+                            left: 8,
+                            text: name,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.blue500,
+                          ),
                         ),
                         CustomText(
                           left: 10,
