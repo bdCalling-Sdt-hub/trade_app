@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
+import 'package:trade_app/view/components/custom_button/custom_button.dart';
+import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
+import 'package:trade_app/view/screens/questions/inner/question_submit_pop.dart';
 
-class PreApprovalQuestionScreen extends StatelessWidget {
-    PreApprovalQuestionScreen({super.key});
+class PreApprovalQuestion3Screen extends StatelessWidget {
+  PreApprovalQuestion3Screen({super.key});
 
-    PackageController controller=Get.find<PackageController>();
+  PackageController controller=Get.find<PackageController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,64 +32,69 @@ class PreApprovalQuestionScreen extends StatelessWidget {
           children: [
             CustomText(text: AppStrings.pleaseFillUpThisForm.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 16.h,),
 
-            ///<================================= name ====================================>
-            CustomText(text: AppStrings.name.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,),
+            ///<================================= datesOfTravel ====================================>
+            CustomText(text: AppStrings.datesOfTravel.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,),
             CustomTextField(
-              textEditingController: controller.nameController,
+              textEditingController: controller.dateTravelController,
               inputTextStyle: const TextStyle(color: AppColors.black500),
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
 
-            ///<================================= dateOfBirth ====================================>
-            CustomText(text: AppStrings.dateOfBirth.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
+            SizedBox(height: 16.h,),
+            CustomText(text: AppStrings.travelStart.tr,fontSize: 18.h,fontWeight: FontWeight.w500,),
+
+            ///<================================= destination ====================================>
+            CustomText(text: AppStrings.destination.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
             CustomTextField(
-              // textEditingController: controller.,
+               textEditingController: controller.destinationStartController,
               inputTextStyle: const TextStyle(color: AppColors.black500),
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
 
-            ///<================================= placeOfBirth ====================================>
-            CustomText(text: AppStrings.placeOfBirth.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
+            ///<================================= state ====================================>
+            CustomText(text: AppStrings.state.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
             CustomTextField(
-               textEditingController: controller.placeBirthController,
+              textEditingController: controller.stateStartController,
               inputTextStyle: const TextStyle(color: AppColors.black500),
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
 
-            ///<================================= licenceNo ====================================>
-            CustomText(text: AppStrings.licenceNo.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
+            ///<================================= country ====================================>
+            CustomText(text: AppStrings.country.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
             CustomTextField(
-              textEditingController: controller.licenseNoController,
+              textEditingController: controller.countryStartController,
               inputTextStyle: const TextStyle(color: AppColors.black500),
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
 
-            ///<================================= password ====================================>
-            CustomText(text: AppStrings.password.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
+            CustomText(text: AppStrings.travelEnd.tr,fontSize: 18.h,fontWeight: FontWeight.w500,top: 16.h,),
+
+            ///<================================= destination ====================================>
+            CustomText(text: AppStrings.destination.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
             CustomTextField(
-              textEditingController: controller.passwordController,
+              textEditingController: controller.destinationEndController,
               inputTextStyle: const TextStyle(color: AppColors.black500),
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
 
-            ///<================================= email ====================================>
-            CustomText(text: AppStrings.email.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
+            ///<================================= state ====================================>
+            CustomText(text: AppStrings.state.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
             CustomTextField(
-              textEditingController: controller.emailController,
+              textEditingController: controller.stateEndController,
               inputTextStyle: const TextStyle(color: AppColors.black500),
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
 
-            ///<================================= phoneNumber ====================================>
-            CustomText(text: AppStrings.phoneNumber.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
+            ///<================================= country ====================================>
+            CustomText(text: AppStrings.country.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
             CustomTextField(
-              textEditingController: controller.phnNumberController,
+              textEditingController: controller.countryEndController,
               inputTextStyle: const TextStyle(color: AppColors.black500),
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
@@ -107,6 +117,15 @@ class PreApprovalQuestionScreen extends StatelessWidget {
               fillColor: AppColors.white200,
               fieldBorderColor: AppColors.gray201,
             ),
+
+            SizedBox(height: 24.h,),
+            ///<================================= submit button ====================================>
+            CustomButton(onTap: (){
+              showDialog(context: context, builder: (index){
+                return QuestionSubmitPop();
+              });
+            },title: AppStrings.submit.tr,)
+
           ],
         ),
       ),

@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
-                    text: AppStrings.popularCategory,
+                    text: AppStrings.popularCategory.tr,
                     fontSize: 16.h,
                     fontWeight: FontWeight.w500,
                   ),
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: AppConstants.electronics,
                         name: 'Samsung Galaxy s22'.tr,
                         onTap: () {
-                          Get.toNamed(AppRoutes.myProductDetailsScreen);
+                          Get.toNamed(AppRoutes.productDetailsScreen);
                         },
                         value: '\$825+',
                         editOnTap: () {},
@@ -322,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       image: AppConstants.electronics,
                       name: 'Samsung Galaxy s22'.tr,
                       onTap: () {
-                        Get.toNamed(AppRoutes.myProductDetailsScreen);
+                        Get.toNamed(AppRoutes.productDetailsScreen);
                       },
                       value: '\$825+',
                       editOnTap: () {},

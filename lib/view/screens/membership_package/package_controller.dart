@@ -16,4 +16,5 @@ class PackageController extends GetxController{
   final TextEditingController destinationEndController=TextEditingController();
   final TextEditingController stateEndController=TextEditingController();
   final TextEditingController countryEndController=TextEditingController();
+  final TextEditingController dateTravelController=TextEditingController();
 }

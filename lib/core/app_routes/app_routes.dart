@@ -14,7 +14,10 @@ import 'package:trade_app/view/screens/other_profile/other_profile.dart';
 import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
-import 'package:trade_app/view/screens/pre_approval_question/pre_approval_question_screen.dart';
+import 'package:trade_app/view/screens/product_details/product_details_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question/pre_approval_question_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question2/pre_approval_question2_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question3/pre_approval_question3_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/language_screen/language_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
@@ -68,7 +71,10 @@ class AppRoutes {
   static const String membershipPackageScreen = "/membership_package_screen";
   static const String packageDetailsScreen = "/package_details_screen";
   static const String preApprovalQuestionScreen = "/pre_approval_question_screen";
+  static const String preApprovalQuestion2Screen = "/pre_approval_question2_screen";
+  static const String preApprovalQuestion3Screen = "/pre_approval_question3_screen";
   static const String languageScreen = "/LanguageScreen";
+  static const String productDetailsScreen = "/product_details_screen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -103,9 +109,12 @@ class AppRoutes {
     GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
     GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),
     GetPage(name: preApprovalQuestionScreen, page: () =>   PreApprovalQuestionScreen()),
+    GetPage(name: preApprovalQuestion2Screen, page: () =>   PreApprovalQuestion2Screen()),
+    GetPage(name: preApprovalQuestion3Screen, page: () =>   PreApprovalQuestion3Screen()),
     GetPage(name: languageScreen, page: () =>   LanguageScreen()),
     GetPage(name: categoryScreen, page: () =>   const CategoryScreen()),
     GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
     GetPage(name: otherProfile, page: () =>   const OtherProfile()),
+    GetPage(name: productDetailsScreen, page: () =>   const ProductDetailsScreen()),
   ];
 }
