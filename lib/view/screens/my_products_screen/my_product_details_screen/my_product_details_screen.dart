@@ -19,7 +19,6 @@ class MyProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-
       ///============================My Product Details Appbar===============
       appBar: CustomAppBar(
         appBarContent: AppStrings.myProductDetails.tr,

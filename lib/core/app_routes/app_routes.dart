@@ -32,6 +32,7 @@ import 'package:trade_app/view/screens/points_earn_screen/points_earn_screen.dar
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/setting_screen.dart';
 import 'package:trade_app/view/screens/swap_history_screen/swap_history_screen.dart';
+import 'package:trade_app/view/screens/swap_product/swap_product_screen.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_screen.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/terms_and_condition_screen.dart';
 
@@ -75,6 +76,7 @@ class AppRoutes {
   static const String preApprovalQuestion3Screen = "/pre_approval_question3_screen";
   static const String languageScreen = "/LanguageScreen";
   static const String productDetailsScreen = "/product_details_screen";
+  static const String swapProductScreen = "/swap_product_screen";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -115,6 +117,7 @@ class AppRoutes {
     GetPage(name: categoryScreen, page: () =>   const CategoryScreen()),
     GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
     GetPage(name: otherProfile, page: () =>   const OtherProfile()),
-    GetPage(name: productDetailsScreen, page: () =>   const ProductDetailsScreen()),
+    GetPage(name: productDetailsScreen, page: () =>  ProductDetailsScreen()),
+    GetPage(name: swapProductScreen, page: () =>  SwapProductScreen()),
   ];
 }
