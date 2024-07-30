@@ -13,6 +13,7 @@ class AppStrings {
   ///===========================Authentication All Strings Here==============
   static const String enterAValidName = "Enter a valid name";
   static const String enterValidEamil = "Please Enter Your Email Address";
+  static const String swapPointsHistory = "Swap Points History:";
   static const String passwordLengthAndContain =
       "Password must be 8 characters long & must include one capital letter";
   static const String signIn = "Sign in";

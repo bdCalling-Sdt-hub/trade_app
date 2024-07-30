@@ -98,7 +98,7 @@ class AppRoutes {
     GetPage(name: myMembershipScreen, page: () =>     MyMembershipScreen()),
     GetPage(name: pointsEarnedScreen, page: () =>    const PointsEarnedScreen()),
     GetPage(name: myRatingScreen, page: () =>     MyRatingScreen()),
-    GetPage(name: membershipDetailsScreen, page: () =>     const MembershipDetailsScreen()),
+    GetPage(name: membershipDetailsScreen, page: () =>      MembershipDetailsScreen()),
 
     ///============================Post Edit Screen=================
     GetPage(name: postAddScreen, page: () =>     const PostAddScreen()),

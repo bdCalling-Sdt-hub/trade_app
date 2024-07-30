@@ -70,7 +70,7 @@ class MyMembershipScreen extends StatelessWidget {
                                 color: AppColors.gray900,
                               ),
                               const CustomText(
-                                text: '25000',
+                                text: '20000',
                                 fontWeight: FontWeight.w700,
                                 fontSize: 20,
                                 color: AppColors.blue500,
