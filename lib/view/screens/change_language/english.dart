@@ -3,7 +3,8 @@ Map<String, String> english = {
   "Account Info":"Account Info",
   "Change Password":"Change Password",
   "Address":"Address",
-  "Terms And Condition":"Terms And Condition",
-  "privacy Policy":"privacy Policy",
+  "Terms & Condition":"Terms & Condition",
+  "Privacy Policy":"Privacy Policy",
   "Help Center":"Help Center",
+  "Settings":"Settings",
 };
