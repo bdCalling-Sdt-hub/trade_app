@@ -1,79 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/controller/search_controller/search_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
+import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
+import 'package:trade_app/view/components/custom_details_container/custom_details_container.dart';
+import 'package:trade_app/view/components/custom_filter/custom_filter.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
-import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+  SearchScreen({super.key});
+
+  final SearchListController searchListController =
+      Get.find<SearchListController>();
+  final TextEditingController _locationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: const Size(375, 812));
+
     return Scaffold(
-        backgroundColor: AppColors.white,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(150.0), // Set a custom height
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 30),
-            // Add horizontal margin
-            padding: const EdgeInsets.only(top: 8.0),
-            // Optional padding
-            child: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: AppColors.blue500,
-                ),
-              ),
-              title: CustomTextField(
+      backgroundColor: AppColors.white,
+      appBar: CustomAppBar(
+        appBarContent: 'Search'.tr,
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Row(
+          children: [
+            ///===================Search Field=============
+            Expanded(
+              flex: 6,
+              child: CustomTextField(
                 hintText: AppStrings.whatAreYouLookingFor,
               ),
-              centerTitle: true,
             ),
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ///=================Top Search===========
-              CustomText(
-                fontSize: 16,
-                text: AppStrings.topSearch.tr,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black500,
-                bottom: 15,
-              ),
-              Column(
-                children: List.generate(5, (index) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    child: Row(
-                      children: [
-                        CustomImage(imageSrc: AppIcons.northEast),
-                        CustomText(
-                          left: 10,
-                          text: 'Mobile Phones',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.black500,
-                        ),
-                      ],
+            SizedBox(width: 10.w),
+
+            ///====================Dialog box ===========
+            Expanded(
+              flex: 2,
+              child: GestureDetector(
+                onTap: () {
+                  Get.dialog(
+                    CustomFilter(
+                      locationController: _locationController,
                     ),
                   );
-                }),
+                },
+
+                ///===================Filter Icon===========
+                child: CustomDetailContainer(
+                  height: 65.h,
+                  weight: 70.w,
+                  color: AppColors.white200,
+                  child: const CustomImage(imageSrc: AppIcons.filterList),
+                ),
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
+
