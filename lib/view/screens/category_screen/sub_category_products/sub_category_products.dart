@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -26,30 +27,12 @@ class SubCategoryProducts extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                CustomText(
-                  text: data['name'],
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: AppColors.black500,
-                ),
-                 const Spacer(),
-                 CustomDetailContainer(
-                    color: AppColors.white200,
-                    child: Row(
-                      children: [
-                        const CustomImage(
-                            imageSrc: AppIcons.filterList),
-                        CustomText(
-                          text: AppStrings.filter.tr,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: AppColors.black500,
-                        ),
-                      ],
-                    ))
-              ],
+            CustomText(
+              text: data['name'],
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              color: AppColors.black500,
+              bottom: 10,
             ),
             Expanded(
               child: GridView.builder(
@@ -68,7 +51,7 @@ class SubCategoryProducts extends StatelessWidget {
                     image: AppConstants.electronics,
                     name: data['name'],
                     onTap: () {
-                      // Get.toNamed(AppRoutes.myProductDetailsScreen);
+                      Get.toNamed(AppRoutes.productDetailsScreen);
                     },
                     value: '\$825+',
                     editOnTap: () {

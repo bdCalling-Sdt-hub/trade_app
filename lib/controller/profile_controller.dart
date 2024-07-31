@@ -41,11 +41,12 @@ TextEditingController countryController = TextEditingController();
   }
 
 
-  final List<String> faqs = [
-    "What is your exchange policy?",
-    "How do I exchange a product?",
-    "Are there any items that cannot be exchanged?",
-    "Do I have to pay for return shipping?",
-    "How long does the exchange process take?"
+
+  final List<Map<String, String>> faqList = [
+    {"que": "What is your exchange policy?", "ans": "This is an dummy answer, To show in UI"},
+    {"que": "How do I exchange a product?", "ans": "This is an dummy answer, To show in UI"},
+    {"que": "Are there any items that cannot be exchanged?", "ans": "This is an dummy answer, To show in UI"},
+    {"que": "Do I have to pay for return shipping?", "ans": "This is an dummy answer, To show in UI"},
+    {"que": "How long does the exchange process take?", "ans": "This is an dummy answer, To show in UI"},
   ];
 }

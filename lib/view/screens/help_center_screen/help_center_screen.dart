@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
-import 'package:trade_app/view/components/custom_fAQ_cards/custom_faq_cards.dart';
 import 'package:trade_app/view/components/custom_help_app_bar/custom_help_app_bar.dart';
 import 'package:trade_app/view/components/custom_help_card/custom_help_card.dart';
+import 'package:trade_app/view/components/custom_help_question/custom_help_question.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
 class HelpCenterScreen extends StatelessWidget {
@@ -39,12 +39,13 @@ class HelpCenterScreen extends StatelessWidget {
                   ),
 
                   ///======================Question Here=======================
-                  ...profileController.faqs.map((faqs) => CustomFAQCard(
-                        question: faqs,
-                        onTap: () {
-                          // Handle FAQ tap
-                        },
-                      )),
+                  // ...profileController.faqs.map((faqs) => CustomFAQCard(
+                  //       question: faqs,
+                  //       onTap: () {
+                  //         // Handle FAQ tap
+                  //       },
+                  //     )),
+                  CustomHelpQuestion(faqList: profileController.faqList),
                   SizedBox(height: 20.h),
 
                   ///=========================Need More Help=================
