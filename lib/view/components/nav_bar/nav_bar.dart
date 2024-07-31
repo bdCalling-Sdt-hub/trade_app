@@ -108,7 +108,7 @@ class _UserNavBarState extends State<NavBar> {
           Get.to(() =>   const ChatScreen());
           break;
         case 2:
-          Get.to(() => const CategoryScreen());
+          Get.to(() =>  CategoryScreen());
           break;
         case 3:
           Get.to(() => const PostScreen());

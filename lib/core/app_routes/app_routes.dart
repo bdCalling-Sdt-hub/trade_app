@@ -8,6 +8,8 @@ import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_scr
 import 'package:trade_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up_otp/sign_up_otp.dart';
 import 'package:trade_app/view/screens/category_screen/category_screen.dart';
+import 'package:trade_app/view/screens/category_screen/sub_category_products/sub_category_products.dart';
+import 'package:trade_app/view/screens/category_screen/sub_category_screen/sub_category_screen.dart';
 import 'package:trade_app/view/screens/just_for_you/just_for_you.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
 import 'package:trade_app/view/screens/my_membership_screen/membership_details_screen/membership_details_screen.dart';
@@ -71,6 +73,7 @@ class AppRoutes {
   static const String otherProfile = "/OtherProfile";
   static const String membershipDetailsScreen = "/MembershipDetailsScreen";
   static const String searchScreen = "/SearchScreen";
+  static const String subCategoryScreen = "/SubCategoryScreen";
 
   ///=============================Post Edit Screen============
   static const String postAddScreen = "/PostAddScreen";
@@ -85,6 +88,7 @@ class AppRoutes {
   static const String swapProductScreen = "/swap_product_screen";
   static const String topProductsScreen = "/top_products_screen";
   static const String justForYou = "/just_for_you";
+  static const String subCategoryProducts = "/SubCategoryProducts";
 
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
@@ -123,7 +127,7 @@ class AppRoutes {
     GetPage(name: preApprovalQuestion2Screen, page: () =>   PreApprovalQuestion2Screen()),
     GetPage(name: preApprovalQuestion3Screen, page: () =>   PreApprovalQuestion3Screen()),
     GetPage(name: languageScreen, page: () =>   LanguageScreen()),
-    GetPage(name: categoryScreen, page: () =>   const CategoryScreen()),
+    GetPage(name: categoryScreen, page: () =>    CategoryScreen()),
     GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
     GetPage(name: otherProfile, page: () =>   const OtherProfile()),
     GetPage(name: productDetailsScreen, page: () =>  ProductDetailsScreen()),
@@ -131,5 +135,7 @@ class AppRoutes {
     GetPage(name: topProductsScreen, page: () =>  TopProductsScreen()),
     GetPage(name: justForYou, page: () =>  JustForYou()),
     GetPage(name: searchScreen, page: () =>  const SearchScreen()),
+    GetPage(name: subCategoryScreen, page: () =>   SubCategoryScreen()),
+    GetPage(name: subCategoryProducts, page: () =>   const SubCategoryProducts()),
   ];
 }
