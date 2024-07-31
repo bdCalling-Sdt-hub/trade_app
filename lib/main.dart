@@ -15,7 +15,7 @@ void main() {
   DeviceUtils.lockDevicePortrait();
   DependencyInjection di = DependencyInjection();
   di.dependencies();
-  Get.put(NetworkController());
+  // Get.put(NetworkController());
   runApp(
     const MyApp(), // Wrap your app
   );
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 200),
-        initialRoute: AppRoutes.homeScreen,
+        initialRoute: AppRoutes.splashScreen,
         navigatorKey: Get.key,
         getPages: AppRoutes.routes,
           locale: const Locale("en","US"),
