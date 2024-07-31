@@ -20,6 +20,7 @@ import 'package:trade_app/view/screens/product_details/product_details_screen.da
 import 'package:trade_app/view/screens/questions/pre_approval_question/pre_approval_question_screen.dart';
 import 'package:trade_app/view/screens/questions/pre_approval_question2/pre_approval_question2_screen.dart';
 import 'package:trade_app/view/screens/questions/pre_approval_question3/pre_approval_question3_screen.dart';
+import 'package:trade_app/view/screens/search_screen/search_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/language_screen/language_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';
@@ -69,6 +70,7 @@ class AppRoutes {
   static const String notificationScreen = "/NotificationScreen";
   static const String otherProfile = "/OtherProfile";
   static const String membershipDetailsScreen = "/MembershipDetailsScreen";
+  static const String searchScreen = "/SearchScreen";
 
   ///=============================Post Edit Screen============
   static const String postAddScreen = "/PostAddScreen";
@@ -128,5 +130,6 @@ class AppRoutes {
     GetPage(name: swapProductScreen, page: () =>  SwapProductScreen()),
     GetPage(name: topProductsScreen, page: () =>  TopProductsScreen()),
     GetPage(name: justForYou, page: () =>  JustForYou()),
+    GetPage(name: searchScreen, page: () =>  const SearchScreen()),
   ];
 }

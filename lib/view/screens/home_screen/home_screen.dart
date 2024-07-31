@@ -62,7 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeAppbar(coinAmount: '22,850'),
+              HomeAppbar(
+                  onTap: (){
+                    Get.toNamed(AppRoutes.searchScreen);
+                  },
+                  coinAmount: '22,850'),
 
               ///==============================Banner Image==========================>
               CarouselSlider(

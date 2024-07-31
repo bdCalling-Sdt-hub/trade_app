@@ -11,8 +11,9 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 
 class HomeAppbar extends StatelessWidget {
-    HomeAppbar({super.key, required this.coinAmount});
+    HomeAppbar({super.key, required this.coinAmount, required this.onTap});
    final String coinAmount;
+   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,6 +67,7 @@ class HomeAppbar extends StatelessWidget {
         SizedBox(height: 16.h,),
         ///<========================== search ============================>
         CustomTextField(
+          onTap:onTap ,
           fieldBorderColor: AppColors.gray300,
           fillColor: AppColors.white200,
           onChanged: (val){},
