@@ -10,7 +10,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class CustomMyProduct extends StatelessWidget {
-  HomeController controller=Get.find<HomeController>();
+  final HomeController controller=Get.find<HomeController>();
   final String image;
   final String name;
   final String value;
@@ -34,7 +34,7 @@ class CustomMyProduct extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin:isMargin?  EdgeInsets.all(10): null,
+        margin:isMargin?  const EdgeInsets.all(10): null,
         width: MediaQuery.of(context).size.width *.43,
         padding: EdgeInsets.symmetric(vertical: 12.h,horizontal: 8.h),
         decoration: BoxDecoration(
@@ -56,7 +56,7 @@ class CustomMyProduct extends StatelessWidget {
                   onPressed: editOnTap,
                   icon: const CustomImage(
                       imageSrc: AppIcons.borderColor),
-                ):SizedBox(),
+                ):const SizedBox(),
               ),
               Align(
                 alignment: Alignment.center,
@@ -77,6 +77,7 @@ class CustomMyProduct extends StatelessWidget {
               ),
               SizedBox(height: 5.h),
               Row(
+
                 children: [
                   CustomText(
                     text: AppStrings.value.tr,
