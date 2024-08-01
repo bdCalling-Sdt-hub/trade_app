@@ -8,6 +8,7 @@ import 'package:trade_app/view/components/custom_help_app_bar/custom_help_app_ba
 import 'package:trade_app/view/components/custom_help_card/custom_help_card.dart';
 import 'package:trade_app/view/components/custom_help_question/custom_help_question.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class HelpCenterScreen extends StatelessWidget {
   HelpCenterScreen({super.key});
@@ -19,6 +20,8 @@ class HelpCenterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      bottomNavigationBar: const NavBar(currentIndex: 4),
+
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

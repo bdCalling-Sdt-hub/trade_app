@@ -14,6 +14,7 @@ import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class AccountInfoScreen extends StatelessWidget {
   AccountInfoScreen({super.key});
@@ -24,6 +25,7 @@ class AccountInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
+      bottomNavigationBar: const NavBar(currentIndex: 4),
 
       ///==================accountInfo Appbar===============
       appBar: CustomAppBar(

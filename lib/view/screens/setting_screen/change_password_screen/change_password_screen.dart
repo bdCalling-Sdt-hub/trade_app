@@ -10,6 +10,7 @@ import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({super.key});
@@ -20,6 +21,7 @@ class ChangePasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
+      bottomNavigationBar: const NavBar(currentIndex: 4),
 
       ///==================ChangePassword Appbar===============
       appBar: CustomAppBar(

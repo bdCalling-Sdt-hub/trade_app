@@ -30,6 +30,7 @@ class CustomDropdown extends StatelessWidget {
         CustomTextField(
           onTap: onTap,
           readOnly: true,
+          hintText: title,
           fieldBorderColor: AppColors.gray201,
           textEditingController: controller,
           suffixIcon: Icon(

@@ -6,6 +6,7 @@ import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_dropdown/custom_dropdown.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/setting_screen/change_language/language_controller.dart';
 
 class LanguageScreen extends StatelessWidget {
@@ -16,7 +17,9 @@ class LanguageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
+      bottomNavigationBar: const NavBar(currentIndex: 4),
+
       ///========================Language appbar=============
       appBar: CustomAppBar(appBarContent: AppStrings.language.tr),
       body: Obx(
@@ -37,7 +40,7 @@ class LanguageScreen extends StatelessWidget {
                 ///==============Here the language dropdown code==============
                 CustomDropdown(
                   title: 'language',
-                  textColor: Colors.red,
+                  textColor: Colors.green,
                   controller: languageController.language,
                   isDropdownVisible: languageController.isLanguage.value,
                   onTap: () {
