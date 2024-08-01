@@ -6,6 +6,7 @@ import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class SubCategoryProducts extends StatelessWidget {
   const SubCategoryProducts({super.key});
@@ -14,6 +15,8 @@ class SubCategoryProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     var data = Get.arguments;
     return Scaffold(
+      bottomNavigationBar: const NavBar(currentIndex: 2),
+
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
         appBarContent: data['name'],

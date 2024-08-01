@@ -41,7 +41,7 @@ class CustomOtherProfileHeader extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
                 SizedBox(width: 35.w),
-                Icon(Icons.star, color: Colors.amber),
+                const Icon(Icons.star, color: Colors.amber),
                 CustomText(
                   left: 5,
                   text: '$rating/5.0',
@@ -52,15 +52,18 @@ class CustomOtherProfileHeader extends StatelessWidget {
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(
-                  left: 10,
+                const CustomText(
+                  textAlign: TextAlign.start,
+                 // left: 10,
                   text: 'Membership Status: ',
                   color: AppColors.black500,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                 ),
                 CustomText(
+                  textAlign: TextAlign.start,
                   text: membershipStatus,
                   color: AppColors.black500,
                   fontSize: 14,

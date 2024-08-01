@@ -6,7 +6,6 @@ import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_details_container/custom_details_container.dart';
 import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
-import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_other_profile_date/custom_other_profile_date.dart';
 import 'package:trade_app/view/components/custom_other_profile_header/custom_other_profile_header.dart';
 import 'package:trade_app/view/components/custom_other_profile_location/custom_other_profile_location.dart';
@@ -32,7 +31,8 @@ class OtherProfile extends StatelessWidget {
             children: [
            CustomDetailContainer(
                isBorder: true,
-               color: AppColors.white200, child: Column(
+               color: AppColors.white200, child:
+           Column(
              children: [
                CustomOtherProfileHeader(
                  imageUrl:AppConstants.userNtr ,

@@ -7,6 +7,7 @@ import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class SubCategoryScreen extends StatelessWidget {
   SubCategoryScreen({super.key});
@@ -18,6 +19,8 @@ class SubCategoryScreen extends StatelessWidget {
     var data = Get.arguments;
 
     return Scaffold(
+      bottomNavigationBar: const NavBar(currentIndex: 2),
+
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
         appBarContent: data['name'],

@@ -49,7 +49,7 @@ class MyRatingScreen extends StatelessWidget {
         appBarContent: AppStrings.myRatingAndComments.tr,
       ),
       body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -311,33 +311,24 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               ///============================ just for you =============================>
-              Container(
-                height: 450.h,
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      mainAxisExtent: controller.isEdit ? 240 : 190
-                      // Adjust the aspect ratio as needed
-                      ),
-                  itemCount: 4,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return CustomMyProduct(
-                      isMargin: false,
-                      isEdit: controller.isEdit,
-                      image: AppConstants.electronics,
-                      name: 'Samsung Galaxy s22'.tr,
-                      onTap: () {
-                        Get.toNamed(AppRoutes.productDetailsScreen);
-                      },
-                      value: '\$825+',
-                      editOnTap: () {},
-                    );
-                  },
-                ),
-              )
+           SingleChildScrollView(
+             scrollDirection: Axis.horizontal,
+             child: Row(
+               children: List.generate(4, (index){
+                 return CustomMyProduct(
+                   isMargin: true,
+                   isEdit: controller.isEdit,
+                   image: AppConstants.electronics,
+                   name: 'Samsung Galaxy s22'.tr,
+                   onTap: () {
+                     Get.toNamed(AppRoutes.productDetailsScreen);
+                   },
+                   value: '\$825+',
+                   editOnTap: () {},
+                 );
+               }),
+             ),
+           )
             ],
           ),
         );
