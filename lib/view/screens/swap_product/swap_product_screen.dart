@@ -22,7 +22,7 @@ class SwapProductScreen extends StatelessWidget {
 
       ///============================My Product Details Appbar===============
       appBar: CustomAppBar(
-        appBarContent: AppStrings.productDetails.tr,
+        appBarContent: AppStrings.swapProduct.tr,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -285,7 +285,7 @@ class SwapProductScreen extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: (){
-                  Get.toNamed(AppRoutes.postEditScreen);
+                  // Get.toNamed(AppRoutes.postEditScreen);
                 },
                 child: CustomDetailContainer(
 
