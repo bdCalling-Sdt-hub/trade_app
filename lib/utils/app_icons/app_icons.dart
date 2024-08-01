@@ -9,6 +9,7 @@ class AppIcons {
   ///=========================Nab bar Icon ======================
   static const String profileSelected = "$basePath/profile_Selected.svg";
   static const String profileUnselected = "$basePath/profile_Unselected.svg";
+  static const String customerSupport = "$basePath/customer support.svg";
   static const String postSelected = "$basePath/post_Selected.svg";
   static const String postUnselected = "$basePath/post_Unselected.svg";
   static const String categorySelected = "$basePath/category_Selected.svg";

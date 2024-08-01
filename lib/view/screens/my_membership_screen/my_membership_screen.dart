@@ -14,6 +14,7 @@ import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_membership_profile_card/custom_membership_profile_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class MyMembershipScreen extends StatelessWidget {
   MyMembershipScreen({super.key});
@@ -25,8 +26,8 @@ class MyMembershipScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-
-      ///==================myMembership Appbar===============
+       bottomNavigationBar: const NavBar(currentIndex: 4),
+      ///=============== ===myMembership Appbar===============
       appBar: CustomAppBar(
         appBarContent: AppStrings.myMembership.tr,
       ),
