@@ -119,7 +119,7 @@ class AppRoutes {
     GetPage(name: membershipDetailsScreen, page: () =>      MembershipDetailsScreen()),
 
     ///============================Post Edit Screen=================
-    GetPage(name: postAddScreen, page: () =>     const PostAddScreen()),
+    GetPage(name: postAddScreen, page: () =>      PostAddScreen()),
     GetPage(name: postEditScreen, page: () =>     const PostEditScreen()),
     GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
     GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),

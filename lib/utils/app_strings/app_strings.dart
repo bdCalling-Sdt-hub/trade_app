@@ -30,6 +30,7 @@ class AppStrings {
   static const String enterYourPassword = "Enter your password";
   static const String retypeYourPassword = "Retype your password";
   static const String rememberMe = "Remember Me";
+  static const String subCategory = "Sub Category";
   static const String forgotPassword = "Forgot password?";
   static const String signUp = "Sign up";
   static const String verificationCode = "Verification Code ";

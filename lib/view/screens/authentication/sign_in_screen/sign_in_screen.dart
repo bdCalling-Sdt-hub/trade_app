@@ -14,7 +14,7 @@ import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
-  AuthController controller = Get.find<AuthController>();
+ final AuthController controller = Get.find<AuthController>();
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

@@ -13,6 +13,7 @@ class CustomFromCard extends StatelessWidget {
   final VoidCallback? onTap;
   final bool isBackgroundColor;
   final bool isMaxLine;
+  final String? Function(String?)? validator;
 
   const CustomFromCard({
     super.key,
@@ -22,7 +23,7 @@ class CustomFromCard extends StatelessWidget {
     this.isIcon = false,
     this.readOnly = false,
     this.onTap,
-    this.isBackgroundColor = false, this.isMaxLine=false,
+    this.isBackgroundColor = false, this.isMaxLine=false, this.validator,
   });
 
   @override
@@ -38,6 +39,7 @@ class CustomFromCard extends StatelessWidget {
           bottom: 8.h,
         ),
         CustomTextField(
+          validator: validator,
           readOnly: readOnly,
           suffixIcon: isIcon ? const Icon(Icons.keyboard_arrow_down) : null,
           isPassword: isPassword,

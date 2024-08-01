@@ -57,7 +57,8 @@ class SearchScreen extends StatelessWidget {
                   height: 65.h,
                   weight: 70.w,
                   color: AppColors.white200,
-                  child: const CustomImage(imageSrc: AppIcons.filterList),
+                  child: const CustomImage(
+                      imageSrc: AppIcons.filterList),
                 ),
               ),
             ),

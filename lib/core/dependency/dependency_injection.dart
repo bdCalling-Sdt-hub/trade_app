@@ -2,6 +2,7 @@
 import 'package:get/get.dart';
 import 'package:trade_app/controller/category_controller/category_controller.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
+import 'package:trade_app/controller/post_controller/post_controller.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/controller/search_controller/search_controller.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
@@ -23,5 +24,6 @@ class DependencyInjection extends Bindings {
    Get.lazyPut(() => MembershipController(), fenix: true);
    Get.lazyPut(() => CategoryController(), fenix: true);
    Get.lazyPut(() => SearchListController(), fenix: true);
+   Get.lazyPut(() => PostController(), fenix: true);
   }
 }
