@@ -6,137 +6,115 @@ import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
+import 'package:trade_app/view/components/custom_details_container/custom_details_container.dart';
+import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
-import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
 class PreApprovalQuestionScreen extends StatelessWidget {
-    PreApprovalQuestionScreen({super.key});
+  PreApprovalQuestionScreen({super.key});
 
-   final PackageController controller=Get.find<PackageController>();
+  final PackageController controller = Get.find<PackageController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
+
       ///============================ preApprovalQuestions =======================>
       appBar: CustomAppBar(
         appBarContent: AppStrings.preApprovalQuestions.tr,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(vertical: 16.h,horizontal: 20.w),
+        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(text: AppStrings.pleaseFillUpThisForm.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 16.h,),
+            CustomText(
+              text: AppStrings.pleaseFillUpThisForm.tr,
+              fontSize: 18.h,
+              fontWeight: FontWeight.w500,
+              bottom: 16.h,
+            ),
 
             ///<================================= name ====================================>
-            CustomText(text: AppStrings.name.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,),
-            CustomTextField(
-              textEditingController: controller.nameController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                title: AppStrings.name, controller: controller.nameController),
 
             ///<================================= dateOfBirth ====================================>
-            CustomText(text: AppStrings.dateOfBirth.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-              // textEditingController: controller.,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                onTap: () {},
+                title: AppStrings.dateOfBirth,
+                controller: controller.destinationStartController),
 
             ///<================================= placeOfBirth ====================================>
-            CustomText(text: AppStrings.placeOfBirth.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-               textEditingController: controller.placeBirthController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                title: AppStrings.placeOfBirth,
+                controller: controller.placeBirthController),
 
             ///<================================= licenceNo ====================================>
-            CustomText(text: AppStrings.licenceNo.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-              textEditingController: controller.licenseNoController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                title: AppStrings.licenceNo,
+                controller: controller.licenseNoController),
 
             ///<================================= password ====================================>
-            CustomText(text: AppStrings.password.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-              textEditingController: controller.passwordController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                isPassword: true,
+                title: AppStrings.password,
+                controller: controller.passwordController),
 
             ///<================================= email ====================================>
-            CustomText(text: AppStrings.email.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-              textEditingController: controller.emailController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                title: AppStrings.email,
+                controller: controller.emailController),
 
             ///<================================= phoneNumber ====================================>
-            CustomText(text: AppStrings.phoneNumber.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-              textEditingController: controller.phnNumberController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                title: AppStrings.phoneNumber,
+                controller: controller.destinationStartController),
 
             ///<================================= profession ====================================>
-            CustomText(text: AppStrings.profession.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-              textEditingController: controller.professionController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
-            ),
+            CustomFromCard(
+                title: AppStrings.profession,
+                controller: controller.professionController),
 
             ///<================================= whatYourReligion ====================================>
-            CustomText(text: AppStrings.whatYourReligion.tr,fontSize: 18.h,fontWeight: FontWeight.w500,bottom: 8.h,top: 16.h,),
-            CustomTextField(
-              textEditingController: controller.religionController,
-              inputTextStyle: const TextStyle(color: AppColors.black500),
-              fillColor: AppColors.white200,
-              fieldBorderColor: AppColors.gray201,
+            CustomFromCard(
+                title: AppStrings.whatYourReligion,
+                controller: controller.religionController),
+
+            SizedBox(
+              height: 24.h,
             ),
 
-            SizedBox(height: 24.h,),
             ///<================================= next button ====================================>
-             Align(
-               alignment: Alignment.center,
-               child: GestureDetector(
-                 onTap: (){
-                   Get.toNamed(AppRoutes.preApprovalQuestion2Screen);
-                 },
-                 child: Container(
-                   padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 16.w),
-                   decoration: BoxDecoration(
-                     color: AppColors.blue500,
-                     borderRadius: BorderRadius.circular(4.sp)
-                   ),
-                   child: Row(
-                     mainAxisSize: MainAxisSize.min,
-                     children: [
-                       CustomText(text: AppStrings.next,color: AppColors.white50,right: 8.h,fontWeight: FontWeight.w500,fontSize: 18.h,),
-                       const CustomImage(imageSrc: AppIcons.arrowRight,imageColor: AppColors.white50,),
-                     ],
-                   ),
-                 ),
-               ),
-             ),
 
-
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(AppRoutes.preApprovalQuestion2Screen);
+                },
+                child: CustomDetailContainer(
+                    color: AppColors.blue500,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomText(
+                          text: AppStrings.next,
+                          color: AppColors.white50,
+                          right: 8.h,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18.h,
+                        ),
+                        const CustomImage(
+                          imageSrc: AppIcons.arrowRight,
+                          imageColor: AppColors.white50,
+                        ),
+                      ],
+                    )),
+              ),
+            )
           ],
         ),
       ),
