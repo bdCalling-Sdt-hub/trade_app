@@ -6,18 +6,16 @@ import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
+import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_radio_button/custom_radio_button.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
-import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
 class PreApprovalQuestion2Screen extends StatelessWidget {
   const PreApprovalQuestion2Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(375, 812));
-    final PackageController controller = Get.find<PackageController>();
     final RxInt selectedPets = 0.obs;
     final RxInt selectedChildren = 0.obs;
     final RxInt one = 0.obs;
@@ -26,6 +24,7 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.white,
+      ///========================question 2================
       appBar: CustomAppBar(
         appBarContent: AppStrings.preApprovalQuestions.tr,
       ),
@@ -107,9 +106,14 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                   onOptionChanged: (index) {
                     selectedChildren.value = index;
                   },
-                ),CustomRadioButton(
+                ),
+                CustomFromCard(
+                  isMaxLine: true,
+                    title: 'What do you want to swap and for how long?',
+                    controller:TextEditingController()),
+                CustomRadioButton(
                   title: 'Do you want to arrive on departure or depart on arrival?',
-                  options: ['Yes', 'No'],
+                  options: ['Arrive on departure', 'Depart on arrival '],
                   selectedOption: three.value,
                   onOptionChanged: (index) {
                     three.value = index;

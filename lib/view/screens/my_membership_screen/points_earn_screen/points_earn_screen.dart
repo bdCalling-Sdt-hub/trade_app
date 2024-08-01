@@ -36,6 +36,7 @@ final MembershipController membershipController = Get.find<MembershipController>
               children: [
                 ///=======================Total points=============
                 CustomDetailContainer(
+                  isBorder: true,
                     color: AppColors.white200,
                     child: Row(
                       children: [
@@ -84,7 +85,7 @@ final MembershipController membershipController = Get.find<MembershipController>
                                   text: item['action']!,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
-                                  color: AppColors.black500,
+                                  color: AppColors.bySwapping,
                                 ),
                                 CustomText(
                                   text: item['date']!,
@@ -105,7 +106,7 @@ final MembershipController membershipController = Get.find<MembershipController>
                       ),
                     );
                   }),
-                )
+                ),
               ],
             ),
           )),

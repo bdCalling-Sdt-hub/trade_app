@@ -4,6 +4,7 @@ class AppColors {
   static const Color white = Color(0xffFFFFFF);
   static const Color titleBlack = Color(0xff222222);
   static const Color blue50 = Color(0xffEBF1FE);
+  static const Color bySwapping = Color(0xff464646);
   ///<===================== blue ==========================>
   static const Color blue100 = Color(0xffc0d4fb);
   static const Color blue200 = Color(0xffa2c0f9);

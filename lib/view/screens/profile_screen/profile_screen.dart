@@ -52,14 +52,14 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CustomText(
                     text: AppStrings.membershipStatus.tr,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
                     color: AppColors.black200,
                   ),
                   CustomText(
                     text: 'Gold'.tr,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
                     color: AppColors.black200,
                   ),
                 ],

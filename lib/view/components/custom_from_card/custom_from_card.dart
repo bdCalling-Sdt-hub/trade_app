@@ -32,11 +32,13 @@ class CustomFromCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
+          textAlign: TextAlign.start,
           color: AppColors.black500,
           text: title,
           fontWeight: FontWeight.w500,
           fontSize: 16.sp,
           bottom: 8.h,
+          maxLines: 2,
         ),
         CustomTextField(
           validator: validator,
