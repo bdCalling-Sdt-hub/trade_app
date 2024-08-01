@@ -7,15 +7,16 @@ import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
+import 'package:trade_app/view/components/custom_sign_up_from/custom_sign_up_from.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
-import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
-  AuthController controller = Get.find<AuthController>();
+  final AuthController controller = Get.find<AuthController>();
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,21 +30,15 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 44.h,
+                  SizedBox(height: 44.h),
+                  CustomText(
+                    text: AppStrings.signUp.tr,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: CustomText(
-                      text: AppStrings.signUp.tr,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+                  SizedBox(height: 24.h),
 
-                  SizedBox(
-                    height: 24.h,
-                  ),
+                  ///==============Welcome=============
                   Row(
                     children: [
                       CustomText(
@@ -54,10 +49,11 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       const CustomImage(
                         imageSrc: AppIcons.emoji,
-                      )
+                      ),
                     ],
                   ),
 
+                  ///===============just a few quick=========
                   CustomText(
                     text: AppStrings.justAFewQuickThingsToGet.tr,
                     fontWeight: FontWeight.w500,
@@ -65,199 +61,69 @@ class SignUpScreen extends StatelessWidget {
                     bottom: 24.h,
                   ),
 
-                  ///<======================================= Email section ======================================>
-                  CustomText(
-                    text: AppStrings.email.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    bottom: 8.h,
+                  ///================firstName===============
+                  CustomSignUpFrom(
+                    label: AppStrings.firstName,
+                    hintText: AppStrings.enterYourFirstName,
+                    controller: controller.firstNameController,
+                    icon: AppIcons.person,
                   ),
 
-                  CustomTextField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.fieldCantBeEmpty.tr;
-                      } else if (!AppStrings.emailRegexp
-                          .hasMatch(controller.emailSignUp.text)) {
-                        return AppStrings.enterValidEmail;
-                      } else {
-                        return null;
-                      }
-                    },
-                    textInputAction: TextInputAction.next,
-                    textEditingController: controller.emailSignUp,
-                    hintText: AppStrings.enterYourEmail.tr,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CustomImage(
-                        imageSrc: AppIcons.mail,
-                        size: 24.h,
-                      ),
-                    ),
+                  ///====================Last Name============
+                  CustomSignUpFrom(
+                    label: AppStrings.lastName,
+                    hintText: AppStrings.enterYourLastName,
+                    controller: controller.lastNameController,
+                    icon: AppIcons.person,
                   ),
 
-                  ///<======================================= mobile number section ======================================>
-                  CustomText(
-                    text: AppStrings.mobileNumber.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    top: 16.h,
-                    bottom: 8.h,
+                  ///================Email================
+                  CustomSignUpFrom(
+                    label: AppStrings.email,
+                    hintText: AppStrings.enterYourEmail,
+                    controller: controller.emailSignUp,
+                    icon: AppIcons.mail,
                   ),
-                  CustomTextField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.fieldCantBeEmpty.tr;
-                      }
-                      else {
-                        return null;
-                      }
-                    },
-                    textEditingController: controller.phoneSignUp,
+
+                  ///==================Mobile Number=-==========
+                  CustomSignUpFrom(
+                    label: AppStrings.mobileNumber,
+                    hintText: AppStrings.enterYourNumber,
+                    controller: controller.phoneSignUp,
+                    icon: AppIcons.call,
                     keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    isPassword: true,
-                    hintText: AppStrings.enterYourNumber.tr,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CustomImage(
-                        imageSrc: AppIcons.call,
-                        size: 24.h,
-                      ),
-                    ),
                   ),
 
-                  ///<======================================= address section ======================================>
-                  CustomText(
-                    text: AppStrings.address.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    top: 16.h,
-                    bottom: 8.h,
+                  ///====================Address================
+                  CustomSignUpFrom(
+                    label: AppStrings.address,
+                    hintText: AppStrings.enterYourAddress,
+                    controller: controller.addressSignUp,
+                    icon: AppIcons.locationHome,
                   ),
-                  CustomTextField(
-                    textEditingController: controller.addressSignUp,
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.done,
-                    isPassword: true,
-                    hintText: AppStrings.enterYourNumber.tr,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CustomImage(
-                        imageSrc: AppIcons.locationHome,
-                        size: 24.h,
-                      ),
-                    ),
-                  ),
-                  ///<======================================= Password section ======================================>
-                  CustomText(
-                    text: AppStrings.password.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    top: 16.h,
-                    bottom: 8.h,
-                  ),
-                  CustomTextField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.fieldCantBeEmpty.tr;
-                      } else if (value.length < 8 ||
-                          !AppStrings.passRegexp.hasMatch(value)) {
-                        return AppStrings.passwordLengthAndContain.tr;
-                      } else {
-                        return null;
-                      }
-                    },
-                    textInputAction: TextInputAction.next,
-                    textEditingController: controller.passSignUp,
-                    isPassword: true,
+
+                  ///====================Password=================
+                  CustomSignUpFrom(
+                    label: AppStrings.password,
                     hintText: AppStrings.enterYourPassword,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CustomImage(
-                        imageSrc: AppIcons.lock,
-                        size: 24.h,
-                      ),
-                    ),
-                  ),
-
-                  ///<======================================= confirm Password section ======================================>
-                  CustomText(
-                    text: AppStrings.confirmPassword.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    top: 16.h,
-                    bottom: 8.h,
-                  ),
-                  CustomTextField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return AppStrings.fieldCantBeEmpty;
-                      } else if (value != controller.passSignUp.text) {
-                        return AppStrings.passwordShould;
-                      }
-                      return null;
-                    },
-                    textEditingController: controller.confirmPassSignup,
-                    textInputAction: TextInputAction.done,
+                    controller: controller.passSignUp,
+                    icon: AppIcons.lock,
                     isPassword: true,
+                  ),
+
+                  ///=======================Confirm Password===========
+                  CustomSignUpFrom(
+                    label: AppStrings.confirmPassword,
                     hintText: AppStrings.confirmPassword,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CustomImage(
-                        imageSrc: AppIcons.lock,
-                        size: 24.h,
-                      ),
-                    ),
+                    controller: controller.confirmPassSignup,
+                    icon: AppIcons.lock,
+                    isPassword: true,
                   ),
-
-                  SizedBox(
-                    height: 24.h,
-                  ),
-
-                  /// <=============================================== iAgreeWithTheTermsAnd ==============================>
-                  GestureDetector(
-                    onTap: () {
-                      controller.isTerms = !controller.isTerms;
-                      controller.update();
-                      //SharePrefsHelper.setBool(AppConstants.isRememberMe, controller.isRemember);
-                    },
-                    child: Row(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: 18,
-                          width: 18,
-                          decoration: BoxDecoration(
-                            color: AppColors.blue500,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Center(
-                            child: controller.isTerms
-                                ? Icon(
-                                    Icons.check,
-                                    color: controller.isTerms
-                                        ? AppColors.white50
-                                        : AppColors.blue500,
-                                    size: 14,
-                                  )
-                                : const SizedBox(),
-                          ),
-                        ),
-                        CustomText(
-                          left: 8.w,
-                          fontWeight: FontWeight.w400,
-                          text: AppStrings.iAgreeWithTheTermsAnd.tr,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 24.h,
-                  ),
-
-                  ///<======================================= sign in button ======================================>
+                  SizedBox(height: 24.h),
+                  ///===================Checkbox here=================
+                  _buildTermsAndConditions(controller),
+                  SizedBox(height: 24.h),
+                  ///=========================Sign Up Button=============
                   CustomButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
@@ -266,42 +132,76 @@ class SignUpScreen extends StatelessWidget {
                     },
                     title: AppStrings.signUp.tr,
                   ),
-
-                  SizedBox(
-                    height: 24.h,
-                  ),
-
-                  ///<======================================= alreadyHaveAnAccount ======================================>
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomText(
-                        text: AppStrings.alreadyHaveAnAccount.tr,
-                      ),
-                      SizedBox(
-                        width: 8.w,
-                      ),
-
-                      /// <============================== Sign In ==============================>
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoutes.signInScreen);
-                        },
-                        child: CustomText(
-                          text: AppStrings.signIn.tr,
-                          fontSize: 16.h,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.blue500,
-                        ),
-                      ),
-                    ],
-                  ),
+                  SizedBox(height: 24.h),
+                  ///================Already Have a Account===============
+                  _buildAlreadyHaveAccount(),
                 ],
               ),
             ),
           ),
         );
       }),
+    );
+  }
+
+
+
+
+
+  Widget _buildTermsAndConditions(AuthController controller) {
+    return GestureDetector(
+      onTap: () {
+        controller.isTerms = !controller.isTerms;
+        controller.update();
+      },
+      child: Row(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            height: 18,
+            width: 18,
+            decoration: BoxDecoration(
+              color: AppColors.blue500,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: controller.isTerms
+                ? const Icon(
+                    Icons.check,
+                    color: AppColors.white50,
+                    size: 14,
+                  )
+                : const SizedBox(),
+          ),
+          CustomText(
+            left: 8.w,
+            fontWeight: FontWeight.w400,
+            text: AppStrings.iAgreeWithTheTermsAnd.tr,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAlreadyHaveAccount() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CustomText(
+          text: AppStrings.alreadyHaveAnAccount.tr,
+        ),
+        SizedBox(width: 8.w),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutes.signInScreen);
+          },
+          child: CustomText(
+            text: AppStrings.signIn.tr,
+            fontSize: 16.h,
+            fontWeight: FontWeight.w500,
+            color: AppColors.blue500,
+          ),
+        ),
+      ],
     );
   }
 }

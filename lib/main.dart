@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 200),
-        initialRoute: AppRoutes.homeScreen,
+        initialRoute: AppRoutes.signUpScreen,
         navigatorKey: Get.key,
         getPages: AppRoutes.routes,
           locale: const Locale("en","US"),

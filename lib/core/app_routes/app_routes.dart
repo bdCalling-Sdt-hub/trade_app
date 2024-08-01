@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:trade_app/view/screens/authentication/forgot_password/forgot_password_screen.dart';
 import 'package:trade_app/view/screens/authentication/otp/otp_screen.dart';
 import 'package:trade_app/view/screens/authentication/reset_password/reset_password_screen.dart';
-import 'package:trade_app/view/screens/account_info_screen/account_info_screen.dart';
 import 'package:trade_app/view/screens/address_screen/address_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_in_screen/sign_in_screen.dart';
 import 'package:trade_app/view/screens/authentication/sign_up/sign_up_screen.dart';
@@ -23,6 +22,7 @@ import 'package:trade_app/view/screens/questions/pre_approval_question/pre_appro
 import 'package:trade_app/view/screens/questions/pre_approval_question2/pre_approval_question2_screen.dart';
 import 'package:trade_app/view/screens/questions/pre_approval_question3/pre_approval_question3_screen.dart';
 import 'package:trade_app/view/screens/search_screen/search_screen.dart';
+import 'package:trade_app/view/screens/setting_screen/account_info_screen/account_info_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/language_screen/language_screen.dart';
 import 'package:trade_app/view/screens/splash/splash_screen.dart';
 import 'package:trade_app/view/screens/change_password_screen/change_password_screen.dart';

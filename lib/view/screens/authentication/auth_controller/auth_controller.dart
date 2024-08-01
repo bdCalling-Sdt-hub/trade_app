@@ -44,6 +44,8 @@ class AuthController extends GetxController{
   TextEditingController addressSignUp = TextEditingController();
   TextEditingController passSignUp = TextEditingController();
   TextEditingController confirmPassSignup = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
 
 /*  bool signUpLoading = false;
   signUpUser() async {
