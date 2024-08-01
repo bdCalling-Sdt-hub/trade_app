@@ -28,4 +28,28 @@ class MembershipController extends GetxController {
     'Earn 25 points for each swap',
     '10 points for positive comments'
   ];
+
+
+  final List<Map<String, String>> pointsData = [
+    {'action': 'By swapping', 'date': '12/03/24', 'points': '+500 Points'},
+    {
+      'action': 'By positive comments',
+      'date': '11/03/24',
+      'points': '+100 Points'
+    },
+    {'action': 'By swapping', 'date': '10/03/24', 'points': '+800 Points'},
+    {'action': 'By swapping', 'date': '09/03/24', 'points': '+500 Points'},
+    {
+      'action': 'By positive comments',
+      'date': '08/03/24',
+      'points': '+600 Points'
+    },
+    {'action': 'By swapping', 'date': '07/03/24', 'points': '+700 Points'},
+    {'action': 'Daily Checkin', 'date': '06/03/24', 'points': '+1200 Points'},
+    {
+      'action': 'By positive comments',
+      'date': '05/03/24',
+      'points': '+600 Points'
+    },
+  ];
 }

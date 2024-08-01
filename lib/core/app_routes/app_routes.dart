@@ -12,6 +12,7 @@ import 'package:trade_app/view/screens/category_screen/sub_category_screen/sub_c
 import 'package:trade_app/view/screens/just_for_you/just_for_you.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
 import 'package:trade_app/view/screens/my_membership_screen/membership_details_screen/membership_details_screen.dart';
+import 'package:trade_app/view/screens/my_membership_screen/points_earn_screen/points_earn_screen.dart';
 import 'package:trade_app/view/screens/notification_screen/notification_screen.dart';
 import 'package:trade_app/view/screens/other_profile/other_profile.dart';
 import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
@@ -33,7 +34,6 @@ import 'package:trade_app/view/screens/my_membership_screen/my_membership_screen
 import 'package:trade_app/view/screens/my_products_screen/my_product_details_screen/my_product_details_screen.dart';
 import 'package:trade_app/view/screens/my_products_screen/my_products_screen.dart';
 import 'package:trade_app/view/screens/my_rating_screen/my_rating_screen.dart';
-import 'package:trade_app/view/screens/points_earn_screen/points_earn_screen.dart';
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/setting_screen.dart';
 import 'package:trade_app/view/screens/swap_history_screen/swap_history_screen.dart';
@@ -114,7 +114,7 @@ class AppRoutes {
     GetPage(name: myProductsScreen, page: () =>  MyProductsScreen()),
     GetPage(name: myProductDetailsScreen, page: () =>    const MyProductDetailsScreen()),
     GetPage(name: myMembershipScreen, page: () =>     MyMembershipScreen()),
-    GetPage(name: pointsEarnedScreen, page: () =>    const PointsEarnedScreen()),
+    GetPage(name: pointsEarnedScreen, page: () =>     PointsEarnedScreen()),
     GetPage(name: myRatingScreen, page: () =>     MyRatingScreen()),
     GetPage(name: membershipDetailsScreen, page: () =>      MembershipDetailsScreen()),
 
@@ -124,16 +124,16 @@ class AppRoutes {
     GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
     GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),
     GetPage(name: preApprovalQuestionScreen, page: () =>   PreApprovalQuestionScreen()),
-    GetPage(name: preApprovalQuestion2Screen, page: () =>   PreApprovalQuestion2Screen()),
+    GetPage(name: preApprovalQuestion2Screen, page: () =>   const PreApprovalQuestion2Screen()),
     GetPage(name: preApprovalQuestion3Screen, page: () =>   PreApprovalQuestion3Screen()),
     GetPage(name: languageScreen, page: () =>   LanguageScreen()),
     GetPage(name: categoryScreen, page: () =>    CategoryScreen()),
     GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
     GetPage(name: otherProfile, page: () =>   const OtherProfile()),
     GetPage(name: productDetailsScreen, page: () =>  ProductDetailsScreen()),
-    GetPage(name: swapProductScreen, page: () =>  SwapProductScreen()),
-    GetPage(name: topProductsScreen, page: () =>  TopProductsScreen()),
-    GetPage(name: justForYou, page: () =>  JustForYou()),
+    GetPage(name: swapProductScreen, page: () =>  const SwapProductScreen()),
+    GetPage(name: topProductsScreen, page: () =>  const TopProductsScreen()),
+    GetPage(name: justForYou, page: () =>  const JustForYou()),
     GetPage(name: searchScreen, page: () =>   SearchScreen()),
     GetPage(name: subCategoryScreen, page: () =>   SubCategoryScreen()),
     GetPage(name: subCategoryProducts, page: () =>   const SubCategoryProducts()),

@@ -16,7 +16,6 @@ class PostEditScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: const NavBar(currentIndex: 3),
 
       ///======================editAd appbar==============
       appBar: CustomAppBar(

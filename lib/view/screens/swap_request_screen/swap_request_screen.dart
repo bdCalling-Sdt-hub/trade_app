@@ -6,6 +6,7 @@ import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_swap_requests/custom_swap_requests.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class SwapRequestScreen extends StatelessWidget {
   const SwapRequestScreen({super.key});
@@ -14,6 +15,7 @@ class SwapRequestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
+      bottomNavigationBar: const NavBar(currentIndex: 4),
 
       ///==================swapRequests Appbar===============
       appBar: CustomAppBar(
