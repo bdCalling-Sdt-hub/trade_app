@@ -68,7 +68,9 @@ class SignUpScreen extends StatelessWidget {
                     controller: controller.firstNameController,
                     icon: AppIcons.person,
                   ),
-
+                      SizedBox(
+                        height: 10.h,
+                      ),
                   ///====================Last Name============
                   CustomSignUpFrom(
                     label: AppStrings.lastName,
@@ -76,7 +78,9 @@ class SignUpScreen extends StatelessWidget {
                     controller: controller.lastNameController,
                     icon: AppIcons.person,
                   ),
-
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   ///================Email================
                   CustomSignUpFrom(
                     label: AppStrings.email,
@@ -84,7 +88,9 @@ class SignUpScreen extends StatelessWidget {
                     controller: controller.emailSignUp,
                     icon: AppIcons.mail,
                   ),
-
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   ///==================Mobile Number=-==========
                   CustomSignUpFrom(
                     label: AppStrings.mobileNumber,
@@ -93,7 +99,9 @@ class SignUpScreen extends StatelessWidget {
                     icon: AppIcons.call,
                     keyboardType: TextInputType.number,
                   ),
-
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   ///====================Address================
                   CustomSignUpFrom(
                     label: AppStrings.address,
@@ -101,7 +109,9 @@ class SignUpScreen extends StatelessWidget {
                     controller: controller.addressSignUp,
                     icon: AppIcons.locationHome,
                   ),
-
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   ///====================Password=================
                   CustomSignUpFrom(
                     label: AppStrings.password,
@@ -110,7 +120,9 @@ class SignUpScreen extends StatelessWidget {
                     icon: AppIcons.lock,
                     isPassword: true,
                   ),
-
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   ///=======================Confirm Password===========
                   CustomSignUpFrom(
                     label: AppStrings.confirmPassword,
