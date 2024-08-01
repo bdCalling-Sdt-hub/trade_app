@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:trade_app/view/screens/change_language/english.dart';
-import 'package:trade_app/view/screens/change_language/spanish.dart';
+import 'package:trade_app/view/screens/setting_screen/change_language/english.dart';
+import 'package:trade_app/view/screens/setting_screen/change_language/spanish.dart';
+
 
 class Language extends Translations {
   @override

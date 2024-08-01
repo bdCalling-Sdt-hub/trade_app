@@ -4,9 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
-import 'package:trade_app/helper/network_controller/network_controller.dart';
 import 'package:trade_app/view/components/device_utils/device_utils.dart';
-import 'package:trade_app/view/screens/change_language/language_transalator.dart';
+import 'package:trade_app/view/screens/setting_screen/change_language/language_transalator.dart';
 
 
 
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.fadeIn,
         transitionDuration: const Duration(milliseconds: 200),
-        initialRoute: AppRoutes.splashScreen,
+        initialRoute: AppRoutes.homeScreen,
         navigatorKey: Get.key,
         getPages: AppRoutes.routes,
           locale: const Locale("en","US"),
