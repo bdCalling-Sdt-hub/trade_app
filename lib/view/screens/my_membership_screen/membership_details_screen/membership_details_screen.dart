@@ -60,7 +60,9 @@ class MembershipDetailsScreen extends StatelessWidget {
                        : CustomSingleSlider(
                      value:
                      membershipController.singleSliderValue.value,
-                     onChanged: null, // Disable user interaction
+                     onChanged: (newValue) {
+                       membershipController.sliderValue.value = newValue;
+                }, // Disable user interaction
                    ),
                    description:
                    'Keep earning points to unlock exclusive benefits and privileges.'

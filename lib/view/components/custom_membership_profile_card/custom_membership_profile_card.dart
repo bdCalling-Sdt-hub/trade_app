@@ -68,16 +68,29 @@ class CustomMembershipProfileCard extends StatelessWidget {
                   ),
                 ],
               ),
+              // Slider(
+              //   value: controller.sliderValue.value,
+              //   onChanged: null, // Disable user interaction
+              //   min: 0,
+              //   max: 100000,
+              //   divisions: 3,
+              //   label: controller.sliderValue.value.toString(),
+              //   // activeColor: Colors.white,
+              //   // inactiveColor: Colors.white,
+              // ),
               Slider(
                 value: controller.sliderValue.value,
-                onChanged: null, // Disable user interaction
+                onChanged: (newValue) {
+                  controller.sliderValue.value = newValue;
+                },
                 min: 0,
                 max: 100000,
                 divisions: 3,
                 label: controller.sliderValue.value.toString(),
-                activeColor: Colors.blue,
-                inactiveColor: Colors.white,
+                activeColor: AppColors.blue500, // Set your desired active color
+                inactiveColor: AppColors.white50, // Set your desired inactive color
               ),
+
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
