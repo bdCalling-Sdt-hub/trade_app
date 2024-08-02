@@ -35,7 +35,7 @@ class CustomDropdown extends StatelessWidget {
           textEditingController: controller,
           suffixIcon: Icon(
             isDropdownVisible
-                ? Icons.keyboard_arrow_down_sharp
+                ? Icons.keyboard_arrow_up
                 : Icons.keyboard_arrow_down_sharp,
             color: isDropdownVisible ? Colors.black : Colors.blue,
           ),

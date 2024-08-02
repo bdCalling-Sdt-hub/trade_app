@@ -40,7 +40,7 @@ class SwapRequestScreen extends StatelessWidget {
                 acceptButton: 'accept'.tr,
                 rejectButton: 'reject'.tr,
                 onTap: () {
-                  Get.toNamed(AppRoutes.productDetailsScreen);
+                  Get.toNamed(AppRoutes.swapProductScreen);
                 },
                 firstProductName: 'Samsung Galaxy S22'.tr,
                 exchangeProductName: 'Sony Y1G Android TV'.tr,

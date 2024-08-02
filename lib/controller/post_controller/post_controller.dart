@@ -16,10 +16,28 @@ class PostController extends GetxController{
   RxInt selectedCategory = 0.obs;
   TextEditingController subCategoriesController = TextEditingController();
 
+  RxBool isProfession = false.obs;
+  RxInt selectProfession = 0.obs;
+  TextEditingController professionController = TextEditingController();
+
   final List<String> subCategoriesList=[
     "Smart Phone",
     "Apple Watch",
     "HeadPhone"
+  ];
+
+  final List<String> religion=[
+    'Islam',
+    "Buddhism",
+    'Hinduism',
+    'christianity'
+  ];
+
+  final List<String> profession=[
+    'Accountant',
+    "Doctor",
+    'Software Engineer',
+    'farmer'
   ];
 
 
