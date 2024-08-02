@@ -17,12 +17,11 @@ import 'package:trade_app/view/components/custom_text_field/custom_text_field.da
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-    ProductDetailsScreen({super.key});
-   final HomeController controller = Get.find<HomeController>();
-  final  List<String> swapList=[
-      "Samsung Galaxy s22",
-      "Redmi Note 11"
-    ];
+  ProductDetailsScreen({super.key});
+
+  final HomeController controller = Get.find<HomeController>();
+  final List<String> swapList = ["Samsung Galaxy s22", "Redmi Note 11"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +31,10 @@ class ProductDetailsScreen extends StatelessWidget {
       appBar: CustomAppBar(
         appBarContent: AppStrings.productDetails.tr,
       ),
-      body: Obx((){
+      body: Obx(() {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: SingleChildScrollView(
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -47,6 +45,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   color: AppColors.black500,
                   bottom: 10.h,
                 ),
+
                 ///======================Image Here=============
                 CustomNetworkImage(
                   imageUrl: AppConstants.electronics,
@@ -84,6 +83,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             color: AppColors.black500,
                             bottom: 10.h,
                           ),
+
                           ///======================Posted on===========
                           CustomText(
                             text: ' : 21 Mar 2:45 PM'.tr,
@@ -101,19 +101,29 @@ class ProductDetailsScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              CustomText(text: AppStrings.postBy,right: 4.w,),
+                              CustomText(
+                                text: AppStrings.postBy,
+                                right: 4.w,
+                              ),
                               GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Get.toNamed(AppRoutes.otherProfile);
                                 },
                                 child: const CustomText(
-                                  text: "${'Nadim hasan'} ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,),
+                                  text: "${'Nadim hasan'} ${'(Gold)'}",
+                                  fontWeight: FontWeight.w500,
+                                  decoration: TextDecoration.underline,
+                                  color: AppColors.blue500,
+                                ),
                               ),
                             ],
                           ),
                           const Row(
                             children: [
-                              CustomImage(imageSrc: AppIcons.locationOn,imageColor: AppColors.black500,),
+                              CustomImage(
+                                imageSrc: AppIcons.locationOn,
+                                imageColor: AppColors.black500,
+                              ),
                               CustomText(text: "Napervilla")
                             ],
                           )
@@ -122,6 +132,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+
                 ///=========================This is Condition==============
                 CustomDetailContainer(
                   color: AppColors.white200,
@@ -145,6 +156,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+
                 ///===================This is Description===============
                 CustomDetailContainer(
                   color: AppColors.white200,
@@ -162,8 +174,8 @@ class ProductDetailsScreen extends StatelessWidget {
                         textAlign: TextAlign.start,
                         maxLines: 30,
                         text:
-                        'Galaxy S22 Ultra, a powerhouse of performance and aesthetics. Its sleek design features a smooth curved display, crafted from premium armor aluminum. With the option of dual SIM, the S22 Ultra marries style and functionality seamlessly. The integrated stylus ensures precise input, while the vibrant 6.8" Dynamic AMOLED 2X display offers stunning visuals with HDR10+ support.'
-                            .tr,
+                            'Galaxy S22 Ultra, a powerhouse of performance and aesthetics. Its sleek design features a smooth curved display, crafted from premium armor aluminum. With the option of dual SIM, the S22 Ultra marries style and functionality seamlessly. The integrated stylus ensures precise input, while the vibrant 6.8" Dynamic AMOLED 2X display offers stunning visuals with HDR10+ support.'
+                                .tr,
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         color: AppColors.black500,
@@ -173,67 +185,83 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 16.h,),
+                SizedBox(
+                  height: 16.h,
+                ),
 
-                CustomText(text: AppStrings.iWantToSwapFor,fontWeight: FontWeight.w500,fontSize: 18.h,bottom: 16.h,),
+                CustomText(
+                  text: AppStrings.iWantToSwapFor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18.h,
+                  bottom: 16.h,
+                ),
 
                 CustomTextField(
-                  onTap: (){
-                    controller.isSwap.value =! controller.isSwap.value;
+                  onTap: () {
+                    controller.isSwap.value = !controller.isSwap.value;
                     controller.isSwap.refresh();
                   },
                   textEditingController: controller.swapController,
                   readOnly: true,
                   fillColor: AppColors.white200,
-                  suffixIcon:controller.isSwap.value? const Icon(Icons.keyboard_arrow_down_sharp): const Icon(Icons.keyboard_arrow_up),
+                  suffixIcon: controller.isSwap.value
+                      ? const Icon(Icons.keyboard_arrow_up)
+                      : const Icon(Icons.keyboard_arrow_down_sharp),
                 ),
 
                 ///<========================= dropdown ============================>
                 controller.isSwap.value
                     ? Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 16.w),
-                      decoration:const BoxDecoration(
-
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(
-                          swapList.length,
-                              (index) => GestureDetector(
-                            onTap: () {
-                              // themeController.selectedCategory.value = index;
-                              controller.swapController.text =
-                              swapList[index];
-                              controller.isSwap.value = false;
-                              controller.update();
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: const BoxDecoration(),
-                                child: CustomText(
-                                  text: swapList[index],
-                                  fontWeight: FontWeight.w500,
-                                  bottom: 4.h,
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            decoration: const BoxDecoration(),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: List.generate(
+                                swapList.length,
+                                (index) => GestureDetector(
+                                  onTap: () {
+                                    // themeController.selectedCategory.value = index;
+                                    controller.swapController.text =
+                                        swapList[index];
+                                    controller.isSwap.value = false;
+                                    controller.update();
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: const BoxDecoration(),
+                                      child: CustomText(
+                                        text: swapList[index],
+                                        fontWeight: FontWeight.w500,
+                                        bottom: 4.h,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      )),
-                )
+                            )),
+                      )
                     : const SizedBox(),
 
-                SizedBox(height: 16.h,),
-                ///=================== sendSwapRequest button ===============
-                CustomButton(onTap: (){
-                  Get.toNamed(AppRoutes.swapProductScreen);
-                },title: AppStrings.sendSwapRequest,),
+                SizedBox(
+                  height: 16.h,
+                ),
 
-                CustomText(text: "By swapping you can earn upto 500 points".tr,top: 8.h,bottom: 16.h,),
+                ///=================== sendSwapRequest button ===============
+                CustomButton(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.swapProductScreen);
+                  },
+                  title: AppStrings.sendSwapRequest,
+                ),
+
+                CustomText(
+                  text: "By swapping you can earn upto 500 points".tr,
+                  top: 8.h,
+                  bottom: 16.h,
+                ),
 
                 ///============================ similarProducts =============================>
                 Row(
@@ -281,13 +309,14 @@ class ProductDetailsScreen extends StatelessWidget {
                     }),
                   ),
                 ),
-                SizedBox(height: 24.h,),
+                SizedBox(
+                  height: 24.h,
+                ),
               ],
             ),
           ),
         );
       }),
-
     );
   }
 }

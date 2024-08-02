@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
+import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
@@ -64,6 +66,13 @@ class ResetPasswordScreen extends StatelessWidget {
                   },
                   textInputAction: TextInputAction.next,
                   isPassword: true,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: CustomImage(
+                      imageSrc: AppIcons.lock,
+                      size: 24.h,
+                    ),
+                  ),
                   textEditingController: controller.newPassController,
                   hintText: AppStrings.enterNewPassword,
                 ),
@@ -90,6 +99,13 @@ class ResetPasswordScreen extends StatelessWidget {
                   textEditingController: controller.confirmPassController,
                   textInputAction: TextInputAction.done,
                   isPassword: true,
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: CustomImage(
+                      imageSrc: AppIcons.lock,
+                      size: 24.h,
+                    ),
+                  ),
                   hintText: AppStrings.retypeNewPassword.tr,
                 ),
 
