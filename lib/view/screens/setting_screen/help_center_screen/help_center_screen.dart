@@ -65,7 +65,7 @@ class HelpCenterScreen extends StatelessWidget {
                     contactText: 'Call Us (+1-212-456-7890)',
                     subText: 'Our help line service is active: 24/7',
                     onTap: () {
-                      // Handle call tap
+                      profileController.launchPhone('01731090564');
                     },
                   ),
                 ],

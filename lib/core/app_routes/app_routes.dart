@@ -131,7 +131,7 @@ class AppRoutes {
     GetPage(name: notificationScreen, page: () =>   const NotificationScreen()),
     GetPage(name: otherProfile, page: () =>   const OtherProfile()),
     GetPage(name: productDetailsScreen, page: () =>  ProductDetailsScreen()),
-    GetPage(name: swapProductScreen, page: () =>  const SwapProductScreen()),
+    GetPage(name: swapProductScreen, page: () =>   SwapProductScreen()),
     GetPage(name: topProductsScreen, page: () =>  const TopProductsScreen()),
     GetPage(name: justForYou, page: () =>  const JustForYou()),
     GetPage(name: searchScreen, page: () =>   SearchScreen()),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
@@ -13,8 +14,9 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
 class SwapProductScreen extends StatelessWidget {
-  const SwapProductScreen({super.key});
+   SwapProductScreen({super.key});
 
+  final ProfileController profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -285,7 +287,8 @@ class SwapProductScreen extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: (){
-                  // Get.toNamed(AppRoutes.postEditScreen);
+                  profileController.launchPhone('01731090564');
+                  ;
                 },
                 child: CustomDetailContainer(
 

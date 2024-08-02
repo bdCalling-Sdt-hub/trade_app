@@ -115,6 +115,7 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                   fontSize: 16.sp,
                   bottom: 8.h,
                   maxLines: 2,
+                  top: 10,
                 ),
                 ///<================================= whatYourReligion ====================================>
                 CustomDropdown(
