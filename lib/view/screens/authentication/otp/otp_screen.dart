@@ -139,7 +139,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     text: AppStrings.resendOtp.tr,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    decoration: TextDecoration.underline,
+                    color: AppColors.blue500,
                   ),
                 ),
               ),
