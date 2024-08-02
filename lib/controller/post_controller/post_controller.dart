@@ -39,17 +39,16 @@ class PostController extends GetxController{
   }
 
   ///============================Multi Image picker method================
-
   RxList<File> selectedImagesMulti = <File>[].obs;
   final ImagePicker picker = ImagePicker();
 
   void pickMultiImage() async {
     try {
       final pickedFiles = await picker.pickMultiImage(
-        imageQuality: 80, // Set quality of images
+        imageQuality: 80,
       );
 
-      if (pickedFiles.isEmpty) {
+      if (pickedFiles == null || pickedFiles.isEmpty) {
         Get.snackbar('No Images Selected', 'No images were selected.');
         selectedImagesMulti.clear();
         return;
@@ -60,7 +59,7 @@ class PostController extends GetxController{
         return;
       }
 
-      selectedImagesMulti.clear(); // Clear existing images
+      selectedImagesMulti.clear();
       for (var xFile in pickedFiles) {
         if (selectedImagesMulti.length < 6) {
           selectedImagesMulti.add(File(xFile.path));
@@ -70,9 +69,10 @@ class PostController extends GetxController{
         }
       }
     } catch (e) {
-      Get.snackbar('Error', 'An error occurred while picking images.');
+      Get.snackbar('Error', 'An error occurred while picking images: $e');
     } finally {
-      update(); // Notify listeners of changes
+      // Notify listeners of changes
+      update();
     }
   }
 

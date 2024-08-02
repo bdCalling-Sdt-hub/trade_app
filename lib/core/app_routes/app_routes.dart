@@ -120,7 +120,7 @@ class AppRoutes {
 
     ///============================Post Edit Screen=================
     GetPage(name: postAddScreen, page: () =>      PostAddScreen()),
-    GetPage(name: postEditScreen, page: () =>     const PostEditScreen()),
+    GetPage(name: postEditScreen, page: () =>      PostEditScreen()),
     GetPage(name: packageDetailsScreen, page: () =>  PackageDetailsScreen()),
     GetPage(name: membershipPackageScreen, page: () =>   MembershipPackageScreen()),
     GetPage(name: preApprovalQuestionScreen, page: () =>   PreApprovalQuestionScreen()),

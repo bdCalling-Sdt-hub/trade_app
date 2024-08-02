@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
         navigatorKey: Get.key,
         getPages: AppRoutes.routes,
           locale: const Locale("en","US"),
-
         translations: Language(),
       ),
     );
