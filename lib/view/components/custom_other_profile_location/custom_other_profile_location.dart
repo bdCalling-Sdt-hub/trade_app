@@ -14,7 +14,7 @@ class CustomOtherProfileLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Icon(Icons.location_on_outlined),
+        const Icon(Icons.location_on_outlined,color: AppColors.blue500,),
         CustomText(
           left: 10,
           text: location,

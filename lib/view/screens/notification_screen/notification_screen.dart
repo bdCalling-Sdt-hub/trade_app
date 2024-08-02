@@ -19,7 +19,7 @@ class NotificationScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
               onTap: () {
-                Get.toNamed(AppRoutes.messageScreen);
+                // Get.toNamed(AppRoutes.messageScreen);
               },
               child: CustomChat(
                 imageUrl: AppConstants.userNtr,
