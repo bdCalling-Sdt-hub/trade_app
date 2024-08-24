@@ -42,7 +42,7 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                 ),
                 CustomRadioButton(
                   title: 'Do you have pets?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: selectedPets.value,
                   onOptionChanged: (index) {
                     selectedPets.value = index;
@@ -51,7 +51,7 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                 SizedBox(height: 12.h),
                 CustomRadioButton(
                   title: 'Do you have children?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: selectedChildren.value,
                   onOptionChanged: (index) {
                     selectedChildren.value = index;
@@ -59,49 +59,49 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                 ),
                 CustomRadioButton(
                   title: 'Do you own a vehicle?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: one.value,
                   onOptionChanged: (index) {
                     one.value = index;
                   },
                 ), CustomRadioButton(
                   title: 'Are you willing to swap your vehicles?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: two.value,
                   onOptionChanged: (index) {
                     two.value = index;
                   },
                 ), CustomRadioButton(
                   title: 'Are you owner or leasing your property?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: selectedChildren.value,
                   onOptionChanged: (index) {
                     selectedChildren.value = index;
                   },
                 ),CustomRadioButton(
                   title: 'Will you able to provide approval from owner for temp swap?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: three.value,
                   onOptionChanged: (index) {
                     three.value = index;
                   },
                 ),CustomRadioButton(
                   title: 'Is your property insured?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: selectedChildren.value,
                   onOptionChanged: (index) {
                     selectedChildren.value = index;
                   },
                 ),CustomRadioButton(
                   title: 'Will your utilities be upto date for swap?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: one.value,
                   onOptionChanged: (index) {
                     one.value = index;
                   },
                 ),CustomRadioButton(
                   title: 'What do you want to swap and for how long?',
-                  options: ['Yes', 'No'],
+                  options: const ['Yes', 'No'],
                   selectedOption: selectedChildren.value,
                   onOptionChanged: (index) {
                     selectedChildren.value = index;
@@ -113,7 +113,7 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                     controller:TextEditingController()),
                 CustomRadioButton(
                   title: 'Do you want to arrive on departure or depart on arrival?',
-                  options: ['Arrive on departure', 'Depart on arrival '],
+                  options: const ['Arrive on departure', 'Depart on arrival '],
                   selectedOption: three.value,
                   onOptionChanged: (index) {
                     three.value = index;

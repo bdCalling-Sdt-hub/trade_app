@@ -22,11 +22,12 @@ class CustomReviewDialog extends StatefulWidget {
       required this.commentController});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomReviewDialogState createState() => _CustomReviewDialogState();
 }
 
 class _CustomReviewDialogState extends State<CustomReviewDialog> {
-  late double _rating;
+  double _rating = 0.0;
 
   @override
   void initState() {
@@ -93,7 +94,6 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
               onRatingUpdate: (rating) {
                 setState(() {
                   _rating = rating;
-                  print(_rating);
                 });
               },
             ),

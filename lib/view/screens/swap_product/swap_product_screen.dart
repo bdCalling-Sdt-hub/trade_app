@@ -288,7 +288,6 @@ class SwapProductScreen extends StatelessWidget {
               child: GestureDetector(
                 onTap: (){
                   profileController.launchPhone('01731090564');
-                  ;
                 },
                 child: CustomDetailContainer(
 

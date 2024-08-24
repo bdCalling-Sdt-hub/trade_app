@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';

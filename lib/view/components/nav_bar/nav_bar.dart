@@ -11,7 +11,6 @@ import 'package:trade_app/view/screens/message_screen/chat_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_screen.dart';
 import 'package:trade_app/view/screens/profile_screen/profile_screen.dart';
 
-
 class NavBar extends StatefulWidget {
   final int currentIndex;
 
@@ -23,6 +22,7 @@ class NavBar extends StatefulWidget {
 
 class _UserNavBarState extends State<NavBar> {
   late int bottomNavIndex;
+
   ///=======================UnselectedIcon====================
   final List<String> unselectedIcon = [
     AppIcons.homeUnselected,
@@ -31,6 +31,7 @@ class _UserNavBarState extends State<NavBar> {
     AppIcons.postUnselected,
     AppIcons.profileUnselected,
   ];
+
   ///=======================SelectedIcon====================
   final List<String> selectedIcon = [
     AppIcons.homeSelected,
@@ -60,7 +61,6 @@ class _UserNavBarState extends State<NavBar> {
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       color: Colors.white,
       height: 95.h,
-
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
       child: Row(
@@ -68,7 +68,7 @@ class _UserNavBarState extends State<NavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           unselectedIcon.length,
-              (index) => InkWell(
+          (index) => InkWell(
             onTap: () => onTap(index),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -79,16 +79,15 @@ class _UserNavBarState extends State<NavBar> {
                       : unselectedIcon[index],
                   height: 24.h,
                   width: 24.w,
-                  color: index == bottomNavIndex?
-                  AppColors.blue:
-                  Colors.black,
+                  // ignore: deprecated_member_use
+                  color:
+                      index == bottomNavIndex ? AppColors.blue : Colors.black,
                 ),
                 SizedBox(height: 4.h),
                 CustomText(
                   text: userNavText[index],
-                  color: index == bottomNavIndex
-                      ? AppColors.blue
-                      : Colors.black,
+                  color:
+                      index == bottomNavIndex ? AppColors.blue : Colors.black,
                 ),
               ],
             ),
@@ -105,10 +104,10 @@ class _UserNavBarState extends State<NavBar> {
           Get.offAll(() => const HomeScreen());
           break;
         case 1:
-          Get.to(() =>   const ChatScreen());
+          Get.to(() => const ChatScreen());
           break;
         case 2:
-          Get.to(() =>  CategoryScreen());
+          Get.to(() => CategoryScreen());
           break;
         case 3:
           Get.to(() => const PostScreen());

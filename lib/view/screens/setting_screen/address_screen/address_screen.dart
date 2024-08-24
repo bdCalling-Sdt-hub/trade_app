@@ -10,8 +10,6 @@ import 'package:trade_app/view/components/custom_button/custom_button.dart';
 import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
-
-
 class AddressScreen extends StatelessWidget {
   AddressScreen({super.key});
 
@@ -39,26 +37,26 @@ class AddressScreen extends StatelessWidget {
                 color: AppColors.black500,
                 bottom: 10,
               ),
+
               ///========================Country===============
               Obx(() => CustomFromCard(
-                readOnly: true,
-                onTap: () {
-                  showCountryPicker(
-                    context: context,
-                    showPhoneCode: true,
-                    onSelect: (Country country) {
-                      profileController.updateCountry(country.name);
-                      profileController.countryController.text = country.name;
-                      print('Selected country: ${country.displayName}');
+                    readOnly: true,
+                    onTap: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode: true,
+                        onSelect: (Country country) {
+                          profileController.updateCountry(country.name);
+                          profileController.countryController.text =
+                              country.name;
+                        },
+                      );
                     },
-                  );
-                  print('This is Tap================');
-                },
-                isIcon: true,
-                title: AppStrings.country.tr,
-                controller: TextEditingController(
-                    text: profileController.selectedCountry.value),
-              )),
+                    isIcon: true,
+                    title: AppStrings.country.tr,
+                    controller: TextEditingController(
+                        text: profileController.selectedCountry.value),
+                  )),
 
               ///========================City===============
               CustomFromCard(
@@ -78,6 +76,7 @@ class AddressScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
+
               ///==========================Update button==============
               CustomButton(
                 onTap: () {

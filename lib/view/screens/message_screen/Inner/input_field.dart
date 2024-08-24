@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -25,7 +23,7 @@ class MessageInputField extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            height: 89.h,
+            height: 80.h,
             color: AppColors.white,
             child: Row(
               children: [
@@ -37,8 +35,6 @@ class MessageInputField extends StatelessWidget {
                     controller.isComment.value = !controller.isComment.value;
                     controller.update();
                     controller.isComment.refresh();
-                    print(
-                        "This is commit value=   ${controller.isComment.value}");
                   },
                   icon: const Icon(
                     Icons.image_outlined,
@@ -47,23 +43,23 @@ class MessageInputField extends StatelessWidget {
                 ),
                 //============================Text Input Field=====================
 
-                Expanded(
+                const Expanded(
                     child: SizedBox(
-                      height: 50,
-                      child: CustomTextField(
-                        textInputAction: TextInputAction.done,
-                        hintText: "Write your message",
-                        fieldBorderColor: Colors.amber,
-                        fillColor: Colors.transparent,
-                      ),
-                    )),
+                  height: 50,
+                  child: CustomTextField(
+                    textInputAction: TextInputAction.done,
+                    hintText: "Write your message",
+                    fieldBorderColor: Colors.amber,
+                    fillColor: Colors.transparent,
+                  ),
+                )),
 
                 //=============================== Send Button ==========================
 
                 GestureDetector(
                   onTap: () {
                     if (controller.sendController.value.text.isNotEmpty ==
-                        true ||
+                            true ||
                         controller.imagePath.value.isNotEmpty == true) {
                       // controller.sendMessage();
                     } else {

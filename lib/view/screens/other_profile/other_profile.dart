@@ -16,6 +16,7 @@ class OtherProfile extends StatefulWidget {
   const OtherProfile({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _OtherProfileState createState() => _OtherProfileState();
 }
 
@@ -106,7 +107,8 @@ class _OtherProfileState extends State<OtherProfile> {
                     date: '12/06/24',
                     imageUrl: AppConstants.userNtr,
                     rating: 5,
-                    review: 'I highly recommend this swapper for anyone in need of a'
+                    review:
+                        'I highly recommend this swapper for anyone in need of a'
                         ' reliable service. My overall experience with it'
                         ' has been exceptionally positive.',
                   );

@@ -47,7 +47,9 @@ class ChangePasswordScreen extends StatelessWidget {
                   isPassword: true,
                   title: AppStrings.enterCurrentPassword.tr,
                   controller: profileController.currentPasswordController,
-                  validator: (String? value) {}),
+                  validator: (String? value) {
+                    return null;
+                  }),
 
               ///==========================enterNewPassword==============
               customEditProfile(
@@ -56,7 +58,9 @@ class ChangePasswordScreen extends StatelessWidget {
                   isPassword: true,
                   title: AppStrings.enterNewPassword.tr,
                   controller: profileController.newPasswordController,
-                  validator: (String? value) {}),
+                  validator: (String? value) {
+                    return null;
+                  }),
 
               ///==========================retypeNewPassword==============
               customEditProfile(
@@ -65,7 +69,9 @@ class ChangePasswordScreen extends StatelessWidget {
                   isPassword: true,
                   title: AppStrings.retypeNewPassword.tr,
                   controller: profileController.reTypePasswordController,
-                  validator: (String? value) {}),
+                  validator: (String? value) {
+                    return null;
+                  }),
 SizedBox(
   height: 20.h,
 ),

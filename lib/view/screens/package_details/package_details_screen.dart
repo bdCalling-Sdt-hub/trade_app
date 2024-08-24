@@ -13,7 +13,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 class PackageDetailsScreen extends StatelessWidget {
   PackageDetailsScreen({super.key});
 
-  var data = Get.arguments;
+  final data = Get.arguments;
 
   @override
   Widget build(BuildContext context) {

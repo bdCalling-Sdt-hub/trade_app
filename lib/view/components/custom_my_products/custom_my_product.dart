@@ -10,7 +10,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class CustomMyProduct extends StatelessWidget {
-  final HomeController controller=Get.find<HomeController>();
+  final HomeController controller = Get.find<HomeController>();
   final String image;
   final String name;
   final String value;
@@ -20,13 +20,16 @@ class CustomMyProduct extends StatelessWidget {
   final bool isEdit;
   final bool isMargin;
 
-   CustomMyProduct({
+  CustomMyProduct({
     super.key,
     required this.image,
     required this.name,
     this.backgroundColor = AppColors.white200,
     required this.onTap,
-    required this.value, required this.editOnTap, this.isEdit=false, required this.isMargin,
+    required this.value,
+    required this.editOnTap,
+    this.isEdit = false,
+    required this.isMargin,
   });
 
   @override
@@ -34,67 +37,63 @@ class CustomMyProduct extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin:isMargin?  const EdgeInsets.all(10): null,
-        width: MediaQuery.of(context).size.width *.43,
-        padding: EdgeInsets.symmetric(vertical: 12.h,horizontal: 8.h),
+        margin: isMargin ? const EdgeInsets.all(10) : null,
+        width: MediaQuery.of(context).size.width * .43,
+        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: backgroundColor,
           border: Border.all(color: AppColors.gray300),
         ),
-        child: SingleChildScrollView
-          (
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Align(
-                alignment: Alignment.bottomRight,
-                child:  isEdit?
-                IconButton(
-                  onPressed: editOnTap,
-                  icon: const CustomImage(
-                      imageSrc: AppIcons.borderColor),
-                ):const SizedBox(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Align(
+              alignment: Alignment.bottomRight,
+              child: isEdit
+                  ? IconButton(
+                      onPressed: editOnTap,
+                      icon: const CustomImage(imageSrc: AppIcons.borderColor),
+                    )
+                  : const SizedBox(),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: CustomNetworkImage(
+                imageUrl: image,
+                height: 106.h,
+                width: 100.w,
               ),
-              Align(
-                alignment: Alignment.center,
-                child: CustomNetworkImage(
-                  imageUrl: image,
-                  height: 106.h,
-                  width: 100.w,
+            ),
+            SizedBox(height: 10.h),
+            CustomText(
+              textAlign: TextAlign.start,
+              text: name,
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+              color: AppColors.black500,
+              maxLines: 3,
+            ),
+            SizedBox(height: 5.h),
+            Row(
+              children: [
+                CustomText(
+                  text: AppStrings.value.tr,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                  color: AppColors.gray700,
                 ),
-              ),
-              SizedBox(height: 10.h),
-              CustomText(
-                textAlign: TextAlign.start,
-                text: name,
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: AppColors.black500,
-                maxLines: 3,
-              ),
-              SizedBox(height: 5.h),
-              Row(
-
-                children: [
-                  CustomText(
-                    text: AppStrings.value.tr,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                    color: AppColors.gray700,
-                  ),
-                  CustomText(
-                    text: value,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: AppColors.blue500,
-                  ),
-                ],
-              ),
-            ],
-          ),
+                CustomText(
+                  text: value,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: AppColors.blue500,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

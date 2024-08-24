@@ -20,7 +20,6 @@ class SubCategoryScreen extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: const NavBar(currentIndex: 2),
-
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
         appBarContent: data['name'],
@@ -51,7 +50,7 @@ class SubCategoryScreen extends StatelessWidget {
                           const CustomImage(imageSrc: AppIcons.chevronForward),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         color: AppColors.black50,
                         thickness: 1,
                       ),

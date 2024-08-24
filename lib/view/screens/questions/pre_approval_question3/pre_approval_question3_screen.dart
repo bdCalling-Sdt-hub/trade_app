@@ -113,7 +113,7 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ///========================Purpose of travel?================
               CustomRadioButton(
                 title: 'Purpose of travel?',
-                options: ['Business', 'Pleasure', 'Recreational'],
+                options: const ['Business', 'Pleasure', 'Recreational'],
                 selectedOption: three.value,
                 onOptionChanged: (index) {
                   three.value = index;

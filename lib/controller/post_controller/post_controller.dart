@@ -66,7 +66,7 @@ class PostController extends GetxController{
         imageQuality: 80,
       );
 
-      if (pickedFiles == null || pickedFiles.isEmpty) {
+      if (pickedFiles.isEmpty) {
         Get.snackbar('No Images Selected', 'No images were selected.');
         selectedImagesMulti.clear();
         return;

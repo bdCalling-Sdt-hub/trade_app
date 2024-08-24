@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +12,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
 
 class OtpScreen extends StatefulWidget {
-  OtpScreen({super.key});
+  const OtpScreen({super.key});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -16,7 +17,6 @@ class SubCategoryProducts extends StatelessWidget {
     var data = Get.arguments;
     return Scaffold(
       bottomNavigationBar: const NavBar(currentIndex: 2),
-
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
         appBarContent: data['name'],
@@ -35,12 +35,11 @@ class SubCategoryProducts extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
-                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
-                    mainAxisExtent: 190
-                ),
+                    mainAxisExtent: 200.h),
                 itemCount: 5,
                 physics: const PageScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {

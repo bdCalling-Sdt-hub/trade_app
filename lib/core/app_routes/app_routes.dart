@@ -93,11 +93,11 @@ class AppRoutes {
   static List<GetPage> routes = [
     GetPage(name: signInScreen, page: () => SignInScreen()),
     GetPage(name: signUpScreen, page: () =>  SignUpScreen()),
-    GetPage(name: signUpOtp, page: () =>  SignUpOtp()),
+    GetPage(name: signUpOtp, page: () =>  const SignUpOtp()),
     GetPage(name: forgotPasswordScreen, page: () =>  ForgotPasswordScreen()),
-    GetPage(name: otpScreen, page: () =>  OtpScreen()),
+    GetPage(name: otpScreen, page: () =>  const OtpScreen()),
     GetPage(name: resetPasswordScreen, page: () =>  ResetPasswordScreen()),
-    GetPage(name: splashScreen, page: () =>  SplashScreen()),
+    GetPage(name: splashScreen, page: () =>  const SplashScreen()),
     GetPage(name: messageScreen, page: () =>  MessageScreen()),
     GetPage(name: homeScreen, page: () =>  const HomeScreen()),
 

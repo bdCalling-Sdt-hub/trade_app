@@ -32,7 +32,7 @@ class SearchScreen extends StatelessWidget {
         child: Row(
           children: [
             ///===================Search Field=============
-            Expanded(
+            const Expanded(
               flex: 6,
               child: CustomTextField(
                 hintText: AppStrings.whatAreYouLookingFor,
@@ -54,11 +54,10 @@ class SearchScreen extends StatelessWidget {
 
                 ///===================Filter Icon===========
                 child: CustomDetailContainer(
-                  height: 65.h,
+                  height: 50.h,
                   weight: 70.w,
                   color: AppColors.white200,
-                  child: const CustomImage(
-                      imageSrc: AppIcons.filterList),
+                  child: const CustomImage(imageSrc: AppIcons.filterList),
                 ),
               ),
             ),
@@ -68,4 +67,3 @@ class SearchScreen extends StatelessWidget {
     );
   }
 }
-

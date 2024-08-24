@@ -30,24 +30,24 @@ class _HomeScreenState extends State<HomeScreen> {
     AppImages.slider,
   ];
 
-  List<Map<String,dynamic>> packageList=[
+  List<Map<String, dynamic>> packageList = [
     {
-      "packageName" : "Gold",
-      "price" : "19.99",
-      "limit" : "Per Months",
-      "color" :const Color(0xffFAA316),
+      "packageName": "Gold",
+      "price": "19.99",
+      "limit": "Per Months",
+      "color": const Color(0xffFAA316),
     },
     {
-      "packageName" : "Platinum",
-      "price" : "25,000",
-      "limit" : "Points need to auto upgrade",
-      "color" : AppColors.gray800,
+      "packageName": "Platinum",
+      "price": "25,000",
+      "limit": "Auto upgrade",
+      "color": AppColors.gray800,
     },
     {
-      "packageName" : "Diamond",
-      "price" : "100,000",
-      "limit" : "Points need to auto upgrade",
-      "color" :AppColors.blue300,
+      "packageName": "Diamond",
+      "price": "100,000",
+      "limit": "Auto upgrade",
+      "color": AppColors.blue300,
     },
   ];
 
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HomeAppbar(
-                  onTap: (){
+                  onTap: () {
                     Get.toNamed(AppRoutes.searchScreen);
                   },
                   coinAmount: '22,850'),
@@ -244,7 +244,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
+
               ///============================ membershipPackages =============================>
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -261,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Column(
                         children: [
-                            CustomText(
+                          CustomText(
                             text: packageList[index]["packageName"],
                             color: AppColors.white50,
                             fontWeight: FontWeight.w600,
@@ -274,11 +277,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             top: 4.h,
                             bottom: 4.h,
                           ),
-                            CustomText(
+                          CustomText(
+                            maxLines: 2,
                             text: packageList[index]["limit"],
                             color: AppColors.white50,
                             fontWeight: FontWeight.w500,
-                              fontSize: 12.h,
+                            fontSize: 12.h,
                           ),
                         ],
                       ),
@@ -286,7 +290,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   }),
                 ),
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
+
               ///============================ just for you =============================>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -311,24 +318,24 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               ///============================ just for you =============================>
-           SingleChildScrollView(
-             scrollDirection: Axis.horizontal,
-             child: Row(
-               children: List.generate(4, (index){
-                 return CustomMyProduct(
-                   isMargin: true,
-                   isEdit: controller.isEdit,
-                   image: AppConstants.electronics,
-                   name: 'Samsung Galaxy s22'.tr,
-                   onTap: () {
-                     Get.toNamed(AppRoutes.productDetailsScreen);
-                   },
-                   value: '\$825+',
-                   editOnTap: () {},
-                 );
-               }),
-             ),
-           )
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(4, (index) {
+                    return CustomMyProduct(
+                      isMargin: true,
+                      isEdit: controller.isEdit,
+                      image: AppConstants.electronics,
+                      name: 'Samsung Galaxy s22'.tr,
+                      onTap: () {
+                        Get.toNamed(AppRoutes.productDetailsScreen);
+                      },
+                      value: '\$825+',
+                      editOnTap: () {},
+                    );
+                  }),
+                ),
+              )
             ],
           ),
         );

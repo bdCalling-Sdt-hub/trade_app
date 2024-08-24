@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -37,6 +35,7 @@ class CustomImage extends StatelessWidget {
     if (imageType == ImageType.svg) {
       imageWidget = SvgPicture.asset(
         imageSrc,
+        // ignore: deprecated_member_use
         color: imageColor,
         height: size,
         width: size,

@@ -11,7 +11,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 
 class HomeAppbar extends StatelessWidget {
-    HomeAppbar({super.key, required this.coinAmount, required this.onTap});
+    const HomeAppbar({super.key, required this.coinAmount, required this.onTap});
    final String coinAmount;
    final VoidCallback onTap;
   @override

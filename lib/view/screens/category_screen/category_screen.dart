@@ -30,7 +30,7 @@ final CategoryController categoryController = Get.find<CategoryController>();
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
-          itemCount: categoryController.cateGoriList.length??0, // You can adjust the item count
+          itemCount: categoryController.cateGoriList.length, // You can adjust the item count
           itemBuilder: (BuildContext context, int index) {
             var data = categoryController.cateGoriList[index];
 
