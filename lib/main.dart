@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,8 +5,6 @@ import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
 import 'package:trade_app/view/components/device_utils/device_utils.dart';
 import 'package:trade_app/view/screens/setting_screen/change_language/language_transalator.dart';
-
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +17,7 @@ void main() {
   );
   // const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -35,12 +33,9 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.splashScreen,
         navigatorKey: Get.key,
         getPages: AppRoutes.routes,
-          locale: const Locale("en","US"),
+        locale: const Locale("en", "US"),
         translations: Language(),
       ),
     );
   }
 }
-
-
-

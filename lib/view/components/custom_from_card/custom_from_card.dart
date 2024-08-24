@@ -23,7 +23,9 @@ class CustomFromCard extends StatelessWidget {
     this.isIcon = false,
     this.readOnly = false,
     this.onTap,
-    this.isBackgroundColor = false, this.isMaxLine=false, this.validator,
+    this.isBackgroundColor = false,
+    this.isMaxLine = false,
+    this.validator,
   });
 
   @override
@@ -51,7 +53,7 @@ class CustomFromCard extends StatelessWidget {
           fieldBorderColor: AppColors.gray201,
           keyboardType: isPassword ? TextInputType.phone : TextInputType.name,
           onTap: onTap,
-          maxLines: isMaxLine?8:1,
+          maxLines: isMaxLine ? 8 : 1,
         ),
         SizedBox(
           height: 15.h,

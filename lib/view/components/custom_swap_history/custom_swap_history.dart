@@ -28,7 +28,8 @@ class CustomSwapHistory extends StatelessWidget {
     this.backgroundColor = AppColors.white200,
     required this.onTap,
     required this.firstProductName,
-    required this.exchangeProductName, required this.onTapName,
+    required this.exchangeProductName,
+    required this.onTapName,
   });
 
   @override
@@ -45,8 +46,8 @@ class CustomSwapHistory extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               CustomText(
-               bottom: 10,
+              CustomText(
+                bottom: 10,
                 text: AppStrings.swappedWith.tr,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -64,7 +65,7 @@ class CustomSwapHistory extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         GestureDetector(
-                          onTap:onTapName,
+                          onTap: onTapName,
                           child: CustomText(
                             left: 8,
                             text: name,
@@ -86,7 +87,9 @@ class CustomSwapHistory extends StatelessWidget {
                   const Spacer(),
                   Expanded(
                     child: CustomButton(
+                      height: 34.h,
                       onTap: onTap,
+                      fontSize: 14.sp,
                       title: AppStrings.review.tr,
                       fillColor: AppColors.white,
                       textColor: AppColors.blue500,
@@ -95,7 +98,7 @@ class CustomSwapHistory extends StatelessWidget {
                   ),
                 ],
               ),
-               CustomText(
+              CustomText(
                 top: 10,
                 left: 7,
                 text: AppStrings.swapItems.tr,
@@ -127,7 +130,6 @@ class CustomSwapHistory extends StatelessWidget {
               SizedBox(
                 height: 12.h,
               ),
-
             ],
           ),
         ),

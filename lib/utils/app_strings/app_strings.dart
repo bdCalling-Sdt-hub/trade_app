@@ -21,7 +21,8 @@ class AppStrings {
       "Password must be 8 characters long & must include one capital letter";
   static const String signIn = "Sign in";
   static const String thankYou = "Thank You!";
-  static const String youSuccess = "You successfully applied for gold membership. Please wait for the approval. We will send you a confirmation email.";
+  static const String youSuccess =
+      "You successfully applied for gold membership. Please wait for the approval. We will send you a confirmation email.";
   static const String welcomeBack = "Welcome Back!";
   static const String email = "Email";
   static const String rating = "Rating";
@@ -38,23 +39,29 @@ class AppStrings {
   static const String signUp = "Sign up";
   static const String verificationCode = "Verification Code ";
   static const String continues = "Continue";
-  static const String weSendYouAVerificationCode = "We send you a verification code to verify your email.";
-  static const String mobileNumber = "Mobile Number";
+  static const String weSendYouAVerificationCode =
+      "We send you a verification code to verify your email.";
+  static const String mobileNumber = "Mobile Number (Optional)";
   static const String enterYourCodeHere = "Enter your code here";
   static const String address = "Address (Optional)";
   static const String resetPassword = "Reset Password";
-  static const String setTheNewPasswordFor = "Set the new password for your account";
+  static const String setTheNewPasswordFor =
+      "Set the new password for your account";
   static const String confirmPassword = "Confirm Password";
   static const String enterNewPassword = "Enter New Password";
-  static const String justAFewQuickThingsToGet = "Just a few quick things to get started";
+  static const String justAFewQuickThingsToGet =
+      "Just a few quick things to get started";
   static const String dontHaveAnAccount = "Don’t have an account?";
   static const String reTypeYourPassword = "Retype your password";
   static const String alreadyHaveAnAccount = "Already have an account?";
-  static const String iAgreeWithTheTermsAnd = "I agree with the terms and condition";
-  static const String pleaseSignInToContinueAccess = "Please sign in to continue access";
-  static const String enterYourEmailAndWeWillSendYou = "Enter your email and we will send you a varification code";
+  static const String iAgreeWithTheTermsAnd =
+      "I agree with the terms and condition";
+  static const String pleaseSignInToContinueAccess =
+      "Please sign in to continue access";
+  static const String enterYourEmailAndWeWillSendYou =
+      "Enter your email and we will send you a varification code";
 
-///=========================My Profile String=======================
+  ///=========================My Profile String=======================
   static const String myProfile = "My Profile";
   static const String logOut = "Log Out";
   static const String myMembership = "My Membership";
@@ -69,7 +76,8 @@ class AppStrings {
   static const String yourMembershipBenefits = "Your Membership Benefits:";
   static const String canExchangeProducts = "Can exchange products";
   static const String earnUpTo1000 = "Earn upto 1000 points by a single swap";
-  static const String payYourSubscriptionFeeInTime = "Pay your subscription fee in time otherwise you may lose your points or downgrade your membership.";
+  static const String payYourSubscriptionFeeInTime =
+      "Pay your subscription fee in time otherwise you may lose your points or downgrade your membership.";
 
   ///======================Settings ============================
   static const String settings = "Settings";
@@ -117,7 +125,8 @@ class AppStrings {
   static const String searchYourQuestionHere = "Search your questions here";
   static const String frequentlyAskedQuestions = "Frequently Asked Questions ";
   static const String needMoreHelp = "Need More Help?";
-  static const String ourHelpLineServiceIsActive = "Our help line service is active: 24/7";
+  static const String ourHelpLineServiceIsActive =
+      "Our help line service is active: 24/7";
 
   ///=========================Change Password ==================
   static const String setYourNewPassword = "Set your new password";
@@ -127,7 +136,7 @@ class AppStrings {
   static const String english = "English";
   static const String spanish = "Spanish";
 
-///==================================Home section===================
+  ///==================================Home section===================
   static const String whatAreYouLookingFor = "What are you looking for?";
   static const String topSearch = "Top search";
   static const String search = "Search";
@@ -205,8 +214,4 @@ class AppStrings {
   static const String addPhoto = "Add Photo";
   static const String postAd = "Post Ad";
   static const String chat = "Chat";
-
-
-
-
 }

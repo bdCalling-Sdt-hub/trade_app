@@ -29,40 +29,36 @@ class SwapHistoryScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
-                  children:List.generate(4, (index){
-                    return     CustomSwapHistory(
-                      onTapName: (){
-                        Get.toNamed(AppRoutes.otherProfile);
-                      },
-                      image: AppConstants.userNtr,
-                      name: 'Zahid '.tr,
-                      date: '12/06/24'.tr,
-                      onTap: () {
-                        showDialogBox(
-                         context);
-                      },
-                      firstProductName: 'Samsung Galaxy S22'.tr,
-                      exchangeProductName: 'Sony Y1G Android TV'.tr,
-                    );
-                  })
-              )
+                  children: List.generate(4, (index) {
+                return CustomSwapHistory(
+                  onTapName: () {
+                    Get.toNamed(AppRoutes.otherProfile);
+                  },
+                  image: AppConstants.userNtr,
+                  name: 'Zahid '.tr,
+                  date: '12/06/24'.tr,
+                  onTap: () {
+                    showDialogBox(context);
+                  },
+                  firstProductName: 'Samsung Galaxy S22'.tr,
+                  exchangeProductName: 'Sony Y1G Android TV'.tr,
+                );
+              }))
             ],
           ),
         ),
       ),
     );
   }
+
   ///========================This is Accept Button Dialog box==============
   void showDialogBox(BuildContext context) {
-    Get.dialog(
-        CustomReviewDialog(
-          commentController: TextEditingController(),
-          onSubmit: (){
-            Get.back();
-          },
-          initialRating:0, // Pass the initial rating value here
-        )
-    );
+    Get.dialog(CustomReviewDialog(
+      commentController: TextEditingController(),
+      onSubmit: () {
+        Get.back();
+      },
+      initialRating: 0, // Pass the initial rating value here
+    ));
   }
-
 }

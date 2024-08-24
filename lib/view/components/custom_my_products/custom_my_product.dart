@@ -38,7 +38,6 @@ class CustomMyProduct extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: isMargin ? const EdgeInsets.all(10) : null,
-        width: MediaQuery.of(context).size.width * .43,
         padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),

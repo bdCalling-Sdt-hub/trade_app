@@ -46,15 +46,14 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
             Row(
               children: [
                 const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: const CustomImage(
-                    imageSrc: AppIcons.closeSmall,
-                    imageType: ImageType.svg,
-                  ),
-                ),
+                IconButton(
+                    onPressed: () {
+                      navigator?.pop();
+                    },
+                    icon: const CustomImage(
+                      imageSrc: AppIcons.closeSmall,
+                      imageType: ImageType.svg,
+                    ))
               ],
             ),
             Center(

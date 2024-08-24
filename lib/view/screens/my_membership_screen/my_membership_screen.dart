@@ -26,7 +26,8 @@ class MyMembershipScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-       bottomNavigationBar: const NavBar(currentIndex: 4),
+      bottomNavigationBar: const NavBar(currentIndex: 4),
+
       ///=============== ===myMembership Appbar===============
       appBar: CustomAppBar(
         appBarContent: AppStrings.myMembership.tr,
@@ -34,140 +35,137 @@ class MyMembershipScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: SingleChildScrollView(
-          child: Obx(
-            () {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ///======================Header Card==================
-                   membershipController.isLoader.value?
-                       const CustomLoader():
-                   CustomMembershipProfileCard(
-                    imageUrl: AppConstants.userNtr,
-                    name: 'Mohammad Rakib',
-                    membershipStatus: 'Gold',
-                    controller: membershipController, onTap: () {
-                      Get.toNamed(AppRoutes.membershipDetailsScreen);
-                   },
-                  ),
-
-                  ///=======================Total Points Earn=============
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.pointsEarnedScreen);
-                    },
-                    child: CustomDetailContainer(
-                      isBorder: true,
-                      color: AppColors.white200,
-                      child: Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: AppStrings.totalPointsEarn.tr,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: AppColors.gray900,
-                              ),
-                              const CustomText(
-                                text: '20000',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                                color: AppColors.blue500,
-                                bottom: 10,
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const CustomImage(imageSrc: AppIcons.arrowForwardIos),
-                        ],
+          child: Obx(() {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ///======================Header Card==================
+                membershipController.isLoader.value
+                    ? const CustomLoader()
+                    : CustomMembershipProfileCard(
+                        imageUrl: AppConstants.userNtr,
+                        name: 'Mohammad Rakib',
+                        membershipStatus: 'Gold',
+                        controller: membershipController,
+                        onTap: () {
+                          Get.toNamed(AppRoutes.membershipDetailsScreen);
+                        },
                       ),
-                    ),
-                  ),
 
-                  ///============================Monthly Subscription fee card========================
-                  CustomDetailContainer(
+                ///=======================Total Points Earn=============
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.pointsEarnedScreen);
+                  },
+                  child: CustomDetailContainer(
                     isBorder: true,
                     color: AppColors.white200,
-                    child: Column(
+                    child: Row(
                       children: [
-                        CustomText(
-                          text: AppStrings.monthlySubscriptionFee.tr,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: AppColors.gray900,
-                        ),
-                        const CustomText(
-                          text: '\$10',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                          color: AppColors.blue500,
-                          bottom: 10,
-                        ),
-                        CustomButton(
-                          onTap: () {},
-                          title: AppStrings.payNow.tr,
-                        ),
-                         CustomText(
-                          textAlign: TextAlign.start,
-                          text: AppStrings.payYourSubscriptionFeeInTime.tr,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: AppColors.gray900,
-                          bottom: 10,
-                          top: 10,
-                          maxLines: 2,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  ///=========================Your Member ship benefits==================
-                  CustomText(
-                    text: AppStrings.yourMembershipBenefits.tr,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: AppColors.black500,
-                    bottom: 10,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                        membershipController.membershipItem.length, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Row(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomImage(
-                              imageSrc: AppIcons.checkCircle,
-                              size: 20.sp,
+                            CustomText(
+                              text: AppStrings.totalPointsEarn.tr,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: AppColors.gray900,
                             ),
-                            SizedBox(
-                              width: 8.w,
-                            ),
-                            Expanded(
-                              child: CustomText(
-                                textAlign: TextAlign.start,
-                                text: membershipController.membershipItem[index],
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14.sp,
-                                maxLines: 2,
-                              ),
+                            const CustomText(
+                              text: '20000',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 20,
+                              color: AppColors.blue500,
+                              bottom: 10,
                             ),
                           ],
                         ),
-                      );
-                    }),
+                        const Spacer(),
+                        const CustomImage(imageSrc: AppIcons.arrowForwardIos),
+                      ],
+                    ),
                   ),
-                ],
-              );
-            }
-          ),
+                ),
+
+                ///============================Monthly Subscription fee card========================
+                CustomDetailContainer(
+                  isBorder: true,
+                  color: AppColors.white200,
+                  child: Column(
+                    children: [
+                      CustomText(
+                        text: AppStrings.monthlySubscriptionFee.tr,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: AppColors.gray900,
+                      ),
+                      const CustomText(
+                        text: '\$19.99',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        color: AppColors.blue500,
+                        bottom: 10,
+                      ),
+                      CustomButton(
+                        onTap: () {},
+                        title: AppStrings.payNow.tr,
+                      ),
+                      CustomText(
+                        textAlign: TextAlign.start,
+                        text: AppStrings.payYourSubscriptionFeeInTime.tr,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: AppColors.gray900,
+                        bottom: 10,
+                        top: 10,
+                        maxLines: 2,
+                      ),
+                    ],
+                  ),
+                ),
+
+                ///=========================Your Member ship benefits==================
+                CustomText(
+                  text: AppStrings.yourMembershipBenefits.tr,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  color: AppColors.black500,
+                  bottom: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                      membershipController.membershipItem.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        children: [
+                          CustomImage(
+                            imageSrc: AppIcons.checkCircle,
+                            size: 20.sp,
+                          ),
+                          SizedBox(
+                            width: 8.w,
+                          ),
+                          Expanded(
+                            child: CustomText(
+                              textAlign: TextAlign.start,
+                              text: membershipController.membershipItem[index],
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.sp,
+                              maxLines: 2,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );
   }
 }
-
-

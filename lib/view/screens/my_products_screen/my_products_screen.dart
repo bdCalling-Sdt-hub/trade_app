@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -11,8 +12,8 @@ import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class MyProductsScreen extends StatelessWidget {
-    MyProductsScreen({super.key});
-   final HomeController controller = Get.find<HomeController>();
+  MyProductsScreen({super.key});
+  final HomeController controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,9 @@ class MyProductsScreen extends StatelessWidget {
         appBarContent: AppStrings.myProducts.tr,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16,),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,12 +41,11 @@ class MyProductsScreen extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
-                gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                    mainAxisExtent: 240
-                ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    mainAxisExtent: 250.h),
                 itemCount: 5,
                 physics: const PageScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
@@ -58,7 +60,7 @@ class MyProductsScreen extends StatelessWidget {
                     value: '\$825+',
                     editOnTap: () {
                       Get.toNamed(AppRoutes.postEditScreen);
-                  },
+                    },
                   );
                 },
               ),

@@ -68,9 +68,10 @@ class SignUpScreen extends StatelessWidget {
                     controller: controller.firstNameController,
                     icon: AppIcons.person,
                   ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+
                   ///====================Last Name============
                   CustomSignUpFrom(
                     label: AppStrings.lastName,
@@ -81,6 +82,7 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
+
                   ///================Email================
                   CustomSignUpFrom(
                     label: AppStrings.email,
@@ -91,6 +93,7 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
+
                   ///==================Mobile Number=-==========
                   CustomSignUpFrom(
                     label: AppStrings.mobileNumber,
@@ -102,6 +105,7 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
+
                   ///====================Address================
                   CustomSignUpFrom(
                     label: AppStrings.address,
@@ -112,6 +116,7 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
+
                   ///====================Password=================
                   CustomSignUpFrom(
                     label: AppStrings.password,
@@ -123,6 +128,7 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
+
                   ///=======================Confirm Password===========
                   CustomSignUpFrom(
                     label: AppStrings.confirmPassword,
@@ -132,9 +138,11 @@ class SignUpScreen extends StatelessWidget {
                     isPassword: true,
                   ),
                   SizedBox(height: 24.h),
+
                   ///===================Checkbox here=================
                   _buildTermsAndConditions(controller),
                   SizedBox(height: 24.h),
+
                   ///=========================Sign Up Button=============
                   CustomButton(
                     onTap: () {
@@ -145,6 +153,7 @@ class SignUpScreen extends StatelessWidget {
                     title: AppStrings.signUp.tr,
                   ),
                   SizedBox(height: 24.h),
+
                   ///================Already Have a Account===============
                   _buildAlreadyHaveAccount(),
                 ],
@@ -155,10 +164,6 @@ class SignUpScreen extends StatelessWidget {
       }),
     );
   }
-
-
-
-
 
   Widget _buildTermsAndConditions(AuthController controller) {
     return GestureDetector(
