@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -178,7 +181,7 @@ class SignInScreen extends StatelessWidget {
 
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRoutes.forgotPasswordScreen);
+                          context.pushNamed(RoutePath.forgotPasswordScreen);
                         },
                         child: CustomText(
                           text: AppStrings.forgotPassword.tr,
@@ -196,7 +199,7 @@ class SignInScreen extends StatelessWidget {
                   CustomButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        Get.to(()=>const HomeScreen());
+                        context.pushNamed(RoutePath.homeScreen);
                       }
                     },
                     title: AppStrings.signIn.tr,
@@ -220,7 +223,7 @@ class SignInScreen extends StatelessWidget {
                       /// <============================== Sign Up ==============================>
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRoutes.signUpScreen);
+                          context.pushNamed(RoutePath.signUpScreen);
                         },
                         child: CustomText(
                           text: AppStrings.signUp.tr,

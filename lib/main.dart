@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
+import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/view/components/device_utils/device_utils.dart';
 import 'package:trade_app/view/screens/setting_screen/change_language/language_transalator.dart';
 
@@ -23,18 +24,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      designSize: const Size(393, 852),
       minTextAdapt: true,
-      splitScreenMode: true,
-      designSize: const Size(375, 812),
-      child: GetMaterialApp(
+      useInheritedMediaQuery: true,
+      // splitScreenMode: true,
+      builder: (context, child) => GetMaterialApp.router(
         debugShowCheckedModeBanner: false,
-        defaultTransition: Transition.fadeIn,
-        transitionDuration: const Duration(milliseconds: 200),
-        initialRoute: AppRoutes.splashScreen,
-        navigatorKey: Get.key,
-        getPages: AppRoutes.routes,
-        locale: const Locale("en", "US"),
-        translations: Language(),
+        routeInformationParser: AppRouter.route.routeInformationParser,
+        routerDelegate: AppRouter.route.routerDelegate,
+        routeInformationProvider: AppRouter.route.routeInformationProvider,
       ),
     );
   }

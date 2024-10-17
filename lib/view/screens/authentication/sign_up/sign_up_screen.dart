@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -147,7 +149,7 @@ class SignUpScreen extends StatelessWidget {
                   CustomButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        Get.toNamed(AppRoutes.signUpOtp);
+                        context.pushNamed(RoutePath.signUpOtp);
                       }
                     },
                     title: AppStrings.signUp.tr,
@@ -155,7 +157,26 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(height: 24.h),
 
                   ///================Already Have a Account===============
-                  _buildAlreadyHaveAccount(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomText(
+                        text: AppStrings.alreadyHaveAnAccount.tr,
+                      ),
+                      SizedBox(width: 8.w),
+                      GestureDetector(
+                        onTap: () {
+                          context.pushNamed(RoutePath.signInScreen);
+                        },
+                        child: CustomText(
+                          text: AppStrings.signIn.tr,
+                          fontSize: 16.h,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.blue500,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
@@ -199,26 +220,5 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAlreadyHaveAccount() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CustomText(
-          text: AppStrings.alreadyHaveAnAccount.tr,
-        ),
-        SizedBox(width: 8.w),
-        GestureDetector(
-          onTap: () {
-            Get.toNamed(AppRoutes.signInScreen);
-          },
-          child: CustomText(
-            text: AppStrings.signIn.tr,
-            fontSize: 16.h,
-            fontWeight: FontWeight.w500,
-            color: AppColors.blue500,
-          ),
-        ),
-      ],
-    );
-  }
+
 }
