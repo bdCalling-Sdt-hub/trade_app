@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
@@ -24,6 +25,7 @@ class _SignUpOtpState extends State<SignUpOtp> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final TextEditingController pinController = TextEditingController();
+  AuthController controller=Get.find<AuthController>();
 
   int _secondsRemaining = 120;
 
@@ -101,7 +103,7 @@ class _SignUpOtpState extends State<SignUpOtp> {
                 enablePinAutofill: true,
                 appContext: (context),
                 onCompleted: (value) {
-                  // controller.signUpOtp = value.toString();
+                   controller.signUpOtp.value = value.toString();
                   controller.update();
                 },
                 autoFocus: true,
@@ -122,7 +124,7 @@ class _SignUpOtpState extends State<SignUpOtp> {
                   inactiveColor: AppColors.blue50,
                   activeColor: AppColors.blue800,
                 ),
-                length: 4,
+                length: 6,
                 enableActiveFill: true,
               ),
 
@@ -132,18 +134,48 @@ class _SignUpOtpState extends State<SignUpOtp> {
 
               ///<==============================Resend Button=============================>
 
-              Align(
-                alignment: Alignment.topRight,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: CustomText(
-                    text: AppStrings.resendOtp.tr,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    decoration: TextDecoration.underline,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    text: 'Did not received any code?',
+
                   ),
-                ),
+                  TextButton(
+                      onPressed: () {
+                        if (controller.secondsRemaining.value == 0) {
+                          //controller.secondsRemaining.value = 3;
+                          // controller.startTimer();
+                          controller.resendOTP(context).then((value) {
+                            if (value == false) {
+                              controller.timer.cancel();
+                              controller.secondsRemaining.value = 0;
+                            }
+                          });
+                        }
+                        // authController.secondsRemaining.value = 10;
+                        // authController.startTimer();
+                      },
+                      child: CustomText(
+                        text: controller.secondsRemaining.value == 0
+                            ? "Resend OTP".tr
+                            : "Resend OTP in ${controller.secondsRemaining}",
+
+                      ))
+                ],
               ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: GestureDetector(
+              //     onTap: () {},
+              //     child: CustomText(
+              //       text: AppStrings.resendOtp.tr,
+              //       fontSize: 16,
+              //       fontWeight: FontWeight.w500,
+              //       decoration: TextDecoration.underline,
+              //     ),
+              //   ),
+              // ),
 
               /* Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -181,9 +213,14 @@ class _SignUpOtpState extends State<SignUpOtp> {
               ),
 
               ///<==================================Verify Button===========================>
-              CustomButton(
+              controller.signUpLoading.value
+                  ? Align(
+                alignment: Alignment.center,
+                child: Lottie.asset('assets/lottie/loading.json',
+                    width: context.width / 6, fit: BoxFit.cover),
+              ):  CustomButton(
                 onTap: () {
-                  context.pushNamed(RoutePath.signInScreen);
+                   controller.signUpOtpVerify(context: context);
                 },
                 title: AppStrings.continues.tr,
               ),

@@ -8,7 +8,7 @@ import 'package:trade_app/view/components/custom_text_field/custom_text_field.da
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
 
 class CustomSignUpFrom extends StatelessWidget {
-  final String label;
+  final String? label;
   final String hintText;
   final TextEditingController controller;
   final String icon;
@@ -16,7 +16,7 @@ class CustomSignUpFrom extends StatelessWidget {
   final TextInputType keyboardType;
 
   const CustomSignUpFrom({super.key,
-    required this.label,
+     this.label ,
     required this.hintText,
     required this.controller,
     required this.icon,
@@ -32,7 +32,7 @@ class CustomSignUpFrom extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: label.tr,
+          text: label!.tr,
           fontSize: 16,
           fontWeight: FontWeight.w500,
           bottom: 8.h,

@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:hive/hive.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
 import 'package:trade_app/core/routes/routes.dart';
+import 'package:trade_app/dependency_injection/path.dart';
 import 'package:trade_app/view/components/device_utils/device_utils.dart';
-import 'package:trade_app/view/screens/setting_screen/change_language/language_transalator.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DeviceUtils.lockDevicePortrait();
   DependencyInjection di = DependencyInjection();
   di.dependencies();
-  // Get.put(NetworkController());
+
+  //SystemUtil.setStatusBarColor(color: Colors.transparent);
+
+  /// ================= DB Path ===============
+  var databasePath = await getApplicationDocumentsDirectory();
+  Hive.init(databasePath.path);
+  // ================ Open the 'users' box before using it ===============
+
+  await Hive.openBox('users');
+
+  initDependencies();
   runApp(
     const MyApp(), // Wrap your app
   );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/core/routes/routes.dart';
@@ -23,7 +24,7 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: GetBuilder<AuthController>(builder: (controller) {
+      body: Obx((){
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
           child: SingleChildScrollView(
@@ -159,12 +160,12 @@ class SignInScreen extends StatelessWidget {
                               child: Center(
                                 child: controller.isRemember
                                     ? Icon(
-                                        Icons.check,
-                                        color: controller.isRemember
-                                            ? AppColors.white50
-                                            : AppColors.blue500,
-                                        size: 14,
-                                      )
+                                  Icons.check,
+                                  color: controller.isRemember
+                                      ? AppColors.white50
+                                      : AppColors.blue500,
+                                  size: 14,
+                                )
                                     : const SizedBox(),
                               ),
                             ),
@@ -196,10 +197,16 @@ class SignInScreen extends StatelessWidget {
                   ),
 
                   ///<======================================= sign in button ======================================>
-                  CustomButton(
+                  controller.signInLoading.value
+                      ? Align(
+                    alignment: Alignment.center,
+                    child: Lottie.asset('assets/lottie/loading.json',
+                        width: context.width / 6, fit: BoxFit.cover),
+                  )
+                      :   CustomButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        context.pushNamed(RoutePath.homeScreen);
+                        controller.signIn(context: context);
                       }
                     },
                     title: AppStrings.signIn.tr,
