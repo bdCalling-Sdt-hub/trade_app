@@ -19,6 +19,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/home_screen/inner/home_appbar.dart';
+import 'package:trade_app/view/screens/home_screen/inner/just_for_you.dart';
 import 'package:trade_app/view/screens/home_screen/inner/top_product.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -304,24 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 ///============================ just for you =============================>
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(4, (index) {
-                      return CustomMyProduct(
-                        isMargin: true,
-                        isEdit: controller.isEdit,
-                        image: AppConstants.electronics,
-                        name: 'Samsung Galaxy s22'.tr,
-                        onTap: () {
-                          context.pushNamed(RoutePath.productDetailsScreen);
-                        },
-                        value: '\$825+',
-                        editOnTap: () {},
-                      );
-                    }),
-                  ),
-                )
+               JustForYou()
               ],
             ),
           );
