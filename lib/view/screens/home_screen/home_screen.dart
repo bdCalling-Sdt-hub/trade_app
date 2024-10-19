@@ -4,17 +4,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/global/error_screen/error_screen.dart';
+import 'package:trade_app/global/no_internet/no_internet.dart';
 import 'package:trade_app/helper/const/const.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_images/app_images.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
+import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/home_screen/inner/home_appbar.dart';
+import 'package:trade_app/view/screens/home_screen/inner/top_product.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,291 +62,270 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: const NavBar(currentIndex: 0),
       backgroundColor: AppColors.white,
-      body: Obx(() {
-        return SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 20.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HomeAppbar(
-                  onTap: () {
-                    context.pushNamed(RoutePath.searchScreen);
-                  },
-                  coinAmount: '22,850'),
-
-              ///==============================Banner Image==========================>
-              CarouselSlider(
-                options: CarouselOptions(
-                  autoPlay: true,
-                  autoPlayCurve: Curves.ease,
-                  pageSnapping: false,
-                  //viewportFraction: 1,
-                  onPageChanged: (int index, reason) {
-                    controller.bannerIndex.value = index;
-
-                    controller.pageController.value = PageController(
-                        initialPage: controller.bannerIndex.value);
-                  },
-                ),
-                items: bannerImage.map((imagePath) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        margin: EdgeInsets.only(left: 8.w),
-                        decoration: BoxDecoration(
-                            image:
-                                DecorationImage(image: AssetImage(imagePath))),
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
-
-              ///============================ Smooth Indicator =============================>
-              Align(
-                alignment: Alignment.center,
-                child: ConstValue.indicator(
-                    controller: controller.pageController.value,
-                    count: bannerImage.length),
-              ),
-
-              SizedBox(
-                height: 16.h,
-              ),
-
-              ///============================ popularCategory =============================>
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    text: AppStrings.popularCategory.tr,
-                    fontSize: 16.h,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  GestureDetector(
+        body:Obx((){
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 20.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HomeAppbar(
                     onTap: () {
-
-                      context.pushNamed(RoutePath.categoryScreen);
+                      context.pushNamed(RoutePath.searchScreen);
                     },
-                    child: CustomText(
-                      text: AppStrings.viewAll,
+                    coinAmount: '22,850'),
+
+                ///==============================Banner Image==========================>
+                CarouselSlider(
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    autoPlayCurve: Curves.ease,
+                    pageSnapping: false,
+                    //viewportFraction: 1,
+                    onPageChanged: (int index, reason) {
+                      controller.bannerIndex.value = index;
+
+                      controller.pageController.value = PageController(
+                          initialPage: controller.bannerIndex.value);
+                    },
+                  ),
+                  items: bannerImage.map((imagePath) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          margin: EdgeInsets.only(left: 8.w),
+                          decoration: BoxDecoration(
+                              image:
+                              DecorationImage(image: AssetImage(imagePath))),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+
+                ///============================ Smooth Indicator =============================>
+                Align(
+                  alignment: Alignment.center,
+                  child: ConstValue.indicator(
+                      controller: controller.pageController.value,
+                      count: bannerImage.length),
+                ),
+
+                SizedBox(
+                  height: 16.h,
+                ),
+                ///============================ popularCategory =============================>
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: AppStrings.popularCategory.tr,
                       fontSize: 16.h,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.blue500,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(6, (index) {
-                    return GestureDetector(
+                    GestureDetector(
                       onTap: () {
-                         context.pushNamed(RoutePath.categoryScreen);
+
+                        context.pushNamed(RoutePath.categoryScreen);
                       },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 16.w),
+                      child: CustomText(
+                        text: AppStrings.viewAll,
+                        fontSize: 16.h,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.blue500,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(6, (index) {
+                      return GestureDetector(
+                        onTap: () {
+                          context.pushNamed(RoutePath.categoryScreen);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(right: 16.w),
+                          child: Column(
+                            children: [
+                              CustomNetworkImage(
+                                imageUrl: AppConstants.mobile,
+                                height: 64.h,
+                                width: 64.h,
+                                borderRadius: BorderRadius.circular(8.sp),
+                              ),
+                              CustomText(
+                                text: 'Mobile',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16.w,
+                                top: 8.h,
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 16.h,
+                ),
+
+                ///============================ top product =============================>
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: AppStrings.topProducts,
+                      fontSize: 16.h,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context.pushNamed(RoutePath.topProductsScreen);
+                      },
+                      child: CustomText(
+                        text: AppStrings.viewAll,
+                        fontSize: 16.h,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.blue500,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+
+                ///============================ top product =============================>
+                TopProduct(),
+
+                SizedBox(
+                  height: 16.h,
+                ),
+
+                ///============================ membershipPackages =============================>
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: AppStrings.membershipPackages,
+                      fontSize: 16.h,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        context.pushNamed(RoutePath.membershipPackageScreen);
+                      },
+                      child: CustomText(
+                        text: AppStrings.viewAll,
+                        fontSize: 16.h,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.blue500,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+
+                ///============================ membershipPackages =============================>
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(packageList.length, (index) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        width: MediaQuery.of(context).size.width * .43,
+                        padding:
+                        EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: packageList[index]["color"],
+                        ),
                         child: Column(
                           children: [
-                            CustomNetworkImage(
-                              imageUrl: AppConstants.mobile,
-                              height: 64.h,
-                              width: 64.h,
-                              borderRadius: BorderRadius.circular(8.sp),
+                            CustomText(
+                              text: packageList[index]["packageName"],
+                              color: AppColors.white50,
+                              fontWeight: FontWeight.w600,
                             ),
                             CustomText(
-                              text: 'Mobile',
+                              text: packageList[index]["price"],
+                              color: AppColors.white50,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 24.h,
+                              top: 4.h,
+                              bottom: 4.h,
+                            ),
+                            CustomText(
+                              maxLines: 2,
+                              text: packageList[index]["limit"],
+                              color: AppColors.white50,
                               fontWeight: FontWeight.w500,
-                              fontSize: 16.w,
-                              top: 8.h,
-                            )
+                              fontSize: 12.h,
+                            ),
                           ],
                         ),
-                      ),
-                    );
-                  }),
-                ),
-              ),
-
-              SizedBox(
-                height: 16.h,
-              ),
-
-              ///============================ top product =============================>
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    text: AppStrings.topProducts,
-                    fontSize: 16.h,
-                    fontWeight: FontWeight.w500,
+                      );
+                    }),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                       context.pushNamed(RoutePath.topProductsScreen);
-                    },
-                    child: CustomText(
-                      text: AppStrings.viewAll,
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+
+                ///============================ just for you =============================>
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: AppStrings.justForYou,
                       fontSize: 16.h,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.blue500,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
+                    GestureDetector(
+                      onTap: () {
+                        context.pushNamed(RoutePath.justForYou);
+                      },
+                      child: CustomText(
+                        text: AppStrings.viewAll,
+                        fontSize: 16.h,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.blue500,
+                      ),
+                    ),
+                  ],
+                ),
 
-              ///============================ top product =============================>
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(4, (index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 10.w),
-                      child: CustomMyProduct(
-                        isMargin: false,
+                ///============================ just for you =============================>
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(4, (index) {
+                      return CustomMyProduct(
+                        isMargin: true,
                         isEdit: controller.isEdit,
                         image: AppConstants.electronics,
                         name: 'Samsung Galaxy s22'.tr,
                         onTap: () {
-                           context.pushNamed(RoutePath.productDetailsScreen);
+                          context.pushNamed(RoutePath.productDetailsScreen);
                         },
                         value: '\$825+',
                         editOnTap: () {},
-                      ),
-                    );
-                  }),
-                ),
-              ),
-
-              SizedBox(
-                height: 16.h,
-              ),
-
-              ///============================ membershipPackages =============================>
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    text: AppStrings.membershipPackages,
-                    fontSize: 16.h,
-                    fontWeight: FontWeight.w500,
+                      );
+                    }),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                       context.pushNamed(RoutePath.membershipPackageScreen);
-                    },
-                    child: CustomText(
-                      text: AppStrings.viewAll,
-                      fontSize: 16.h,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.blue500,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-
-              ///============================ membershipPackages =============================>
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(packageList.length, (index) {
-                    return Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      width: MediaQuery.of(context).size.width * .43,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: packageList[index]["color"],
-                      ),
-                      child: Column(
-                        children: [
-                          CustomText(
-                            text: packageList[index]["packageName"],
-                            color: AppColors.white50,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          CustomText(
-                            text: packageList[index]["price"],
-                            color: AppColors.white50,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 24.h,
-                            top: 4.h,
-                            bottom: 4.h,
-                          ),
-                          CustomText(
-                            maxLines: 2,
-                            text: packageList[index]["limit"],
-                            color: AppColors.white50,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12.h,
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-
-              ///============================ just for you =============================>
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomText(
-                    text: AppStrings.justForYou,
-                    fontSize: 16.h,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                       context.pushNamed(RoutePath.justForYou);
-                    },
-                    child: CustomText(
-                      text: AppStrings.viewAll,
-                      fontSize: 16.h,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.blue500,
-                    ),
-                  ),
-                ],
-              ),
-
-              ///============================ just for you =============================>
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(4, (index) {
-                    return CustomMyProduct(
-                      isMargin: true,
-                      isEdit: controller.isEdit,
-                      image: AppConstants.electronics,
-                      name: 'Samsung Galaxy s22'.tr,
-                      onTap: () {
-                         context.pushNamed(RoutePath.productDetailsScreen);
-                      },
-                      value: '\$825+',
-                      editOnTap: () {},
-                    );
-                  }),
-                ),
-              )
-            ],
-          ),
-        );
-      }),
+                )
+              ],
+            ),
+          );
+        })
     );
   }
 }

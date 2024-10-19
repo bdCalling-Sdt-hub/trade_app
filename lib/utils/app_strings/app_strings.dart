@@ -37,6 +37,7 @@ class AppStrings {
   static const String subCategory = "Sub Category";
   static const String forgotPassword = "Forgot password?";
   static const String signUp = "Sign up";
+  static const String noDataFound = "No Data Found";
   static const String verificationCode = "Verification Code ";
   static const String continues = "Continue";
   static const String weSendYouAVerificationCode =

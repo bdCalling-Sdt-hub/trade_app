@@ -21,4 +21,5 @@ class AppConstants {
 
 }
 
-enum Status { loading, error, completed, internetError }
+enum Status { loading, error, completed, internetError,noDataFound }
+

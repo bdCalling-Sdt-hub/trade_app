@@ -3,8 +3,7 @@ class ApiUrl {
   static const imageBaseUrl = '$baseUrl/';
   static socketUrl({String userID = ""}) => '$baseUrl?userId=$userID';
 
-  /// ============================ Auth ==============================
-
+  /// ============================ Auth ==============================>
   static const register = "/auth/register";
   static const resend = "/auth/resend-active";
   static const activeUser = "/auth/activate-user";
@@ -13,4 +12,7 @@ class ApiUrl {
   static const resendVerify = "/auth/resend-verify";
   static const verifyOtp = "/auth/verify-otp";
   static const resetPassword = "/auth/reset-password";
+
+  /// ============================ Auth ==============================>
+  static const getTopProduct = "/product/get-top-products";
 }
