@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -16,6 +17,7 @@ import 'package:trade_app/view/screens/authentication/auth_controller/auth_contr
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
   final formKey = GlobalKey<FormState>();
+  AuthController controller=Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         backgroundColor: AppColors.white50,
       ),
       backgroundColor: AppColors.white50,
-      body: GetBuilder<AuthController>(builder: (controller) {
+      body: Obx((){
         return SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 44.h),
           child: Form(
@@ -33,10 +35,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ///<=================================Title Text=====================================>
                 Center(
                     child: CustomText(
-                  text: AppStrings.forgotPassword.tr,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                )),
+                      text: AppStrings.forgotPassword.tr,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w600,
+                    )),
                 CustomText(
                   text: AppStrings.enterYourEmailAndWeWillSendYou.tr,
                   fontWeight: FontWeight.w400,
@@ -88,12 +90,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
 
                 ///<==================================Verify Button===========================>
-                CustomButton(
+                controller.signInLoading.value
+                    ? Align(
+                  alignment: Alignment.center,
+                  child: Lottie.asset('assets/lottie/loading.json',
+                      width: context.width / 6, fit: BoxFit.cover),
+                ):  CustomButton(
                   onTap: () {
                     if(formKey.currentState!.validate()){
-                          context.pushNamed(RoutePath.otpScreen);
+                       controller.forgotPass(context: context);
                     }
-                    // Get.toNamed(AppRoutes.signInScreen);
                   },
                   title: AppStrings.continues.tr,
                 ),

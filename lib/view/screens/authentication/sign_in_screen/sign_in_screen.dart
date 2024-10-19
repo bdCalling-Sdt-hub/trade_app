@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
-import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -14,17 +12,16 @@ import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
-import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
- final AuthController controller = Get.find<AuthController>();
+  final AuthController controller = Get.find<AuthController>();
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Obx((){
+      body: Obx(() {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
           child: SingleChildScrollView(
@@ -160,12 +157,12 @@ class SignInScreen extends StatelessWidget {
                               child: Center(
                                 child: controller.isRemember
                                     ? Icon(
-                                  Icons.check,
-                                  color: controller.isRemember
-                                      ? AppColors.white50
-                                      : AppColors.blue500,
-                                  size: 14,
-                                )
+                                        Icons.check,
+                                        color: controller.isRemember
+                                            ? AppColors.white50
+                                            : AppColors.blue500,
+                                        size: 14,
+                                      )
                                     : const SizedBox(),
                               ),
                             ),
@@ -199,18 +196,18 @@ class SignInScreen extends StatelessWidget {
                   ///<======================================= sign in button ======================================>
                   controller.signInLoading.value
                       ? Align(
-                    alignment: Alignment.center,
-                    child: Lottie.asset('assets/lottie/loading.json',
-                        width: context.width / 6, fit: BoxFit.cover),
-                  )
-                      :   CustomButton(
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        controller.signIn(context: context);
-                      }
-                    },
-                    title: AppStrings.signIn.tr,
-                  ),
+                          alignment: Alignment.center,
+                          child: Lottie.asset('assets/lottie/loading.json',
+                              width: context.width / 6, fit: BoxFit.cover),
+                        )
+                      : CustomButton(
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              controller.signIn(context: context);
+                            }
+                          },
+                          title: AppStrings.signIn.tr,
+                        ),
 
                   SizedBox(
                     height: 24.h,

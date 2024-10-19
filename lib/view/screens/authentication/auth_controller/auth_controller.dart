@@ -13,26 +13,23 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 
-class AuthController extends GetxController{
-
+class AuthController extends GetxController {
   ApiClient apiClient = serviceLocator();
   DBHelper dbHelper = serviceLocator();
 
-
   ///<=========================== Sign in controller========================>
-  TextEditingController signInEmail =
-  TextEditingController( );
-  TextEditingController passWordSignIn =
-  TextEditingController( );
+  TextEditingController signInEmail = TextEditingController();
+  TextEditingController passWordSignIn = TextEditingController();
 
   saveInformation({required Response<dynamic> response}) {
     dbHelper.storeTokenUserdata(
-        token: response.body["data"]["accessToken"],
+      token: response.body["data"]["accessToken"],
     );
   }
 
   bool isRemember = false;
   bool isTerms = false;
+
   ///============================ Sign In =========================
   RxBool signInLoading = false.obs;
 
@@ -49,9 +46,6 @@ class AuthController extends GetxController{
         body: body,
         isBasic: true,
         url: ApiUrl.login.addBaseUrl);
-
-    // // Ensure the widget is still mounted before using BuildContext
-    // if (!context.mounted) return;
 
     if (response.statusCode == 200) {
       saveInformation(response: response);
@@ -91,7 +85,7 @@ class AuthController extends GetxController{
         context: context,
         body: body,
         isBasic: true,
-        url:ApiUrl.register.addBaseUrl);
+        url: ApiUrl.register.addBaseUrl);
 
     if (response.statusCode == 200) {
       secondsRemaining.value = 60;
@@ -115,8 +109,8 @@ class AuthController extends GetxController{
     var response = await apiClient.post(
         isBasic: true,
         body: body,
-        url: ApiUrl.resend.addBaseUrl, context: context
-            );
+        url: ApiUrl.resend.addBaseUrl,
+        context: context);
 
     if (response.statusCode == 200) {
       secondsRemaining.value = 60;
@@ -145,9 +139,9 @@ class AuthController extends GetxController{
     });
   }
 
-  /// ====================== signUpOtpVarify ========================
+  /// ====================== signUpOtpVarify ========================>
   RxBool verifyLoading = false.obs;
-  RxString signUpOtp=''.obs;
+  RxString signUpOtp = ''.obs;
   signUpOtpVerify({required BuildContext context}) async {
     verifyLoading.value = true;
     var body = {
@@ -158,12 +152,13 @@ class AuthController extends GetxController{
     var response = await apiClient.post(
         body: body,
         isBasic: true,
-        url: ApiUrl.activeUser.addBaseUrl, context: context);
+        url: ApiUrl.activeUser.addBaseUrl,
+        context: context);
 
     if (response.statusCode == 201) {
       timer.cancel();
       showSnackBar(
-        // ignore: use_build_context_synchronously
+          // ignore: use_build_context_synchronously
           context: context,
           content: response.body["message"],
           backgroundColor: Colors.green);
@@ -179,53 +174,117 @@ class AuthController extends GetxController{
     verifyLoading.value = false;
   }
 
-  ///<========================= forgot controller =========================>
+  ///============================ forgot pass =========================
   TextEditingController forgotPassEmailController = TextEditingController();
 
-  /*  handleForgetPassword() async {
-    signUpLoading = true;
-    update();
-    var body = {"email": forgotPassEmailController.text.trim()};
-    var response = await ApiClient.postData(
-      ApiConstant.forgetPass,
-      body,
-    );
-    if (response.statusCode == 200) {
-      Get.toNamed(AppRoute.otpScreen);
-    } else {
-      ApiChecker.checkApi(response);
-    }
-    signUpLoading = false;
-    update();
-  }*/
+  forgotPass({required BuildContext context}) async {
+    signInLoading.value = true;
 
-  ///<============================ reset password ==============================>
-  TextEditingController newPassController = TextEditingController();
-  TextEditingController confirmPassController = TextEditingController();
-  //var token='';
-
-/*  handleResetPassword() async {
-    signUpLoading = true;
-    //var bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
-    update();
-
-    Map<String, String> header = {'authorization': token};
     var body = {
-      "newPassword": newPassController.text,
-      "confirmPassword": confirmPassController.text,
+      "email": forgotPassEmailController.value.text,
     };
 
-    var response =
-    await ApiClient.postData(ApiConstant.resetPass, body, headers: header);
+    var response = await apiClient.post(
+        showResult: false,
+        context: context,
+        body: body,
+        isBasic: true,
+        url: ApiUrl.forgotPassword.addBaseUrl);
 
     if (response.statusCode == 200) {
-      Get.snackbar("Done", "Successfully updated");
-      Get.offAllNamed(AppRoute.logIn);
+      // saveInformation(response: response);
+      AppRouter.route.replaceNamed(RoutePath.otpScreen);
     } else {
-      ApiChecker.checkApi(response);
+      // ignore: use_build_context_synchronously
+      checkApi(response: response, context: context);
     }
 
-    signUpLoading = false;
-    update();
-  }*/
+    signInLoading.value = false;
+    signInLoading.refresh();
+  }
+
+  /// ===================== forgot Resent OTP ======================
+  Future<bool> forgotResendOTP(context) async {
+    var body = {"email": forgotPassEmailController.value.text};
+
+    var response = await apiClient.post(
+        isBasic: true,
+        body: body,
+        url: ApiUrl.resendVerify.addBaseUrl,
+        context: context);
+
+    if (response.statusCode == 200) {
+      secondsRemaining.value = 60;
+      secondsRemaining.refresh();
+      startTimer();
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /// ====================== signUpOtpVarify ========================
+  //RxBool verifyLoading = false.obs;
+  RxString OtpScreen = ''.obs;
+  forgotOtpVerify({required BuildContext context}) async {
+    verifyLoading.value = true;
+    var body = {
+      "email": forgotPassEmailController.value.text,
+      "code": OtpScreen.value
+    };
+
+    var response = await apiClient.post(
+        body: body,
+        isBasic: true,
+        url: ApiUrl.verifyOtp.addBaseUrl,
+        context: context);
+
+    if (response.statusCode == 200) {
+      //timer.cancel();
+      showSnackBar(
+          context: context,
+          content: response.body["message"],
+          backgroundColor: Colors.green);
+
+      AppRouter.route.replaceNamed(RoutePath.resetPasswordScreen);
+    } else {
+      // ignore: use_build_context_synchronously
+      checkApi(response: response, context: context);
+    }
+
+    verifyLoading.value = false;
+  }
+
+  ///============================ Sign In =========================
+
+  TextEditingController newPassController = TextEditingController();
+  TextEditingController confirmPassController = TextEditingController();
+  resetPassword({required BuildContext context}) async {
+    signInLoading.value = true;
+    var body = {
+      "email": forgotPassEmailController.value.text,
+      "newPassword": newPassController.value.text,
+      "confirmPassword": confirmPassController.value.text,
+    };
+    var response = await apiClient.post(
+        showResult: false,
+        context: context,
+        body: body,
+        isBasic: true,
+        url: ApiUrl.resetPassword.addBaseUrl
+    );
+
+    if (response.statusCode == 200) {
+      showSnackBar(
+          context: context,
+          content: response.body["message"],
+          backgroundColor: Colors.green);
+      AppRouter.route.replaceNamed(RoutePath.signInScreen);
+    } else {
+      checkApi(response: response, context: context);
+    }
+    signInLoading.value = false;
+    signInLoading.refresh();
+  }
 }

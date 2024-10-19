@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -14,8 +15,8 @@ import 'package:trade_app/view/components/custom_text_field/custom_text_field.da
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-    ResetPasswordScreen({super.key});
-    final formKey = GlobalKey<FormState>();
+  ResetPasswordScreen({super.key});
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,10 +35,10 @@ class ResetPasswordScreen extends StatelessWidget {
                 ///<=================================Title Text=====================================>
                 Center(
                     child: CustomText(
-                      text: AppStrings.resetPassword.tr,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w600,
-                    )),
+                  text: AppStrings.resetPassword.tr,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                )),
                 CustomText(
                   text: AppStrings.setTheNewPasswordFor.tr,
                   fontWeight: FontWeight.w400,
@@ -46,6 +47,7 @@ class ResetPasswordScreen extends StatelessWidget {
                   fontSize: 16.h,
                   bottom: 24.h,
                 ),
+
                 ///<==============================Password section====================================>
                 CustomText(
                   text: AppStrings.enterNewPassword.tr,
@@ -116,14 +118,20 @@ class ResetPasswordScreen extends StatelessWidget {
                 ),
 
                 ///<==================================   Button ===========================>
-                CustomButton(
-                  onTap: () {
-                    if(formKey.currentState!.validate()){
-                      context.pushNamed(RoutePath.signInScreen);
-                    }
-                  },
-                  title: AppStrings.continues.tr,
-                ),
+                controller.signInLoading.value
+                    ? Align(
+                        alignment: Alignment.center,
+                        child: Lottie.asset('assets/lottie/loading.json',
+                            width: context.width / 6, fit: BoxFit.cover),
+                      )
+                    : CustomButton(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            controller.resetPassword(context: context);
+                          }
+                        },
+                        title: AppStrings.continues.tr,
+                      ),
               ],
             ),
           ),

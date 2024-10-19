@@ -133,7 +133,6 @@ class _SignUpOtpState extends State<SignUpOtp> {
               ),
 
               ///<==============================Resend Button=============================>
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -164,49 +163,6 @@ class _SignUpOtpState extends State<SignUpOtp> {
                       ))
                 ],
               ),
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: GestureDetector(
-              //     onTap: () {},
-              //     child: CustomText(
-              //       text: AppStrings.resendOtp.tr,
-              //       fontSize: 16,
-              //       fontWeight: FontWeight.w500,
-              //       decoration: TextDecoration.underline,
-              //     ),
-              //   ),
-              // ),
-
-              /* Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      */ /*TextButton(
-                        onPressed: () {},
-                        child: const CustomText(text: AppStrings.resendOTP)),*/ /*
-                      GestureDetector(
-                        onTap: () {
-                          if (_secondsRemaining == 0) {
-                            _secondsRemaining = 120;
-                            startTimer();
-                            controller.signUpResentOtp().then((value) {
-                              if (value == false) {
-                                setState(() {
-                                  _timer.cancel();
-                                  _secondsRemaining = 0;
-                                });
-                              }
-                            }
-                            );
-                          }
-                        },
-                        child: CustomText(
-                            text: _secondsRemaining == 0
-                                ? "Resend OTP".tr
-                                : "Resend SMS $_secondsRemaining",
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),*/
 
               SizedBox(
                 height: 24.h,
