@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -71,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
               ///=========================myMembership==============
               CustomProfileCard(
                 onTap: () {
-                  Get.toNamed(AppRoutes.myMembershipScreen);
+                   context.pushNamed(RoutePath.myMembershipScreen);
 
                 },
                 text: AppStrings.myMembership.tr,
@@ -82,7 +84,7 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.myProductsScreen);
+                   context.pushNamed(RoutePath.myProductsScreen);
 
                 },
                 text: AppStrings.myProducts.tr,
@@ -93,7 +95,7 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.swapRequestScreen);
+                   context.pushNamed(RoutePath.swapRequestScreen);
                 },
                 text: AppStrings.swapRequests.tr,
                 leadingIcon: AppIcons.swapHoriz,
@@ -103,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.swapHistoryScreen);
+                   context.pushNamed(RoutePath.swapHistoryScreen);
 
                 },
                 text: AppStrings.swapHistory.tr,
@@ -114,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.myRatingScreen);
+                   context.pushNamed(RoutePath.myRatingScreen);
 
                 },
                 text: AppStrings.myRatingAndComments.tr,
@@ -125,7 +127,7 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.settingScreen);
+                   context.pushNamed(RoutePath.settingScreen);
 
                 },
                 text: AppStrings.settings.tr,
@@ -135,7 +137,7 @@ class ProfileScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: false,
                 onTap: () {
-                  Get.toNamed(AppRoutes.signInScreen);
+                   context.pushNamed(RoutePath.signInScreen);
                 },
                 text: AppStrings.logOut.tr,
                 leadingIcon: AppIcons.vector,

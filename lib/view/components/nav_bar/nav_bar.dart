@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
@@ -101,19 +103,23 @@ class _UserNavBarState extends State<NavBar> {
     if (index != bottomNavIndex) {
       switch (index) {
         case 0:
-          Get.offAll(() => const HomeScreen());
+           context.pushNamed(RoutePath.homeScreen);
           break;
         case 1:
           Get.to(() => const ChatScreen());
+          context.pushNamed(RoutePath.chatScreen);
           break;
         case 2:
           Get.to(() => CategoryScreen());
+          context.pushNamed(RoutePath.categoryScreen);
           break;
         case 3:
           Get.to(() => const PostScreen());
+          context.pushNamed(RoutePath.postScreen);
           break;
         case 4:
           Get.to(() => const ProfileScreen());
+          context.pushNamed(RoutePath.profileScreen);
       }
     }
   }

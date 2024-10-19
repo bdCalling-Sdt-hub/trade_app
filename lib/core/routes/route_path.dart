@@ -40,16 +40,19 @@ class RoutePath {
   ///=============================Post Edit Screen============
   static const String postAddScreen = "PostAddScreen";
   static const String postEditScreen = "PostEditScreen";
-  static const String membershipPackageScreen = "membership_package_screen";
-  static const String packageDetailsScreen = "package_details_screen";
-  static const String preApprovalQuestionScreen = "pre_approval_question_screen";
-  static const String preApprovalQuestion2Screen = "pre_approval_question2_screen";
-  static const String preApprovalQuestion3Screen = "pre_approval_question3_screen";
+  static const String membershipPackageScreen = "MembershipPackageScreen";
+  static const String packageDetailsScreen = "PackageDetailsScreen";
+  static const String preApprovalQuestionScreen = "PreApprovalQuestionScreen";
+  static const String preApprovalQuestion2Screen = "PreApprovalQuestion2Screen";
+  static const String preApprovalQuestion3Screen = "PreApprovalQuestion3Screen";
   static const String languageScreen = "LanguageScreen";
-  static const String productDetailsScreen = "product_details_screen";
-  static const String swapProductScreen = "swap_product_screen";
-  static const String topProductsScreen = "top_products_screen";
-  static const String justForYou = "just_for_you";
+  static const String productDetailsScreen = "ProductDetailsScreen";
+  static const String swapProductScreen = "SwapProductScreen";
+  static const String topProductsScreen = "TopProductsScreen";
+  static const String justForYou = "justForYou";
   static const String subCategoryProducts = "SubCategoryProducts";
+  static const String chatScreen = "ChatScreen";
+  static const String postScreen = "PostScreen";
+  static const String profileScreen = "ProfileScreen";
 
 }

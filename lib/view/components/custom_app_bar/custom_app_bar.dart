@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
@@ -44,7 +46,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           children: [
             GestureDetector(
               onTap: (){
-                Get.toNamed(AppRoutes.homeScreen);
+                 context.pushNamed(RoutePath.homeScreen);
               },
               child: const CustomImage(
                   imageSrc: AppIcons.logo,

@@ -14,6 +14,7 @@ import 'package:trade_app/view/screens/category_screen/sub_category_screen/sub_c
 import 'package:trade_app/view/screens/home_screen/home_screen.dart';
 import 'package:trade_app/view/screens/just_for_you/just_for_you.dart';
 import 'package:trade_app/view/screens/membership_package/membership_package_screen.dart';
+import 'package:trade_app/view/screens/message_screen/chat_screen.dart';
 import 'package:trade_app/view/screens/message_screen/message_screen.dart';
 import 'package:trade_app/view/screens/my_membership_screen/membership_details_screen/membership_details_screen.dart';
 import 'package:trade_app/view/screens/my_membership_screen/my_membership_screen.dart';
@@ -26,7 +27,10 @@ import 'package:trade_app/view/screens/other_profile/other_profile.dart';
 import 'package:trade_app/view/screens/package_details/package_details_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_add_screen/post_add_screen.dart';
 import 'package:trade_app/view/screens/post_screen/post_edit_screen/post_edit_screen.dart';
+import 'package:trade_app/view/screens/post_screen/post_screen.dart';
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
+import 'package:trade_app/view/screens/product_details/product_details_screen.dart';
+import 'package:trade_app/view/screens/profile_screen/profile_screen.dart';
 import 'package:trade_app/view/screens/search_screen/search_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/account_info_screen/account_info_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/address_screen/address_screen.dart';
@@ -64,6 +68,13 @@ class AppRouter {
           name: RoutePath.errorScreen,
           path: RoutePath.errorScreen.addBasePath,
           builder: (context, state) => const ErrorPage(),
+        ),
+
+        ///======================= erroe Route =======================
+        GoRoute(
+          name: RoutePath.productDetailsScreen,
+          path: RoutePath.productDetailsScreen.addBasePath,
+          builder: (context, state) =>  ProductDetailsScreen(),
         ),
 
         ///======================= signInScreen Route =======================
@@ -318,6 +329,26 @@ class AppRouter {
           builder: (context, state) => SubCategoryProducts(),
         ),
 
+        ///======================= chatScreen Route =======================
+        GoRoute(
+          name: RoutePath.chatScreen,
+          path: RoutePath.chatScreen.addBasePath,
+          builder: (context, state) => ChatScreen(),
+        ),
+
+        ///======================= postScreen Route =======================
+        GoRoute(
+          name: RoutePath.postScreen,
+          path: RoutePath.postScreen.addBasePath,
+          builder: (context, state) => PostScreen(),
+        ),
+
+        ///======================= subCategoryProducts Route =======================
+        GoRoute(
+          name: RoutePath.profileScreen,
+          path: RoutePath.profileScreen.addBasePath,
+          builder: (context, state) => ProfileScreen(),
+        ),
       ]);
 
   static GoRouter get route => initRoute;

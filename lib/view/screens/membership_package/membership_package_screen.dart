@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
@@ -76,8 +78,7 @@ class MembershipPackageScreen extends StatelessWidget {
                 ///<====================== package contain ============================>
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(AppRoutes.packageDetailsScreen,
-                        arguments: data);
+                    context.pushNamed(RoutePath.packageDetailsScreen,extra: data);
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,

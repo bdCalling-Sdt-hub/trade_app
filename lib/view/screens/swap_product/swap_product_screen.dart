@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -97,7 +99,7 @@ class SwapProductScreen extends StatelessWidget {
                             CustomText(text: AppStrings.postBy,right: 4.w,),
                             GestureDetector(
                                 onTap: (){
-                                  Get.toNamed(AppRoutes.otherProfile);
+                                   context.pushNamed(RoutePath.otherProfile);
                                 },
                                 child: const CustomText(text: "${'Nadim hasan'} ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,)),
                           ],
@@ -319,7 +321,7 @@ class SwapProductScreen extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: (){
-                  Get.toNamed(AppRoutes.messageScreen);
+                   context.pushNamed(RoutePath.messageScreen);
                 },
                 child: CustomDetailContainer(
                     color: AppColors.blue500,

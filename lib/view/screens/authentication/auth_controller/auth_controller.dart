@@ -18,8 +18,10 @@ class AuthController extends GetxController {
   DBHelper dbHelper = serviceLocator();
 
   ///<=========================== Sign in controller========================>
-  TextEditingController signInEmail = TextEditingController(text: 'wikevih356@avzong.com');
-  TextEditingController passWordSignIn = TextEditingController(text: 'Nadim1234');
+  TextEditingController signInEmail =
+      TextEditingController(text: 'wikevih356@avzong.com');
+  TextEditingController passWordSignIn =
+      TextEditingController(text: 'Nadim1234');
 
   saveInformation({required Response<dynamic> response}) {
     dbHelper.storeTokenUserdata(
@@ -272,8 +274,7 @@ class AuthController extends GetxController {
         context: context,
         body: body,
         isBasic: true,
-        url: ApiUrl.resetPassword.addBaseUrl
-    );
+        url: ApiUrl.resetPassword.addBaseUrl);
 
     if (response.statusCode == 200) {
       showSnackBar(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_images/app_images.dart';
@@ -48,7 +50,7 @@ class HomeAppbar extends StatelessWidget {
                 ///<========================== notification ============================>
                 GestureDetector(
                   onTap: (){
-                    Get.toNamed(AppRoutes.notificationScreen);
+                     context.pushNamed(RoutePath.notificationScreen);
                   },
                   child: Container(
                     padding: EdgeInsets.all(4.sp),

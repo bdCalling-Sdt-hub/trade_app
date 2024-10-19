@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/category_controller/category_controller.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
@@ -34,7 +36,7 @@ class SubCategoryScreen extends StatelessWidget {
                 var data = categoryController.subCategoriesList[index];
                 return GestureDetector(
                   onTap: () {
-                    Get.toNamed(AppRoutes.subCategoryProducts, arguments: data);
+                     context.pushNamed(RoutePath.subCategoryProducts,extra: data);
                   },
                   child: Column(
                     children: [

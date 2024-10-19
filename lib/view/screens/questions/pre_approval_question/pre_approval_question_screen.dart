@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -147,7 +149,7 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed(AppRoutes.preApprovalQuestion2Screen);
+                       context.pushNamed(RoutePath.preApprovalQuestion2Screen);
                     },
                     child: CustomDetailContainer(
                         color: AppColors.blue500,

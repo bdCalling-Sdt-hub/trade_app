@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -40,7 +42,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.accountInfoScreen);
+                   context.pushNamed(RoutePath.accountInfoScreen);
                 },
                 text: AppStrings.accountInfo.tr,
                 leadingIcon: AppIcons.person,
@@ -50,7 +52,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.changePasswordScreen);
+                   context.pushNamed(RoutePath.changePasswordScreen);
                 },
                 text: AppStrings.changePassword.tr,
                 leadingIcon: AppIcons.key,
@@ -60,7 +62,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.languageScreen);
+                   context.pushNamed(RoutePath.languageScreen);
                 },
                 text: AppStrings.language.tr,
                 leadingIcon: AppIcons.language,
@@ -72,7 +74,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.addressScreen);
+                  context.pushNamed(RoutePath.addressScreen);
                 },
                 text: AppStrings.addresss.tr,
                 leadingIcon: AppIcons.myLocation,
@@ -82,7 +84,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.termsAndConditionScreen);
+                   context.pushNamed(RoutePath.termsAndConditionScreen);
                 },
                 text: AppStrings.termsAndConditions.tr,
                 leadingIcon: AppIcons.report,
@@ -92,7 +94,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.privacyPolicyScreen);
+                   context.pushNamed(RoutePath.privacyPolicyScreen);
                 },
                 text: AppStrings.privacyPolicy.tr,
                 leadingIcon: AppIcons.verifiedUser,
@@ -102,7 +104,7 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.helpCenterScreen);
+                   context.pushNamed(RoutePath.helpCenterScreen);
                 },
                 text: AppStrings.helpCenter.tr,
                 leadingIcon: AppIcons.help,
