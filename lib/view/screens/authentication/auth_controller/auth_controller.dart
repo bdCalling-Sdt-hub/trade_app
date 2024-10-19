@@ -18,8 +18,8 @@ class AuthController extends GetxController {
   DBHelper dbHelper = serviceLocator();
 
   ///<=========================== Sign in controller========================>
-  TextEditingController signInEmail = TextEditingController();
-  TextEditingController passWordSignIn = TextEditingController();
+  TextEditingController signInEmail = TextEditingController(text: 'wikevih356@avzong.com');
+  TextEditingController passWordSignIn = TextEditingController(text: 'Nadim1234');
 
   saveInformation({required Response<dynamic> response}) {
     dbHelper.storeTokenUserdata(

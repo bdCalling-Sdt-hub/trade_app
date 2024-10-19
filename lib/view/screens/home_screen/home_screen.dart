@@ -2,7 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/helper/const/const.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
@@ -64,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               HomeAppbar(
                   onTap: () {
-                    Get.toNamed(AppRoutes.searchScreen);
+                    context.pushNamed(RoutePath.searchScreen);
                   },
                   coinAmount: '22,850'),
 
@@ -119,7 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(AppRoutes.categoryScreen);
+
+                      context.pushNamed(RoutePath.categoryScreen);
                     },
                     child: CustomText(
                       text: AppStrings.viewAll,
@@ -139,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: List.generate(6, (index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(AppRoutes.categoryScreen);
+                         context.pushNamed(RoutePath.categoryScreen);
                       },
                       child: Container(
                         margin: EdgeInsets.only(right: 16.w),
@@ -180,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(AppRoutes.topProductsScreen);
+                       context.pushNamed(RoutePath.topProductsScreen);
                     },
                     child: CustomText(
                       text: AppStrings.viewAll,
@@ -208,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: AppConstants.electronics,
                         name: 'Samsung Galaxy s22'.tr,
                         onTap: () {
-                          Get.toNamed(AppRoutes.productDetailsScreen);
+                           context.pushNamed(RoutePath.productDetailsScreen);
                         },
                         value: '\$825+',
                         editOnTap: () {},
@@ -233,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(AppRoutes.membershipPackageScreen);
+                       context.pushNamed(RoutePath.membershipPackageScreen);
                     },
                     child: CustomText(
                       text: AppStrings.viewAll,
@@ -305,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(AppRoutes.justForYou);
+                       context.pushNamed(RoutePath.justForYou);
                     },
                     child: CustomText(
                       text: AppStrings.viewAll,
@@ -328,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       image: AppConstants.electronics,
                       name: 'Samsung Galaxy s22'.tr,
                       onTap: () {
-                        Get.toNamed(AppRoutes.productDetailsScreen);
+                         context.pushNamed(RoutePath.productDetailsScreen);
                       },
                       value: '\$825+',
                       editOnTap: () {},
