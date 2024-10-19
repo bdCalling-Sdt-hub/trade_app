@@ -8,6 +8,7 @@ import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/screens/home_screen/model/just_for_you.dart';
 import 'package:trade_app/view/screens/home_screen/model/popular_category_model.dart';
+import 'package:trade_app/view/screens/home_screen/model/slider.dart';
 import 'package:trade_app/view/screens/home_screen/model/top_product_model.dart';
 
 class HomeController extends GetxController {
@@ -47,11 +48,9 @@ class HomeController extends GetxController {
     }
   }
 
-
+  /// ======================= justForYou List =========================>
   var justForYouLoading = Status.loading.obs;
   JustForYouLoadingMethod(Status status) => justForYouLoading.value = status;
-
-  /// ======================= justForYou List =========================>
   RxList<JustForYouDatum> justForYouList = <JustForYouDatum>[].obs;
   getJustForYouProduct({BuildContext? context}) async {
     justForYouLoading(Status.loading);
@@ -76,10 +75,10 @@ class HomeController extends GetxController {
     }
   }
 
+  /// ======================= getPopularCategory List =========================>
   var popularCategory = Status.loading.obs;
   PopularCategoryLoadingMethod(Status status) => popularCategory.value = status;
 
-  /// ======================= getPopularCategory List =========================>
   RxList<CategoryDatum> popularCategoryList = <CategoryDatum>[].obs;
   getPopularCategory({BuildContext? context}) async {
     popularCategory(Status.loading);
@@ -103,11 +102,39 @@ class HomeController extends GetxController {
     }
   }
 
+  /// ======================= Banner List =========================>
+  var banner = Status.loading.obs;
+  BannerLoadingMethod(Status status) => banner.value = status;
+
+  RxList<SliderDatum> bannerList = <SliderDatum>[].obs;
+  getBanner({BuildContext? context}) async {
+    banner(Status.loading);
+
+    var response = await apiClient.get(
+        url: ApiUrl.allAdds.addBaseUrl, showResult: true);
+
+    if (response.statusCode == 200) {
+      bannerList.value = List<SliderDatum>.from(
+          response.body["data"].map((x) => SliderDatum.fromJson(x)));
+      banner(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        banner(Status.internetError);
+      } else if (response.statusCode == 404) {
+        banner(Status.noDataFound);
+      } else {
+        banner(Status.error);
+      }
+    }
+  }
+
   @override
   void onInit() {
     getTopProduct();
     getJustForYouProduct();
     getPopularCategory();
+    getBanner();
     super.onInit();
   }
 }

@@ -32,11 +32,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.find<HomeController>();
-  final List<String> bannerImage = [
-    AppImages.slider,
-    AppImages.slider,
-    AppImages.slider,
-  ];
+  // final List<String> bannerImage = [
+  //   AppImages.slider,
+  //   AppImages.slider,
+  //   AppImages.slider,
+  // ];
 
   List<Map<String, dynamic>> packageList = [
     {
@@ -90,14 +90,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           initialPage: controller.bannerIndex.value);
                     },
                   ),
-                  items: bannerImage.map((imagePath) {
+                  items: controller.bannerList.value.map((imagePath) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
                           margin: EdgeInsets.only(left: 8.w),
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(imagePath))),
+                                image: NetworkImage(
+                                    '${ApiUrl.baseUrl}${imagePath.image ?? ""}'),
+                              )
+                          ),
                         );
                       },
                     );
@@ -109,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   alignment: Alignment.center,
                   child: ConstValue.indicator(
                       controller: controller.pageController.value,
-                      count: bannerImage.length),
+                      count: controller.bannerList.length),
                 ),
 
                 SizedBox(
