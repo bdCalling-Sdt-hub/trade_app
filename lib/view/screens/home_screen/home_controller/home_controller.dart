@@ -7,6 +7,7 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/screens/home_screen/model/just_for_you.dart';
+import 'package:trade_app/view/screens/home_screen/model/popular_category_model.dart';
 import 'package:trade_app/view/screens/home_screen/model/top_product_model.dart';
 
 class HomeController extends GetxController {
@@ -50,7 +51,7 @@ class HomeController extends GetxController {
   var justForYouLoading = Status.loading.obs;
   JustForYouLoadingMethod(Status status) => justForYouLoading.value = status;
 
-  /// ======================= TopProduct List =========================>
+  /// ======================= justForYou List =========================>
   RxList<JustForYouDatum> justForYouList = <JustForYouDatum>[].obs;
   getJustForYouProduct({BuildContext? context}) async {
     justForYouLoading(Status.loading);
@@ -75,10 +76,38 @@ class HomeController extends GetxController {
     }
   }
 
+  var popularCategory = Status.loading.obs;
+  PopularCategoryLoadingMethod(Status status) => popularCategory.value = status;
+
+  /// ======================= getPopularCategory List =========================>
+  RxList<CategoryDatum> popularCategoryList = <CategoryDatum>[].obs;
+  getPopularCategory({BuildContext? context}) async {
+    popularCategory(Status.loading);
+
+    var response = await apiClient.get(
+        url: ApiUrl.getCategory.addBaseUrl, showResult: true);
+
+    if (response.statusCode == 200) {
+      popularCategoryList.value = List<CategoryDatum>.from(
+          response.body["data"].map((x) => CategoryDatum.fromJson(x)));
+      popularCategory(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        popularCategory(Status.internetError);
+      } else if (response.statusCode == 404) {
+        popularCategory(Status.noDataFound);
+      } else {
+        popularCategory(Status.error);
+      }
+    }
+  }
+
   @override
   void onInit() {
     getTopProduct();
     getJustForYouProduct();
+    getPopularCategory();
     super.onInit();
   }
 }

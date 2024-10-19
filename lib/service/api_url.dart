@@ -16,4 +16,5 @@ class ApiUrl {
   /// ============================ Auth ==============================>
   static const getTopProduct = "/product/get-top-products";
   static const justForYou = "/product/just-for-you";
+  static const getCategory = "/category/get-all";
 }

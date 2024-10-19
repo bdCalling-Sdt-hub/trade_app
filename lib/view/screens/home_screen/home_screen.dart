@@ -20,6 +20,7 @@ import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/home_screen/inner/home_appbar.dart';
 import 'package:trade_app/view/screens/home_screen/inner/just_for_you.dart';
+import 'package:trade_app/view/screens/home_screen/inner/popular_category.dart';
 import 'package:trade_app/view/screens/home_screen/inner/top_product.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -61,9 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NavBar(currentIndex: 0),
-      backgroundColor: AppColors.white,
-        body:Obx((){
+        bottomNavigationBar: const NavBar(currentIndex: 0),
+        backgroundColor: AppColors.white,
+        body: Obx(() {
           return SingleChildScrollView(
             padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 20.w),
             child: Column(
@@ -95,8 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Container(
                           margin: EdgeInsets.only(left: 8.w),
                           decoration: BoxDecoration(
-                              image:
-                              DecorationImage(image: AssetImage(imagePath))),
+                              image: DecorationImage(
+                                  image: AssetImage(imagePath))),
                         );
                       },
                     );
@@ -114,6 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 16.h,
                 ),
+
                 ///============================ popularCategory =============================>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -125,7 +127,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-
                         context.pushNamed(RoutePath.categoryScreen);
                       },
                       child: CustomText(
@@ -140,37 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 16.h,
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(6, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          context.pushNamed(RoutePath.categoryScreen);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(right: 16.w),
-                          child: Column(
-                            children: [
-                              CustomNetworkImage(
-                                imageUrl: AppConstants.mobile,
-                                height: 64.h,
-                                width: 64.h,
-                                borderRadius: BorderRadius.circular(8.sp),
-                              ),
-                              CustomText(
-                                text: 'Mobile',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16.w,
-                                top: 8.h,
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
+                PopularCategory(),
 
                 SizedBox(
                   height: 16.h,
@@ -243,8 +214,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Container(
                         margin: const EdgeInsets.only(right: 8),
                         width: MediaQuery.of(context).size.width * .43,
-                        padding:
-                        EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 12.h, horizontal: 8.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: packageList[index]["color"],
@@ -305,11 +276,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 ///============================ just for you =============================>
-               JustForYou()
+                JustForYou()
               ],
             ),
           );
-        })
-    );
+        }));
   }
 }
