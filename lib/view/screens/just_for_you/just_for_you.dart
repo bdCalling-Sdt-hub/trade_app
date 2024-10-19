@@ -26,7 +26,7 @@ class JustForYou extends StatelessWidget {
 
       ///============================  topProducts ===============
       appBar: CustomAppBar(
-        appBarContent: AppStrings.topProducts.tr,
+        appBarContent: AppStrings.justForYou.tr,
       ),
       body:Obx(() {
         switch (controller.justForYouLoading.value) {
@@ -44,42 +44,38 @@ class JustForYou extends StatelessWidget {
                 controller.getJustForYouProduct(context: context);
               },
             );
-
           case Status.noDataFound:
             return Center(
               child: CustomText(text: AppStrings.noDataFound),
             );
-
           case Status.completed:
-
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 24.h,horizontal: 20.w),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    mainAxisExtent: 240
-                  // Adjust the aspect ratio as needed
-                ),
-                itemCount: 4,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  return CustomMyProduct(
-                    isMargin: false,
-                    isEdit: controller.isEdit,
-                    image:
-                    '${ApiUrl.baseUrl}${controller.justForYouList.value[index].images?[0]}',
-                    name: controller.justForYouList.value[index].title ?? "",
-                    onTap: () {
-                      context.pushNamed(RoutePath.productDetailsScreen);
-                    },
-                    value:
-                    '\$${controller.justForYouList.value[index].productValue ?? ""}',
-                    editOnTap: () {},
-                  );
-                },
+            var justForYouList = controller.justForYouList.value;
+            return GridView.builder(
+              padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
+              scrollDirection: Axis.vertical,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                mainAxisExtent: 240,
               ),
+              itemCount: justForYouList.length,
+              physics: const BouncingScrollPhysics(), // Allow scrolling
+              itemBuilder: (BuildContext context, int index) {
+                return CustomMyProduct(
+                  isMargin: false,
+                  isEdit: controller.isEdit,
+                  image:
+                  '${ApiUrl.baseUrl}${controller.justForYouList.value[index].images?[0]}',
+                  name: controller.justForYouList.value[index].title ?? "",
+                  onTap: () {
+                    context.pushNamed(RoutePath.productDetailsScreen);
+                  },
+                  value:
+                  '\$${controller.justForYouList.value[index].productValue ?? ""}',
+                  editOnTap: () {},
+                );
+              },
             );
         }
       })
