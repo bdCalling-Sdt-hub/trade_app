@@ -36,7 +36,6 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.getSubCategory(context: context,category: widget.cateName);
     });
-
     super.initState();
   }
   @override

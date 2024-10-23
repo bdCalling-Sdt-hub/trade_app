@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -13,13 +14,30 @@ import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
-class PostAddScreen extends StatelessWidget {
-  PostAddScreen({super.key});
+class PostAddScreen extends StatefulWidget {
+  PostAddScreen({super.key, required this.catName});
 
+  final String catName;
 
+  @override
+  State<PostAddScreen> createState() => _PostAddScreenState();
+}
+
+class _PostAddScreenState extends State<PostAddScreen> {
   final PostController postController = Get.find<PostController>();
+
+  HomeController controller = Get.find<HomeController>();
+
   final formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.getSubCategory(context: context,category: widget.catName);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +63,38 @@ class PostAddScreen extends StatelessWidget {
                     text: '${AppStrings.productDetails}:'.tr,
                     bottom: 12,
                   ),
-                  CustomFromCard(
-                    isBackgroundColor: true,
-                    readOnly: true,
-                    title: AppStrings.productCategory.tr,
-                    controller: postController.productCategoryController,
+                  CustomText(
+                    color: AppColors.black500,
+                    text: AppStrings.categories.tr,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    bottom: 8.h,
                   ),
+                  ///<============================ category name =======================>
+                  Container(
+                    width: double.infinity,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.blue100,
+                        borderRadius: BorderRadius.circular(8.sp)
+                      ),
+                      child: CustomText(
+                        textAlign: TextAlign.start,
+                        text: widget.catName,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.h,
+
+                      )),
+                  SizedBox(height: 16.h,),
+
+                  // CustomFromCard(
+                  //   isBackgroundColor: true,
+                  //   readOnly: true,
+                  //   title: AppStrings.productCategory.tr,
+                  //   controller: postController.productCategoryController,
+                  // ),
+
                   CustomText(
                     color: AppColors.black500,
                     text: AppStrings.subCategory.tr,

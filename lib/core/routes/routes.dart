@@ -277,7 +277,7 @@ class AppRouter {
         GoRoute(
           name: RoutePath.postAddScreen,
           path: RoutePath.postAddScreen.addBasePath,
-          builder: (context, state) => PostAddScreen(),
+          builder: (context, state) => PostAddScreen(catName: state.extra as String,),
         ),
 
         ///======================= postEditScreen Route =======================
