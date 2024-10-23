@@ -19,7 +19,7 @@ import 'package:trade_app/view/screens/home_screen/home_controller/home_controll
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({super.key});
 
-final CategoryController categoryController = Get.find<CategoryController>();
+  final CategoryController categoryController = Get.find<CategoryController>();
   HomeController controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,9 @@ final CategoryController categoryController = Get.find<CategoryController>();
           case Status.internetError:
             return NoInternetScreen(
               onTap: () {
-                controller.getPopularCategory(context: context,);
+                controller.getPopularCategory(
+                  context: context,
+                );
               },
             );
           case Status.error:
@@ -54,9 +56,11 @@ final CategoryController categoryController = Get.find<CategoryController>();
           case Status.completed:
             var popularCategoryList = controller.popularCategoryList.value;
             return GridView.builder(
-              padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
+              padding:
+              EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
               scrollDirection: Axis.vertical,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate:
+              const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
@@ -67,12 +71,18 @@ final CategoryController categoryController = Get.find<CategoryController>();
               itemBuilder: (BuildContext context, int index) {
                 return CustomCategories(
                   onTap: () {
-                    print( controller.popularCategoryList.value[index].name ?? "");
+                    print(controller
+                        .popularCategoryList.value[index].name ??
+                        "");
 
                     context.pushNamed(RoutePath.subCategoryScreen,extra: controller.popularCategoryList.value[index].name ?? '');
+
                   },
-                  image: '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
-                  name: controller.popularCategoryList.value[index].name ?? "",
+                  image:
+                  '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
+                  name:
+                  controller.popularCategoryList.value[index].name ??
+                      "",
                 );
               },
             );
@@ -81,3 +91,4 @@ final CategoryController categoryController = Get.find<CategoryController>();
     );
   }
 }
+

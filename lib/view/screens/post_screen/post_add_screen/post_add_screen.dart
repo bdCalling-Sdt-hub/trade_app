@@ -17,6 +17,7 @@ import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 class PostAddScreen extends StatelessWidget {
   PostAddScreen({super.key});
 
+
   final PostController postController = Get.find<PostController>();
   final formKey = GlobalKey<FormState>();
 

@@ -2,68 +2,108 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trade_app/core/app_routes/app_routes.dart';
+import 'package:trade_app/controller/category_controller/category_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
-import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/global/error_screen/error_screen.dart';
+import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_categories/custom_categories.dart';
+import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class PostScreen extends StatelessWidget {
-  const PostScreen({super.key});
+  PostScreen({super.key});
 
+  final CategoryController categoryController = Get.find<CategoryController>();
+  HomeController controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: const NavBar(currentIndex: 3),
 
-      ///======================Post appbar==============
+      ///===================Categories appbar===============
       appBar: CustomAppBar(
         appBarContent: AppStrings.postAnAd.tr,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ///==========================Please Choose a Category=======
-            CustomText(
-              fontWeight: FontWeight.w500,
-              color: AppColors.black500,
-              fontSize: 18,
-              text: AppStrings.pleaseChooseACategory.tr,
-            ),
-            SizedBox(height: 10.h),
-
-            ///==========================GridView=======================
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
+      body: Obx(() {
+        switch (controller.popularCategory.value) {
+          case Status.loading:
+            return const CustomLoader();
+          case Status.internetError:
+            return NoInternetScreen(
+              onTap: () {
+                controller.getPopularCategory(
+                  context: context,
+                );
+              },
+            );
+          case Status.error:
+            return GeneralErrorScreen(
+              onTap: () {
+                controller.getPopularCategory(context: context);
+              },
+            );
+          case Status.noDataFound:
+            return Center(
+              child: CustomText(text: AppStrings.noDataFound),
+            );
+          case Status.completed:
+            var popularCategoryList = controller.popularCategoryList.value;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  text: AppStrings.pleaseChooseACategory,
+                  fontSize: 20.h,
+                  fontWeight: FontWeight.w500,
+                  left: 20.w,
                 ),
-                itemCount: 10, // Adjust the item count as needed
-                itemBuilder: (BuildContext context, int index) {
-                  return CustomCategories(
-                    image: AppConstants.electronics,
-                    name: 'Electronics',
-                    onTap: () {
-                       context.pushNamed(RoutePath.postAddScreen);
+
+                Expanded(
+                  child: GridView.builder(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
+                    scrollDirection: Axis.vertical,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      mainAxisExtent: 160,
+                    ),
+                    itemCount: popularCategoryList.length,
+                    physics: const BouncingScrollPhysics(), // Allow scrolling
+                    itemBuilder: (BuildContext context, int index) {
+                      return CustomCategories(
+                        onTap: () {
+                          print(controller
+                                  .popularCategoryList.value[index].name ??
+                              "");
+
+                          context.pushNamed(RoutePath.postAddScreen,
+                              extra: controller
+                                      .popularCategoryList.value[index].name ??
+                                  '');
+                        },
+                        image:
+                            '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
+                        name:
+                            controller.popularCategoryList.value[index].name ??
+                                "",
+                      );
                     },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+                  ),
+                ),
+              ],
+            );
+        }
+      }),
     );
   }
-
-
 }
