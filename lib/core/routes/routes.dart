@@ -270,7 +270,7 @@ class AppRouter {
         GoRoute(
           name: RoutePath.subCategoryScreen,
           path: RoutePath.subCategoryScreen.addBasePath,
-          builder: (context, state) => SubCategoryScreen(),
+          builder: (context, state) => SubCategoryScreen(cateName: state.extra as String,),
         ),
 
         ///======================= postAddScreen Route =======================
@@ -326,7 +326,17 @@ class AppRouter {
         GoRoute(
           name: RoutePath.subCategoryProducts,
           path: RoutePath.subCategoryProducts.addBasePath,
-          builder: (context, state) => SubCategoryProducts(),
+            builder: (context, state) {
+              final catId = state.uri.queryParameters["catId"] ?? "";
+              final subCatId = state.uri.queryParameters["subCatId"] ?? "";
+
+              print("catId: $catId, subCatId: $subCatId"); // Debugging
+
+              return SubCategoryProducts(
+                catId: catId,
+                subCatId: subCatId,
+              );
+            },
         ),
 
         ///======================= chatScreen Route =======================

@@ -103,23 +103,23 @@ class _UserNavBarState extends State<NavBar> {
     if (index != bottomNavIndex) {
       switch (index) {
         case 0:
-           context.pushNamed(RoutePath.homeScreen);
+           context.pushReplacementNamed(RoutePath.homeScreen);
           break;
         case 1:
-          Get.to(() => const ChatScreen());
-          context.pushNamed(RoutePath.chatScreen);
+         // Get.to(() => const ChatScreen());
+          context.pushReplacementNamed(RoutePath.chatScreen);
           break;
         case 2:
-          Get.to(() => CategoryScreen());
-          context.pushNamed(RoutePath.categoryScreen);
+         // Get.to(() => CategoryScreen());
+          context.pushReplacementNamed(RoutePath.categoryScreen);
           break;
         case 3:
-          Get.to(() => const PostScreen());
-          context.pushNamed(RoutePath.postScreen);
+         // Get.to(() => const PostScreen());
+          context.pushReplacementNamed(RoutePath.postScreen);
           break;
         case 4:
-          Get.to(() => const ProfileScreen());
-          context.pushNamed(RoutePath.profileScreen);
+         // Get.to(() => const ProfileScreen());
+          context.pushReplacementNamed(RoutePath.profileScreen);
       }
     }
   }

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/category_controller/category_controller.dart';
-import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
@@ -25,6 +24,7 @@ final CategoryController categoryController = Get.find<CategoryController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: const NavBar(currentIndex: 2),
 
       ///===================Categories appbar===============
@@ -38,7 +38,7 @@ final CategoryController categoryController = Get.find<CategoryController>();
           case Status.internetError:
             return NoInternetScreen(
               onTap: () {
-                controller.getPopularCategory(context: context);
+                controller.getPopularCategory(context: context,);
               },
             );
           case Status.error:
@@ -67,7 +67,9 @@ final CategoryController categoryController = Get.find<CategoryController>();
               itemBuilder: (BuildContext context, int index) {
                 return CustomCategories(
                   onTap: () {
-                    context.pushNamed(RoutePath.subCategoryScreen);
+                    print( controller.popularCategoryList.value[index].name ?? "");
+
+                    context.pushNamed(RoutePath.subCategoryScreen,extra: controller.popularCategoryList.value[index].name ?? '');
                   },
                   image: '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
                   name: controller.popularCategoryList.value[index].name ?? "",

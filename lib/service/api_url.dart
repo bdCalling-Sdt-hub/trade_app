@@ -17,5 +17,7 @@ class ApiUrl {
   static const getTopProduct = "/product/get-top-products";
   static const justForYou = "/product/just-for-you";
   static const getCategory = "/category/get-all";
+  static const getSubCategory = "/sub-category/get-all";
   static const allAdds = "/adds/all-adds";
+  static const getSubProduct = "/product/get-all";
 }

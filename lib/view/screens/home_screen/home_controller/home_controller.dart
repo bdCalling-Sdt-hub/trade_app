@@ -6,6 +6,8 @@ import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/category_screen/model/sub_category_model.dart';
+import 'package:trade_app/view/screens/category_screen/model/sub_category_product_model.dart';
 import 'package:trade_app/view/screens/home_screen/model/just_for_you.dart';
 import 'package:trade_app/view/screens/home_screen/model/popular_category_model.dart';
 import 'package:trade_app/view/screens/home_screen/model/slider.dart';
@@ -125,6 +127,60 @@ class HomeController extends GetxController {
         banner(Status.noDataFound);
       } else {
         banner(Status.error);
+      }
+    }
+  }
+
+  /// ======================= getSubCategory List =========================>
+  var subCategory = Status.loading.obs;
+  SubCategoryLoadingMethod(Status status) => subCategory.value = status;
+
+  RxList<SubDatum> subCategoryList = <SubDatum>[].obs;
+  getSubCategory({BuildContext? context,String category=''}) async {
+    SubCategoryLoadingMethod(Status.loading);
+
+    var response = await apiClient.get(
+        url: '${ApiUrl.getSubCategory.addBaseUrl}?category=$category', showResult: true);
+
+    if (response.statusCode == 200) {
+      subCategoryList.value = List<SubDatum>.from(
+          response.body["data"].map((x) => SubDatum.fromJson(x)));
+      SubCategoryLoadingMethod(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        SubCategoryLoadingMethod(Status.internetError);
+      } else if (response.statusCode == 404) {
+        SubCategoryLoadingMethod(Status.noDataFound);
+      } else {
+        SubCategoryLoadingMethod(Status.error);
+      }
+    }
+  }
+
+  /// ======================= getSubCategoryProduct List =========================>
+  var subCategoryProduct = Status.loading.obs;
+  SubCategoryProductLoadingMethod(Status status) => subCategoryProduct.value = status;
+
+  RxList<SubProductDatum> subCategoryProductList = <SubProductDatum>[].obs;
+  getSubCategoryProduct({BuildContext? context,String catId='',String subCatID=''}) async {
+    SubCategoryProductLoadingMethod(Status.loading);
+
+    var response = await apiClient.get(
+        url: '${ApiUrl.getSubProduct.addBaseUrl}?category=$catId&subCategory=$subCatID', showResult: true);
+
+    if (response.statusCode == 200) {
+      subCategoryProductList.value = List<SubProductDatum>.from(
+          response.body["data"].map((x) => SubProductDatum.fromJson(x)));
+      SubCategoryProductLoadingMethod(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        SubCategoryProductLoadingMethod(Status.internetError);
+      } else if (response.statusCode == 404) {
+        SubCategoryProductLoadingMethod(Status.noDataFound);
+      } else {
+        SubCategoryProductLoadingMethod(Status.error);
       }
     }
   }
