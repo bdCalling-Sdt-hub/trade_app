@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:trade_app/controller/category_controller/category_controller.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
@@ -89,25 +90,28 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                           );
 
                         },
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                CustomText(
-                                  text: subCategoryList[index].name ?? "",
-                                  color: AppColors.black500,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                ),
-                                const Spacer(),
-                                const CustomImage(imageSrc: AppIcons.chevronForward),
-                              ],
-                            ),
-                            const Divider(
-                              color: AppColors.black50,
-                              thickness: 1,
-                            ),
-                          ],
+                        child: Container(
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  CustomText(
+                                    text: subCategoryList[index].name ?? "",
+                                    color: AppColors.black500,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
+                                  const Spacer(),
+                                  const CustomImage(imageSrc: AppIcons.chevronForward),
+                                ],
+                              ),
+                              const Divider(
+                                color: AppColors.black50,
+                                thickness: 1,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }),

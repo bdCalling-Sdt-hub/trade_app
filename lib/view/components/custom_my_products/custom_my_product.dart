@@ -64,6 +64,7 @@ class CustomMyProduct extends StatelessWidget {
                 imageUrl: image,
                 height: 106.h,
                 width: 100.w,
+                borderRadius: BorderRadius.circular(8.sp),
               ),
             ),
             SizedBox(height: 10.h),

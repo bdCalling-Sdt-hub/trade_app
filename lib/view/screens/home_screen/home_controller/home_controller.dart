@@ -167,7 +167,7 @@ class HomeController extends GetxController {
     SubCategoryProductLoadingMethod(Status.loading);
 
     var response = await apiClient.get(
-        url: '${ApiUrl.getSubProduct.addBaseUrl}?category=$catId&subCategory=$subCatID', showResult: true);
+        url: '${ApiUrl.getSubProduct.addBaseUrl}?category=$subCatID&subCategory=$catId', showResult: true);
 
     if (response.statusCode == 200) {
       subCategoryProductList.value = List<SubProductDatum>.from(

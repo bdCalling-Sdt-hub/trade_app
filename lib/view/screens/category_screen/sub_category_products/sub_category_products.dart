@@ -6,6 +6,7 @@ import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -67,42 +68,40 @@ class _SubCategoryProductsState extends State<SubCategoryProducts> {
               child: CustomText(text: AppStrings.noDataFound),
             );
           case Status.completed:
-            var subCategoryList = controller.subCategoryList.value;
-            return subCategoryList.isEmpty ?  Center(
-              child: CustomText(text: AppStrings.noDataFound),
-            ):
+            var subCategoryProductList = controller.subCategoryProductList.value;
+            return
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(
-                    text: '',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: AppColors.black500,
-                    bottom: 10,
-                  ),
+                  // CustomText(
+                  //   text: '',
+                  //   fontWeight: FontWeight.w500,
+                  //   fontSize: 16,
+                  //   color: AppColors.black500,
+                  //   bottom: 10,
+                  // ),
                   Expanded(
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 12,
                           mainAxisSpacing: 12,
-                          mainAxisExtent: 200.h),
-                      itemCount: 5,
+                          mainAxisExtent: 220.h),
+                      itemCount: subCategoryProductList.length,
                       physics: const PageScrollPhysics(),
                       itemBuilder: (BuildContext context, int index) {
                         return CustomMyProduct(
                           isMargin: false,
                           isEdit: false,
-                          image: AppConstants.electronics,
-                          name: '',
+                          image: '${ApiUrl.baseUrl}${subCategoryProductList[index].images?[0] ?? ""}',
+                          name: subCategoryProductList[index].title ?? '',
                           onTap: () {
 
                             context.pushNamed(RoutePath.productDetailsScreen);
                           },
-                          value: '\$825+',
+                          value: '\$${subCategoryProductList[index].productValue ?? ""}',
                           editOnTap: () {
                             // Get.toNamed(AppRoutes.postEditScreen);
                           },
