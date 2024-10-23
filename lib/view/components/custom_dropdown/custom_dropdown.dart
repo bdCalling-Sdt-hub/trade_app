@@ -5,7 +5,9 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 
 class CustomDropdown extends StatelessWidget {
-  final String title;
+  final String ?title;
+  final String ?dropdownName;
+  final int? length;
   final Color textColor;
   final TextEditingController controller;
   final bool isDropdownVisible;
@@ -14,13 +16,13 @@ class CustomDropdown extends StatelessWidget {
   final Function(int) onSelect;
 
   const CustomDropdown({super.key,
-    required this.title,
+      this.title,
     required this.textColor,
     required this.controller,
     required this.isDropdownVisible,
     required this.onTap,
     required this.options,
-    required this.onSelect,
+    required this.onSelect, this.length, this.dropdownName,
   });
 
   @override
@@ -51,7 +53,7 @@ class CustomDropdown extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(
-                options.length,
+                length!,
                     (index) => GestureDetector(
                   onTap: () {
                     onSelect(index);
@@ -63,7 +65,7 @@ class CustomDropdown extends StatelessWidget {
                         color: AppColors.white200
                       ),
                       child: CustomText(
-                        text: options[index],
+                        text: dropdownName!,
                         fontWeight: FontWeight.w500,
                         bottom: 4.h,
                         color: AppColors.black500,

@@ -145,6 +145,8 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       subCategoryList.value = List<SubDatum>.from(
           response.body["data"].map((x) => SubDatum.fromJson(x)));
+
+      print("masum==============${response.body["data"]}");
       SubCategoryLoadingMethod(Status.completed);
     } else {
       checkApi(response: response, context: context);
