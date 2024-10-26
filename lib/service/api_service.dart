@@ -616,31 +616,40 @@ class ApiClient {
   // }
 
   // Delete method
-  Future<Map<String, dynamic>?> delete(
+  Future<Response> delete(
       {String? url,
-      bool? isBasic,
-      int code = 202,
-      bool isLogout = false,
-      int duration = 15,
-      bool showResult = false}) async {
-    log.i(
-        '|📍📍📍|-----------------[[ DELETE ]] method details start-----------------|📍📍📍|');
+      bool isBasic = false,
 
-    log.i(url);
 
-    log.i(
-        '|📍📍📍|-----------------[[ DELETE ]] method details end ------------------|📍📍📍|');
+      int duration = 30,
+      bool showResult = false, required BuildContext context}) async {
+
+
+    /// ======================- Check Internet ===================
+
+    if (!await (connectionChecker.isConnected)) {
+      return Response(statusCode: 503, statusText: noInternetConnection);
+    }
+
+    if(showResult){
+
+      log.i(
+          '|📍📍📍|-----------------[[ DELETE ]] method details start-----------------|📍📍📍|');
+
+      log.i("URL === >>> $url");
+
+
+    }
+
+
+
 
     try {
       var headers = isBasic! ? basicHeaderInfo() : await bearerHeaderInfo();
 
-      if (isLogout) {
-// headers
 
-// ..addAll({"fcm_token": await FirebaseMessaging.instance.getToken()});
-      }
 
-      log.i(headers);
+
 
       final response = await http
           .delete(
@@ -649,40 +658,41 @@ class ApiClient {
           )
           .timeout(Duration(seconds: duration));
 
-      log.i(
-          '|📒📒📒|----------------- [[ DELETE ]] method response start-----------------|📒📒📒|');
+
 
       if (showResult) {
-        log.i(response.body.toString());
+        log.i("Body === >> ${response.body}");
+
+        log.i("Sttus Code ===>>> ${response.statusCode}");
+
+        log.i(
+            '|📒📒📒|----------------- [[ DELETE ]] method response End-----------------|📒📒📒|');
       }
 
-      log.i(response.statusCode);
 
-      log.i(
-          '|📒📒📒|----------------- [[ DELETE ]] method response start-----------------|📒📒📒|');
 
-      if (response.statusCode == code) {
-// LocalStorage.clear();
 
-        return jsonDecode(response.body);
-      } else {
-        log.e('🐞🐞🐞 Error Alert 🐞🐞🐞');
 
-        log.e(
-            'unknown error hitted in status code  ${jsonDecode(response.body)}');
+      var decodeBody = jsonDecode(response.body);
 
-        return null;
-      }
+      return Response(
+        body: decodeBody,
+        statusCode: response.statusCode,
+      );
     } on SocketException {
       log.e('🐞🐞🐞 Error Alert on Socket Exception 🐞🐞🐞');
 
-      return null;
+      return const Response(
+          body: {},
+          statusCode: 400,
+          statusText: '🐞🐞🐞 Error Alert on Socket Exception 🐞🐞🐞');
     } on TimeoutException {
       log.e('🐞🐞🐞 Error Alert 🐞🐞🐞');
 
       log.e('Time out exception$url');
 
-      return null;
+      return const Response(
+          body: {}, statusCode: 400, statusText: 'client exception hitted');
     } on http.ClientException catch (err, stackrace) {
       log.e('🐞🐞🐞 Error Alert 🐞🐞🐞');
 
@@ -692,7 +702,8 @@ class ApiClient {
 
       log.e(stackrace.toString());
 
-      return null;
+      return const Response(
+          body: {}, statusCode: 400, statusText: 'client exception hitted');
     } catch (e) {
       log.e('🐞🐞🐞 Error Alert 🐞🐞🐞');
 
@@ -700,7 +711,10 @@ class ApiClient {
 
       log.e("❌❌❌ $e");
 
-      return null;
+      return const Response(
+          body: {},
+          statusCode: 400,
+          statusText: '🐞🐞🐞 Other Error Alert 🐞🐞🐞');
     }
   }
 

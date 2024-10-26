@@ -9,6 +9,7 @@ import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
+import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/screens/my_products_screen/model/my_product_model.dart';
 
@@ -159,10 +160,10 @@ class PostController extends GetxController {
 
   updateProduct(
       {String catId = '',
-        String subCatId = "",
-        String userID = "",
-        String productId = "",
-        required BuildContext context}) async {
+      String subCatId = "",
+      String userID = "",
+      String productId = "",
+      required BuildContext context}) async {
     print('======================== Nadim');
     addProductLoading.value = true;
 
@@ -187,13 +188,15 @@ class PostController extends GetxController {
 
     var response = selectedImagesMulti.isEmpty
         ? await apiClient.patch(
-        url: '${ApiUrl.editProduct.addBaseUrl}/$productId', context: context, body: body)
+            url: '${ApiUrl.editProduct.addBaseUrl}/$productId',
+            context: context,
+            body: body)
         : await apiClient.multipartRequest(
-      url: '${ApiUrl.editProduct.addBaseUrl}/$productId',
-      reqType: 'patch',
-      body: body,
-      multipartBody: multipartBodyList,
-    );
+            url: '${ApiUrl.editProduct.addBaseUrl}/$productId',
+            reqType: 'patch',
+            body: body,
+            multipartBody: multipartBodyList,
+          );
 
     if (response.statusCode == 200) {
       productTitleController.clear();
@@ -207,6 +210,31 @@ class PostController extends GetxController {
 
       AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
     } else {
+      checkApi(response: response, context: context);
+    }
+
+    addProductLoading.value = false;
+    update();
+  }
+
+  ///<=============================== delete product ===============================>
+
+  RxInt size=0.obs;
+  deleteProduct({required BuildContext context,String productId=''}) async {
+    print('======================== Nadim');
+    addProductLoading.value = true;
+
+    update();
+    var response = await apiClient.delete(
+      url: '${ApiUrl.deleteProduct.addBaseUrl}/$productId',
+      context: context,
+    );
+
+    if (response.statusCode == 200) {
+      getMyProduct(context: context);
+      AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
+    } else {
+      //toastMessage(message: 'Product does not delete Successfully');
       checkApi(response: response, context: context);
     }
 

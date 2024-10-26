@@ -23,4 +23,5 @@ class ApiUrl {
   static const addProduct = "/product/add-product";
   static const myProduct = "/product/my-products";
   static const editProduct = "/product/edit";
+  static const deleteProduct = "/product/delete";
 }

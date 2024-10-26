@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
+import 'package:trade_app/controller/post_controller/post_controller.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -12,6 +13,7 @@ import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_details_container/custom_details_container.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
+import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
@@ -28,6 +30,7 @@ class MyProductDetailsScreen extends StatelessWidget {
     final String productId;
     final String userId;
 
+    PostController controller=Get.find<PostController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,105 +39,79 @@ class MyProductDetailsScreen extends StatelessWidget {
       appBar: CustomAppBar(
         appBarContent: AppStrings.myProductDetails.tr,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ///======================Image Here=============
-              CustomNetworkImage(
-                imageUrl: image,
-                height: 252.h,
-                width: double.infinity,
-              ),
-              CustomDetailContainer(
-                color: AppColors.white200,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ///======================Item Name==============
-                    CustomText(
-                      text: title,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.black500,
-                      bottom: 10.h,
-                    ),
-                    Row(
-                      children: [
-                        ///=========================Price=============
-                        CustomText(
-                          text: '${ productValue.toString()}',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: AppColors.blue500,
-                          bottom: 10.h,
-                        ),
-                        const Spacer(),
-                        CustomText(
-                          text: AppStrings.postedOn.tr,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: AppColors.black500,
-                          bottom: 10.h,
-                        ),
-                        ///======================Posted on===========
-                        CustomText(
-                          text: ' : 21 Mar 2:45 PM'.tr,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          color: AppColors.black500,
-                          bottom: 10.h,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              ///=========================This is Condition==============
-              CustomDetailContainer(
-                color: AppColors.white200,
-                child: Row(
-                  children: [
-                    CustomText(
-                      text: AppStrings.condition.tr,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.black500,
-                      bottom: 10.h,
-                    ),
-                    const Spacer(),
-                    CustomText(
-                      text: condition,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.black500,
-                      bottom: 10.h,
-                    ),
-                  ],
-                ),
-              ),
-              ///===================This is Description===============
-              CustomDetailContainer(
-                color: AppColors.white200,
-                child: Container(
+      body: Obx((){
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ///======================Image Here=============
+                CustomNetworkImage(
+                  imageUrl: image,
+                  height: 252.h,
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                ),
+                SizedBox(height: controller.size.value.toDouble(),),
+                CustomDetailContainer(
+                  color: AppColors.white200,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      ///======================Item Name==============
                       CustomText(
-                        text: AppStrings.description.tr,
+                        text: title,
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         color: AppColors.black500,
                         bottom: 10.h,
                       ),
+                      Row(
+                        children: [
+                          ///=========================Price=============
+                          CustomText(
+                            text: '${ productValue.toString()}',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: AppColors.blue500,
+                            bottom: 10.h,
+                          ),
+                          const Spacer(),
+                          CustomText(
+                            text: AppStrings.postedOn.tr,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: AppColors.black500,
+                            bottom: 10.h,
+                          ),
+                          ///======================Posted on===========
+                          CustomText(
+                            text: ' : 21 Mar 2:45 PM'.tr,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: AppColors.black500,
+                            bottom: 10.h,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                ///=========================This is Condition==============
+                CustomDetailContainer(
+                  color: AppColors.white200,
+                  child: Row(
+                    children: [
                       CustomText(
-                        textAlign: TextAlign.start,
-                        maxLines: 30,
-                        text:description,
+                        text: AppStrings.condition.tr,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: AppColors.black500,
+                        bottom: 10.h,
+                      ),
+                      const Spacer(),
+                      CustomText(
+                        text: condition,
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                         color: AppColors.black500,
@@ -143,11 +120,40 @@ class MyProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-            ],
+                ///===================This is Description===============
+                CustomDetailContainer(
+                  color: AppColors.white200,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          text: AppStrings.description.tr,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: AppColors.black500,
+                          bottom: 10.h,
+                        ),
+                        CustomText(
+                          textAlign: TextAlign.start,
+                          maxLines: 30,
+                          text:description,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: AppColors.black500,
+                          bottom: 10.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Row(
@@ -191,28 +197,34 @@ class MyProductDetailsScreen extends StatelessWidget {
             SizedBox(
               width: 10.w,
             ),
+             SizedBox(height: controller.size.value.toDouble(),),
              ///=======================Delete Button===============
-             Expanded(
-              child: CustomDetailContainer(
-                  color: AppColors.blue500,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CustomImage(
-                        imageSrc: AppIcons.delete,
-                        imageColor: AppColors.white,
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      CustomText(
-                        text: AppStrings.delete.tr,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: AppColors.white,
-                      )
-                    ],
-                  )),
+            controller.addProductLoading.value? const CustomLoader(): Expanded(
+              child: GestureDetector(
+                onTap: (){
+                  controller.deleteProduct(context: context,productId: productId);
+                },
+                child: CustomDetailContainer(
+                    color: AppColors.blue500,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CustomImage(
+                          imageSrc: AppIcons.delete,
+                          imageColor: AppColors.white,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        CustomText(
+                          text: AppStrings.delete.tr,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: AppColors.white,
+                        )
+                      ],
+                    )),
+              ),
             ),
           ],
         ),
