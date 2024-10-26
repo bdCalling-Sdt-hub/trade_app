@@ -162,6 +162,11 @@ class MyProductDetailsScreen extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: (){
+                  controller.productTitleController.text= title;
+                  controller.conditionController.text= condition;
+                  controller.descriptionController.text= description;
+                  //controller.addressController.text= addres;
+                  controller.productValueController.text= productValue.toString();
                   context.pushNamed(RoutePath.postEditScreen,
                     queryParameters: {
                       "cateName": catName,

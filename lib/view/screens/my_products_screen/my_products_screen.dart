@@ -31,7 +31,7 @@ class MyProductsScreen extends StatelessWidget {
         appBarContent: AppStrings.myProducts.tr,
       ),
       body: Obx(() {
-        switch (controller.myProduct.value) {
+        switch (controller.myProductLoading.value) {
           case Status.loading:
             return const CustomLoader();
           case Status.internetError:

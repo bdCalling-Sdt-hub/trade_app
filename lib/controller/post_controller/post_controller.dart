@@ -213,7 +213,7 @@ class PostController extends GetxController {
       productValueController.clear();
       addressController.clear();
       addProductLoading.value = false;
-       array.clear();
+      array.clear();
 
       AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
     } else {
@@ -226,8 +226,8 @@ class PostController extends GetxController {
 
   ///<=============================== delete product ===============================>
 
-  RxInt size=0.obs;
-  deleteProduct({required BuildContext context,String productId=''}) async {
+  RxInt size = 0.obs;
+  deleteProduct({required BuildContext context, String productId = ''}) async {
     print('======================== Nadim');
     addProductLoading.value = true;
 
@@ -250,12 +250,13 @@ class PostController extends GetxController {
   }
 
   /// ======================= My product List =========================>
-  var myProduct = Status.loading.obs;
-  MyProductLoadingMethod(Status status) => myProduct.value = status;
+  var myProductLoading = Status.loading.obs;
+  MyProductLoadingMethod(Status status) => myProductLoading.value = status;
 
   RxList<Datum> myProductList = <Datum>[].obs;
-  getMyProduct(
-      {BuildContext? context, String catId = '', String subCatID = ''}) async {
+  getMyProduct({
+    BuildContext? context,
+  }) async {
     MyProductLoadingMethod(Status.loading);
 
     var response = await apiClient.get(
@@ -280,7 +281,7 @@ class PostController extends GetxController {
 
   @override
   void onInit() {
-   getMyProduct();
+    // getMyProduct();
     super.onInit();
   }
 }
