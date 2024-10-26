@@ -82,10 +82,6 @@ class PostScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return CustomCategories(
                         onTap: () {
-                          print(controller
-                                  .popularCategoryList.value[index].name ??
-                              "");
-
                           context.pushNamed(
                             RoutePath.postAddScreen,
                             queryParameters: {

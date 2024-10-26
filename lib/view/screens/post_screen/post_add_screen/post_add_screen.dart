@@ -125,6 +125,12 @@ class _PostAddScreenState extends State<PostAddScreen> {
                   // ),
 
                   CustomTextField(
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return AppStrings.fieldCantBeEmpty;
+                      }
+                      return null;
+                    },
                     onTap: (){
                       controller.isDropdownVisible.value =! controller.isDropdownVisible.value;
                       controller.isDropdownVisible.refresh();
@@ -226,12 +232,12 @@ class _PostAddScreenState extends State<PostAddScreen> {
                     controller: postController.productValueController,
                   ),
                   CustomFromCard(
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return AppStrings.fieldCantBeEmpty;
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value == null || value.trim().isEmpty) {
+                    //     return AppStrings.fieldCantBeEmpty;
+                    //   }
+                    //   return null;
+                    // },
                     title: AppStrings.address.tr,
                     controller: postController.addressController,
                   ),

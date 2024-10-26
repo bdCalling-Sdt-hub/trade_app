@@ -9,6 +9,8 @@ import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/my_products_screen/model/my_product_model.dart';
 
 class PostController extends GetxController {
   TextEditingController productCategoryController =
@@ -26,12 +28,6 @@ class PostController extends GetxController {
   RxBool isProfession = false.obs;
   RxInt selectProfession = 0.obs;
   TextEditingController professionController = TextEditingController();
-
-  final List<String> subCategoriesList = [
-    "Smart Phone",
-    "Apple Watch",
-    "HeadPhone"
-  ];
 
   final List<String> religion = [
     'Islam',
@@ -102,6 +98,7 @@ class PostController extends GetxController {
     }
   }
 
+  ///<=============================== add product ===============================>
   RxBool addProductLoading = false.obs;
   addProduct(
       {String catId = '',
@@ -156,5 +153,98 @@ class PostController extends GetxController {
 
     addProductLoading.value = false;
     update();
+  }
+
+  ///<=============================== add product ===============================>
+
+  updateProduct(
+      {String catId = '',
+        String subCatId = "",
+        String userID = "",
+        String productId = "",
+        required BuildContext context}) async {
+    print('======================== Nadim');
+    addProductLoading.value = true;
+
+    update();
+    Map<String, dynamic> body = {
+      "category": catId,
+      "subCategory": subCatId,
+      "user": userID,
+      "title": productTitleController.text,
+      "condition": conditionController.text,
+      "description": descriptionController.text,
+      "productValue": 100,
+
+      ///productValueController.text.toString()
+      "address": addressController.text,
+    };
+
+    // Prepare a list of MultipartBody items for each image
+    List<MultipartBody> multipartBodyList = selectedImagesMulti.map((file) {
+      return MultipartBody("product_img", file);
+    }).toList();
+
+    var response = selectedImagesMulti.isEmpty
+        ? await apiClient.patch(
+        url: '${ApiUrl.editProduct.addBaseUrl}/$productId', context: context, body: body)
+        : await apiClient.multipartRequest(
+      url: '${ApiUrl.editProduct.addBaseUrl}/$productId',
+      reqType: 'patch',
+      body: body,
+      multipartBody: multipartBodyList,
+    );
+
+    if (response.statusCode == 200) {
+      productTitleController.clear();
+      subCategoriesController.clear();
+      conditionController.clear();
+      descriptionController.clear();
+      productValueController.clear();
+      addressController.clear();
+      addProductLoading.value = false;
+      multipartBodyList.clear();
+      AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
+    } else {
+      checkApi(response: response, context: context);
+    }
+
+    addProductLoading.value = false;
+    update();
+  }
+
+  /// ======================= My product List =========================>
+  var myProduct = Status.loading.obs;
+  MyProductLoadingMethod(Status status) => myProduct.value = status;
+
+  RxList<Datum> myProductList = <Datum>[].obs;
+  getMyProduct(
+      {BuildContext? context, String catId = '', String subCatID = ''}) async {
+    MyProductLoadingMethod(Status.loading);
+
+    var response = await apiClient.get(
+        url: '${ApiUrl.myProduct.addBaseUrl}', showResult: true);
+
+    if (response.statusCode == 200) {
+      myProductList.value =
+          List<Datum>.from(response.body["data"].map((x) => Datum.fromJson(x)));
+      getMyProduct(context: context);
+      MyProductLoadingMethod(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        MyProductLoadingMethod(Status.internetError);
+      } else if (response.statusCode == 404) {
+        MyProductLoadingMethod(Status.noDataFound);
+      } else {
+        MyProductLoadingMethod(Status.error);
+      }
+    }
+  }
+
+  @override
+  void onInit() {
+    getMyProduct();
+    super.onInit();
   }
 }

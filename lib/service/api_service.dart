@@ -248,7 +248,7 @@ class ApiClient {
       bool isBasic = false,
       Map<String, dynamic>? body,
       int duration = 30,
-      bool showResult = true}) async {
+      bool showResult = true, required BuildContext context}) async {
     try {
       /// ======================- Check Internet ===================
 

@@ -74,7 +74,7 @@ class AppRouter {
         GoRoute(
           name: RoutePath.productDetailsScreen,
           path: RoutePath.productDetailsScreen.addBasePath,
-          builder: (context, state) =>  ProductDetailsScreen(),
+          builder: (context, state) => ProductDetailsScreen(),
         ),
 
         ///======================= signInScreen Route =======================
@@ -270,7 +270,9 @@ class AppRouter {
         GoRoute(
           name: RoutePath.subCategoryScreen,
           path: RoutePath.subCategoryScreen.addBasePath,
-          builder: (context, state) => SubCategoryScreen(cateName: state.extra as String,),
+          builder: (context, state) => SubCategoryScreen(
+            cateName: state.extra as String,
+          ),
         ),
 
         ///======================= postAddScreen Route =======================
@@ -292,7 +294,19 @@ class AppRouter {
         GoRoute(
           name: RoutePath.postEditScreen,
           path: RoutePath.postEditScreen.addBasePath,
-          builder: (context, state) => PostEditScreen(),
+          builder: (context, state) {
+            final cateId = state.uri.queryParameters["cateId"] ?? "";
+            final cateName = state.uri.queryParameters["cateName"] ?? "";
+            final productId = state.uri.queryParameters["productId"] ?? "";
+            final userId = state.uri.queryParameters["userId"] ?? "";
+
+            return PostEditScreen(
+              catId: cateId,
+              catName: cateName,
+              productId: productId,
+              userId: userId,
+            );
+          },
         ),
 
         ///======================= membershipPackageScreen Route =======================
@@ -334,17 +348,17 @@ class AppRouter {
         GoRoute(
           name: RoutePath.subCategoryProducts,
           path: RoutePath.subCategoryProducts.addBasePath,
-            builder: (context, state) {
-              final catId = state.uri.queryParameters["catId"] ?? "";
-              final subCatId = state.uri.queryParameters["subCatId"] ?? "";
+          builder: (context, state) {
+            final catId = state.uri.queryParameters["catId"] ?? "";
+            final subCatId = state.uri.queryParameters["subCatId"] ?? "";
 
-              print("catId: $catId, subCatId: $subCatId"); // Debugging
+            print("catId: $catId, subCatId: $subCatId"); // Debugging
 
-              return SubCategoryProducts(
-                catId: catId,
-                subCatId: subCatId,
-              );
-            },
+            return SubCategoryProducts(
+              catId: catId,
+              subCatId: subCatId,
+            );
+          },
         ),
 
         ///======================= chatScreen Route =======================
