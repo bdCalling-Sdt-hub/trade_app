@@ -205,10 +205,27 @@ class AppRouter {
 
         ///======================= myProductDetailsScreen Route =======================
         GoRoute(
-          name: RoutePath.myProductDetailsScreen,
-          path: RoutePath.myProductDetailsScreen.addBasePath,
-          builder: (context, state) => MyProductDetailsScreen(),
-        ),
+            name: RoutePath.myProductDetailsScreen,
+            path: RoutePath.myProductDetailsScreen.addBasePath,
+            builder: (context, state) {
+              final image = state.uri.queryParameters["image"] ?? "";
+              final title = state.uri.queryParameters["title"] ?? "";
+              final productValue = state.uri.queryParameters["productValue"] ?? "";
+              final condition = state.uri.queryParameters["condition"] ?? "";
+              final description = state.uri.queryParameters["description"] ?? "";
+              final catName = state.uri.queryParameters["cateName"] ?? "";
+              final cateId = state.uri.queryParameters["cateId"] ?? "";
+              final productId = state.uri.queryParameters["productId"] ?? "";
+              final userId = state.uri.queryParameters["userId"] ?? "";
+
+              return MyProductDetailsScreen(
+                image: image,
+                title: title,
+                productValue: int.parse(productValue), // Convert to int
+                condition: condition,
+                description: description, catName: catName,catId: cateId,productId: productId, userId: userId,
+              );
+            }),
 
         ///======================= myMembershipScreen Route =======================
         GoRoute(

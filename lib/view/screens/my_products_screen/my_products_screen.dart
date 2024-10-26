@@ -83,9 +83,21 @@ class MyProductsScreen extends StatelessWidget {
                           image: '${ApiUrl.baseUrl}${myProductList[index].images?[0] ?? ""}',
                           name: myProductList[index].title ?? "",
                           onTap: () {
-                            context.pushNamed(RoutePath.myProductDetailsScreen);
+                            context.pushNamed(RoutePath.myProductDetailsScreen,
+                            queryParameters: {
+                              "image" : '${ApiUrl.baseUrl}${myProductList[index].images?[0] ?? ""}',
+                              "title" : myProductList[index].title ?? "",
+                              "condition" : myProductList[index].condition ?? "",
+                              "description" : myProductList[index].description ?? "",
+                              "productValue" :  (myProductList[index].productValue ?? 0).toString(),
+                              "cateName": myProductList[index].category?.name ?? '',
+                              "cateId":myProductList[index].category?.id  ?? '',
+                              "productId":myProductList[index].id  ?? '',
+                              "userId":myProductList[index].user  ?? '',
+                            }
+                            );
                           },
-                          value: '\$${myProductList[index].productValue ?? ""}',
+                          value: '\$${myProductList[index].productValue ?? 0}',
                           editOnTap: () {
                             context.pushNamed(RoutePath.postEditScreen,
                               queryParameters: {

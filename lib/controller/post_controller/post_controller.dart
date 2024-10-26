@@ -116,7 +116,7 @@ class PostController extends GetxController {
       "title": productTitleController.text,
       "condition": conditionController.text,
       "description": descriptionController.text,
-      "productValue": 100,
+      "productValue": int.parse(productValueController.text).toString(),
 
       ///productValueController.text.toString()
       "address": addressController.text,
@@ -174,7 +174,7 @@ class PostController extends GetxController {
       "title": productTitleController.text,
       "condition": conditionController.text,
       "description": descriptionController.text,
-      "productValue": 100,
+      "productValue": int.parse(productValueController.text).toString(),
 
       ///productValueController.text.toString()
       "address": addressController.text,
@@ -204,6 +204,7 @@ class PostController extends GetxController {
       addressController.clear();
       addProductLoading.value = false;
       multipartBodyList.clear();
+
       AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
     } else {
       checkApi(response: response, context: context);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -15,7 +16,17 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
 class MyProductDetailsScreen extends StatelessWidget {
-  const MyProductDetailsScreen({super.key});
+    MyProductDetailsScreen({super.key, required this.image, required this.title, required this.condition, required this.description, required this.productValue, required this.catName, required this.catId, required this.productId, required this.userId});
+
+    final String image;
+    final String title;
+    final int productValue;
+    final String condition;
+    final String description;
+    final String catName;
+    final String catId;
+    final String productId;
+    final String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +44,7 @@ class MyProductDetailsScreen extends StatelessWidget {
             children: [
               ///======================Image Here=============
               CustomNetworkImage(
-                imageUrl: AppConstants.electronics,
+                imageUrl: image,
                 height: 252.h,
                 width: double.infinity,
               ),
@@ -44,7 +55,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                   children: [
                     ///======================Item Name==============
                     CustomText(
-                      text: 'Samsung Galaxy S22 Ultra 5G'.tr,
+                      text: title,
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: AppColors.black500,
@@ -54,7 +65,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                       children: [
                         ///=========================Price=============
                         CustomText(
-                          text: '\$820+'.tr,
+                          text: '${ productValue.toString()}',
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
                           color: AppColors.blue500,
@@ -95,7 +106,7 @@ class MyProductDetailsScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     CustomText(
-                      text: 'Used',
+                      text: condition,
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: AppColors.black500,
@@ -107,28 +118,30 @@ class MyProductDetailsScreen extends StatelessWidget {
               ///===================This is Description===============
               CustomDetailContainer(
                 color: AppColors.white200,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: AppStrings.description.tr,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.black500,
-                      bottom: 10.h,
-                    ),
-                    CustomText(
-                      textAlign: TextAlign.start,
-                      maxLines: 30,
-                      text:
-                          'Galaxy S22 Ultra, a powerhouse of performance and aesthetics. Its sleek design features a smooth curved display, crafted from premium armor aluminum. With the option of dual SIM, the S22 Ultra marries style and functionality seamlessly. The integrated stylus ensures precise input, while the vibrant 6.8" Dynamic AMOLED 2X display offers stunning visuals with HDR10+ support.'
-                              .tr,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color: AppColors.black500,
-                      bottom: 10.h,
-                    ),
-                  ],
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        text: AppStrings.description.tr,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: AppColors.black500,
+                        bottom: 10.h,
+                      ),
+                      CustomText(
+                        textAlign: TextAlign.start,
+                        maxLines: 30,
+                        text:description,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: AppColors.black500,
+                        bottom: 10.h,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -143,7 +156,14 @@ class MyProductDetailsScreen extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: (){
-                  context.pushNamed(RoutePath.postEditScreen);
+                  context.pushNamed(RoutePath.postEditScreen,
+                    queryParameters: {
+                      "cateName": catName,
+                      "cateId": catId,
+                      "productId": productId,
+                      "userId": userId,
+                    },
+                  );
                 },
                 child: CustomDetailContainer(
 
