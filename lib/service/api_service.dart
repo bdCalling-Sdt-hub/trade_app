@@ -248,7 +248,8 @@ class ApiClient {
       bool isBasic = false,
       Map<String, dynamic>? body,
       int duration = 30,
-      bool showResult = true, required BuildContext context}) async {
+      bool showResult = true,
+      required BuildContext context}) async {
     try {
       /// ======================- Check Internet ===================
 
@@ -420,11 +421,11 @@ class ApiClient {
   /// ========================= MaltiPart Request =====================
   Future<Response> multipartRequest(
       {required String url,
-        required String reqType,
-        bool isBasic = false,
-        Map<String, dynamic>? body,
-        List<MultipartBody>? multipartBody,
-        bool showResult = true}) async {
+      required String reqType,
+      bool isBasic = false,
+      Map<String, dynamic>? body,
+      List<MultipartBody>? multipartBody,
+      bool showResult = true}) async {
     try {
       /// ======================- Check Internet ===================
 
@@ -444,7 +445,8 @@ class ApiClient {
         reqType,
         Uri.parse(url),
       )
-        ..fields.addAll(body?.map((key, value) => MapEntry(key, value.toString())) ?? {})
+        ..fields.addAll(
+            body?.map((key, value) => MapEntry(key, value.toString())) ?? {})
         ..headers.addAll(
           isBasic ? basicHeaderInfo() : await bearerHeaderInfo(),
         );
@@ -519,7 +521,6 @@ class ApiClient {
           statusText: '🐞🐞🐞 Other Error Alert 🐞🐞🐞');
     }
   }
-
 
   // // multipart multi file Method
   // Future<Map<String, dynamic>?> multipartMultiFile({
@@ -619,37 +620,24 @@ class ApiClient {
   Future<Response> delete(
       {String? url,
       bool isBasic = false,
-
-
       int duration = 30,
-      bool showResult = false, required BuildContext context}) async {
-
-
+      bool showResult = false,
+      required BuildContext context}) async {
     /// ======================- Check Internet ===================
 
     if (!await (connectionChecker.isConnected)) {
       return Response(statusCode: 503, statusText: noInternetConnection);
     }
 
-    if(showResult){
-
+    if (showResult) {
       log.i(
           '|📍📍📍|-----------------[[ DELETE ]] method details start-----------------|📍📍📍|');
 
       log.i("URL === >>> $url");
-
-
     }
-
-
-
 
     try {
       var headers = isBasic! ? basicHeaderInfo() : await bearerHeaderInfo();
-
-
-
-
 
       final response = await http
           .delete(
@@ -657,8 +645,6 @@ class ApiClient {
             headers: headers,
           )
           .timeout(Duration(seconds: duration));
-
-
 
       if (showResult) {
         log.i("Body === >> ${response.body}");
@@ -668,10 +654,6 @@ class ApiClient {
         log.i(
             '|📒📒📒|----------------- [[ DELETE ]] method response End-----------------|📒📒📒|');
       }
-
-
-
-
 
       var decodeBody = jsonDecode(response.body);
 

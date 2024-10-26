@@ -99,6 +99,11 @@ class MyProductsScreen extends StatelessWidget {
                           },
                           value: '\$${myProductList[index].productValue ?? 0}',
                           editOnTap: () {
+                            controller.productTitleController.text=myProductList[index].title ?? '';
+                            controller.conditionController.text=myProductList[index].condition ?? '';
+                            controller.descriptionController.text=myProductList[index].description ?? '';
+                             controller.addressController.text= myProductList[index].address ?? '';
+                             controller.productValueController.text= (myProductList[index].productValue ?? 0).toString();
                             context.pushNamed(RoutePath.postEditScreen,
                               queryParameters: {
                                 "cateName": myProductList[index].category?.name ?? '',

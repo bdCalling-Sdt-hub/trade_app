@@ -182,9 +182,16 @@ class PostController extends GetxController {
     };
 
     // Prepare a list of MultipartBody items for each image
-    List<MultipartBody> multipartBodyList = selectedImagesMulti.map((file) {
-      return MultipartBody("product_img", file);
-    }).toList();
+    // List<MultipartBody> multipartBodyList = selectedImagesMulti.map((file) {
+    //   return MultipartBody("product_img", file);
+    // }).toList();
+
+    RxList<MultipartBody>? array = <MultipartBody>[].obs;
+    for (int i = 0; i < selectedImagesMulti.length; i++) {
+      array.add(
+        MultipartBody("product_img", selectedImagesMulti[i]),
+      );
+    }
 
     var response = selectedImagesMulti.isEmpty
         ? await apiClient.patch(
@@ -195,7 +202,7 @@ class PostController extends GetxController {
             url: '${ApiUrl.editProduct.addBaseUrl}/$productId',
             reqType: 'patch',
             body: body,
-            multipartBody: multipartBodyList,
+            multipartBody: array,
           );
 
     if (response.statusCode == 200) {
@@ -206,7 +213,7 @@ class PostController extends GetxController {
       productValueController.clear();
       addressController.clear();
       addProductLoading.value = false;
-      multipartBodyList.clear();
+       array.clear();
 
       AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
     } else {
@@ -232,9 +239,9 @@ class PostController extends GetxController {
 
     if (response.statusCode == 200) {
       getMyProduct(context: context);
+      toastMessage(message: 'Product delete Successfully');
       AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
     } else {
-      //toastMessage(message: 'Product does not delete Successfully');
       checkApi(response: response, context: context);
     }
 
@@ -273,7 +280,7 @@ class PostController extends GetxController {
 
   @override
   void onInit() {
-    getMyProduct();
+   getMyProduct();
     super.onInit();
   }
 }
