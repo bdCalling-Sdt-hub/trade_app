@@ -277,7 +277,15 @@ class AppRouter {
         GoRoute(
           name: RoutePath.postAddScreen,
           path: RoutePath.postAddScreen.addBasePath,
-          builder: (context, state) => PostAddScreen(catName: state.extra as String,),
+          builder: (context, state) {
+            final cateId = state.uri.queryParameters["cateId"] ?? "";
+            final cateName = state.uri.queryParameters["cateName"] ?? "";
+
+            return PostAddScreen(
+              catId: cateId,
+              catName: cateName,
+            );
+          },
         ),
 
         ///======================= postEditScreen Route =======================

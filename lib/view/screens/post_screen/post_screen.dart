@@ -86,10 +86,13 @@ class PostScreen extends StatelessWidget {
                                   .popularCategoryList.value[index].name ??
                               "");
 
-                          context.pushNamed(RoutePath.postAddScreen,
-                              extra: controller
-                                      .popularCategoryList.value[index].name ??
-                                  '');
+                          context.pushNamed(
+                            RoutePath.postAddScreen,
+                            queryParameters: {
+                              "cateName": controller.popularCategoryList.value[index].name ?? '',
+                              "cateId":controller.popularCategoryList.value[index].id ?? '',
+                            },
+                          );
                         },
                         image:
                             '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',

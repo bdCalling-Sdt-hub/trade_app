@@ -420,11 +420,11 @@ class ApiClient {
   /// ========================= MaltiPart Request =====================
   Future<Response> multipartRequest(
       {required String url,
-      required String reqType,
-      bool isBasic = false,
-      Map<String, String>? body,
-      List<MultipartBody>? multipartBody,
-      bool showResult = true}) async {
+        required String reqType,
+        bool isBasic = false,
+        Map<String, dynamic>? body,
+        List<MultipartBody>? multipartBody,
+        bool showResult = true}) async {
     try {
       /// ======================- Check Internet ===================
 
@@ -444,14 +444,13 @@ class ApiClient {
         reqType,
         Uri.parse(url),
       )
-        ..fields.addAll(body ?? {})
+        ..fields.addAll(body?.map((key, value) => MapEntry(key, value.toString())) ?? {})
         ..headers.addAll(
           isBasic ? basicHeaderInfo() : await bearerHeaderInfo(),
         );
 
       if (multipartBody!.isNotEmpty) {
-        // ignore: avoid_function_literals_in_foreach_calls
-        multipartBody.forEach((element) async {
+        for (var element in multipartBody) {
           debugPrint("path : ${element.file.path}");
 
           var mimeType = lookupMimeType(element.file.path);
@@ -464,19 +463,15 @@ class ApiClient {
             contentType: MediaType.parse(mimeType!),
           );
           request.files.add(multipartImg);
-          //request.files.add(await http.MultipartFile.fromPath(element.key, element.file.path,contentType: MediaType('video', 'mp4')));
-        });
+        }
       }
 
-      // ..files.add(await http.MultipartFile.fromPath(filedName!, filepath!));
       var response = await request.send();
       var jsonData = await http.Response.fromStream(response);
 
       if (showResult) {
         log.i("===> Response Body => ${jsonData.body}");
-
         log.i("===> Status Code =>${response.statusCode}");
-
         log.i(
             '|📒📒📒|-----------------[[ Multipart $reqType ]] method response end --------------------|📒📒📒|');
       }
@@ -507,9 +502,7 @@ class ApiClient {
       log.e('🐞🐞🐞 Error Alert Client Exception🐞🐞🐞');
 
       log.e('client exception hitted');
-
       log.e(err.toString());
-
       log.e(stackrace.toString());
 
       return const Response(
@@ -518,7 +511,6 @@ class ApiClient {
       log.e('🐞🐞🐞 Other Error Alert 🐞🐞🐞');
 
       log.e('❌❌❌ unlisted error received');
-
       log.e("❌❌❌ $e");
 
       return const Response(
@@ -527,6 +519,7 @@ class ApiClient {
           statusText: '🐞🐞🐞 Other Error Alert 🐞🐞🐞');
     }
   }
+
 
   // // multipart multi file Method
   // Future<Map<String, dynamic>?> multipartMultiFile({

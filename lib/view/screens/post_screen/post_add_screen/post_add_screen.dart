@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -12,14 +11,17 @@ import 'package:trade_app/view/components/custom_details_container/custom_detail
 import 'package:trade_app/view/components/custom_dropdown/custom_dropdown.dart';
 import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
+import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class PostAddScreen extends StatefulWidget {
-  PostAddScreen({super.key, required this.catName});
+  PostAddScreen({super.key, required this.catName, required this.catId});
 
   final String catName;
+  final String catId;
 
   @override
   State<PostAddScreen> createState() => _PostAddScreenState();
@@ -38,7 +40,7 @@ class _PostAddScreenState extends State<PostAddScreen> {
     });
     super.initState();
   }
-
+  var  subCateId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,24 +104,85 @@ class _PostAddScreenState extends State<PostAddScreen> {
                     fontSize: 16,
                     bottom: 8.h,
                   ),
-                  CustomDropdown(
-                    title: AppStrings.subCategory,
-                    textColor: AppColors.white200,
-                    controller: postController.subCategoriesController,
-                    isDropdownVisible: postController.isSubCategories.value,
-                    onTap: () {
-                      postController.isSubCategories.value =
-                          !postController.isSubCategories.value;
+                  // CustomDropdown(
+                  //   title: AppStrings.subCategory,
+                  //   textColor: AppColors.white200,
+                  //   controller: postController.subCategoriesController,
+                  //   isDropdownVisible: postController.isSubCategories.value,
+                  //   onTap: () {
+                  //     postController.isSubCategories.value =
+                  //         !postController.isSubCategories.value;
+                  //   },
+                  //   options: postController.subCategoriesList,
+                  //   onSelect: (index) {
+                  //     postController.selectedCategory.value = index;
+                  //     postController.subCategoriesController.text =
+                  //         postController.subCategoriesList[
+                  //             postController.selectedCategory.value];
+                  //     postController.isSubCategories.value = false;
+                  //     postController.isSubCategories.refresh();
+                  //   },
+                  // ),
+
+                  CustomTextField(
+                    onTap: (){
+                      controller.isDropdownVisible.value =! controller.isDropdownVisible.value;
+                      controller.isDropdownVisible.refresh();
                     },
-                    options: postController.subCategoriesList,
-                    onSelect: (index) {
-                      postController.selectedCategory.value = index;
-                      postController.subCategoriesController.text =
-                          postController.subCategoriesList[
-                              postController.selectedCategory.value];
-                      postController.isSubCategories.value = false;
-                      postController.isSubCategories.refresh();
-                    },
+                    readOnly: true,
+                    hintText: '',
+                    fieldBorderColor: AppColors.gray201,
+                    textEditingController: postController.subCategoriesController,
+                    suffixIcon: Icon(
+                      controller.isDropdownVisible.value
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down_sharp,
+                      color: controller.isDropdownVisible.value ? Colors.black : Colors.blue,
+                    ),
+                  ),
+
+                  controller.isDropdownVisible.value
+                      ? Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      decoration: const BoxDecoration(
+                        color: AppColors.white200,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(
+                          controller.subCategoryList!.length,
+                              (index) => GestureDetector(
+                            onTap: () {
+
+                                 controller.isDropdownVisible.value =! controller.isDropdownVisible.value;
+
+
+                                 postController.subCategoriesController.text=controller.subCategoryList[index].name ?? "";
+                                 subCateId=controller.subCategoryList[index].id ?? "";
+                                 controller.isDropdownVisible.refresh();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration:
+                                const BoxDecoration(color: AppColors.white200),
+                                child: CustomText(
+                                  text: controller.subCategoryList[index].name ?? "",
+                                  fontWeight: FontWeight.w500,
+                                  bottom: 4.h,
+                                  color: AppColors.black500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                      : const SizedBox(
+                    height: 10,
                   ),
                   CustomFromCard(
                     validator: (value) {
@@ -259,11 +322,10 @@ class _PostAddScreenState extends State<PostAddScreen> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  CustomButton(
+                postController.addProductLoading.value?const CustomLoader():  CustomButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        // Handle the post ad submission logic here
-                        Get.back(); // Navigate back or to the desired screen
+                         postController.addProduct(context: context,catId: widget.catId,subCatId: subCateId,userID: '67134188f4a6206f732f46f6');
                       }
                     },
                     title: AppStrings.postAd,

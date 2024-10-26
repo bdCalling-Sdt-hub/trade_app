@@ -135,6 +135,8 @@ class HomeController extends GetxController {
   var subCategory = Status.loading.obs;
   SubCategoryLoadingMethod(Status status) => subCategory.value = status;
 
+  RxBool isDropdownVisible=false.obs;
+
   RxList<SubDatum> subCategoryList = <SubDatum>[].obs;
   getSubCategory({BuildContext? context,String category=''}) async {
     SubCategoryLoadingMethod(Status.loading);
@@ -186,6 +188,7 @@ class HomeController extends GetxController {
       }
     }
   }
+
 
   @override
   void onInit() {
