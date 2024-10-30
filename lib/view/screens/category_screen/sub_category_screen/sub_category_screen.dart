@@ -84,6 +84,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                             RoutePath.subCategoryProducts,
                             queryParameters: {
                               "catId": subCategoryList[index].id ?? "",
+                              "subName": subCategoryList[index].name ?? "",
                               "subCatId": subCategoryList[index].category?.id ?? "",
                             },
                           );

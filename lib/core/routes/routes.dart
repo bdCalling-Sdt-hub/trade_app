@@ -74,7 +74,13 @@ class AppRouter {
         GoRoute(
           name: RoutePath.productDetailsScreen,
           path: RoutePath.productDetailsScreen.addBasePath,
-          builder: (context, state) => ProductDetailsScreen(),
+          builder: (context, state) {
+            final productId = state.uri.queryParameters["productId"] ?? "";
+            return ProductDetailsScreen(
+              productId: productId,
+
+            );
+          },
         ),
 
         ///======================= signInScreen Route =======================
@@ -367,13 +373,14 @@ class AppRouter {
           path: RoutePath.subCategoryProducts.addBasePath,
           builder: (context, state) {
             final catId = state.uri.queryParameters["catId"] ?? "";
+            final subName = state.uri.queryParameters["subName"] ?? "";
             final subCatId = state.uri.queryParameters["subCatId"] ?? "";
 
             print("catId: $catId, subCatId: $subCatId"); // Debugging
 
             return SubCategoryProducts(
               catId: catId,
-              subCatId: subCatId,
+              subCatId: subCatId, subCatName: subName,
             );
           },
         ),

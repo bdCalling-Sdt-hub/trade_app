@@ -18,10 +18,11 @@ import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class SubCategoryProducts extends StatefulWidget {
-    SubCategoryProducts({super.key, required this.catId, required this.subCatId});
+    SubCategoryProducts({super.key, required this.catId, required this.subCatId, required this.subCatName});
 
     final String catId;
     final String subCatId;
+    final String subCatName;
 
   @override
   State<SubCategoryProducts> createState() => _SubCategoryProductsState();
@@ -45,7 +46,7 @@ class _SubCategoryProductsState extends State<SubCategoryProducts> {
       bottomNavigationBar: const NavBar(currentIndex: 2),
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
-        appBarContent: 'nnn',
+        appBarContent: widget.subCatName,
       ),
       body:Obx(() {
         switch (controller.subCategoryProduct.value) {
@@ -98,8 +99,12 @@ class _SubCategoryProductsState extends State<SubCategoryProducts> {
                           image: '${ApiUrl.baseUrl}${subCategoryProductList[index].images?[0] ?? ""}',
                           name: subCategoryProductList[index].title ?? '',
                           onTap: () {
-
-                            context.pushNamed(RoutePath.productDetailsScreen);
+                            context.pushNamed(RoutePath.productDetailsScreen,
+                              queryParameters: {
+                                "productId": subCategoryProductList[index].id ?? '',
+                              },
+                            );
+                           // context.pushNamed(RoutePath.productDetailsScreen);
                           },
                           value: '\$${subCategoryProductList[index].productValue ?? ""}',
                           editOnTap: () {

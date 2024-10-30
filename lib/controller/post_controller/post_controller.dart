@@ -12,6 +12,7 @@ import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/screens/my_products_screen/model/my_product_model.dart';
+import 'package:trade_app/view/screens/product_details/product_details_model.dart';
 
 class PostController extends GetxController {
   TextEditingController productCategoryController =
@@ -275,6 +276,46 @@ class PostController extends GetxController {
         MyProductLoadingMethod(Status.noDataFound);
       } else {
         MyProductLoadingMethod(Status.error);
+      }
+    }
+  }
+
+  RxBool isSwap = false.obs;
+  Rx<PageController> pageController = PageController().obs;
+  TextEditingController swapController = TextEditingController();
+
+  ///<=========================== product details =================================>
+
+  var productDetailsLoading = Status.loading.obs;
+  ProductDetailsLoadingMethod(Status status) =>
+      productDetailsLoading.value = status;
+  Rx<ProductDetailsModel> productDetailsModel = ProductDetailsModel().obs;
+
+  Future<void> getProductDetails(
+      {BuildContext? context, required productId}) async {
+    print('product id =========================> ${ApiUrl.productDetails.addBaseUrl}/$productId');
+    ProductDetailsLoadingMethod(Status.loading);
+    refresh();
+
+    var response = await apiClient.get(
+        url: '${ApiUrl.productDetails.addBaseUrl}/$productId',
+        showResult: true);
+
+
+
+    if (response.statusCode == 200) {
+      productDetailsModel.value = ProductDetailsModel.fromJson(response.body);
+
+      ProductDetailsLoadingMethod(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        ProductDetailsLoadingMethod(Status.internetError);
+      } else if (response.statusCode == 404) {
+        ProductDetailsLoadingMethod(Status.noDataFound);
+      } else {
+        ProductDetailsLoadingMethod(Status.error);
       }
     }
   }

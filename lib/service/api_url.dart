@@ -1,5 +1,5 @@
 class ApiUrl {
-  static const baseUrl = "http://192.168.10.152:5070";
+  static const baseUrl = "http://192.168.10.14:5070";
   static const imageBaseUrl = '$baseUrl/';
   static socketUrl({String userID = ""}) => '$baseUrl?userId=$userID';
 
@@ -24,4 +24,5 @@ class ApiUrl {
   static const myProduct = "/product/my-products";
   static const editProduct = "/product/edit";
   static const deleteProduct = "/product/delete";
+  static const productDetails = "/product/details";
 }
