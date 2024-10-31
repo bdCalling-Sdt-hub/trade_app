@@ -7,6 +7,7 @@ import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -90,8 +91,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                     ///======================Image Here=============
                     CustomNetworkImage(
-                      imageUrl: AppConstants.electronics,
-                      height: 252.h,
+                      imageUrl: '${ApiUrl.baseUrl}/${productDetailsModel.data?.product?.images?[0] ?? ""}',
+                      height: 220.h,
                       width: double.infinity,
                     ),
                     CustomDetailContainer(
@@ -101,7 +102,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         children: [
                           ///======================Item Name==============
                           CustomText(
-                            text: 'Samsung Galaxy S22 Ultra 5G'.tr,
+                            text: productDetailsModel.data?.product?.title ?? "",
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: AppColors.black500,
@@ -111,7 +112,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             children: [
                               ///=========================Price=============
                               CustomText(
-                                text: '\$820+'.tr,
+                                text: '\$${ productDetailsModel.data?.product?.productValue ?? 0}'.tr,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16.h,
                                 color: AppColors.blue500,
@@ -151,8 +152,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     onTap: () {
                                       context.pushNamed(RoutePath.otherProfile);
                                     },
-                                    child: const CustomText(
-                                      text: "${'Nadim hasan'} ${'(Gold)'}",
+                                    child: CustomText(
+                                      text: "${ productDetailsModel.data?.product?.user?.name ?? ""} - ${ productDetailsModel.data?.product?.user?.userType ?? ""}",
                                       fontWeight: FontWeight.w500,
                                       decoration: TextDecoration.underline,
                                       color: AppColors.blue500,
@@ -160,13 +161,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   ),
                                 ],
                               ),
-                              const Row(
+                                Row(
                                 children: [
                                   CustomImage(
                                     imageSrc: AppIcons.locationOn,
                                     imageColor: AppColors.black500,
                                   ),
-                                  CustomText(text: "Napervilla")
+                                  CustomText(text:  productDetailsModel.data?.product?.address ?? "")
                                 ],
                               )
                             ],
@@ -189,7 +190,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                           const Spacer(),
                           CustomText(
-                            text: 'Used',
+                            text: productDetailsModel.data?.product?.condition ?? "",
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: AppColors.black500,
@@ -201,6 +202,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                     ///===================This is Description===============
                     CustomDetailContainer(
+                      weight: double.infinity,
                       color: AppColors.white200,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,8 +218,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             textAlign: TextAlign.start,
                             maxLines: 30,
                             text:
-                            'Galaxy S22 Ultra, a powerhouse of performance and aesthetics. Its sleek design features a smooth curved display, crafted from premium armor aluminum. With the option of dual SIM, the S22 Ultra marries style and functionality seamlessly. The integrated stylus ensures precise input, while the vibrant 6.8" Dynamic AMOLED 2X display offers stunning visuals with HDR10+ support.'
-                                .tr,
+                            productDetailsModel.data?.product?.description ?? "",
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: AppColors.black500,
@@ -261,12 +262,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                              swapList.length,
+                              controller.myProductList.length,
                                   (index) => GestureDetector(
                                 onTap: () {
                                   // themeController.selectedCategory.value = index;
                                   controller.swapController.text =
-                                  swapList[index];
+                                  controller.myProductList[index].title ?? "";
                                   controller.isSwap.value = false;
                                   controller.update();
                                 },
@@ -275,7 +276,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   child: Container(
                                     decoration: const BoxDecoration(),
                                     child: CustomText(
-                                      text: swapList[index],
+                                      text: controller.myProductList[index].title ?? "",
                                       fontWeight: FontWeight.w500,
                                       bottom: 4.h,
                                     ),
@@ -300,7 +301,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
 
                     CustomText(
-                      text: "By swapping you can earn upto 500 points".tr,
+                      text: "By swapping you can earn upto ${productDetailsModel.data?.point ?? ""} points".tr,
                       top: 8.h,
                       bottom: 16.h,
                     ),
@@ -333,18 +334,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(4, (index) {
+                        children: List.generate(productDetailsModel.data!.similarProduct!.length, (index) {
                           return Container(
                             margin: EdgeInsets.only(right: 10.w),
                             child: CustomMyProduct(
                               isMargin: false,
                               isEdit: false,
-                              image: AppConstants.electronics,
-                              name: 'Samsung Galaxy s22'.tr,
+                              image: '${ApiUrl.baseUrl}/${productDetailsModel.data?.similarProduct?[index].images?[0] ?? ""}',
+                              name: productDetailsModel.data?.similarProduct?[index].title ?? "",
                               onTap: () {
                                 context.pushNamed(RoutePath.productDetailsScreen);
                               },
-                              value: '\$825+',
+                              value: '\$${productDetailsModel.data?.similarProduct?[index].productValue ?? ""}',
                               editOnTap: () {},
                             ),
                           );
