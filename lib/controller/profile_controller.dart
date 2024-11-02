@@ -3,6 +3,12 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:trade_app/helper/extension/base_extension.dart';
+import 'package:trade_app/service/api_service.dart';
+import 'package:trade_app/service/api_url.dart';
+import 'package:trade_app/service/check_api.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/swap_history_screen/swap_history_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController {
@@ -60,5 +66,42 @@ TextEditingController countryController = TextEditingController();
     } else {
       throw 'Could not launch $phoneNumber';
     }
+  }
+
+  /// ======================= My product List =========================>
+  var myProductLoading = Status.loading.obs;
+  MyProductLoadingMethod(Status status) => myProductLoading.value = status;
+
+  ApiClient apiClient=ApiClient();
+  RxList<SwapHistoryDatum> swapHistoryList = <SwapHistoryDatum>[].obs;
+  getSwapHistory({
+    BuildContext? context,
+  }) async {
+    MyProductLoadingMethod(Status.loading);
+
+    var response = await apiClient.get(
+        url: ApiUrl.swapHistory.addBaseUrl, showResult: true);
+
+    if (response.statusCode == 200) {
+      swapHistoryList.value =
+      List<SwapHistoryDatum>.from(response.body["data"].map((x) => SwapHistoryDatum.fromJson(x)));
+
+      MyProductLoadingMethod(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        MyProductLoadingMethod(Status.internetError);
+      } else if (response.statusCode == 404) {
+        MyProductLoadingMethod(Status.noDataFound);
+      } else {
+        MyProductLoadingMethod(Status.error);
+      }
+    }
+  }
+
+@override
+  void onInit() {
+    getSwapHistory();
+    super.onInit();
   }
 }

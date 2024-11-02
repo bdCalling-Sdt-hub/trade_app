@@ -25,4 +25,7 @@ class ApiUrl {
   static const editProduct = "/product/edit";
   static const deleteProduct = "/product/delete";
   static const productDetails = "/product/details";
+  static const swapProduct = "/swap/make-swap";
+  static const swapHistory = "/swap/swap-histoy";
+  static const swapMyReq = "/swap/pending-swap?status=my_request";
 }

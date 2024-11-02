@@ -20,6 +20,8 @@ class CustomSwapRequests extends StatelessWidget {
   final String rejectButton;
   final Color backgroundColor;
   final VoidCallback onTap;
+  final VoidCallback onTapAcceptButton;
+  final VoidCallback onTapRejectButton;
   final VoidCallback onTapName;
 
   const CustomSwapRequests({
@@ -32,7 +34,7 @@ class CustomSwapRequests extends StatelessWidget {
     this.backgroundColor = AppColors.white200,
     required this.onTap,
     required this.firstProductName,
-    required this.exchangeProductName, required this.onTapName,
+    required this.exchangeProductName, required this.onTapName, required this.onTapAcceptButton, required this.onTapRejectButton,
   });
 
   @override
@@ -129,7 +131,7 @@ class CustomSwapRequests extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomButton(
-                      onTap: (){},
+                      onTap: onTapAcceptButton,
                       title: acceptButton,
                       fillColor: AppColors.white,
                       textColor: AppColors.green600,
@@ -139,7 +141,7 @@ class CustomSwapRequests extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: CustomButton(
-                      onTap: (){},
+                      onTap: onTapRejectButton,
                       title: rejectButton,
                       fillColor: AppColors.white,
                       textColor: AppColors.red500,

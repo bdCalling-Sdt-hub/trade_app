@@ -9,6 +9,7 @@ import 'package:trade_app/view/screens/authentication/auth_controller/auth_contr
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 import 'package:trade_app/view/screens/message_screen/MessgaeController/message_controller.dart';
+import 'package:trade_app/view/screens/swap_request_screen/swap_request_controller.dart';
 
 
 
@@ -25,5 +26,6 @@ class DependencyInjection extends Bindings {
    Get.lazyPut(() => CategoryController(), fenix: true);
    Get.lazyPut(() => SearchListController(), fenix: true);
    Get.lazyPut(() => PostController(), fenix: true);
+   Get.lazyPut(() => SwapRequestController(), fenix: true);
   }
 }

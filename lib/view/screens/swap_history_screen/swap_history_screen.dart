@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/global/error_screen/error_screen.dart';
+import 'package:trade_app/global/no_internet/no_internet.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
+import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_review_dialoge/custom_review_dialoge.dart';
 import 'package:trade_app/view/components/custom_swap_history/custom_swap_history.dart';
+import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 
 class SwapHistoryScreen extends StatelessWidget {
-  const SwapHistoryScreen({super.key});
+  SwapHistoryScreen({super.key});
 
+  ProfileController controller = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,32 +30,64 @@ class SwapHistoryScreen extends StatelessWidget {
       appBar: CustomAppBar(
         appBarContent: AppStrings.swapHistory.tr,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                  children: List.generate(4, (index) {
-                return CustomSwapHistory(
-                  onTapName: () {
-                     context.pushNamed(RoutePath.otherProfile);
-                  },
-                  image: AppConstants.userNtr,
-                  name: 'Zahid '.tr,
-                  date: '12/06/24'.tr,
-                  onTap: () {
-                    showDialogBox(context);
-                  },
-                  firstProductName: 'Samsung Galaxy S22'.tr,
-                  exchangeProductName: 'Sony Y1G Android TV'.tr,
-                );
-              }))
-            ],
-          ),
-        ),
-      ),
+      body: Obx(() {
+        switch (controller.myProductLoading.value) {
+          case Status.loading:
+            return const CustomLoader();
+          case Status.internetError:
+            return NoInternetScreen(
+              onTap: () {
+                controller.getSwapHistory(context: context);
+              },
+            );
+          case Status.error:
+            return GeneralErrorScreen(
+              onTap: () {
+                controller.getSwapHistory(context: context);
+              },
+            );
+          case Status.noDataFound:
+            return Center(
+              child: CustomText(text: AppStrings.noDataFound),
+            );
+          case Status.completed:
+            var swapHistoryList = controller.swapHistoryList.value;
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                        children:
+                            List.generate(swapHistoryList.length, (index) {
+                      return CustomSwapHistory(
+                        onTapName: () {
+                          context.pushNamed(RoutePath.otherProfile);
+                        },
+                        image: swapHistoryList[index]
+                                .productTo
+                                ?.user
+                                ?.profileImage ??
+                            "",
+                        name:
+                            swapHistoryList[index].productTo?.user?.name ?? "",
+                        date: '12/06/24'.tr,
+                        onTap: () {
+                          showDialogBox(context);
+                        },
+                        firstProductName:
+                            swapHistoryList[index].productTo?.title ?? "",
+                        exchangeProductName:
+                            swapHistoryList[index].productFrom?.title ?? "",
+                      );
+                    }))
+                  ],
+                ),
+              ),
+            );
+        }
+      }),
     );
   }
 

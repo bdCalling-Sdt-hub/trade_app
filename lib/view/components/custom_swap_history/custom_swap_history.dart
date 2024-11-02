@@ -107,7 +107,7 @@ class CustomSwapHistory extends StatelessWidget {
                 color: AppColors.black500,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText(
                     text: firstProductName,

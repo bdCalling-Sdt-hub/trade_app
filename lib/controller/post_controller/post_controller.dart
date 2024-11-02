@@ -293,15 +293,14 @@ class PostController extends GetxController {
 
   Future<void> getProductDetails(
       {BuildContext? context, required productId}) async {
-    print('product id =========================> ${ApiUrl.productDetails.addBaseUrl}/$productId');
+    print(
+        'product id =========================> ${ApiUrl.productDetails.addBaseUrl}/$productId');
     ProductDetailsLoadingMethod(Status.loading);
     refresh();
 
     var response = await apiClient.get(
         url: '${ApiUrl.productDetails.addBaseUrl}/$productId',
         showResult: true);
-
-
 
     if (response.statusCode == 200) {
       productDetailsModel.value = ProductDetailsModel.fromJson(response.body);
@@ -320,9 +319,39 @@ class PostController extends GetxController {
     }
   }
 
+  ///<==================== swap product =======================>
+  swapProduct(
+      {required String productUserID,
+      required String productProductID,
+      required String myUserID,
+      required String myProductId,
+      required BuildContext context}) async {
+    addProductLoading.value = true;
+
+    update();
+    Map<String, dynamic> body = {
+      "userFrom": myUserID,
+      "userTo": productUserID,
+      "productFrom": myProductId,
+      "productTo": productProductID,
+    };
+
+    var response = await apiClient.post(
+        url: ApiUrl.swapProduct.addBaseUrl, context: context, body: body);
+
+    if (response.statusCode == 200) {
+      AppRouter.route.replaceNamed(RoutePath.swapRequestScreen);
+    } else {
+      checkApi(response: response, context: context);
+    }
+
+    addProductLoading.value = false;
+    update();
+  }
+
   @override
   void onInit() {
-     getMyProduct();
+    getMyProduct();
     super.onInit();
   }
 }
