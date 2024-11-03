@@ -11,6 +11,7 @@ import 'package:trade_app/helper/tost_message/show_snackbar.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
+import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 
 class AuthController extends GetxController {
@@ -19,9 +20,9 @@ class AuthController extends GetxController {
 
   ///<=========================== Sign in controller========================>
   TextEditingController signInEmail =
-      TextEditingController(text: 'wikevih356@avzong.com');
+      TextEditingController(text: 'retev81494@evasud.com');
   TextEditingController passWordSignIn =
-      TextEditingController(text: 'Nadim1234');
+      TextEditingController(text: 'Nadim12345');
 
   saveInformation({required Response<dynamic> response}) {
     dbHelper.storeTokenUserdata(
@@ -52,6 +53,8 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       saveInformation(response: response);
       AppRouter.route.replaceNamed(RoutePath.homeScreen);
+    } else if (response.statusCode == 404) {
+      toastMessage(message: response.body["message"]);
     } else {
       // ignore: use_build_context_synchronously
       checkApi(response: response, context: context);

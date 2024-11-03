@@ -11,7 +11,7 @@ class SwapRequestController extends GetxController{
  RxInt selectedTabIndex=0.obs;
 
  ApiClient apiClient=ApiClient();
- /// ======================= TopProduct List =========================>
+ /// ======================= swapMyReqList =========================>
  RxList<MySwapDatum> swapMyReqList = <MySwapDatum>[].obs;
 
  var swapMyReqLoading = Status.loading.obs;
@@ -40,9 +40,40 @@ class SwapRequestController extends GetxController{
   }
  }
 
+ /// ======================= swapTheirReqList =========================>
+ RxList<MySwapDatum> swapTheirReqList = <MySwapDatum>[].obs;
+
+ var swapTheirReqLoading = Status.loading.obs;
+ SwapTheirReqLoadingLoadingMethod(Status status) => swapTheirReqLoading.value = status;
+
+ getSwapTheirRequest({BuildContext? context}) async {
+  swapTheirReqLoading(Status.loading);
+
+  var response = await apiClient.get(
+      url: ApiUrl.swapTheirReq.addBaseUrl, showResult: true);
+
+  if (response.statusCode == 200) {
+   // topProductList.value = TopProductDatum.fromJson(response.body["data"]);
+   swapMyReqList.value = List<MySwapDatum>.from(
+       response.body["data"].map((x) => MySwapDatum.fromJson(x)));
+   swapTheirReqLoading(Status.completed);
+  } else {
+   checkApi(response: response, context: context);
+   if (response.statusCode == 503) {
+    swapTheirReqLoading(Status.internetError);
+   } else if (response.statusCode == 404) {
+    swapTheirReqLoading(Status.noDataFound);
+   } else {
+    swapTheirReqLoading(Status.error);
+   }
+  }
+ }
+
+
  @override
   void onInit() {
-    getSwapMyRequest();
+  //getSwapMyRequest();
+  getSwapTheirRequest();
     super.onInit();
   }
 }

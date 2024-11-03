@@ -46,8 +46,9 @@ class SwapMyRequest extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
+              children: List.generate(swapMyReqList.length, (index){
+                return Container(
+                  margin: EdgeInsets.only(bottom: 16.h),
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -61,7 +62,7 @@ class SwapMyRequest extends StatelessWidget {
                         children: [
                           CustomNetworkImage(
                               boxShape: BoxShape.circle,
-                              imageUrl: '',
+                              imageUrl: swapMyReqList[index].userTo?.profileImage ?? "",
                               height: 36.h,
                               width: 36.w),
                           Expanded(
@@ -74,7 +75,7 @@ class SwapMyRequest extends StatelessWidget {
                                   },
                                   child: CustomText(
                                     left: 8,
-                                    text: 'name',
+                                    text:  swapMyReqList[index].userTo?.name ?? "",
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.blue500,
@@ -82,7 +83,7 @@ class SwapMyRequest extends StatelessWidget {
                                 ),
                                 CustomText(
                                   left: 10,
-                                  text: 'date',
+                                  text:  swapMyReqList[index].userTo?.createdAt.toString() ?? "",
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
                                   color: AppColors.black400,
@@ -115,7 +116,7 @@ class SwapMyRequest extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           CustomText(
-                            text: 't product',
+                            text: swapMyReqList[index].userTo?.name ?? "",
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: AppColors.black500,
@@ -144,8 +145,8 @@ class SwapMyRequest extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
-              ],
+                );
+              }),
             ),
           );
       }

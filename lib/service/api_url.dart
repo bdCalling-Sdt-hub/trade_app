@@ -28,4 +28,5 @@ class ApiUrl {
   static const swapProduct = "/swap/make-swap";
   static const swapHistory = "/swap/swap-histoy";
   static const swapMyReq = "/swap/pending-swap?status=my_request";
+  static const swapTheirReq = "/swap/pending-swap?status=receive_request";
 }
