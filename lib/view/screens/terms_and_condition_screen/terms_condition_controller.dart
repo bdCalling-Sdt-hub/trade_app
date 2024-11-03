@@ -6,6 +6,8 @@ import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/my_rating_screen/avg_review_model.dart';
+import 'package:trade_app/view/screens/my_rating_screen/my_review_model.dart';
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_model.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/term_condition_model.dart';
 
@@ -62,10 +64,62 @@ class TermsConditionController extends GetxController{
     }
   }
 
+  ///<========================= myRatingModel ==============================>
+  Rx<AvgReviewModel> myRatingModel = AvgReviewModel().obs;
+
+  getAvgRating({BuildContext? context}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
+    var response = await apiClient.get(url: ApiUrl.avgRating.addBaseUrl,showResult: true);
+
+    if (response.statusCode == 200) {
+      myRatingModel.value = AvgReviewModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        rxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        rxRequestStatus(Status.noDataFound);
+      } else {
+        rxRequestStatus(Status.error);
+      }
+    }
+  }
+
+  /// ======================= getRating =========================>
+  RxList<MyRatingDatum> ratingList = <MyRatingDatum>[].obs;
+  getRating({BuildContext? context}) async {
+    rxRequestStatus(Status.loading);
+
+    var response = await apiClient.get(
+        url: ApiUrl.myReview.addBaseUrl, showResult: true);
+
+    if (response.statusCode == 200) {
+
+      ratingList.value = List<MyRatingDatum>.from(
+          response.body["data"].map((x) => MyRatingDatum.fromJson(x)));
+      rxRequestStatus(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        rxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        rxRequestStatus(Status.noDataFound);
+      } else {
+        rxRequestStatus(Status.error);
+      }
+    }
+  }
+
   @override
   void onInit() {
     getTerms();
     getPrivacy();
+    getAvgRating();
+    getRating();
+    getRating();
     super.onInit();
   }
 }

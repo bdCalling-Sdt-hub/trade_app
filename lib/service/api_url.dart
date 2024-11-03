@@ -32,4 +32,6 @@ class ApiUrl {
   static const termsCondition = "/rules/get-rules";
   static const privacyPolicy = "/rules/get-facts";
   static const changePassword = "/auth/change-password";
+  static const avgRating = "/review/average-ratting";
+  static const myReview = "/review/my-reviews";
 }
