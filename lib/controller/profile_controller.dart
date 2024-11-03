@@ -1,12 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
+import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/screens/swap_history_screen/swap_history_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -97,6 +101,35 @@ TextEditingController countryController = TextEditingController();
         MyProductLoadingMethod(Status.error);
       }
     }
+  }
+
+  RxBool signUpLoading = false.obs;
+  changePassword({required BuildContext context}) async {
+    signUpLoading.value = true;
+    Map<String,dynamic> body = {
+      "oldPassword": currentPasswordController.value.text,
+      "newPassword": newPasswordController.value.text,
+      "confirmPassword": reTypePasswordController.value.text,
+    };
+
+    var response = await apiClient.patch(
+        context: context,
+        body: body,
+
+        url: ApiUrl.changePassword.addBaseUrl,);
+
+    if (response.statusCode == 200) {
+
+      AppRouter.route.pushNamed(RoutePath.settingScreen);
+    }else if(response.statusCode == 402){
+      toastMessage(message: response.body["message"]);
+    } else {
+      // ignore: use_build_context_synchronously
+      checkApi(response: response, context: context);
+    }
+
+    signUpLoading.value = false;
+    signUpLoading.refresh();
   }
 
 @override

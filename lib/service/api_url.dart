@@ -31,4 +31,5 @@ class ApiUrl {
   static const swapTheirReq = "/swap/pending-swap?status=receive_request";
   static const termsCondition = "/rules/get-rules";
   static const privacyPolicy = "/rules/get-facts";
+  static const changePassword = "/auth/change-password";
 }
