@@ -287,7 +287,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                                     .title ??
                                                 "";
                                         myProductId = controller
-                                                .myProductList[index].user ??
+                                                .myProductList[index].id ??
                                             "";
                                         controller.isSwap.value = false;
                                         controller.update();

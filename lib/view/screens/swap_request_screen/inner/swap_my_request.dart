@@ -16,9 +16,21 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_controller.dart';
 
-class SwapMyRequest extends StatelessWidget {
+class SwapMyRequest extends StatefulWidget {
   SwapMyRequest({super.key});
+
+  @override
+  State<SwapMyRequest> createState() => _SwapMyRequestState();
+}
+
+class _SwapMyRequestState extends State<SwapMyRequest> {
   SwapRequestController controller = Get.find<SwapRequestController>();
+
+  @override
+  void initState() {
+    controller.getSwapMyRequest(context: context);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -93,7 +105,9 @@ class SwapMyRequest extends StatelessWidget {
                           ),
                           const Spacer(),
                           GestureDetector(
-                            onTap: (){},
+                            onTap: (){
+                              context.pushNamed(RoutePath.swapProductScreen);
+                            },
                             child:  CustomText(
                               decoration: TextDecoration.underline,
                               text: AppStrings.viewDetails.tr,

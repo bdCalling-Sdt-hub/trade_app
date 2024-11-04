@@ -11,9 +11,21 @@ import 'package:trade_app/view/components/custom_swap_requests/custom_swap_reque
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_controller.dart';
 
-class SwapAnotherRequest extends StatelessWidget {
+class SwapAnotherRequest extends StatefulWidget {
   SwapAnotherRequest({super.key});
+
+  @override
+  State<SwapAnotherRequest> createState() => _SwapAnotherRequestState();
+}
+
+class _SwapAnotherRequestState extends State<SwapAnotherRequest> {
   SwapRequestController controller = Get.find<SwapRequestController>();
+
+  @override
+  void initState() {
+    controller.getSwapTheirRequest(context: context);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Obx(() {

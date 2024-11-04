@@ -12,6 +12,7 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/profile_screen/profile_model.dart';
 import 'package:trade_app/view/screens/swap_history_screen/swap_history_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,36 +32,151 @@ class ProfileController extends GetxController {
     }
   }
 
+  RxInt size=0.obs;
   ///=======================Controller here=====================
-TextEditingController firstNameController = TextEditingController();
-TextEditingController lastNameController = TextEditingController();
-TextEditingController emailController = TextEditingController();
-TextEditingController phoneController = TextEditingController();
-TextEditingController currentPasswordController = TextEditingController();
-TextEditingController newPasswordController = TextEditingController();
-TextEditingController reTypePasswordController = TextEditingController();
-TextEditingController cityController = TextEditingController();
-TextEditingController zipCodeController = TextEditingController();
-TextEditingController addressController = TextEditingController();
-TextEditingController countryController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController currentPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController reTypePasswordController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController zipCodeController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
 
-///==========================Update Country Picker================
+  RxBool profileUpdateLoading = false.obs;
+  updateProfile({required BuildContext context}) async {
+    profileUpdateLoading = true.obs;
+
+    update();
+    Map<String, dynamic> body = {
+      "name": firstNameController.text,
+      "email": emailController.text,
+      "phone": phoneController.text,
+    };
+
+    var response = imageFile == null
+        ? await apiClient.patch(
+            url: ApiUrl.editProfile.addBaseUrl,
+            showResult: true,
+            context: context,
+          )
+        : await apiClient.multipartRequest(
+            url: ApiUrl.editProfile.addBaseUrl,
+            reqType: 'patch',
+            body: body,
+            multipartBody: [
+              MultipartBody("profile_image", File(imageFile!.value.path)),
+            ],
+          );
+    ;
+
+    if (response.statusCode == 200) {
+      firstNameController.clear();
+      emailController.clear();
+      phoneController.clear();
+      getProfile();
+      AppRouter.route.replaceNamed(RoutePath.profileScreen);
+    } else {
+      checkApi(response: response, context: context);
+    }
+
+    profileUpdateLoading = false.obs;
+    update();
+  }
+
+  updateAddress({required BuildContext context}) async {
+    profileUpdateLoading = true.obs;
+
+    update();
+    Map<String, dynamic> body = {
+      "address": addressController.text,
+      "country": countryController.text,
+      "zip": zipCodeController.text,
+      "city": cityController.text,
+    };
+
+    var response =   await apiClient.patch(
+      url: ApiUrl.editProfile.addBaseUrl,
+      showResult: true,
+      context: context,
+      body: body
+    ) ;
+
+    if (response.statusCode == 200) {
+      addressController.clear();
+      countryController.clear();
+      zipCodeController.clear();
+      getProfile();
+      AppRouter.route.replaceNamed(RoutePath.profileScreen);
+    } else {
+      checkApi(response: response, context: context);
+    }
+
+    profileUpdateLoading = false.obs;
+    update();
+  }
+
+  ///<=============================== get profile ================================>
+  final rxRequestStatus = Status.loading.obs;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
+  Rx<ProfileModel> profileModel = ProfileModel().obs;
+
+  ApiClient apiClient = ApiClient();
+  Future<void> getProfile({BuildContext? context}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
+
+    var response =
+        await apiClient.get(url: ApiUrl.profile.addBaseUrl, showResult: true);
+
+    if (response.statusCode == 200) {
+      profileModel.value = ProfileModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        setRxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        setRxRequestStatus(Status.noDataFound);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+    }
+  }
+
+  ///==========================Update Country Picker================
   var selectedCountry = ''.obs;
 
   void updateCountry(String country) {
     selectedCountry.value = country;
   }
 
-
-
   final List<Map<String, String>> faqList = [
-    {"que": "What is your exchange policy?", "ans": "This is an dummy answer, To show in UI"},
-    {"que": "How do I exchange a product?", "ans": "This is an dummy answer, To show in UI"},
-    {"que": "Are there any items that cannot be exchanged?", "ans": "This is an dummy answer, To show in UI"},
-    {"que": "Do I have to pay for return shipping?", "ans": "This is an dummy answer, To show in UI"},
-    {"que": "How long does the exchange process take?", "ans": "This is an dummy answer, To show in UI"},
+    {
+      "que": "What is your exchange policy?",
+      "ans": "This is an dummy answer, To show in UI"
+    },
+    {
+      "que": "How do I exchange a product?",
+      "ans": "This is an dummy answer, To show in UI"
+    },
+    {
+      "que": "Are there any items that cannot be exchanged?",
+      "ans": "This is an dummy answer, To show in UI"
+    },
+    {
+      "que": "Do I have to pay for return shipping?",
+      "ans": "This is an dummy answer, To show in UI"
+    },
+    {
+      "que": "How long does the exchange process take?",
+      "ans": "This is an dummy answer, To show in UI"
+    },
   ];
-
 
   ///===================Customer care method ==========
   Future<void> launchPhone(String phoneNumber) async {
@@ -76,7 +192,6 @@ TextEditingController countryController = TextEditingController();
   var myProductLoading = Status.loading.obs;
   MyProductLoadingMethod(Status status) => myProductLoading.value = status;
 
-  ApiClient apiClient=ApiClient();
   RxList<SwapHistoryDatum> swapHistoryList = <SwapHistoryDatum>[].obs;
   getSwapHistory({
     BuildContext? context,
@@ -87,8 +202,8 @@ TextEditingController countryController = TextEditingController();
         url: ApiUrl.swapHistory.addBaseUrl, showResult: true);
 
     if (response.statusCode == 200) {
-      swapHistoryList.value =
-      List<SwapHistoryDatum>.from(response.body["data"].map((x) => SwapHistoryDatum.fromJson(x)));
+      swapHistoryList.value = List<SwapHistoryDatum>.from(
+          response.body["data"].map((x) => SwapHistoryDatum.fromJson(x)));
 
       MyProductLoadingMethod(Status.completed);
     } else {
@@ -106,22 +221,21 @@ TextEditingController countryController = TextEditingController();
   RxBool signUpLoading = false.obs;
   changePassword({required BuildContext context}) async {
     signUpLoading.value = true;
-    Map<String,dynamic> body = {
+    Map<String, dynamic> body = {
       "oldPassword": currentPasswordController.value.text,
       "newPassword": newPasswordController.value.text,
       "confirmPassword": reTypePasswordController.value.text,
     };
 
     var response = await apiClient.patch(
-        context: context,
-        body: body,
-
-        url: ApiUrl.changePassword.addBaseUrl,);
+      context: context,
+      body: body,
+      url: ApiUrl.changePassword.addBaseUrl,
+    );
 
     if (response.statusCode == 200) {
-
       AppRouter.route.pushNamed(RoutePath.settingScreen);
-    }else if(response.statusCode == 402){
+    } else if (response.statusCode == 402) {
       toastMessage(message: response.body["message"]);
     } else {
       // ignore: use_build_context_synchronously
@@ -132,9 +246,10 @@ TextEditingController countryController = TextEditingController();
     signUpLoading.refresh();
   }
 
-@override
+  @override
   void onInit() {
     getSwapHistory();
+    getProfile();
     super.onInit();
   }
 }

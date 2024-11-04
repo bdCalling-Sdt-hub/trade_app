@@ -54,7 +54,7 @@ class SwapRequestController extends GetxController{
 
   if (response.statusCode == 200) {
    // topProductList.value = TopProductDatum.fromJson(response.body["data"]);
-   swapMyReqList.value = List<MySwapDatum>.from(
+   swapTheirReqList.value = List<MySwapDatum>.from(
        response.body["data"].map((x) => MySwapDatum.fromJson(x)));
    swapTheirReqLoading(Status.completed);
   } else {
@@ -72,8 +72,8 @@ class SwapRequestController extends GetxController{
 
  @override
   void onInit() {
-  //getSwapMyRequest();
-  getSwapTheirRequest();
+ // getSwapMyRequest();
+ // getSwapTheirRequest();
     super.onInit();
   }
 }

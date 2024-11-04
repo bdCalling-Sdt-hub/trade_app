@@ -165,6 +165,19 @@ class HomeController extends GetxController {
   /// ======================= getSubCategoryProduct List =========================>
   var subCategoryProduct = Status.loading.obs;
   SubCategoryProductLoadingMethod(Status status) => subCategoryProduct.value = status;
+  var totalPage = 0;
+  var currentPage = 0;
+
+  ScrollController scrollController = ScrollController();
+
+  //===================Pagination Scroll Controller===============
+
+  Future<void> addScrollListener() async {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      loadMore();
+    }
+  }
 
   RxList<SubProductDatum> subCategoryProductList = <SubProductDatum>[].obs;
   getSubCategoryProduct({BuildContext? context,String catId='',String subCatID=''}) async {
@@ -176,6 +189,12 @@ class HomeController extends GetxController {
     if (response.statusCode == 200) {
       subCategoryProductList.value = List<SubProductDatum>.from(
           response.body["data"].map((x) => SubProductDatum.fromJson(x)));
+
+      if (subCategoryProductList.isNotEmpty) {
+        currentPage = response.body['meta']['page'];
+        totalPage = response.body['meta']['totalPage'];
+      }
+
       SubCategoryProductLoadingMethod(Status.completed);
     } else {
       checkApi(response: response, context: context);
@@ -189,6 +208,38 @@ class HomeController extends GetxController {
     }
   }
 
+  //==================================Pagination============================
+
+  var isLoadMoreRunning = false.obs;
+  RxInt pages = 1.obs;
+
+  loadMore({BuildContext? context,String catId='',String subCatID=''}) async {
+    debugPrint("===============load more=============");
+    if (subCategoryProduct.value != Status.loading &&
+        isLoadMoreRunning.value == false &&
+        totalPage != currentPage) {
+      isLoadMoreRunning(true);
+      pages.value += 1;
+      refresh();
+
+      Response response = await apiClient.get(
+          url: '${ApiUrl.getSubProduct.addBaseUrl}', showResult: true
+      );
+      currentPage = response.body['meta']['page'];
+      totalPage = response.body['meta']['totalPage'];
+
+      if (response.statusCode == 200) {
+        var demoList = List<SubProductDatum>.from(
+            response.body["data"].map((x) => SubProductDatum.fromJson(x)));
+        subCategoryProductList.addAll(demoList);
+
+        subCategoryProductList.refresh();
+      } else {
+        checkApi(response: response, context: context);
+      }
+      isLoadMoreRunning(false);
+    }
+  }
 
   @override
   void onInit() {
@@ -196,6 +247,7 @@ class HomeController extends GetxController {
     getJustForYouProduct();
     getPopularCategory();
     getBanner();
+    scrollController.addListener(addScrollListener);
     super.onInit();
   }
 }

@@ -34,4 +34,6 @@ class ApiUrl {
   static const changePassword = "/auth/change-password";
   static const avgRating = "/review/average-ratting";
   static const myReview = "/review/my-reviews";
+  static const profile = "/auth/profile";
+  static const editProfile = "/auth/edit-profile";
 }
