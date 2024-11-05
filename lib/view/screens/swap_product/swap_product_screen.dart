@@ -85,141 +85,6 @@ class _SwapProductScreenState extends State<SwapProductScreen> {
                   ),
                   ///======================Image Here=============
                   CustomNetworkImage(
-                    imageUrl: '${ApiUrl.baseUrl}/${swapProductDetailsModel.data?.productFrom?.images?[0] ?? ""}',
-                    height: 210.h,
-                    width: double.infinity,
-                  ),
-                  CustomDetailContainer(
-                    color: AppColors.white200,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ///======================Item Name==============
-                        CustomText(
-                          text: swapProductDetailsModel.data?.productFrom?.title ?? "",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: AppColors.black500,
-                          bottom: 10.h,
-                        ),
-                        Row(
-                          children: [
-                            ///=========================Price=============
-                            CustomText(
-                              text: '\$${swapProductDetailsModel.data?.productFrom?.productValue ?? ""}'.tr,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16.h,
-                              color: AppColors.blue500,
-                              bottom: 10.h,
-                            ),
-                            const Spacer(),
-                            CustomText(
-                              text: '${AppStrings.postedOn.tr}: ',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                              color: AppColors.black500,
-                              bottom: 10.h,
-                            ),
-                            ///======================Posted on===========
-                            CustomText(
-                              text:  swapProductDetailsModel.data?.userFrom?.createdAt.toString() ?? "",
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12,
-                              color: AppColors.black500,
-                              bottom: 10.h,
-                            ),
-                          ],
-                        ),
-
-                        ///<======================= post by name =======================>
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                CustomText(text: AppStrings.postBy,right: 4.w,),
-                                GestureDetector(
-                                    onTap: (){
-                                      context.pushNamed(RoutePath.otherProfile);
-                                    },
-                                    child:   CustomText(text: "${swapProductDetailsModel.data?.userFrom?.name ?? "" } ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,)),
-                              ],
-                            ),
-                              Row(
-                              children: [
-                                CustomImage(imageSrc: AppIcons.locationOn,imageColor: AppColors.black500,),
-                                CustomText(text: swapProductDetailsModel.data?.userFrom?.address ?? "")
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  ///=========================This is Condition==============
-                  CustomDetailContainer(
-                    color: AppColors.white200,
-                    child: Row(
-                      children: [
-                        CustomText(
-                          text: AppStrings.condition.tr,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: AppColors.black500,
-                          bottom: 10.h,
-                        ),
-                        const Spacer(),
-                        CustomText(
-                          text: swapProductDetailsModel.data?.productFrom?.condition ?? "",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: AppColors.black500,
-                          bottom: 10.h,
-                        ),
-                      ],
-                    ),
-                  ),
-                  ///===================This is Description===============
-                  CustomDetailContainer(
-                    color: AppColors.white200,
-                    child: Container(
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                            text: AppStrings.description.tr,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: AppColors.black500,
-                            bottom: 10.h,
-                          ),
-                          CustomText(
-                            textAlign: TextAlign.start,
-                            maxLines: 30,
-                            text: swapProductDetailsModel.data?.productFrom?.description ?? "",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: AppColors.black500,
-                            bottom: 10.h,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 16.h,),
-
-                  ///<=============================== swap product =========================>
-                  CustomText(
-                    text: AppStrings.swapProduct.tr,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    color: AppColors.black500,
-                    bottom: 10.h,
-                  ),
-                  ///======================Image Here=============
-                  CustomNetworkImage(
                     imageUrl: '${ApiUrl.baseUrl}/${swapProductDetailsModel.data?.productTo?.images?[0] ?? ""}',
                     height: 210.h,
                     width: double.infinity,
@@ -241,23 +106,23 @@ class _SwapProductScreenState extends State<SwapProductScreen> {
                           children: [
                             ///=========================Price=============
                             CustomText(
-                              text: '\$${swapProductDetailsModel.data?.productTo?.productValue ?? ""}',
+                              text: '\$${swapProductDetailsModel.data?.productTo?.productValue ?? ""}'.tr,
                               fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                              fontSize: 16.h,
                               color: AppColors.blue500,
                               bottom: 10.h,
                             ),
                             const Spacer(),
                             CustomText(
-                              text: AppStrings.postedOn.tr,
-                              fontWeight: FontWeight.w400,
+                              text: '${AppStrings.postedOn.tr}: ',
+                              fontWeight: FontWeight.w500,
                               fontSize: 12,
                               color: AppColors.black500,
                               bottom: 10.h,
                             ),
                             ///======================Posted on===========
                             CustomText(
-                              text: ' : ${swapProductDetailsModel.data?.userTo?.createdAt ?? ""}',
+                              text:  swapProductDetailsModel.data?.userTo?.createdAt.toString() ?? "",
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
                               color: AppColors.black500,
@@ -265,6 +130,29 @@ class _SwapProductScreenState extends State<SwapProductScreen> {
                             ),
                           ],
                         ),
+
+                        ///<======================= post by name =======================>
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                CustomText(text: AppStrings.postBy,right: 4.w,),
+                                GestureDetector(
+                                    onTap: (){
+                                      context.pushNamed(RoutePath.otherProfile);
+                                    },
+                                    child:   CustomText(text: "${swapProductDetailsModel.data?.userTo?.name ?? "" } ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,)),
+                              ],
+                            ),
+                              Row(
+                              children: [
+                                CustomImage(imageSrc: AppIcons.locationOn,imageColor: AppColors.black500,),
+                                CustomText(text: swapProductDetailsModel.data?.userTo?.address ?? "")
+                              ],
+                            )
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -310,6 +198,118 @@ class _SwapProductScreenState extends State<SwapProductScreen> {
                             textAlign: TextAlign.start,
                             maxLines: 30,
                             text: swapProductDetailsModel.data?.productTo?.description ?? "",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: AppColors.black500,
+                            bottom: 10.h,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 16.h,),
+
+                  ///<=============================== swap product =========================>
+                  CustomText(
+                    text: AppStrings.swapProduct.tr,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black500,
+                    bottom: 10.h,
+                  ),
+                  ///======================Image Here=============
+                  CustomNetworkImage(
+                    imageUrl: '${ApiUrl.baseUrl}/${swapProductDetailsModel.data?.productFrom?.images?[0] ?? ""}',
+                    height: 210.h,
+                    width: double.infinity,
+                  ),
+                  CustomDetailContainer(
+                    color: AppColors.white200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ///======================Item Name==============
+                        CustomText(
+                          text: swapProductDetailsModel.data?.productFrom?.title ?? "",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: AppColors.black500,
+                          bottom: 10.h,
+                        ),
+                        Row(
+                          children: [
+                            ///=========================Price=============
+                            CustomText(
+                              text: '\$${swapProductDetailsModel.data?.productFrom?.productValue ?? ""}',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                              color: AppColors.blue500,
+                              bottom: 10.h,
+                            ),
+                            const Spacer(),
+                            CustomText(
+                              text: AppStrings.postedOn.tr,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: AppColors.black500,
+                              bottom: 10.h,
+                            ),
+                            ///======================Posted on===========
+                            CustomText(
+                              text: ' : ${swapProductDetailsModel.data?.userFrom?.createdAt ?? ""}',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                              color: AppColors.black500,
+                              bottom: 10.h,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  ///=========================This is Condition==============
+                  CustomDetailContainer(
+                    color: AppColors.white200,
+                    child: Row(
+                      children: [
+                        CustomText(
+                          text: AppStrings.condition.tr,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: AppColors.black500,
+                          bottom: 10.h,
+                        ),
+                        const Spacer(),
+                        CustomText(
+                          text: swapProductDetailsModel.data?.productFrom?.condition ?? "",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: AppColors.black500,
+                          bottom: 10.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                  ///===================This is Description===============
+                  CustomDetailContainer(
+                    color: AppColors.white200,
+                    child: Container(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            text: AppStrings.description.tr,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: AppColors.black500,
+                            bottom: 10.h,
+                          ),
+                          CustomText(
+                            textAlign: TextAlign.start,
+                            maxLines: 30,
+                            text: swapProductDetailsModel.data?.productFrom?.description ?? "",
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: AppColors.black500,
