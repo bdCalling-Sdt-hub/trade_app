@@ -31,6 +31,9 @@ import 'package:trade_app/view/screens/post_screen/post_screen.dart';
 import 'package:trade_app/view/screens/privacy_policy_screen/privacy_policy_screen.dart';
 import 'package:trade_app/view/screens/product_details/product_details_screen.dart';
 import 'package:trade_app/view/screens/profile_screen/profile_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question/pre_approval_question_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question2/pre_approval_question2_screen.dart';
+import 'package:trade_app/view/screens/questions/pre_approval_question3/pre_approval_question3_screen.dart';
 import 'package:trade_app/view/screens/search_screen/search_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/account_info_screen/account_info_screen.dart';
 import 'package:trade_app/view/screens/setting_screen/address_screen/address_screen.dart';
@@ -404,6 +407,22 @@ class AppRouter {
           name: RoutePath.profileScreen,
           path: RoutePath.profileScreen.addBasePath,
           builder: (context, state) => ProfileScreen(),
+        ),
+
+        GoRoute(
+          name: RoutePath.preApprovalQuestionScreen,
+          path: RoutePath.preApprovalQuestionScreen.addBasePath,
+          builder: (context, state) => PreApprovalQuestionScreen(),
+        ),
+        GoRoute(
+          name: RoutePath.preApprovalQuestion2Screen,
+          path: RoutePath.preApprovalQuestion2Screen.addBasePath,
+          builder: (context, state) => PreApprovalQuestion2Screen(),
+        ),
+        GoRoute(
+          name: RoutePath.preApprovalQuestion3Screen,
+          path: RoutePath.preApprovalQuestion3Screen.addBasePath,
+          builder: (context, state) => PreApprovalQuestion3Screen(),
         ),
       ]);
 

@@ -15,7 +15,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 class PackageDetailsScreen extends StatelessWidget {
   PackageDetailsScreen({super.key});
 
-  final data = Get.arguments;
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class PackageDetailsScreen extends StatelessWidget {
 
       ///============================ membershipPackages =======================>
       appBar: CustomAppBar(
-        appBarContent: data["memberShip"],
+        appBarContent:'jwvh',
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
@@ -40,7 +40,7 @@ class PackageDetailsScreen extends StatelessWidget {
                   right: 8.w,
                 ),
                 CustomText(
-                  text: data["memberShip"],
+                  text: 'membership',
                   fontSize: 16.h,
                   fontWeight: FontWeight.w500,
                 ),
@@ -56,18 +56,18 @@ class PackageDetailsScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 32.h, horizontal: 8.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: data["color"],
+                color: AppColors.blue500,
               ),
               child: Column(
                 children: [
                   CustomText(
-                    text: data["packageName"],
+                    text:  'packageName',
                     color: AppColors.white50,
                     fontWeight: FontWeight.w600,
                     fontSize: 18.h,
                   ),
                   CustomText(
-                    text: "\$${data["price"]}",
+                    text: 'price',
                     color: AppColors.white50,
                     fontWeight: FontWeight.w700,
                     fontSize: 24.h,
@@ -75,7 +75,7 @@ class PackageDetailsScreen extends StatelessWidget {
                     bottom: 16.h,
                   ),
                   CustomText(
-                    text: data["limit"],
+                    text: 'limit',
                     color: AppColors.white50,
                     fontWeight: FontWeight.w500,
                   ),
@@ -90,7 +90,7 @@ class PackageDetailsScreen extends StatelessWidget {
             Align(
                 alignment: Alignment.center,
                 child: CustomText(
-                  text: data["points"],
+                  text: 'points',
                   fontWeight: FontWeight.w500,
                   fontSize: 16.h,
                 )),
