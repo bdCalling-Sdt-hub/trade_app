@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -55,7 +56,7 @@ class _SwapMyRequestState extends State<SwapMyRequest> {
           );
         case Status.completed:
           var swapMyReqList = controller.swapMyReqList.value;
-          return SingleChildScrollView(
+          return swapMyReqList.isEmpty? Center(child: CustomText(text: 'No Data Found')):  SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List.generate(swapMyReqList.length, (index){
@@ -74,7 +75,7 @@ class _SwapMyRequestState extends State<SwapMyRequest> {
                         children: [
                           CustomNetworkImage(
                               boxShape: BoxShape.circle,
-                              imageUrl: swapMyReqList[index].userTo?.profileImage ?? "",
+                              imageUrl: '${ApiUrl.baseUrl}/${swapMyReqList[index].userTo?.profileImage ?? ""}',
                               height: 36.h,
                               width: 36.w),
                           Expanded(
@@ -106,7 +107,7 @@ class _SwapMyRequestState extends State<SwapMyRequest> {
                           const Spacer(),
                           GestureDetector(
                             onTap: (){
-                              context.pushNamed(RoutePath.swapProductScreen);
+                              context.pushNamed(RoutePath.swapProductScreen,extra: swapMyReqList[index].id);
                             },
                             child:  CustomText(
                               decoration: TextDecoration.underline,
@@ -130,7 +131,7 @@ class _SwapMyRequestState extends State<SwapMyRequest> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           CustomText(
-                            text: swapMyReqList[index].userTo?.name ?? "",
+                            text: swapMyReqList[index].productTo?.title ?? "",
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: AppColors.black500,
@@ -140,7 +141,7 @@ class _SwapMyRequestState extends State<SwapMyRequest> {
                             imageColor: AppColors.blue500,
                           ),
                           CustomText(
-                            text: 'm product',
+                            text: swapMyReqList[index].productFrom?.title ?? "",
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: AppColors.black500,
@@ -151,7 +152,9 @@ class _SwapMyRequestState extends State<SwapMyRequest> {
                         height: 12.h,
                       ),
                       CustomButton(
-                        onTap: (){},
+                        onTap: (){
+                          controller.swapDelete(context: context,swapId:swapMyReqList[index].id ?? "" );
+                        },
                         title: 'Cancel',
                         fillColor: AppColors.white,
                         textColor: AppColors.red500,

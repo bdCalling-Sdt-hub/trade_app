@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
@@ -50,7 +51,7 @@ class _SwapAnotherRequestState extends State<SwapAnotherRequest> {
           );
         case Status.completed:
           var swapTheirReqList = controller.swapTheirReqList.value;
-          return SingleChildScrollView(
+          return swapTheirReqList.isEmpty? Center(child: CustomText(text: 'No Data Found')) : SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -60,18 +61,22 @@ class _SwapAnotherRequestState extends State<SwapAnotherRequest> {
                         onTapName: () {
                           context.pushNamed(RoutePath.otherProfile);
                         },
-                        image: AppConstants.userNtr,
-                        name: 'Zahid Hossain'.tr,
-                        date: '12/06/24'.tr,
+                        image: '${ApiUrl.baseUrl}${swapTheirReqList[index].userFrom?.profileImage ?? ""}',
+                        name: swapTheirReqList[index].userFrom?.name ?? "",
+                        date: swapTheirReqList[index].userFrom?.createdAt.toString() ?? "",
                         acceptButton: 'accept'.tr,
                         rejectButton: 'reject'.tr,
                         onTap: () {
-                          context.pushNamed(RoutePath.swapProductScreen);
+                          context.pushNamed(RoutePath.swapProductScreen,extra: swapTheirReqList[index].id);
                         },
-                        firstProductName: 'Samsung Galaxy S22'.tr,
-                        exchangeProductName: 'Sony Y1G Android TV'.tr,
-                        onTapAcceptButton: () {},
-                        onTapRejectButton: () {},
+                        firstProductName: swapTheirReqList[index].productFrom?.title ?? '',
+                        exchangeProductName: swapTheirReqList[index].productTo?.title ?? '',
+                        onTapAcceptButton: () {
+                          controller.swapAccept(context: context,swapId: swapTheirReqList[index].id ?? "");
+                        },
+                        onTapRejectButton: () {
+                          controller.swapRemove(context: context,swapId: swapTheirReqList[index].id ?? "");
+                        },
                       );
                     }))
               ],

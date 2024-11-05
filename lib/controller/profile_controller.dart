@@ -32,7 +32,8 @@ class ProfileController extends GetxController {
     }
   }
 
-  RxInt size=0.obs;
+  RxInt size = 0.obs;
+
   ///=======================Controller here=====================
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -98,12 +99,11 @@ class ProfileController extends GetxController {
       "city": cityController.text,
     };
 
-    var response =   await apiClient.patch(
-      url: ApiUrl.editProfile.addBaseUrl,
-      showResult: true,
-      context: context,
-      body: body
-    ) ;
+    var response = await apiClient.patch(
+        url: ApiUrl.editProfile.addBaseUrl,
+        showResult: true,
+        context: context,
+        body: body);
 
     if (response.statusCode == 200) {
       addressController.clear();
@@ -218,6 +218,7 @@ class ProfileController extends GetxController {
     }
   }
 
+  ///<========================== change password ===========================>
   RxBool signUpLoading = false.obs;
   changePassword({required BuildContext context}) async {
     signUpLoading.value = true;
@@ -237,6 +238,41 @@ class ProfileController extends GetxController {
       AppRouter.route.pushNamed(RoutePath.settingScreen);
     } else if (response.statusCode == 402) {
       toastMessage(message: response.body["message"]);
+    } else {
+      // ignore: use_build_context_synchronously
+      checkApi(response: response, context: context);
+    }
+
+    signUpLoading.value = false;
+    signUpLoading.refresh();
+  }
+
+  ///<========================== change password ===========================>
+
+  final TextEditingController commentController = TextEditingController();
+  reviewRating(
+      {required BuildContext context,
+      required double rating,
+      required String swapId}) async {
+    signUpLoading.value = true;
+    Map<String, dynamic> body = {
+      "swapId": swapId,
+      "ratting": rating,
+      "comment": commentController.value.text,
+    };
+
+    var response = await apiClient.post(
+      context: context,
+      body: body,
+      url: ApiUrl.reviewSend.addBaseUrl,
+    );
+
+    if (response.statusCode == 200) {
+      AppRouter.route.pushNamed(RoutePath.swapHistoryScreen);
+    }
+    else if (response.statusCode == 402) {
+      toastMessage(message: response.body["message"]);
+
     } else {
       // ignore: use_build_context_synchronously
       checkApi(response: response, context: context);

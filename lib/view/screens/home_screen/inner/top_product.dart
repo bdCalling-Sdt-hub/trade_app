@@ -56,7 +56,11 @@ class TopProduct extends StatelessWidget {
                         '${ApiUrl.baseUrl}${controller.topProductList.value[index].images?[0]}',
                     name: controller.topProductList.value[index].title ?? "",
                     onTap: () {
-                      context.pushNamed(RoutePath.productDetailsScreen);
+                      context.pushNamed(RoutePath.productDetailsScreen,
+                        queryParameters: {
+                          "productId": controller.topProductList.value[index].id ?? '',
+                        },
+                      );
                     },
                     value:
                         '\$${controller.topProductList.value[index].productValue ?? ""}',

@@ -36,4 +36,9 @@ class ApiUrl {
   static const myReview = "/review/my-reviews";
   static const profile = "/auth/profile";
   static const editProfile = "/auth/edit-profile";
+  static const swapApprove = "/swap/approve";
+  static const swapReject = "/swap/reject";
+  static const swapDelete = "/swap/swap-delete/";
+  static const swapDetails = "/swap/swap-details";
+  static const reviewSend = "/review/send";
 }

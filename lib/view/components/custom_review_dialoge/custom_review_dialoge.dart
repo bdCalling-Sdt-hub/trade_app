@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -11,15 +12,11 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 
 class CustomReviewDialog extends StatefulWidget {
-  final VoidCallback onSubmit;
-  final double initialRating;
-  final TextEditingController commentController;
-
-  const CustomReviewDialog(
-      {super.key,
-      required this.onSubmit,
-      required this.initialRating,
-      required this.commentController});
+  const CustomReviewDialog({
+    super.key,
+    required this.swapId,
+  });
+  final String swapId;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -28,11 +25,11 @@ class CustomReviewDialog extends StatefulWidget {
 
 class _CustomReviewDialogState extends State<CustomReviewDialog> {
   double _rating = 0.0;
+  ProfileController controller = Get.find<ProfileController>();
 
   @override
   void initState() {
     super.initState();
-    _rating = widget.initialRating;
   }
 
   @override
@@ -108,7 +105,7 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
               ),
             ),
             CustomTextField(
-              textEditingController: TextEditingController(),
+              textEditingController: controller.commentController,
               hintText: 'Write Your Review Here',
               fillColor: Colors.white,
               maxLines: 4,
@@ -118,7 +115,11 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
             Padding(
               padding: EdgeInsets.only(top: 10.h),
               child: CustomButton(
-                onTap: widget.onSubmit,
+                onTap: () {
+                  print(_rating);
+                  controller.reviewRating(
+                      context: context, rating: _rating, swapId: widget.swapId);
+                },
                 title: AppStrings.submit,
               ),
             ),

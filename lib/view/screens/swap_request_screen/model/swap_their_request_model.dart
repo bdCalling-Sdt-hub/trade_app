@@ -36,8 +36,8 @@ class SwapTheirDatum {
   String? id;
   User? userFrom;
   User? userTo;
-  dynamic productFrom;
-  ProductTo? productTo;
+  Product? productFrom;
+  Product? productTo;
   String? isApproved;
   List<dynamic>? ratting;
   DateTime? createdAt;
@@ -65,8 +65,8 @@ class SwapTheirDatum {
     id: json["_id"],
     userFrom: json["userFrom"] == null ? null : User.fromJson(json["userFrom"]),
     userTo: json["userTo"] == null ? null : User.fromJson(json["userTo"]),
-    productFrom: json["productFrom"],
-    productTo: json["productTo"] == null ? null : ProductTo.fromJson(json["productTo"]),
+    productFrom: json["productFrom"] == null ? null : Product.fromJson(json["productFrom"]),
+    productTo: json["productTo"] == null ? null : Product.fromJson(json["productTo"]),
     isApproved: json["isApproved"],
     ratting: json["ratting"] == null ? [] : List<dynamic>.from(json["ratting"]!.map((x) => x)),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
@@ -78,7 +78,7 @@ class SwapTheirDatum {
     "_id": id,
     "userFrom": userFrom?.toJson(),
     "userTo": userTo?.toJson(),
-    "productFrom": productFrom,
+    "productFrom": productFrom?.toJson(),
     "productTo": productTo?.toJson(),
     "isApproved": isApproved,
     "ratting": ratting == null ? [] : List<dynamic>.from(ratting!.map((x) => x)),
@@ -88,7 +88,7 @@ class SwapTheirDatum {
   };
 }
 
-class ProductTo {
+class Product {
   String? id;
   String? category;
   String? subCategory;
@@ -101,7 +101,7 @@ class ProductTo {
   List<String>? images;
   int? v;
 
-  ProductTo({
+  Product({
     this.id,
     this.category,
     this.subCategory,
@@ -115,11 +115,11 @@ class ProductTo {
     this.v,
   });
 
-  factory ProductTo.fromRawJson(String str) => ProductTo.fromJson(json.decode(str));
+  factory Product.fromRawJson(String str) => Product.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory ProductTo.fromJson(Map<String, dynamic> json) => ProductTo(
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
     id: json["_id"],
     category: json["category"],
     subCategory: json["subCategory"],
@@ -168,8 +168,9 @@ class User {
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
-  dynamic verifyExpire;
-  dynamic verifyCode;
+  String? address;
+  String? country;
+  String? zip;
 
   User({
     this.id,
@@ -191,8 +192,9 @@ class User {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.verifyExpire,
-    this.verifyCode,
+    this.address,
+    this.country,
+    this.zip,
   });
 
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
@@ -219,8 +221,9 @@ class User {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    verifyExpire: json["verifyExpire"],
-    verifyCode: json["verifyCode"],
+    address: json["address"],
+    country: json["country"],
+    zip: json["zip"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -243,7 +246,8 @@ class User {
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
-    "verifyExpire": verifyExpire,
-    "verifyCode": verifyCode,
+    "address": address,
+    "country": country,
+    "zip": zip,
   };
 }

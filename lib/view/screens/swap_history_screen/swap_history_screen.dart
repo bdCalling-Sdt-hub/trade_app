@@ -6,6 +6,7 @@ import 'package:trade_app/core/app_routes/app_routes.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -65,21 +66,18 @@ class SwapHistoryScreen extends StatelessWidget {
                         onTapName: () {
                           context.pushNamed(RoutePath.otherProfile);
                         },
-                        image: swapHistoryList[index]
-                                .productTo
-                                ?.user
-                                ?.profileImage ??
-                            "",
+                        image: '${ApiUrl.baseUrl}${swapHistoryList[index].productFrom?.user?.profileImage ?? ""}',
                         name:
-                            swapHistoryList[index].productTo?.user?.name ?? "",
+                            swapHistoryList[index].productFrom?.user?.name ?? "",
                         date: '12/06/24'.tr,
                         onTap: () {
-                          showDialogBox(context);
+                          showDialog(context: context, builder: (context){
+                            return  CustomReviewDialog(swapId: swapHistoryList[index].id?? "",);
+                          });
                         },
-                        firstProductName:
-                            swapHistoryList[index].productTo?.title ?? "",
+                        firstProductName: swapHistoryList[index].productFrom?.title ?? "",
                         exchangeProductName:
-                            swapHistoryList[index].productFrom?.title ?? "",
+                            swapHistoryList[index].productTo?.title ?? "",
                       );
                     }))
                   ],
@@ -93,12 +91,6 @@ class SwapHistoryScreen extends StatelessWidget {
 
   ///========================This is Accept Button Dialog box==============
   void showDialogBox(BuildContext context) {
-    Get.dialog(CustomReviewDialog(
-      commentController: TextEditingController(),
-      onSubmit: () {
-        Get.back();
-      },
-      initialRating: 0, // Pass the initial rating value here
-    ));
+
   }
 }

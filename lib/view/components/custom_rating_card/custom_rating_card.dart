@@ -47,11 +47,22 @@ class CustomRatingCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(
-                      text: name,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: AppColors.black500,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomText(
+                          text: name,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: AppColors.black500,
+                        ),
+                        CustomText(
+                          text: date,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: AppColors.black500,
+                        ),
+                      ],
                     ),
                     SizedBox(height: 2.h),
                     Row(
@@ -76,12 +87,7 @@ class CustomRatingCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10.w), // Add some space between the review and the date
-              CustomText(
-                text: date,
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: AppColors.black500,
-              ),
+
             ],
           ),
         ],

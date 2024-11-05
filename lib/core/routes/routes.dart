@@ -350,7 +350,7 @@ class AppRouter {
         GoRoute(
           name: RoutePath.swapProductScreen,
           path: RoutePath.swapProductScreen.addBasePath,
-          builder: (context, state) => SwapProductScreen(),
+          builder: (context, state) => SwapProductScreen(swapId:  state.extra as String,),
         ),
 
         ///======================= topProductsScreen Route =======================

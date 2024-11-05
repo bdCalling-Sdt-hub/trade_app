@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -99,7 +100,7 @@ class MyRatingScreen extends StatelessWidget {
                               ),
                               CustomText(
                                 textAlign: TextAlign.start,
-                                text: ' 4.7/5.0'.tr,
+                                text: ' ${controller.myRatingModel.value.data?.averageRating ?? 0.0}/5.0'.tr,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
                                 color: AppColors.black500,
@@ -115,14 +116,14 @@ class MyRatingScreen extends StatelessWidget {
                         bottom: 19,
                       ),
                       Column(
-                        children: List.generate(ratingsData.length, (index) {
-                          final item = ratingsData[index];
+                        children: List.generate(controller.ratingList.length, (index) {
+
                           return CustomRatingCard(
-                            name: item['name'],
-                            date: item['date'],
-                            imageUrl: item['imageUrl'],
-                            rating: item['rating'],
-                            review: item['review'],
+                            name: controller.ratingList.value[index].swapOwner?.name ?? "",
+                            date: controller.ratingList.value[index].swapOwner?.createdAt.toString() ?? "",
+                            imageUrl: '${ApiUrl.baseUrl}${controller.ratingList.value[index].swapOwner?.profileImage ?? ""}',
+                            rating: (controller.ratingList.value[index].ratting ??  0.0).toInt(),
+                            review: controller.ratingList.value[index].comment ?? "",
                           );
                         }),
                       )
