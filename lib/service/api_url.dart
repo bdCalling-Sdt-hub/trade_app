@@ -43,4 +43,5 @@ class ApiUrl {
   static const reviewSend = "/review/send";
   static const partnerProfile = "/swap/partner_profile";
   static const subscriptionAll = "/subscription/all";
+  static const subscriptionDetails = "/subscription/details";
 }

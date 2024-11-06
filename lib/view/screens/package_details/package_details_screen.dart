@@ -11,11 +11,25 @@ import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
-class PackageDetailsScreen extends StatelessWidget {
-  PackageDetailsScreen({super.key});
+class PackageDetailsScreen extends StatefulWidget {
+  PackageDetailsScreen({super.key, required this.id});
 
+  final String id;
 
+  @override
+  State<PackageDetailsScreen> createState() => _PackageDetailsScreenState();
+}
+
+class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
+  PackageController packageController = Get.find<PackageController>();
+
+  @override
+  void initState() {
+    packageController.getPackageDetails(id: widget.id, context: context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +38,8 @@ class PackageDetailsScreen extends StatelessWidget {
 
       ///============================ membershipPackages =======================>
       appBar: CustomAppBar(
-        appBarContent:'jwvh',
+        appBarContent:
+            "${packageController.packageDetailsModel.value.data?.planName ?? ""} Membership",
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
@@ -33,14 +48,15 @@ class PackageDetailsScreen extends StatelessWidget {
           children: [
             Row(
               children: [
+                // CustomText(
+                //   text: "1.",
+                //   fontSize: 16.h,
+                //   fontWeight: FontWeight.w500,
+                //   right: 8.w,
+                // ),
                 CustomText(
-                  text: "1.",
-                  fontSize: 16.h,
-                  fontWeight: FontWeight.w500,
-                  right: 8.w,
-                ),
-                CustomText(
-                  text: 'membership',
+                  text:
+                      "${packageController.packageDetailsModel.value.data?.planName ?? ""} Membership",
                   fontSize: 16.h,
                   fontWeight: FontWeight.w500,
                 ),
@@ -61,13 +77,15 @@ class PackageDetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CustomText(
-                    text:  'packageName',
+                    text:
+                        "${packageController.packageDetailsModel.value.data?.planName ?? ""}",
                     color: AppColors.white50,
                     fontWeight: FontWeight.w600,
                     fontSize: 18.h,
                   ),
                   CustomText(
-                    text: 'price',
+                    text:
+                        '\$${packageController.packageDetailsModel.value.data?.fee ?? ""}',
                     color: AppColors.white50,
                     fontWeight: FontWeight.w700,
                     fontSize: 24.h,
@@ -75,7 +93,7 @@ class PackageDetailsScreen extends StatelessWidget {
                     bottom: 16.h,
                   ),
                   CustomText(
-                    text: 'limit',
+                    text: 'Per Month',
                     color: AppColors.white50,
                     fontWeight: FontWeight.w500,
                   ),
@@ -90,7 +108,8 @@ class PackageDetailsScreen extends StatelessWidget {
             Align(
                 alignment: Alignment.center,
                 child: CustomText(
-                  text: 'points',
+                  text:
+                      'From ${packageController.packageDetailsModel.value.data?.pointRangeStart ?? ""}-${packageController.packageDetailsModel.value.data?.pointRangeEnd ?? ""} Points',
                   fontWeight: FontWeight.w500,
                   fontSize: 16.h,
                 )),
@@ -105,27 +124,84 @@ class PackageDetailsScreen extends StatelessWidget {
               fontSize: 18.h,
               fontWeight: FontWeight.w500,
             ),
+            SizedBox(
+              height: 16.h,
+            ),
             Column(
-              children: List.generate(4, (index) {
-                return Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomImage(
-                        imageSrc: AppIcons.checkCircle,
-                        size: 24.h,
-                      ),
-                      CustomText(
-                        text: "Can exchange products",
-                        left: 8.w,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16.h,
-                      )
-                    ],
-                  ),
-                );
-              }),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomImage(
+                      imageSrc: AppIcons.checkCircle,
+                      size: 24.h,
+                    ),
+                    CustomText(
+                      text: "Can exchange products",
+                      left: 8.w,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.h,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomImage(
+                      imageSrc: AppIcons.checkCircle,
+                      size: 24.h,
+                    ),
+                    CustomText(
+                      text:
+                          "${packageController.packageDetailsModel.value.data?.swapPoint ?? ""} points for each swap",
+                      left: 8.w,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.h,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomImage(
+                      imageSrc: AppIcons.checkCircle,
+                      size: 24.h,
+                    ),
+                    CustomText(
+                      text:
+                          "${packageController.packageDetailsModel.value.data?.positiveCommentPoint ?? ""} points for positive comments",
+                      left: 8.w,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.h,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomImage(
+                      imageSrc: AppIcons.checkCircle,
+                      size: 24.h,
+                    ),
+                    CustomText(
+                      text: "Partner benefits",
+                      left: 8.w,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.h,
+                    )
+                  ],
+                ),
+              ],
             )
           ],
         ),
@@ -134,7 +210,6 @@ class PackageDetailsScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
         child: CustomButton(
           onTap: () {
-
             context.pushNamed(RoutePath.preApprovalQuestionScreen);
           },
           title: AppStrings.applyForMembership,

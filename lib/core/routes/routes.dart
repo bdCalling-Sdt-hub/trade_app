@@ -346,7 +346,7 @@ class AppRouter {
         GoRoute(
           name: RoutePath.packageDetailsScreen,
           path: RoutePath.packageDetailsScreen.addBasePath,
-          builder: (context, state) => PackageDetailsScreen(),
+          builder: (context, state) => PackageDetailsScreen(id: state.extra as String,),
         ),
 
         ///======================= swapProductScreen Route =======================

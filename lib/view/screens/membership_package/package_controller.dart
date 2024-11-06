@@ -5,6 +5,7 @@ import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/membership_package/package_details_model.dart';
 import 'package:trade_app/view/screens/membership_package/package_model.dart';
 
 class PackageController extends GetxController{
@@ -50,6 +51,34 @@ class PackageController extends GetxController{
         packageLoading(Status.noDataFound);
       } else {
         packageLoading(Status.error);
+      }
+    }
+  }
+
+  ///<=============================== get profile ================================>
+  final rxRequestStatus = Status.loading.obs;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
+  Rx<PackageDetailsModel> packageDetailsModel = PackageDetailsModel().obs;
+
+  Future<void> getPackageDetails({BuildContext? context, required String id}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
+
+    var response =
+    await apiClient.get(url: '${ApiUrl.subscriptionDetails.addBaseUrl}/$id', showResult: true);
+
+    if (response.statusCode == 200) {
+      packageDetailsModel.value = PackageDetailsModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        setRxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        setRxRequestStatus(Status.noDataFound);
+      } else {
+        setRxRequestStatus(Status.error);
       }
     }
   }

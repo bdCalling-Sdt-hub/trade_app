@@ -80,7 +80,7 @@ class MembershipPackageScreen extends StatelessWidget {
                       ///<====================== package contain ============================>
                       GestureDetector(
                         onTap: () {
-                          context.pushNamed(RoutePath.packageDetailsScreen,extra: data);
+                          context.pushNamed(RoutePath.packageDetailsScreen,extra: data.id ?? "");
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,
