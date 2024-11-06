@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -89,16 +90,16 @@ class _OtherProfileState extends State<OtherProfile> {
                           CustomOtherProfileHeader(
                             imageUrl: AppConstants.userNtr,
                             name: partnerProfileModel.data?.profile?.name ?? "",
-                            rating: 4.5,
+                            rating: partnerProfileModel.data?.averageRating ?? 0.0,
                             membershipStatus: 'Gold',
                           ),
                           SizedBox(height: 10.h),
-                          const CustomOtherProfileLocation(
-                            location: '47 W ,13th Street, New York',
+                            CustomOtherProfileLocation(
+                            location: '${partnerProfileModel.data?.profile?.city ?? ""} ${partnerProfileModel.data?.profile?.address ?? ""}',
                           ),
                           SizedBox(height: 10.h),
-                          const CustomOtherProfileDate(
-                            memberSince: 'Nov, 2022',
+                            CustomOtherProfileDate(
+                            memberSince: partnerProfileModel.data?.profile?.createdAt.toString() ?? "",
                             lastSiteVisit: '24 Jun, 2024',
                           ),
                         ],
@@ -116,13 +117,13 @@ class _OtherProfileState extends State<OtherProfile> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(4, (index) {
+                        children: List.generate(partnerProfileModel.data!.product!.length, (index) {
                           return CustomMyProduct(
                             isMargin: true,
-                            image: AppConstants.electronics,
-                            name: 'OnePlus V2 Android Smart LED TV',
+                            image: '${ApiUrl.baseUrl}${partnerProfileModel.data?.product?[index].images?[0] ?? ""}',
+                            name: partnerProfileModel.data?.product?[index].title ?? "",
                             onTap: () {},
-                            value: '\$768',
+                            value: '\$${ partnerProfileModel.data?.product?[index].productValue ?? ""}',
                             editOnTap: () {},
                           );
                         }),
@@ -138,16 +139,14 @@ class _OtherProfileState extends State<OtherProfile> {
                       fontWeight: FontWeight.w500,
                     ),
                     Column(
-                      children: List.generate(_isExpanded ? 10 : 3, (index) {
+                      children: List.generate( partnerProfileModel.data!.ratting!.length, (index) {
                         return CustomRatingCard(
-                          name: 'Sakib',
-                          date: '12/06/24',
+                          name: partnerProfileModel.data?.ratting?[index].user?.name ?? "",
+                          date: partnerProfileModel.data?.ratting?[index].user?.createdAt.toString() ?? "",
                           imageUrl: AppConstants.userNtr,
-                          rating: 5,
-                          review:
-                          'I highly recommend this swapper for anyone in need of a'
-                              ' reliable service. My overall experience with it'
-                              ' has been exceptionally positive.',
+                          rating: (partnerProfileModel.data?.ratting?[index].ratting ?? 0.0).toInt(),
+
+                          review: partnerProfileModel.data?.ratting?[index].comment ?? '',
                         );
                       }),
                     ),

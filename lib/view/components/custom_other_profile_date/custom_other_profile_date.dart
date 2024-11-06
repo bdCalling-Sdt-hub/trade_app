@@ -28,7 +28,7 @@ class CustomOtherProfileDate extends StatelessWidget {
             ),
             CustomText(
               left: 10,
-              text: 'Last Site Visit:',
+              text: ' ',//Last Site Visit:
               color: AppColors.black500,
               fontSize: 14,
               fontWeight: FontWeight.w400,
@@ -45,13 +45,13 @@ class CustomOtherProfileDate extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),
-            CustomText(
-              left: 10,
-              text: lastSiteVisit,
-              color: AppColors.black500,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
+            // CustomText(
+            //   left: 10,
+            //   text: lastSiteVisit,
+            //   color: AppColors.black500,
+            //   fontSize: 14,
+            //   fontWeight: FontWeight.w400,
+            // ),
           ],
         ),
       ],

@@ -34,7 +34,7 @@ class PartnerProfileModel {
 
 class Data {
   Profile? profile;
-  List<dynamic>? product;
+  List<Product>? product;
   List<Ratting>? ratting;
   double? averageRating;
 
@@ -51,16 +51,81 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     profile: json["profile"] == null ? null : Profile.fromJson(json["profile"]),
-    product: json["product"] == null ? [] : List<dynamic>.from(json["product"]!.map((x) => x)),
+    product: json["product"] == null ? [] : List<Product>.from(json["product"]!.map((x) => Product.fromJson(x))),
     ratting: json["ratting"] == null ? [] : List<Ratting>.from(json["ratting"]!.map((x) => Ratting.fromJson(x))),
-    averageRating: (json["average_rating"] as num?)?.toDouble(),
+    averageRating: json["average_rating"] == null ? null : (json["average_rating"] as num).toDouble(),
   );
+
 
   Map<String, dynamic> toJson() => {
     "profile": profile?.toJson(),
-    "product": product == null ? [] : List<dynamic>.from(product!.map((x) => x)),
+    "product": product == null ? [] : List<dynamic>.from(product!.map((x) => x.toJson())),
     "ratting": ratting == null ? [] : List<dynamic>.from(ratting!.map((x) => x.toJson())),
     "average_rating": averageRating,
+  };
+}
+
+class Product {
+  String? id;
+  String? category;
+  String? subCategory;
+  String? user;
+  String? title;
+  String? condition;
+  String? description;
+  int? productValue;
+  String? status;
+  String? address;
+  List<String>? images;
+  int? v;
+
+  Product({
+    this.id,
+    this.category,
+    this.subCategory,
+    this.user,
+    this.title,
+    this.condition,
+    this.description,
+    this.productValue,
+    this.status,
+    this.address,
+    this.images,
+    this.v,
+  });
+
+  factory Product.fromRawJson(String str) => Product.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+    id: json["_id"],
+    category: json["category"],
+    subCategory: json["subCategory"],
+    user: json["user"],
+    title: json["title"],
+    condition: json["condition"],
+    description: json["description"],
+    productValue: json["productValue"],
+    status: json["status"],
+    address: json["address"],
+    images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
+    v: json["__v"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "_id": id,
+    "category": category,
+    "subCategory": subCategory,
+    "user": user,
+    "title": title,
+    "condition": condition,
+    "description": description,
+    "productValue": productValue,
+    "status": status,
+    "address": address,
+    "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
+    "__v": v,
   };
 }
 
@@ -84,6 +149,10 @@ class Profile {
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  String? address;
+  String? city;
+  String? country;
+  String? zip;
 
   Profile({
     this.id,
@@ -105,6 +174,10 @@ class Profile {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.address,
+    this.city,
+    this.country,
+    this.zip,
   });
 
   factory Profile.fromRawJson(String str) => Profile.fromJson(json.decode(str));
@@ -131,6 +204,10 @@ class Profile {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
+    address: json["address"],
+    city: json["city"],
+    country: json["country"],
+    zip: json["zip"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -153,6 +230,10 @@ class Profile {
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
+    "address": address,
+    "city": city,
+    "country": country,
+    "zip": zip,
   };
 }
 
@@ -207,7 +288,6 @@ class Ratting {
     "__v": v,
   };
 }
-
 
 class Swap {
   String? id;
