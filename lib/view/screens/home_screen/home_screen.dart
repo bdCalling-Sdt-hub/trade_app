@@ -4,17 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/routes/route_path.dart';
-import 'package:trade_app/global/error_screen/error_screen.dart';
-import 'package:trade_app/global/no_internet/no_internet.dart';
 import 'package:trade_app/helper/const/const.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
-import 'package:trade_app/utils/app_const/app_const.dart';
-import 'package:trade_app/utils/app_images/app_images.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
-import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
-import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
-import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
@@ -35,26 +28,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.find<HomeController>();
   PackageController packageController = Get.find<PackageController>();
-  List<Map<String, dynamic>> packageList = [
-    {
-      "packageName": "Gold",
-      "price": "19.99",
-      "limit": "Per Months",
-      "color": const Color(0xffFAA316),
-    },
-    {
-      "packageName": "Platinum",
-      "price": "25,000",
-      "limit": "Auto upgrade",
-      "color": AppColors.gray800,
-    },
-    {
-      "packageName": "Diamond",
-      "price": "100,000",
-      "limit": "Auto upgrade",
-      "color": AppColors.blue300,
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: EdgeInsets.only(left: 8.w),
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(
-                                    '${ApiUrl.baseUrl}${imagePath.image ?? ""}'),
-                              )
-                          ),
+                            image: NetworkImage(
+                                '${ApiUrl.baseUrl}${imagePath.image ?? ""}'),
+                          )),
                         );
                       },
                     );
