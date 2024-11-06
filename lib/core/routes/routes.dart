@@ -275,7 +275,7 @@ class AppRouter {
         GoRoute(
           name: RoutePath.otherProfile,
           path: RoutePath.otherProfile.addBasePath,
-          builder: (context, state) => OtherProfile(),
+          builder: (context, state) => OtherProfile(partnerId: state.extra as String,),
         ),
 
         ///======================= membershipDetailsScreen Route =======================

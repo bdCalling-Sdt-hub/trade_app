@@ -59,7 +59,7 @@ class _SwapAnotherRequestState extends State<SwapAnotherRequest> {
                     children: List.generate(swapTheirReqList.length, (index) {
                       return CustomSwapRequests(
                         onTapName: () {
-                          context.pushNamed(RoutePath.otherProfile);
+                          context.pushNamed(RoutePath.otherProfile,extra: swapTheirReqList[index].userFrom?.id ?? "");
                         },
                         image: '${ApiUrl.baseUrl}${swapTheirReqList[index].userFrom?.profileImage ?? ""}',
                         name: swapTheirReqList[index].userFrom?.name ?? "",

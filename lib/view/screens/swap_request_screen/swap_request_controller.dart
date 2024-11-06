@@ -5,6 +5,7 @@ import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/other_profile/partner_profile_model.dart';
 import 'package:trade_app/view/screens/swap_product/swap_product_details_model.dart';
 import 'package:trade_app/view/screens/swap_request_screen/model/swap_my_request_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,14 +15,14 @@ class SwapRequestController extends GetxController {
 
   ApiClient apiClient = ApiClient();
 
-
   ///===================Customer care method ==========
   Future<void> launchPhone(String phoneNumber) async {
     final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
     try {
       await launchUrl(
         phoneUri,
-        mode: LaunchMode.externalApplication, // Ensure it uses the external app to handle the call
+        mode: LaunchMode
+            .externalApplication, // Ensure it uses the external app to handle the call
       );
     } catch (e) {
       debugPrint('Could not launch $phoneNumber: $e');
@@ -63,7 +64,8 @@ class SwapRequestController extends GetxController {
   RxList<MySwapDatum> swapTheirReqList = <MySwapDatum>[].obs;
 
   var swapTheirReqLoading = Status.loading.obs;
-  SwapTheirReqLoadingLoadingMethod(Status status) => swapTheirReqLoading.value = status;
+  SwapTheirReqLoadingLoadingMethod(Status status) =>
+      swapTheirReqLoading.value = status;
 
   getSwapTheirRequest({BuildContext? context}) async {
     swapTheirReqLoading(Status.loading);
@@ -152,7 +154,6 @@ class SwapRequestController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-
       getSwapMyRequest();
     } else {
       checkApi(response: response, context: context);
@@ -165,35 +166,63 @@ class SwapRequestController extends GetxController {
   ///<=============================== swap Details ================================>
   final rxRequestStatus = Status.loading.obs;
   void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
-  Rx<SwapProductDetailsModel> swapProductDetailsModel = SwapProductDetailsModel().obs;
+  Rx<SwapProductDetailsModel> swapProductDetailsModel =
+      SwapProductDetailsModel().obs;
 
+  Future<void> getSwapProductDetails(
+      {BuildContext? context, String swapId = ''}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
 
-  Future<void> getSwapProductDetails({BuildContext? context,String swapId=''}) async {
-   setRxRequestStatus(Status.loading);
-   refresh();
+    var response = await apiClient.get(
+        url: '${ApiUrl.swapDetails.addBaseUrl}/$swapId', showResult: true);
 
-   var response =
-   await apiClient.get(url: '${ApiUrl.swapDetails.addBaseUrl}/$swapId', showResult: true);
-
-   if (response.statusCode == 200) {
-     swapProductDetailsModel.value = SwapProductDetailsModel.fromJson(response.body);
-    setRxRequestStatus(Status.completed);
-    update();
-   } else {
-    checkApi(response: response, context: context);
-    if (response.statusCode == 503) {
-     setRxRequestStatus(Status.internetError);
-    } else if (response.statusCode == 404) {
-     setRxRequestStatus(Status.noDataFound);
+    if (response.statusCode == 200) {
+      swapProductDetailsModel.value =
+          SwapProductDetailsModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
     } else {
-     setRxRequestStatus(Status.error);
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        setRxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        setRxRequestStatus(Status.noDataFound);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
     }
-   }
+  }
+
+  ///<=============================== get PartnerProfile ================================>
+
+  Rx<PartnerProfileModel> partnerProfileModel = PartnerProfileModel().obs;
+
+  Future<void> getPartnerProfile({BuildContext? context,required String partnerId}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
+
+    var response =
+        await apiClient.get(url: '${ApiUrl.partnerProfile.addBaseUrl}/$partnerId', showResult: true);
+
+    if (response.statusCode == 200) {
+      partnerProfileModel.value = PartnerProfileModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        setRxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        setRxRequestStatus(Status.noDataFound);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+    }
   }
 
   @override
   void onInit() {
-
     // getSwapMyRequest();
     // getSwapTheirRequest();
     super.onInit();

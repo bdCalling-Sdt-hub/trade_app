@@ -41,4 +41,5 @@ class ApiUrl {
   static const swapDelete = "/swap/swap-delete/";
   static const swapDetails = "/swap/swap-details";
   static const reviewSend = "/review/send";
+  static const partnerProfile = "/swap/partner_profile";
 }
