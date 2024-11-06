@@ -18,11 +18,11 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final RxInt selectedPets = 0.obs;
-    final RxInt selectedChildren = 0.obs;
-    final RxInt one = 0.obs;
-    final RxInt two = 0.obs;
-    final RxInt three = 0.obs;
+    final RxString selectedPets = "Yes".obs;
+    final RxString selectedChildren = "Yes".obs;
+    final RxString one = "Yes".obs;
+    final RxString two = "Yes".obs;
+    final RxString three = "Yes".obs;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -48,6 +48,7 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                   selectedOption: selectedPets.value,
                   onOptionChanged: (index) {
                     selectedPets.value = index;
+
                   },
                 ),
                 SizedBox(height: 12.h),
@@ -155,7 +156,9 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                     SizedBox(width: 16.w),
                     GestureDetector(
                       onTap: () {
-                         context.pushNamed(RoutePath.preApprovalQuestion3Screen);
+                        print(selectedPets.value);
+
+                         // context.pushNamed(RoutePath.preApprovalQuestion3Screen);
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 16.w),

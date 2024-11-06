@@ -33,148 +33,150 @@ class PreApprovalQuestionScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
-        child: Obx(
-           () {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  text: AppStrings.pleaseFillUpThisForm.tr,
-                  fontSize: 18.h,
-                  fontWeight: FontWeight.w500,
-                  bottom: 16.h,
-                ),
+        child: Obx(() {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
+                text: AppStrings.pleaseFillUpThisForm.tr,
+                fontSize: 18.h,
+                fontWeight: FontWeight.w500,
+                bottom: 16.h,
+              ),
 
-                ///<================================= name ====================================>
-                CustomFromCard(
-                    title: AppStrings.name, controller: controller.nameController),
+              ///<================================= name ====================================>
+              CustomFromCard(
+                  title: AppStrings.name,
+                  controller: controller.nameController),
 
-                ///<================================= dateOfBirth ====================================>
-                CustomFromCard(
-                    onTap: () {},
-                    title: AppStrings.dateOfBirth,
-                    controller: controller.destinationStartController),
+              ///<================================= dateOfBirth ====================================>
+              CustomFromCard(
+                  onTap: () {},
+                  title: AppStrings.dateOfBirth,
+                  controller: controller.destinationStartController),
 
-                ///<================================= placeOfBirth ====================================>
-                CustomFromCard(
-                    title: AppStrings.placeOfBirth,
-                    controller: controller.placeBirthController),
+              ///<================================= placeOfBirth ====================================>
+              CustomFromCard(
+                  title: AppStrings.placeOfBirth,
+                  controller: controller.placeBirthController),
 
-                ///<================================= licenceNo ====================================>
-                CustomFromCard(
-                    title: AppStrings.licenceNo,
-                    controller: controller.licenseNoController),
+              ///<================================= licenceNo ====================================>
+              CustomFromCard(
+                  title: AppStrings.licenceNo,
+                  controller: controller.licenseNoController),
 
-                ///<================================= PassPort ====================================>
-                CustomFromCard(
-                    title: AppStrings.passport,
-                    controller: controller.passwordController),
+              ///<================================= PassPort ====================================>
+              CustomFromCard(
+                  title: AppStrings.passport,
+                  controller: controller.passwordController),
 
-                ///<================================= email ====================================>
-                CustomFromCard(
-                    title: AppStrings.email,
-                    controller: controller.emailController),
+              ///<================================= email ====================================>
+              CustomFromCard(
+                  title: AppStrings.email,
+                  controller: controller.emailController),
 
-                ///<================================= phoneNumber ====================================>
-                CustomFromCard(
-                    title: AppStrings.phoneNumber,
-                    controller: controller.destinationStartController),
+              ///<================================= phoneNumber ====================================>
+              CustomFromCard(
+                  title: AppStrings.phoneNumber,
+                  controller: controller.destinationStartController),
 
-                ///<================================= profession ====================================>
-                CustomText(
-                  textAlign: TextAlign.start,
-                  color: AppColors.black500,
-                  text: AppStrings.profession,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16.sp,
-                  bottom: 8.h,
-                  maxLines: 2,
-                ),
-                CustomDropdown(
-                  title: AppStrings.profession,
-                  textColor: AppColors.white200,
-                  controller: postController.professionController,
-                  isDropdownVisible: postController.isProfession.value,
+              ///<================================= profession ====================================>
+              CustomText(
+                textAlign: TextAlign.start,
+                color: AppColors.black500,
+                text: AppStrings.profession,
+                fontWeight: FontWeight.w500,
+                fontSize: 16.sp,
+                bottom: 8.h,
+                maxLines: 2,
+              ),
+              CustomDropdown(
+                dropdownName: 'developer',
+                length: 2,
+                title: AppStrings.profession,
+                textColor: AppColors.white200,
+                controller: postController.professionController,
+                isDropdownVisible: postController.isProfession.value,
+                onTap: () {
+                  postController.isProfession.value =
+                      !postController.isProfession.value;
+                },
+                options: postController.profession,
+                onSelect: (index) {
+                  postController.selectProfession.value = index;
+                  postController.professionController.text = postController
+                      .profession[postController.selectProfession.value];
+                  postController.isProfession.value = false;
+                  postController.isProfession.refresh();
+                },
+              ),
+              CustomText(
+                textAlign: TextAlign.start,
+                color: AppColors.black500,
+                text: AppStrings.whatYourReligion,
+                fontWeight: FontWeight.w500,
+                fontSize: 16.sp,
+                bottom: 8.h,
+                maxLines: 2,
+                top: 10,
+              ),
+
+              ///<================================= whatYourReligion ====================================>
+              CustomDropdown(
+                dropdownName: 'developer',
+                length: 2,
+                title: AppStrings.whatYourReligion,
+                textColor: AppColors.white200,
+                controller: postController.subCategoriesController,
+                isDropdownVisible: postController.isSubCategories.value,
+                onTap: () {
+                  postController.isSubCategories.value =
+                      !postController.isSubCategories.value;
+                },
+                options: postController.religion,
+                onSelect: (index) {
+                  postController.selectedCategory.value = index;
+                  postController.subCategoriesController.text = postController
+                      .religion[postController.selectedCategory.value];
+                  postController.isSubCategories.value = false;
+                  postController.isSubCategories.refresh();
+                },
+              ),
+
+              SizedBox(
+                height: 24.h,
+              ),
+
+              ///<================================= next button ====================================>
+
+              Center(
+                child: GestureDetector(
                   onTap: () {
-                    postController.isProfession.value =
-                    !postController.isProfession.value;
+                    context.pushNamed(RoutePath.preApprovalQuestion2Screen);
                   },
-                  options: postController.profession,
-                  onSelect: (index) {
-                    postController.selectProfession.value = index;
-                    postController.professionController.text =
-                    postController.profession[
-                    postController.selectProfession.value];
-                    postController.isProfession.value = false;
-                    postController.isProfession.refresh();
-                  },
+                  child: CustomDetailContainer(
+                      color: AppColors.blue500,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomText(
+                            text: AppStrings.next,
+                            color: AppColors.white50,
+                            right: 8.h,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18.h,
+                          ),
+                          const CustomImage(
+                            imageSrc: AppIcons.arrowRight,
+                            imageColor: AppColors.white50,
+                          ),
+                        ],
+                      )),
                 ),
-                CustomText(
-                  textAlign: TextAlign.start,
-                  color: AppColors.black500,
-                  text: AppStrings.whatYourReligion,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16.sp,
-                  bottom: 8.h,
-                  maxLines: 2,
-                  top: 10,
-                ),
-                ///<================================= whatYourReligion ====================================>
-                CustomDropdown(
-                  title: AppStrings.whatYourReligion,
-                  textColor: AppColors.white200,
-                  controller: postController.subCategoriesController,
-                  isDropdownVisible: postController.isSubCategories.value,
-                  onTap: () {
-                    postController.isSubCategories.value =
-                    !postController.isSubCategories.value;
-                  },
-                  options: postController.religion,
-                  onSelect: (index) {
-                    postController.selectedCategory.value = index;
-                    postController.subCategoriesController.text =
-                    postController.religion[
-                    postController.selectedCategory.value];
-                    postController.isSubCategories.value = false;
-                    postController.isSubCategories.refresh();
-                  },
-                ),
-
-                SizedBox(
-                  height: 24.h,
-                ),
-
-                ///<================================= next button ====================================>
-
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                       context.pushNamed(RoutePath.preApprovalQuestion2Screen);
-                    },
-                    child: CustomDetailContainer(
-                        color: AppColors.blue500,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CustomText(
-                              text: AppStrings.next,
-                              color: AppColors.white50,
-                              right: 8.h,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.h,
-                            ),
-                            const CustomImage(
-                              imageSrc: AppIcons.arrowRight,
-                              imageColor: AppColors.white50,
-                            ),
-                          ],
-                        )),
-                  ),
-                )
-              ],
-            );
-          }
-        ),
+              )
+            ],
+          );
+        }),
       ),
     );
   }

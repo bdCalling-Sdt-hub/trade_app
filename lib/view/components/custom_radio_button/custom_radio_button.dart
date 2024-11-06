@@ -4,8 +4,8 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 class CustomRadioButton extends StatelessWidget {
   final String title;
   final List<String> options;
-  final int selectedOption;
-  final ValueChanged<int> onOptionChanged;
+  final String selectedOption;
+  final ValueChanged<String> onOptionChanged;
 
   const CustomRadioButton({
     super.key,
@@ -29,9 +29,9 @@ class CustomRadioButton extends StatelessWidget {
         maxLines: 2,),
         Column(
           children: List.generate(options.length, (index) {
-            return RadioListTile<int>(
+            return RadioListTile<String>(
               title: Text(options[index]),
-              value: index,
+              value: options[index],
               groupValue: selectedOption,
               onChanged: (value) => onOptionChanged(value!),
             );
