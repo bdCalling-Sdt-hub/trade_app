@@ -51,8 +51,8 @@ class _OtherProfileState extends State<OtherProfile> {
       backgroundColor: AppColors.white,
 
       ///======================Other Profile Appbar============
-      appBar: const CustomAppBar(
-        appBarContent: 'Zahid ',
+      appBar: CustomAppBar(
+        appBarContent: controller.partnerProfileModel.value.data?.profile?.name ?? "",
       ),
       body: Obx(() {
         switch (controller.rxRequestStatus.value) {

@@ -20,8 +20,10 @@ import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/home_screen/inner/home_appbar.dart';
 import 'package:trade_app/view/screens/home_screen/inner/just_for_you.dart';
+import 'package:trade_app/view/screens/home_screen/inner/package.dart';
 import 'package:trade_app/view/screens/home_screen/inner/popular_category.dart';
 import 'package:trade_app/view/screens/home_screen/inner/top_product.dart';
+import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,12 +34,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.find<HomeController>();
-  // final List<String> bannerImage = [
-  //   AppImages.slider,
-  //   AppImages.slider,
-  //   AppImages.slider,
-  // ];
-
+  PackageController packageController = Get.find<PackageController>();
   List<Map<String, dynamic>> packageList = [
     {
       "packageName": "Gold",
@@ -58,8 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
       "color": AppColors.blue300,
     },
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -212,47 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 ///============================ membershipPackages =============================>
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(packageList.length, (index) {
-                      return Container(
-                        margin: const EdgeInsets.only(right: 8),
-                        width: MediaQuery.of(context).size.width * .43,
-                        padding: EdgeInsets.symmetric(
-                            vertical: 12.h, horizontal: 8.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: packageList[index]["color"],
-                        ),
-                        child: Column(
-                          children: [
-                            CustomText(
-                              text: packageList[index]["packageName"],
-                              color: AppColors.white50,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            CustomText(
-                              text: packageList[index]["price"],
-                              color: AppColors.white50,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24.h,
-                              top: 4.h,
-                              bottom: 4.h,
-                            ),
-                            CustomText(
-                              maxLines: 2,
-                              text: packageList[index]["limit"],
-                              color: AppColors.white50,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12.h,
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  ),
-                ),
+                Package(),
                 SizedBox(
                   height: 16.h,
                 ),
