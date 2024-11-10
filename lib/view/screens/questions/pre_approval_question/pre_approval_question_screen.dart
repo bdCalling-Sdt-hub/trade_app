@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
-import 'package:trade_app/core/app_routes/app_routes.dart';
+
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -78,7 +78,7 @@ class PreApprovalQuestionScreen extends StatelessWidget {
               ///<================================= phoneNumber ====================================>
               CustomFromCard(
                   title: AppStrings.phoneNumber,
-                  controller: controller.destinationStartController),
+                  controller: controller.phnNumberController),
 
               ///<================================= profession ====================================>
               CustomText(
@@ -127,7 +127,7 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                 length: 2,
                 title: AppStrings.whatYourReligion,
                 textColor: AppColors.white200,
-                controller: postController.subCategoriesController,
+                controller: controller.religionController,
                 isDropdownVisible: postController.isSubCategories.value,
                 onTap: () {
                   postController.isSubCategories.value =
@@ -136,7 +136,7 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                 options: postController.religion,
                 onSelect: (index) {
                   postController.selectedCategory.value = index;
-                  postController.subCategoriesController.text = postController
+                  controller.religionController.text = postController
                       .religion[postController.selectedCategory.value];
                   postController.isSubCategories.value = false;
                   postController.isSubCategories.refresh();

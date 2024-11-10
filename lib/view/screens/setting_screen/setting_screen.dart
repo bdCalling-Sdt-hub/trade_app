@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/profile_controller.dart';
-import 'package:trade_app/core/app_routes/app_routes.dart';
+
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';

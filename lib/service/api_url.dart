@@ -44,4 +44,5 @@ class ApiUrl {
   static const partnerProfile = "/swap/partner_profile";
   static const subscriptionAll = "/subscription/all";
   static const subscriptionDetails = "/subscription/details";
+  static const createPlan = "/plan/create-plan";
 }

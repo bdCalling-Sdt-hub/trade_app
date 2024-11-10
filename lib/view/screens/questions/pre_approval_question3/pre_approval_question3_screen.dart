@@ -16,6 +16,7 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
 
   final PackageController controller = Get.find<PackageController>();
   final RxInt three = 0.obs;
+  final RxString purposeTravel = "Business".obs;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,7 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
                 bottom: 16.h,
               ),
 
+              SizedBox(height: controller.size.value.toDouble(),),
               ///<================================= datesOfTravel ====================================>
 
               CustomFromCard(
@@ -71,7 +73,7 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ///=========================County================
               CustomFromCard(
                   title: AppStrings.county,
-                  controller: TextEditingController()),
+                  controller: controller.countyStartController),
 
               ///<================================= country ====================================>
               CustomFromCard(
@@ -101,7 +103,7 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ///=========================County================
               CustomFromCard(
                   title: AppStrings.county,
-                  controller: TextEditingController()),
+                  controller: controller.countyEndController),
 
               ///<================================= country ====================================>
               CustomFromCard(
@@ -111,14 +113,22 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
                 height: 10.h,
               ),
               ///========================Purpose of travel?================
-              /*CustomRadioButton(
-                title: 'Purpose of travel?',
-                options: const ['Business', 'Pleasure', 'Recreational'],
-                selectedOption: three.value,
+              CustomRadioButton(
+                title: 'Do you have children?',
+                options: const ['Business', 'Pleasure','Recreational'],
+                selectedOption: purposeTravel.value,
                 onOptionChanged: (index) {
-                  three.value = index;
+                  purposeTravel.value = index;
                 },
-              ),*/
+              ),
+              // CustomRadioButton(
+              //   title: 'Do you have pets?',
+              //   options: const ['Yes', 'No'],
+              //   selectedOption: three.value,
+              //   onOptionChanged: (index) {
+              //     selectedPets.value = index;
+              //   },
+              // ),
 
               SizedBox(
                 height: 24.h,
