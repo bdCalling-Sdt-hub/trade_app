@@ -84,7 +84,7 @@ class PackageController extends GetxController {
       "utilitiesUptoDate": utilitiesUptoDate.value,
       "aboutSwap": swapAboutController.text,
       "departureArrival": departureArrival.value,
-      //"datesOfTravel": dateTravelController.value.text,
+      "datesOfTravel": dateTravelController.value.text,
       "startDestination": destinationStartController.value.text,
       "startState": stateStartController.value.text,
       "travelStartCounty": countyStartController.value.text,
