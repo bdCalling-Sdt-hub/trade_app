@@ -48,6 +48,7 @@ class TopProduct extends StatelessWidget {
               children: List.generate(controller.topProductList.value.length,
                   (index) {
                 return Container(
+                  width: MediaQuery.of(context).size.width * .4,
                   margin: EdgeInsets.only(right: 10.w),
                   child: CustomMyProduct(
                     isMargin: false,

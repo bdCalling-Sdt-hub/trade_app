@@ -48,7 +48,7 @@ class _QuestionSubmitPopState extends State<QuestionSubmitPop> {
                 alignment: Alignment.bottomRight,
                 child: IconButton(
                   onPressed: () {
-                    Get.back();
+                   // Get.back();
                   },
                   icon:const Icon(
                     Icons.close,

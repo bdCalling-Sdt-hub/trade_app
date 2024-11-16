@@ -35,6 +35,8 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
     super.initState();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +113,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                         ),
                         CustomText(
                           text:
-                          '\$${packageController.packageDetailsModel.value.data?.fee ?? ""}',
+                          '\$${packageController.packageDetailsModel.value.data?.fee ?? 0}',
                           color: AppColors.white50,
                           fontWeight: FontWeight.w700,
                           fontSize: 24.h,
@@ -241,6 +243,9 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
         padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
         child: CustomButton(
           onTap: () {
+            packageController.planType.value = packageController.packageDetailsModel.value.data?.planName ?? "";
+            packageController.planId.value = packageController.packageDetailsModel.value.data?.id ?? "";
+            packageController.amount.value =( packageController.packageDetailsModel.value.data?.fee ?? 0).toInt();
             context.pushNamed(RoutePath.preApprovalQuestionScreen);
           },
           title: AppStrings.applyForMembership,

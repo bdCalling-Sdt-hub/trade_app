@@ -72,9 +72,9 @@ class CustomMyProduct extends StatelessWidget {
               textAlign: TextAlign.start,
               text: name,
               fontWeight: FontWeight.w500,
-              fontSize: 14,
+              fontSize: 14.h,
               color: AppColors.black500,
-              maxLines: 3,
+             // maxLines: 3,
             ),
             SizedBox(height: 5.h),
             Row(

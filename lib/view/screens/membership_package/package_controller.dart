@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/routes/route_path.dart';
@@ -32,38 +34,37 @@ class PackageController extends GetxController {
   final TextEditingController countryEndController = TextEditingController();
   final TextEditingController countyEndController = TextEditingController();
   final TextEditingController dateTravelController = TextEditingController();
+  final TextEditingController swapAboutController = TextEditingController();
+
+  final RxString selectedPets = "Yes".obs;
+  final RxString selectedChildren = "Yes".obs;
+  final RxString ownerOfProperty = "Yes".obs;
+  final RxString propertyInsured = "Yes".obs;
+  final RxString haveVehicle = "Yes".obs;
+  final RxString willingVehicle = "Yes".obs;
+  final RxString ableApproveForm = "Yes".obs;
+  final RxString utilitiesUptoDate = "Yes".obs;
+  final RxString departureArrival = "Yes".obs;
+  final RxString purposeTravel = "Business".obs;
+
+  RxString planType = ''.obs;
+  RxString planId = ''.obs;
+  RxInt amount = 0.obs;
 
   ///<========================== question ===========================>
   RxBool signUpLoading = false.obs;
-  question(
-      {required BuildContext context,
-      required String plan_id,
-      required int amount,
-      required String planStartDate,
-      required String planEndDate,
-      required String payment_status,
-      required String plan_type,
-      required String haveChildren,
-      required String havePets,
-      required String haveVehicle,
-      required String willingVehicle,
-      required String ownerOfProperty,
-      required String ableApproveForm,
-      required String propertyInsured,
-      required String utilitiesUptoDate,
-      required String aboutSwap,
-      required String departureArrival,
-      required String purposeOfTravel,
-
-      }) async {
+  question({
+    required BuildContext context,
+    required String payment_status,
+  }) async {
     signUpLoading.value = true;
     Map<String, dynamic> body = {
-      "plan_id": plan_id,
-      "amount": amount,
-      "planStartDate": planStartDate,
-      "planEndDate": planEndDate,
-      "payment_status": payment_status,
-      "plan_type": plan_type,
+      "plan_id": planId.value,
+      "amount": "100",
+      // "planStartDate": planStartDate,
+      // "planEndDate": planEndDate,
+      //"payment_status": payment_status,
+      "plan_type": planType.value,
       "name": nameController.value.text,
       "date_of_birth": destinationStartController.value.text,
       "place_of_birth": placeBirthController.value.text,
@@ -73,17 +74,17 @@ class PackageController extends GetxController {
       "phone_number": phnNumberController.value.text,
       "profession": professionController.value.text,
       // "region": regionController.value.text,
-      "haveChildren": haveChildren,
-      "havePets": havePets,
-      "haveVehicle": haveVehicle,
-      "willingVehicle": willingVehicle,
-      "ownerOfProperty": ownerOfProperty,
-      "ableApproveForm": ableApproveForm,
-      "propertyInsured": propertyInsured,
-      "utilitiesUptoDate": utilitiesUptoDate,
-      "aboutSwap": aboutSwap,
-      "departureArrival": departureArrival,
-      "datesOfTravel": dateTravelController.value.text,
+      "haveChildren": selectedChildren.value,
+      "havePets": selectedPets.value,
+      "haveVehicle": haveVehicle.value,
+      "willingVehicle": willingVehicle.value,
+      "ownerOfProperty": ownerOfProperty.value,
+      "ableApproveForm": ableApproveForm.value,
+      "propertyInsured": propertyInsured.value,
+      "utilitiesUptoDate": utilitiesUptoDate.value,
+      "aboutSwap": swapAboutController.text,
+      "departureArrival": departureArrival.value,
+      //"datesOfTravel": dateTravelController.value.text,
       "startDestination": destinationStartController.value.text,
       "startState": stateStartController.value.text,
       "travelStartCounty": countyStartController.value.text,
@@ -92,11 +93,11 @@ class PackageController extends GetxController {
       "endState": stateEndController.value.text,
       "endCounty": countyEndController.value.text,
       "endCountry": countryEndController.value.text,
-      "purposeOfTravel": purposeOfTravel,
+      "purposeOfTravel": purposeTravel.value,
       "religion": religionController.value.text,
     };
 
-    var response = await apiClient.patch(
+    var response = await apiClient.post(
       context: context,
       body: body,
       url: ApiUrl.createPlan.addBaseUrl,
@@ -108,7 +109,7 @@ class PackageController extends GetxController {
       toastMessage(message: response.body["message"]);
     } else {
       // ignore: use_build_context_synchronously
-      checkApi(response: response, context: context);
+      //checkApi(response: response, context: context);
     }
 
     signUpLoading.value = false;

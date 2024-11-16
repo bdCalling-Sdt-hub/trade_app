@@ -123,7 +123,7 @@ class PreApprovalQuestionScreen extends StatelessWidget {
 
               ///<================================= whatYourReligion ====================================>
               CustomDropdown(
-                dropdownName: 'developer',
+                dropdownName: 'Islam',
                 length: 2,
                 title: AppStrings.whatYourReligion,
                 textColor: AppColors.white200,

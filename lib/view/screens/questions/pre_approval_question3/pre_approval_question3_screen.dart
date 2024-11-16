@@ -15,8 +15,6 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
   PreApprovalQuestion3Screen({super.key});
 
   final PackageController controller = Get.find<PackageController>();
-  final RxInt three = 0.obs;
-  final RxString purposeTravel = "Business".obs;
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +112,11 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ),
               ///========================Purpose of travel?================
               CustomRadioButton(
-                title: 'Do you have children?',
+                title: 'Purpose or travel?',
                 options: const ['Business', 'Pleasure','Recreational'],
-                selectedOption: purposeTravel.value,
+                selectedOption: controller.purposeTravel.value,
                 onOptionChanged: (index) {
-                  purposeTravel.value = index;
+                  controller.purposeTravel.value = index;
                 },
               ),
               // CustomRadioButton(
@@ -137,11 +135,13 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ///<================================= submit button ====================================>
               CustomButton(
                 onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (index) {
-                        return const QuestionSubmitPop();
-                      });
+
+                  controller.question(context: context, payment_status: "Unpaid");
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (index) {
+                  //       return const QuestionSubmitPop();
+                  //     });
                 },
                 title: AppStrings.submit.tr,
               )

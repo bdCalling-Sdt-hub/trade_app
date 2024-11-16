@@ -11,184 +11,191 @@ import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_radio_button/custom_radio_button.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
 class PreApprovalQuestion2Screen extends StatelessWidget {
-  const PreApprovalQuestion2Screen({super.key});
+  PreApprovalQuestion2Screen({super.key});
 
+  PackageController controller = Get.find<PackageController>();
   @override
   Widget build(BuildContext context) {
-    final RxString selectedPets = "Yes".obs;
-    final RxString selectedChildren = "Yes".obs;
-    final RxString one = "Yes".obs;
-    final RxString two = "Yes".obs;
-    final RxString three = "Yes".obs;
-
     return Scaffold(
       backgroundColor: AppColors.white,
+
       ///========================question 2================
       appBar: CustomAppBar(
         appBarContent: AppStrings.preApprovalQuestions.tr,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
-        child: Obx(
-        () {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  text: AppStrings.pleaseFillUpThisForm.tr,
-                  fontSize: 18.h,
-                  fontWeight: FontWeight.w500,
-                ),
-                CustomRadioButton(
-                  title: 'Do you have pets?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: selectedPets.value,
-                  onOptionChanged: (index) {
-                    selectedPets.value = index;
-                  },
-                ),
-                SizedBox(height: 12.h),
-                CustomRadioButton(
-                  title: 'Do you have children?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: selectedChildren.value,
-                  onOptionChanged: (index) {
-                    selectedChildren.value = index;
-                  },
-                ),
-                CustomRadioButton(
-                  title: 'Do you own a vehicle?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: one.value,
-                  onOptionChanged: (index) {
-                    one.value = index;
-                  },
-                ), CustomRadioButton(
-                  title: 'Are you willing to swap your vehicles?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: two.value,
-                  onOptionChanged: (index) {
-                    two.value = index;
-                  },
-                ), CustomRadioButton(
-                  title: 'Are you owner or leasing your property?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: selectedChildren.value,
-                  onOptionChanged: (index) {
-                    selectedChildren.value = index;
-                  },
-                ),CustomRadioButton(
-                  title: 'Will you able to provide approval from owner for temp swap?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: three.value,
-                  onOptionChanged: (index) {
-                    three.value = index;
-                  },
-                ),CustomRadioButton(
-                  title: 'Is your property insured?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: selectedChildren.value,
-                  onOptionChanged: (index) {
-                    selectedChildren.value = index;
-                  },
-                ),CustomRadioButton(
-                  title: 'Will your utilities be upto date for swap?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: one.value,
-                  onOptionChanged: (index) {
-                    one.value = index;
-                  },
-                ),CustomRadioButton(
-                  title: 'What do you want to swap and for how long?',
-                  options: const ['Yes', 'No'],
-                  selectedOption: selectedChildren.value,
-                  onOptionChanged: (index) {
-                    selectedChildren.value = index;
-                  },
-                ),
-                CustomFromCard(
+        child: Obx(() {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
+                text: AppStrings.pleaseFillUpThisForm.tr,
+                fontSize: 18.h,
+                fontWeight: FontWeight.w500,
+              ),
+              CustomRadioButton(
+                title: 'Do you have pets?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.selectedPets.value,
+                onOptionChanged: (index) {
+                  controller.selectedPets.value = index;
+                },
+              ),
+              SizedBox(height: 12.h),
+              CustomRadioButton(
+                title: 'Do you have children?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.selectedChildren.value,
+                onOptionChanged: (index) {
+                  controller.selectedChildren.value = index;
+                },
+              ),
+              CustomRadioButton(
+                title: 'Do you own a vehicle?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.haveVehicle.value,
+                onOptionChanged: (index) {
+                  controller.haveVehicle.value = index;
+                },
+              ),
+              CustomRadioButton(
+                title: 'Are you willing to swap your vehicles?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.willingVehicle.value,
+                onOptionChanged: (index) {
+                  controller.willingVehicle.value = index;
+                },
+              ),
+              CustomRadioButton(
+                title: 'Are you owner or leasing your property?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.ownerOfProperty.value,
+                onOptionChanged: (index) {
+                  controller.ownerOfProperty.value = index;
+                },
+              ),
+              CustomRadioButton(
+                title:
+                    'Will you able to provide approval from owner for temp swap?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.ableApproveForm.value,
+                onOptionChanged: (index) {
+                  controller.ableApproveForm.value = index;
+                },
+              ),
+              CustomRadioButton(
+                title: 'Is your property insured?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.propertyInsured.value,
+                onOptionChanged: (index) {
+                  controller.propertyInsured.value = index;
+                },
+              ),
+              CustomRadioButton(
+                title: 'Will your utilities be upto date for swap?',
+                options: const ['Yes', 'No'],
+                selectedOption: controller.utilitiesUptoDate.value,
+                onOptionChanged: (index) {
+                  controller.utilitiesUptoDate.value = index;
+                },
+              ),
+              // CustomRadioButton(
+              //   title: 'What do you want to swap and for how long?',
+              //   options: const ['Yes', 'No'],
+              //   selectedOption: selectedChildren.value,
+              //   onOptionChanged: (index) {
+              //     selectedChildren.value = index;
+              //   },
+              // ),
+              CustomFromCard(
                   isMaxLine: true,
-                    title: 'What do you want to swap and for how long?',
-                    controller:TextEditingController()),
-                CustomRadioButton(
-                  title: 'Do you want to arrive on departure or depart on arrival?',
-                  options: const ['Arrive on departure', 'Depart on arrival '],
-                  selectedOption: three.value,
-                  onOptionChanged: (index) {
-                    three.value = index;
-                  },
-                ),
-                SizedBox(height: 40.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 16.w),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.sp),
-                          border: Border.all(width: 1, color: AppColors.blue500),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const CustomImage(
-                              imageSrc: AppIcons.arrowLeftAlt,
-                              imageColor: AppColors.blue500,
-                            ),
-                            CustomText(
-                              text: AppStrings.back,
-                              color: AppColors.blue500,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.sp,
-                            ),
-                          ],
-                        ),
+                  title: 'What do you want to swap and for how long?',
+                  controller: controller.swapAboutController),
+              CustomRadioButton(
+                title:
+                    'Do you want to arrive on departure or depart on arrival?',
+                options: const ['Arrive on departure', 'Depart on arrival '],
+                selectedOption: controller.departureArrival.value,
+                onOptionChanged: (index) {
+                  controller.departureArrival.value = index;
+                },
+              ),
+              SizedBox(height: 40.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 4.h, horizontal: 16.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.sp),
+                        border: Border.all(width: 1, color: AppColors.blue500),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const CustomImage(
+                            imageSrc: AppIcons.arrowLeftAlt,
+                            imageColor: AppColors.blue500,
+                          ),
+                          CustomText(
+                            text: AppStrings.back,
+                            color: AppColors.blue500,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18.sp,
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(width: 16.w),
-                    GestureDetector(
-                      onTap: () {
-                        print(selectedPets.value);
+                  ),
+                  SizedBox(width: 16.w),
+                  GestureDetector(
+                    onTap: () {
+                      print(controller.planType.value);
+                      print(controller.planId.value);
+                      print(controller.amount.value);
 
-                          context.pushNamed(RoutePath.preApprovalQuestion3Screen);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 16.w),
-                        decoration: BoxDecoration(
-                          color: AppColors.blue500,
-                          borderRadius: BorderRadius.circular(4.sp),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            CustomText(
-                              text: AppStrings.next,
-                              color: AppColors.white50,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.sp,
-                            ),
-                            const CustomImage(
-                              imageSrc: AppIcons.arrowRight,
-                              imageColor: AppColors.white50,
-                            ),
-                          ],
-                        ),
+
+                      context.pushNamed(RoutePath.preApprovalQuestion3Screen);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 4.h, horizontal: 16.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.blue500,
+                        borderRadius: BorderRadius.circular(4.sp),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomText(
+                            text: AppStrings.next,
+                            color: AppColors.white50,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18.sp,
+                          ),
+                          const CustomImage(
+                            imageSrc: AppIcons.arrowRight,
+                            imageColor: AppColors.white50,
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ],
-            );
-          }
-        ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
 }
-
