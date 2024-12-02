@@ -13,7 +13,9 @@ import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/dependency_injection/path.dart';
 import 'package:trade_app/global/model/response_model.dart';
 import 'package:trade_app/helper/local_db/local_db.dart';
+import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/helper/tost_message/show_snackbar.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/logger/logger.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -30,7 +32,7 @@ Map<String, String> basicHeaderInfo() {
 
 Future<Map<String, String>> bearerHeaderInfo() async {
   DBHelper dbHelper = serviceLocator();
-  final token = await dbHelper.getToken();
+  final token = await SharePrefsHelper.getString(AppConstants.token);
   // log.i("Bearer $token");
   return {
     HttpHeaders.acceptHeader: "application/json",

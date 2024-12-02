@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 class DBHelper {
-  Future<bool> checkUserLogedIn() async {
+/*  Future<bool> checkUserLogedIn() async {
     /// =================== Open BOX ======================
     await Hive.openBox('users');
 
@@ -19,7 +19,6 @@ class DBHelper {
   }
 
   /// ====================== Get Token ====================
-
   Future<String> getToken() async {
     var users = Hive.box(
       'users',
@@ -32,7 +31,6 @@ class DBHelper {
   }
 
   /// ====================== Save User ID ==================
-
   Future<String> getUserId() async {
     var users = Hive.box(
       'users',
@@ -47,7 +45,6 @@ class DBHelper {
   }
 
   /// ====================== Save User Information ==================
-
   Future storeTokenUserdata({
     String? token,
     String? image,
@@ -91,5 +88,5 @@ class DBHelper {
   Future<bool> onbordingCheck() async {
     Box? users = Hive.box('users');
     return users.get("onBording") != null;
-  }
+  }*/
 }

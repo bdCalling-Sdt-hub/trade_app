@@ -7,11 +7,13 @@ import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/dependency_injection/path.dart';
 import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/helper/local_db/local_db.dart';
+import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/helper/tost_message/show_snackbar.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 
 class AuthController extends GetxController {
@@ -25,9 +27,11 @@ class AuthController extends GetxController {
       TextEditingController(text: 'Nadim12345');
 
   saveInformation({required Response<dynamic> response}) {
-    dbHelper.storeTokenUserdata(
-      token: response.body["data"]["accessToken"],
-    );
+    // dbHelper.storeTokenUserdata(
+    //   token: response.body["data"]["accessToken"],
+    // );
+    SharePrefsHelper.setString(
+        AppConstants.token, response.body["data"]["accessToken"]);
   }
 
   bool isRemember = false;

@@ -63,14 +63,14 @@ class SettingScreen extends StatelessWidget {
               ),
 
               ///====================Language================
-              CustomProfileCard(
-                isCevron: true,
-                onTap: () {
-                   context.pushNamed(RoutePath.languageScreen);
-                },
-                text: AppStrings.language.tr,
-                leadingIcon: AppIcons.language,
-              ),
+              // CustomProfileCard(
+              //   isCevron: true,
+              //   onTap: () {
+              //      context.pushNamed(RoutePath.languageScreen);
+              //   },
+              //   text: AppStrings.language.tr,
+              //   leadingIcon: AppIcons.language,
+              // ),
 
 
 

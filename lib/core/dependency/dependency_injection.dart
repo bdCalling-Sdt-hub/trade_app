@@ -9,6 +9,7 @@ import 'package:trade_app/view/screens/authentication/auth_controller/auth_contr
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 import 'package:trade_app/view/screens/message_screen/MessgaeController/message_controller.dart';
+import 'package:trade_app/view/screens/my_membership_screen/payment_controller/payment_controller.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_controller.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/terms_condition_controller.dart';
 
@@ -17,7 +18,7 @@ import 'package:trade_app/view/screens/terms_and_condition_screen/terms_conditio
 class DependencyInjection extends Bindings {
   @override
   void dependencies() {
-    ///==========================User section==================
+    ///<========================== User section ==============================>
    Get.lazyPut(() => MessageController(), fenix: true);
    Get.lazyPut(() => AuthController(), fenix: true);
    Get.lazyPut(() => ProfileController(), fenix: true);
@@ -29,5 +30,6 @@ class DependencyInjection extends Bindings {
    Get.lazyPut(() => PostController(), fenix: true);
    Get.lazyPut(() => SwapRequestController(), fenix: true);
    Get.lazyPut(() => TermsConditionController(), fenix: true);
+   Get.lazyPut(() => PaymentController(), fenix: true);
   }
 }

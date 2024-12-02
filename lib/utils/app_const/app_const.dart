@@ -10,6 +10,7 @@ class AppConstants {
   static String profileID = "profileID";
   static String userStatus = "userStatus";
   static String rememberMe = "rememberMe";
+  static String token = "token";
   static var chatId = "chatID";
   static String isRememberMe = "isRememberMe";
   static String userNtr = 'https://www.india.com/wp-content/uploads/2022/03/Jr-NTR-On-RRR-Massive-Success.jpg';
