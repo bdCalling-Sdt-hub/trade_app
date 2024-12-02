@@ -34,7 +34,7 @@ class AuthController extends GetxController {
         AppConstants.token, response.body["data"]["accessToken"]);
   }
 
-  bool isRemember = false;
+  RxBool isRemember = false.obs;
   bool isTerms = false;
 
   ///============================ Sign In =========================

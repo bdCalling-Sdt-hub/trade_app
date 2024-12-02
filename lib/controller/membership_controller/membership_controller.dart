@@ -4,7 +4,7 @@ import 'package:trade_app/utils/app_strings/app_strings.dart';
 class MembershipController extends GetxController {
 
   RxBool isLoader = false.obs;
-  var sliderValue = 25000.0.obs;
+  var sliderValue = 50.0.obs;
 
   void updateSliderValue(double value) {
     sliderValue.value = value;

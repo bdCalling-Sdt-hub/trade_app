@@ -79,12 +79,13 @@ class CustomMembershipProfileCard extends StatelessWidget {
               //   // inactiveColor: Colors.white,
               // ),
               Slider(
-                value: controller.sliderValue.value,
+                //value: controller.sliderValue.value,
+                value: 100,
                 onChanged: (newValue) {
                   controller.sliderValue.value = newValue;
                 },
                 min: 0,
-                max: 100000,
+                max: 1000,
                 divisions: 3,
                 label: controller.sliderValue.value.toString(),
                 activeColor: AppColors.blue500, // Set your desired active color

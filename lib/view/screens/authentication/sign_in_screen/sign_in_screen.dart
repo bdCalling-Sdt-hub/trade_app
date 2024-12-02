@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
@@ -140,9 +142,10 @@ class SignInScreen extends StatelessWidget {
                       /// <===============================================Remember button==============================>
                       GestureDetector(
                         onTap: () {
-                          controller.isRemember = !controller.isRemember;
+                          controller.isRemember.value = !controller.isRemember.value;
                           controller.update();
-                          //SharePrefsHelper.setBool(AppConstants.isRememberMe, controller.isRemember);
+                          SharePrefsHelper.setBool(AppConstants.isRememberMe, controller.isRemember.value);
+                          print(controller.isRemember.value);
                         },
                         child: Row(
                           children: [
@@ -155,10 +158,10 @@ class SignInScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: Center(
-                                child: controller.isRemember
+                                child: controller.isRemember.value
                                     ? Icon(
                                         Icons.check,
-                                        color: controller.isRemember
+                                        color: controller.isRemember.value
                                             ? AppColors.white50
                                             : AppColors.blue500,
                                         size: 14,

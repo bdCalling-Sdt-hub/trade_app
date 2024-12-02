@@ -17,12 +17,13 @@ import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_membership_profile_card/custom_membership_profile_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:trade_app/view/screens/my_membership_screen/payment_controller/payment_controller.dart';
 
 class MyMembershipScreen extends StatelessWidget {
   MyMembershipScreen({super.key});
 
-  final MembershipController membershipController =
-      Get.find<MembershipController>();
+  final MembershipController membershipController = Get.find<MembershipController>();
+  final PaymentController controller = Get.find<PaymentController>();
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +110,9 @@ class MyMembershipScreen extends StatelessWidget {
                         bottom: 10,
                       ),
                       CustomButton(
-                        onTap: () {},
+                        onTap: () {
+                          controller.makePayment(amount: 20, context: context);
+                        },
                         title: AppStrings.payNow.tr,
                       ),
                       CustomText(

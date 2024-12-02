@@ -33,7 +33,7 @@ Map<String, String> basicHeaderInfo() {
 Future<Map<String, String>> bearerHeaderInfo() async {
   DBHelper dbHelper = serviceLocator();
   final token = await SharePrefsHelper.getString(AppConstants.token);
-  // log.i("Bearer $token");
+   log.i("Bearer $token");
   return {
     HttpHeaders.acceptHeader: "application/json",
     HttpHeaders.contentTypeHeader: "application/json",

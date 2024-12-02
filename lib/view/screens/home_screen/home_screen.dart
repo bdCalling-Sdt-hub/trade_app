@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/helper/const/const.dart';
+import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
@@ -28,7 +30,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.find<HomeController>();
   PackageController packageController = Get.find<PackageController>();
-
+  @override
+  void initState() {
+    SharePrefsHelper.getBool(AppConstants.isRememberMe);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
