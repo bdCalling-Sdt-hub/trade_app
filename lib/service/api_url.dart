@@ -46,4 +46,5 @@ class ApiUrl {
   static const subscriptionDetails = "/subscription/details";
   static const createPlan = "/plan/create-plan";
   static const paymentIntent = "/payment/payment-intent";
+  static const planProfile = "/plan/profile";
 }

@@ -90,7 +90,7 @@ class ProfileScreen extends StatelessWidget {
                           color: AppColors.black200,
                         ),
                         CustomText(
-                          text: 'Gold'.tr,
+                          text: controller.profileModel.value.data?.userType?? "",
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                           color: AppColors.black200,
@@ -104,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
                     ///=========================myMembership==============
                     CustomProfileCard(
                       onTap: () {
-                        context.pushNamed(RoutePath.myMembershipScreen);
+                        context.pushNamed(RoutePath.myMembershipScreen,);
 
                       },
                       text: AppStrings.myMembership.tr,

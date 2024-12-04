@@ -1,5 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/helper/extension/base_extension.dart';
+import 'package:trade_app/service/api_service.dart';
+import 'package:trade_app/service/api_url.dart';
+import 'package:trade_app/service/check_api.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
+import 'package:trade_app/view/screens/my_membership_screen/membership_profile_model/membership_profile_model.dart';
 
 class MembershipController extends GetxController {
 
@@ -52,4 +59,33 @@ class MembershipController extends GetxController {
       'points': '+600 Points'
     },
   ];
+
+  ///<=============================== get profile ================================>
+  final rxRequestStatus = Status.loading.obs;
+  void setRxRequestStatus(Status value) => rxRequestStatus.value = value;
+  Rx<MemberShipProfileModel> memberShipProfileModel = MemberShipProfileModel().obs;
+
+  ApiClient apiClient = ApiClient();
+  Future<void> getMemberShipProfile({BuildContext? context, required String userId}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
+
+    var response =
+    await apiClient.get(url: '${ApiUrl.planProfile.addBaseUrl}/$userId', showResult: true);
+
+    if (response.statusCode == 200) {
+      memberShipProfileModel.value = MemberShipProfileModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        setRxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        setRxRequestStatus(Status.noDataFound);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+    }
+  }
 }

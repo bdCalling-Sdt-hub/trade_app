@@ -13,32 +13,38 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/my_membership_screen/membership_profile_model/membership_profile_model.dart';
 
 class PaymentController extends GetxController {
+  ApiClient apiClient = ApiClient();
+
   ///========================= Create Payment Intent =========================
   Map<String, dynamic> value = {};
-  ApiClient apiClient = serviceLocator();
   Future<Map<String, dynamic>> createPaymentIntent(
       {required double price, required BuildContext context}) async {
-  //  var bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
+    //  var bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
     // var mainHeaders = {
     //   'Content-Type': 'application/json',
     //   //'Accept': 'application/json',
     //   'Authorization': 'Bearer $bearerToken'
     // };
-    Map<String,dynamic> body = {
+    Map<String, dynamic> body = {
       "amount": price,
     };
     try {
       var response = await apiClient.post(
-          url: ApiUrl.paymentIntent.addBaseUrl, context: context, body: body,showResult: true,);
+        url: ApiUrl.paymentIntent.addBaseUrl,
+        context: context,
+        body: body,
+        showResult: true,
+      );
       debugPrint("Payment Intent body ${response.statusCode}");
 
       if (response.statusCode == 200) {
         print('================== ${response.body["data"]}');
         return response.body["data"];
       } else {
-       // checkApi(response: response, context: context);
+        // checkApi(response: response, context: context);
         toastMessage(message: 'response error');
         return {};
       }
@@ -63,13 +69,15 @@ class PaymentController extends GetxController {
 
       if (paymentIntentData.isNotEmpty) {
         print('================== ${paymentIntentData.isNotEmpty}');
-        await Stripe.instance.initPaymentSheet(
-            paymentSheetParameters: SetupPaymentSheetParameters(
+        await Stripe.instance
+            .initPaymentSheet(
+                paymentSheetParameters: SetupPaymentSheetParameters(
           merchantDisplayName: 'Nadim',
           paymentIntentClientSecret: paymentIntentData['client_secret'],
           allowsDelayedPaymentMethods: true,
           style: ThemeMode.light,
-        )).onError((e,s){
+        ))
+            .onError((e, s) {
           print('===================== error response ${e}');
         });
         await Stripe.instance.presentPaymentSheet();

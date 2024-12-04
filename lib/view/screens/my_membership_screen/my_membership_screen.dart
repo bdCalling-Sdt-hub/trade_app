@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
+import 'package:trade_app/controller/profile_controller.dart';
 
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -19,12 +20,26 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/my_membership_screen/payment_controller/payment_controller.dart';
 
-class MyMembershipScreen extends StatelessWidget {
+class MyMembershipScreen extends StatefulWidget {
   MyMembershipScreen({super.key});
 
-  final MembershipController membershipController = Get.find<MembershipController>();
-  final PaymentController controller = Get.find<PaymentController>();
+  @override
+  State<MyMembershipScreen> createState() => _MyMembershipScreenState();
+}
 
+class _MyMembershipScreenState extends State<MyMembershipScreen> {
+  final MembershipController membershipController = Get.find<MembershipController>();
+
+  final PaymentController controller = Get.find<PaymentController>();
+  final ProfileController profileController = Get.find<ProfileController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+        membershipController.getMemberShipProfile(userId: profileController.profileModel.value.data?.id ?? "");
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

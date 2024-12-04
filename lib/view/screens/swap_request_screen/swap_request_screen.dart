@@ -23,8 +23,8 @@ class _SwapRequestScreenState extends State<SwapRequestScreen> {
   List<Widget> userScreens = [SwapMyRequest(), SwapAnotherRequest()];
 
   List<String> swapList = [
-    'my',
-    'their'
+    'Send',
+    'Requested'
   ];
 
   @override
