@@ -16,35 +16,32 @@ import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/screens/my_membership_screen/membership_profile_model/membership_profile_model.dart';
 
 class PaymentController extends GetxController {
+
   ApiClient apiClient = ApiClient();
 
   ///========================= Create Payment Intent =========================
   Map<String, dynamic> value = {};
   Future<Map<String, dynamic>> createPaymentIntent(
-      {required double price, required BuildContext context}) async {
-    //  var bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
+      {required int price, required BuildContext context}) async {
+  //  var bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
     // var mainHeaders = {
     //   'Content-Type': 'application/json',
     //   //'Accept': 'application/json',
     //   'Authorization': 'Bearer $bearerToken'
     // };
-    Map<String, dynamic> body = {
+    Map<String,dynamic> body = {
       "amount": price,
     };
     try {
       var response = await apiClient.post(
-        url: ApiUrl.paymentIntent.addBaseUrl,
-        context: context,
-        body: body,
-        showResult: true,
-      );
+          url: ApiUrl.paymentIntent.addBaseUrl, context: context, body: body,showResult: true,);
       debugPrint("Payment Intent body ${response.statusCode}");
 
       if (response.statusCode == 200) {
         print('================== ${response.body["data"]}');
         return response.body["data"];
       } else {
-        // checkApi(response: response, context: context);
+       // checkApi(response: response, context: context);
         toastMessage(message: 'response error');
         return {};
       }
@@ -58,7 +55,10 @@ class PaymentController extends GetxController {
   ///========================= Make Payment =========================
 
   Future<void> makePayment({
-    required double amount,
+    required int amount,
+    required String userId,
+    required String planId,
+    required String subscriptionId,
     required BuildContext context,
   }) async {
     try {
@@ -69,34 +69,24 @@ class PaymentController extends GetxController {
 
       if (paymentIntentData.isNotEmpty) {
         print('================== ${paymentIntentData.isNotEmpty}');
-        await Stripe.instance
-            .initPaymentSheet(
-                paymentSheetParameters: SetupPaymentSheetParameters(
+        await Stripe.instance.initPaymentSheet(
+            paymentSheetParameters: SetupPaymentSheetParameters(
           merchantDisplayName: 'Nadim',
           paymentIntentClientSecret: paymentIntentData['client_secret'],
           allowsDelayedPaymentMethods: true,
           style: ThemeMode.light,
-        ))
-            .onError((e, s) {
+        )).onError((e,s){
           print('===================== error response ${e}');
         });
         await Stripe.instance.presentPaymentSheet();
 
         /// >><><><><><><<><><><><><><> Send response in server <><><><><><><><><><<><><><><><><<
 
-        // makeOrder(
-        //   totalItem: totalItem,
-        //   price: amount,
-        //   deliveryDate: deliveryDate,
-        //   deliveryFee: deliveryFee,
-        //   cart: cartId,
-        //   points: points,
-        //   paymentMethod: 'online',
-        //   transactionId: paymentIntentData['transactionId'] ?? "",
-        //   isPicked: isPickedUp,
-        //   productId: productId,
-        //   context: context,
-        // );
+        makeOrder(
+          price: amount,
+          transactionId: paymentIntentData['transactionId'] ?? "",
+          context: context, userId: userId, planId: planId, subscriptionId: subscriptionId,
+        );
 
         toastMessage(message: "Payment Successful");
       }
@@ -109,16 +99,13 @@ class PaymentController extends GetxController {
   ///============================ Send Response to server ==============================
 
   makeOrder({
-    required int totalItem,
-    required double price,
-    required String deliveryDate,
-    required int deliveryFee,
-    required String cart,
-    required int points,
-    required String paymentMethod,
+
+    required int price,
+
     required String transactionId,
-    required bool isPicked,
-    required List productId,
+    required String userId,
+    required String planId,
+    required String subscriptionId,
     required BuildContext context,
   }) async {
     var bearerToken =
@@ -131,16 +118,11 @@ class PaymentController extends GetxController {
     };
 
     Map<String, dynamic> body = {
-      "totalItem": totalItem,
-      "price": price,
-      "deliveryDate": deliveryDate,
-      "deliveryFee": deliveryFee,
-      "cart": cart,
-      "points": points,
-      "transactionId": transactionId,
-      "callForPickup": isPicked,
-      "paymentMethod": paymentMethod,
-      "products": productId
+      "amount": price,
+      "user": userId,
+      "transaction_id": transactionId,
+      "plan_id": planId,
+      "subscriptions_id": subscriptionId,
     };
     var response = await apiClient.post(url: '', context: context!, body: body);
     if (response.statusCode == 200) {
