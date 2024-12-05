@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
@@ -96,7 +97,7 @@ class _SwapMyRequestState extends State<SwapMyRequest> {
                                 ),
                                 CustomText(
                                   left: 10,
-                                  text:  swapMyReqList[index].userTo?.createdAt.toString() ?? "",
+                                  text:DateFormat('yMMMd').format(  swapMyReqList[index].userTo!.createdAt!.toLocal()),
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,
                                   color: AppColors.black400,

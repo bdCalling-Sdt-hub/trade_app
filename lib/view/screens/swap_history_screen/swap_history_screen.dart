@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 
 import 'package:trade_app/core/routes/route_path.dart';
@@ -69,7 +70,7 @@ class SwapHistoryScreen extends StatelessWidget {
                         image: '${ApiUrl.baseUrl}${swapHistoryList[index].productFrom?.user?.profileImage ?? ""}',
                         name:
                             swapHistoryList[index].productFrom?.user?.name ?? "",
-                        date: '12/06/24'.tr,
+                        date:DateFormat('yMMMd').format(swapHistoryList[index].createdAt!.toLocal()),
                         onTap: () {
                           showDialog(context: context, builder: (context){
                             return  CustomReviewDialog(swapId: swapHistoryList[index].id?? "",);

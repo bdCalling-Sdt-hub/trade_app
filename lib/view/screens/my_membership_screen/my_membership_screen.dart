@@ -150,7 +150,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                           ),
                           CustomButton(
                             onTap: () {
-                             // controller.makePayment(amount: data.data?.plan?.amount ?? 0, context: context);
+                              controller.makePayment(amount: data.data?.plan?.amount ?? 0, context: context, userId: profileController.profileModel.value.data?.id ?? "", planId: data.data?.plan?.id ?? "", subscriptionId: data.data?.plan?.planId?.id ?? "");
                             },
                             title: AppStrings.payNow.tr,
                           ),

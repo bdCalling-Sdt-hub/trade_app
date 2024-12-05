@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
@@ -63,7 +64,7 @@ class _SwapAnotherRequestState extends State<SwapAnotherRequest> {
                         },
                         image: '${ApiUrl.baseUrl}${swapTheirReqList[index].userFrom?.profileImage ?? ""}',
                         name: swapTheirReqList[index].userFrom?.name ?? "",
-                        date: swapTheirReqList[index].userFrom?.createdAt.toString() ?? "",
+                        date: DateFormat('yMMMd').format(swapTheirReqList[index].userFrom!.createdAt!.toLocal()),
                         acceptButton: 'accept'.tr,
                         rejectButton: 'reject'.tr,
                         onTap: () {

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
+import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/dependency_injection/path.dart';
 import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
@@ -124,9 +126,9 @@ class PaymentController extends GetxController {
       "plan_id": planId,
       "subscriptions_id": subscriptionId,
     };
-    var response = await apiClient.post(url: '', context: context!, body: body);
+    var response = await apiClient.post(url: ApiUrl.successIntent.addBaseUrl, context: context!, body: body);
     if (response.statusCode == 200) {
-      //Get.toNamed(AppRoute.orderHistoryScreen);
+      AppRouter.route.pushNamed(RoutePath.homeScreen);
 
       toastMessage(message: response.body["message"]);
     } else {
