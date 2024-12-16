@@ -42,7 +42,7 @@ class Package extends StatelessWidget {
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(packageList.length, (index) {
+              children: List.generate(packageList.length ?? 0, (index) {
                 return Container(
                   margin: const EdgeInsets.only(right: 8),
                   width: MediaQuery.of(context).size.width * .43,

@@ -30,8 +30,8 @@ class AuthController extends GetxController {
     // dbHelper.storeTokenUserdata(
     //   token: response.body["data"]["accessToken"],
     // );
-    SharePrefsHelper.setString(
-        AppConstants.token, response.body["data"]["accessToken"]);
+    SharePrefsHelper.setString(AppConstants.token, response.body["data"]["accessToken"]);
+    SharePrefsHelper.setString(AppConstants.userId, response.body["data"]["user"]["_id"]);
   }
 
   RxBool isRemember = false.obs;

@@ -97,7 +97,7 @@ class AppRouter {
         GoRoute(
           name: RoutePath.messageScreen,
           path: RoutePath.messageScreen.addBasePath,
-          builder: (context, state) => MessageScreen(),
+          builder: (context, state) => MessageScreen(receiverId: state.extra as String,),
         ),
 
         ///======================= signUpScreen Route =======================

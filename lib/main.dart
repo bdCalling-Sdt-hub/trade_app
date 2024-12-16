@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
 import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/dependency_injection/path.dart';
+import 'package:trade_app/service/socket_service.dart';
 import 'package:trade_app/view/components/device_utils/device_utils.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -15,8 +16,11 @@ Future<void> main() async {
   DependencyInjection di = DependencyInjection();
   di.dependencies();
 
+  SocketApi.init();
   //SystemUtil.setStatusBarColor(color: Colors.transparent);
-  Stripe.publishableKey="pk_test_51Q69G2L8xn5o73J1fDJ9iprBk2h3Kjbj1zXs1Rll89x1qFFXPAtHqyZ667hyVpAIlUvIJRzzhDXmRxQ6r9tOeOlZ00mZDAdEoI";
+  Stripe.publishableKey =
+      "pk_test_51Q69G2L8xn5o73J1fDJ9iprBk2h3Kjbj1zXs1Rll89x1qFFXPAtHqyZ667hyVpAIlUvIJRzzhDXmRxQ6r9tOeOlZ00mZDAdEoI";
+
   /// ================= DB Path ===============
   var databasePath = await getApplicationDocumentsDirectory();
   Hive.init(databasePath.path);

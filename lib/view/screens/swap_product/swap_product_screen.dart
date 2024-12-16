@@ -314,83 +314,89 @@ class _SwapProductScreenState extends State<SwapProductScreen> {
                             color: AppColors.black500,
                             bottom: 10.h,
                           ),
+
+
+
                         ],
                       ),
                     ),
                   ),
+                  Row(
+                    children: [
+                      ///==========================Edit Button=============
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: (){
+                            controller.launchPhone('01731090564');
+                          },
+                          child: CustomDetailContainer(
+
+                              color: AppColors.blue500,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const CustomImage(
+                                    imageSrc: AppIcons.call,
+                                    imageColor: AppColors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  CustomText(
+                                    text: AppStrings.call.tr,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: AppColors.white,
+                                  )
+                                ],
+                              )),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      ///======================= chat button===============
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: (){
+                            context.pushNamed(RoutePath.messageScreen,extra: swapProductDetailsModel.data?.userTo?.id ?? '');
+                          },
+                          child: CustomDetailContainer(
+                              color: AppColors.blue500,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const CustomImage(
+                                    imageSrc: AppIcons.forum,
+                                    imageColor: AppColors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  CustomText(
+                                    text: AppStrings.chat.tr,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: AppColors.white,
+                                  )
+                                ],
+                              )),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
+
+
               ),
             );
         }
       }),
 
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Row(
-          children: [
-            ///==========================Edit Button=============
-            Expanded(
-              child: GestureDetector(
-                onTap: (){
-                  controller.launchPhone('01731090564');
-                },
-                child: CustomDetailContainer(
-
-                    color: AppColors.blue500,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CustomImage(
-                          imageSrc: AppIcons.call,
-                          imageColor: AppColors.white,
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        CustomText(
-                          text: AppStrings.call.tr,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                          color: AppColors.white,
-                        )
-                      ],
-                    )),
-              ),
-            ),
-            SizedBox(
-              width: 10.w,
-            ),
-            ///======================= chat button===============
-            Expanded(
-              child: GestureDetector(
-                onTap: (){
-                   context.pushNamed(RoutePath.messageScreen);
-                },
-                child: CustomDetailContainer(
-                    color: AppColors.blue500,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CustomImage(
-                          imageSrc: AppIcons.forum,
-                          imageColor: AppColors.white,
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        CustomText(
-                          text: AppStrings.chat.tr,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                          color: AppColors.white,
-                        )
-                      ],
-                    )),
-              ),
-            ),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      //   child:,
+      // ),
     );
   }
 }

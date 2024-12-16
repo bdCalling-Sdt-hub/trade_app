@@ -1,7 +1,7 @@
 class ApiUrl {
   static const baseUrl = "http://103.145.138.200:5070";
   static const imageBaseUrl = '$baseUrl/';
-  static socketUrl({String userID = ""}) => '$baseUrl?userId=$userID';
+  static socketUrl({required String userID}) => 'http://103.145.138.200:5070?id=$userID';
 
   /// ============================ Auth ==============================>
   static const register = "/auth/register";
@@ -49,4 +49,5 @@ class ApiUrl {
   static const planProfile = "/plan/profile";
   static const successIntent = "/payment/success_intent";
   static const allPoints = "/plan/all-points";
+  static const getMessage = "/message/get-message";
 }

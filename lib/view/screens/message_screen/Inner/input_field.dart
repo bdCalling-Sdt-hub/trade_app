@@ -7,8 +7,8 @@ import 'package:trade_app/view/components/custom_text_field/custom_text_field.da
 import 'package:trade_app/view/screens/message_screen/MessgaeController/message_controller.dart';
 
 class MessageInputField extends StatelessWidget {
-  MessageInputField({super.key});
-
+  MessageInputField({super.key, required this.senderId});
+  final String senderId;
   final MessageController controller = Get.find<MessageController>();
 
   @override
@@ -32,9 +32,7 @@ class MessageInputField extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     controller.selectImage();
-                    controller.isComment.value = !controller.isComment.value;
                     controller.update();
-                    controller.isComment.refresh();
                   },
                   icon: const Icon(
                     Icons.image_outlined,
@@ -43,12 +41,12 @@ class MessageInputField extends StatelessWidget {
                 ),
                 //============================Text Input Field=====================
 
-                const Expanded(
-                    child: SizedBox(
+                Expanded(child: SizedBox(
                   height: 50,
                   child: CustomTextField(
                     textInputAction: TextInputAction.done,
                     hintText: "Write your message",
+                    textEditingController: controller.message,
                     fieldBorderColor: Colors.amber,
                     fillColor: Colors.transparent,
                   ),
@@ -58,10 +56,8 @@ class MessageInputField extends StatelessWidget {
 
                 GestureDetector(
                   onTap: () {
-                    if (controller.sendController.value.text.isNotEmpty ==
-                            true ||
-                        controller.imagePath.value.isNotEmpty == true) {
-                      // controller.sendMessage();
+                    if (controller.message.value.text.isNotEmpty == true || controller.imagePath.value.isNotEmpty == true) {
+                      controller.sendMessage(senderId);
                     } else {
                       toastMessage(message: "Please write something");
                     }

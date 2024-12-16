@@ -80,55 +80,57 @@ class MyRatingScreen extends StatelessWidget {
 
               return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomDetailContainer(
-                          color: AppColors.white200,
-                          child: Row(
-                            children: [
-                              CustomText(
-                                textAlign: TextAlign.start,
-                                text: AppStrings.overallRating.tr,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                                color: AppColors.black500,
-                              ),
-                              const Spacer(),
-                              const Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              ),
-                              CustomText(
-                                textAlign: TextAlign.start,
-                                text: ' ${controller.myRatingModel.value.data?.averageRating ?? 0.0}/5.0'.tr,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                                color: AppColors.black500,
-                              ),
-                            ],
-                          )),
-                      CustomText(
-                        textAlign: TextAlign.start,
-                        text: AppStrings.allRatingAndComments.tr,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: AppColors.black500,
-                        bottom: 19,
-                      ),
-                      Column(
-                        children: List.generate(controller.ratingList.length, (index) {
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomDetailContainer(
+                            color: AppColors.white200,
+                            child: Row(
+                              children: [
+                                CustomText(
+                                  textAlign: TextAlign.start,
+                                  text: AppStrings.overallRating.tr,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                  color: AppColors.black500,
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                CustomText(
+                                  textAlign: TextAlign.start,
+                                  text: ' ${controller.myRatingModel.value.data?.averageRating ?? 0.0}/5.0'.tr,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 18,
+                                  color: AppColors.black500,
+                                ),
+                              ],
+                            )),
+                        CustomText(
+                          textAlign: TextAlign.start,
+                          text: AppStrings.allRatingAndComments.tr,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: AppColors.black500,
+                          bottom: 19,
+                        ),
+                        Column(
+                          children: List.generate(controller.ratingList.length, (index) {
 
-                          return CustomRatingCard(
-                            name: controller.ratingList.value[index].swapOwner?.name ?? "",
-                            date:DateFormat('yMMMd').format(controller.ratingList.value[index].swapOwner!.createdAt!.toLocal()),
-                            imageUrl: '${ApiUrl.baseUrl}${controller.ratingList.value[index].swapOwner?.profileImage ?? ""}',
-                            rating: (controller.ratingList.value[index].ratting ??  0.0).toInt(),
-                            review: controller.ratingList.value[index].comment ?? "",
-                          );
-                        }),
-                      )
-                    ],
+                            return CustomRatingCard(
+                              name: controller.ratingList.value[index].swapOwner?.name ?? "",
+                              date:DateFormat('yMMMd').format(controller.ratingList.value[index].swapOwner!.createdAt!.toLocal()),
+                              imageUrl: '${ApiUrl.baseUrl}${controller.ratingList.value[index].swapOwner?.profileImage ?? ""}',
+                              rating: (controller.ratingList.value[index].ratting ??  0.0).toInt(),
+                              review: controller.ratingList.value[index].comment ?? "",
+                            );
+                          }),
+                        )
+                      ],
+                    ),
                   ));
           }
         }));
