@@ -19,39 +19,48 @@ class CustomChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          leading: CustomNetworkImage(
-            boxShape: BoxShape.circle,
-            imageUrl: imageUrl,
-            height: 40.h,
-            width: 40.w,
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.grey.withOpacity(.3),
+            width: 1
+          )
+        )
+      ),
+      child: Column(
+        children: [
+          ListTile(
+            leading: CustomNetworkImage(
+              boxShape: BoxShape.circle,
+              imageUrl: imageUrl,
+              height: 40.h,
+              width: 40.w,
+            ),
+            title: CustomText(
+              textAlign: TextAlign.start,
+              text: name,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: AppColors.black500,
+            ),
+            subtitle: CustomText(
+              textAlign: TextAlign.start,
+              text: subTitle,
+              fontSize: 12,
+              maxLines: 2,
+              fontWeight: FontWeight.w400,
+              color: Colors.black,
+            ),
+            trailing: CustomText(
+              text: time,
+              color: Colors.black,
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+            ),
           ),
-          title: CustomText(
-            textAlign: TextAlign.start,
-            text: name,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: AppColors.black500,
-          ),
-          subtitle: CustomText(
-            textAlign: TextAlign.start,
-            text: subTitle,
-            fontSize: 12,
-            maxLines: 2,
-            fontWeight: FontWeight.w400,
-            color: Colors.black,
-          ),
-          trailing: CustomText(
-            text: time,
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-          ),
-        ),
-        const Divider(),
-      ],
+        ],
+      ),
     );
   }
 }

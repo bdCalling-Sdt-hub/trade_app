@@ -49,5 +49,6 @@ class ApiUrl {
   static const planProfile = "/plan/profile";
   static const successIntent = "/payment/success_intent";
   static const allPoints = "/plan/all-points";
+  static const getConversation = "/message/get-conversation";
   static getMessage({required int page, required String id})=> "$baseUrl/message/get-message/$id?page=$page&limit=20";
 }

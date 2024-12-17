@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
+import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/service/socket_service.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/message_screen/chat_model.dart';
 import 'package:trade_app/view/screens/message_screen/message_list_model.dart';
 
 class MessageController extends GetxController {
@@ -77,6 +80,36 @@ class MessageController extends GetxController {
   }
 
 
+  ///<========================== conversation list ==========================>
+ var myUserId;
+  var chatLoading = Status.loading.obs;
+  ChatLoadingMethod(Status status) => chatLoading.value = status;
+  RxList<ChatList> chatList = <ChatList>[].obs;
+  getConversation({BuildContext? context}) async {
+    chatLoading(Status.loading);
+
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      myUserId = sharedPreferences.getString(AppConstants.userId)??"";
+    var response = await apiClient.get(
+        url: '${ApiUrl.getConversation.addBaseUrl}/$myUserId', showResult: true);
+
+    if (response.statusCode == 200) {
+      // topProductList.value = TopProductDatum.fromJson(response.body["data"]);
+      chatList.value = List<ChatList>.from(
+          response.body["data"].map((x) => ChatList.fromJson(x)));
+      chatLoading(Status.completed);
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        chatLoading(Status.internetError);
+      } else if (response.statusCode == 404) {
+        chatLoading(Status.noDataFound);
+      } else {
+        chatLoading(Status.error);
+      }
+    }
+  }
+
 
   ///========================== Pick Image ========================
   Rx<File> imageFile = File("").obs;
@@ -95,7 +128,7 @@ class MessageController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    getConversation();
     super.onInit();
   }
 }
