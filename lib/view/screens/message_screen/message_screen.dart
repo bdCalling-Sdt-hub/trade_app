@@ -24,10 +24,15 @@ class _MessageScreenState extends State<MessageScreen> {
   @override
   void initState() {
     super.initState();
+    initSocket();
+  }
+
+  void initSocket() async{
     controller.pagingController.addPageRequestListener((pageKey) {
+      print("object");
       controller.getAllChat(page: pageKey, receiverId: widget.receiverId);
     });
-    SocketApi.init();
+    await SocketApi.init();
     controller.listenForNewMessages();
   }
 
@@ -69,10 +74,10 @@ class MessageListCard extends StatelessWidget {
           reverse: true,
           builderDelegate: PagedChildBuilderDelegate<MessageModel>(
             itemBuilder: (context, message, index) {
-              print("${controller.myId.value} ${ message.receiverId}${message.message}");
+              print("${controller.myId.value} ${ message.receiverId} /${message.message}");
               return ChatBubble(
                 message: message,
-                isSentByMe: controller.myId.value == message.receiverId,
+                isSentByMe: controller.myId.value == message.senderId,
               );
             },
             firstPageProgressIndicatorBuilder: (_) => const Center(child: CircularProgressIndicator()),

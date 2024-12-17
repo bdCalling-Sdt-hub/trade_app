@@ -131,12 +131,13 @@ class PostController extends GetxController {
 
     var response = selectedImagesMulti.isEmpty
         ? await apiClient.post(
-            url: ApiUrl.addProduct.addBaseUrl, context: context, body: body)
+            url: ApiUrl.addProduct.addBaseUrl, context: context, body: body,showResult: true)
         : await apiClient.multipartRequest(
             url: ApiUrl.addProduct.addBaseUrl,
             reqType: 'Post',
             body: body,
             multipartBody: multipartBodyList,
+      showResult: true
           );
 
     if (response.statusCode == 200) {
@@ -351,7 +352,7 @@ class PostController extends GetxController {
 
   @override
   void onInit() {
-    //getMyProduct();
+   // getMyProduct();
     super.onInit();
   }
 }

@@ -242,8 +242,8 @@ class User {
 
 class SimilarProduct {
   String? id;
-  CategoryEnum? category;
-  SubCategory? subCategory;
+  String? category;
+  String? subCategory;
   String? user;
   String? title;
   String? condition;
@@ -273,8 +273,8 @@ class SimilarProduct {
 
   factory SimilarProduct.fromJson(Map<String, dynamic> json) => SimilarProduct(
     id: json["_id"],
-    category: categoryEnumValues.map[json["category"]]!,
-    subCategory: subCategoryValues.map[json["subCategory"]]!,
+    category: json["category"]!,
+    subCategory: json["subCategory"]!,
     user: json["user"],
     title: json["title"],
     condition: json["condition"],
@@ -287,8 +287,8 @@ class SimilarProduct {
 
   Map<String, dynamic> toJson() => {
     "_id": id,
-    "category": categoryEnumValues.reverse[category],
-    "subCategory": subCategoryValues.reverse[subCategory],
+    "category": category,
+    "subCategory": subCategory,
     "user": user,
     "title": title,
     "condition": condition,
@@ -300,21 +300,6 @@ class SimilarProduct {
   };
 }
 
-enum CategoryEnum {
-  THE_66_E51_B7_E4127_AAA606943831
-}
-
-final categoryEnumValues = EnumValues({
-  "66e51b7e4127aaa606943831": CategoryEnum.THE_66_E51_B7_E4127_AAA606943831
-});
-
-enum SubCategory {
-  THE_670_E4_ACCC8_C8878_E72_F0_D22_A
-}
-
-final subCategoryValues = EnumValues({
-  "670e4accc8c8878e72f0d22a": SubCategory.THE_670_E4_ACCC8_C8878_E72_F0_D22_A
-});
 
 class EnumValues<T> {
   Map<String, T> map;

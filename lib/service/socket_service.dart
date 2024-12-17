@@ -17,7 +17,7 @@ class SocketApi {
 
   ///<------------------------- Socket Initialization with dynamic User ID ---------------->
 
-  static void init() async {
+  static Future<void> init() async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String userId = sharedPreferences.getString(AppConstants.userId)??"";
     if (userId.isEmpty || userId == "null") {

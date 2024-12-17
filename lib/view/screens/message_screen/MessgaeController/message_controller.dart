@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/socket_service.dart';
@@ -27,12 +26,13 @@ class MessageController extends GetxController {
     isLoadingMove.value = true;
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     myId.value = sharedPreferences.getString(AppConstants.userId)??"";
+    print("===============Init");
     try {
-      final response = await apiClient.get(url: '${ApiUrl.getMessage.addBaseUrl}/$receiverId', showResult: true);
+      final response = await apiClient.get(url: ApiUrl.getMessage(page: page, id: receiverId), showResult: true);
 
       if (response.statusCode == 200) {
         final userServiceAll = MessageListModel.fromJson(response.body);
-        final newItems = userServiceAll.data ?? [];
+        final newItems = userServiceAll.messages ?? [];
 
         if (newItems.isEmpty) {
           pagingController.appendLastPage(newItems);

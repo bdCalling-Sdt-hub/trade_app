@@ -1,18 +1,12 @@
 class MessageListModel {
-  final int? statusCode;
-  final bool? success;
-  final List<MessageModel>? data;
+  final List<MessageModel>? messages;
 
   MessageListModel({
-    this.statusCode,
-    this.success,
-    this.data,
+    this.messages,
   });
 
   factory MessageListModel.fromJson(Map<String, dynamic> json) => MessageListModel(
-    statusCode: json["statusCode"],
-    success: json["success"],
-    data: json["data"] == null ? [] : List<MessageModel>.from(json["data"]!.map((x) => MessageModel.fromJson(x))),
+    messages: json["messages"] == null ? [] : List<MessageModel>.from(json["messages"]!.map((x) => MessageModel.fromJson(x))),
   );
 }
 
@@ -26,7 +20,7 @@ class MessageModel {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? v;
-  final String? datumId;
+  final String? messageId;
 
   MessageModel({
     this.id,
@@ -38,7 +32,7 @@ class MessageModel {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.datumId,
+    this.messageId,
   });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) => MessageModel(
@@ -51,6 +45,6 @@ class MessageModel {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    datumId: json["id"],
+    messageId: json["id"],
   );
 }

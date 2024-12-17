@@ -133,12 +133,11 @@ class ProfileScreen extends StatelessWidget {
                       leadingIcon: AppIcons.swapHoriz,
                     ),
 
-                    ///====================Swap History================
+                    ///<===================== Swap History =======================>
                     CustomProfileCard(
                       isCevron: true,
                       onTap: () {
                         context.pushNamed(RoutePath.swapHistoryScreen);
-
                       },
                       text: AppStrings.swapHistory.tr,
                       leadingIcon: AppIcons.history,
