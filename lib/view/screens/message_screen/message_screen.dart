@@ -43,11 +43,21 @@ class _MessageScreenState extends State<MessageScreen> {
       appBar: CustomAppBar(
         appBarContent: 'Robert Smith'.tr,
       ),
-      body: Column(
-        children: [
-          MessageListCard(controller: controller, scrollController: scrollController),
-          MessageInputField(senderId: widget.receiverId),
-        ],
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          controller.pagingController.addPageRequestListener((pageKey) {
+            print("object");
+            controller.getAllChat(page: pageKey, receiverId: widget.receiverId);
+          });
+          await SocketApi.init();
+          controller.listenForNewMessages();
+        },
+        child: Column(
+          children: [
+            MessageListCard(controller: controller, scrollController: scrollController, receiverId: widget.receiverId,),
+            MessageInputField(senderId: widget.receiverId),
+          ],
+        ),
       ),
     );
   }
@@ -57,11 +67,13 @@ class MessageListCard extends StatelessWidget {
   const MessageListCard({
     super.key,
     required this.controller,
-    required this.scrollController,
+    required this.scrollController, required this.receiverId,
+
   });
 
   final MessageController controller;
   final ScrollController scrollController;
+  final String receiverId;
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +86,10 @@ class MessageListCard extends StatelessWidget {
           reverse: true,
           builderDelegate: PagedChildBuilderDelegate<MessageModel>(
             itemBuilder: (context, message, index) {
-              print("${controller.myId.value} ${ message.receiverId} /${message.message}");
+              print("${controller.myId.value} ${receiverId} /${message.message}");
               return ChatBubble(
                 message: message,
-                isSentByMe: controller.myId.value == message.senderId,
+                isSentByMe: controller.myId.value == receiverId,
               );
             },
             firstPageProgressIndicatorBuilder: (_) => const Center(child: CircularProgressIndicator()),

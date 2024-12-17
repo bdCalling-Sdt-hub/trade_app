@@ -359,7 +359,7 @@ class _SwapProductScreenState extends State<SwapProductScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: (){
-                            context.pushNamed(RoutePath.messageScreen,extra: swapProductDetailsModel.data?.userTo?.id ?? '');
+                            context.pushNamed(RoutePath.messageScreen,extra: swapProductDetailsModel.data?.userFrom?.id ?? '');
                           },
                           child: CustomDetailContainer(
                               color: AppColors.blue500,

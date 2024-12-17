@@ -37,6 +37,7 @@ class MyProductModel {
 }
 
 class Datum {
+  String? status;
   String? id;
   Category? category;
   SubCategory? subCategory;
@@ -49,6 +50,7 @@ class Datum {
   List<String>? images;
 
   Datum({
+    this.status,
     this.id,
     this.category,
     this.subCategory,
@@ -66,6 +68,7 @@ class Datum {
   String toRawJson() => json.encode(toJson());
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    status: json["status"],
     id: json["_id"],
     category: json["category"] == null ? null : Category.fromJson(json["category"]),
     subCategory: json["subCategory"] == null ? null : SubCategory.fromJson(json["subCategory"]),
@@ -79,6 +82,7 @@ class Datum {
   );
 
   Map<String, dynamic> toJson() => {
+    "status": status,
     "_id": id,
     "category": category?.toJson(),
     "subCategory": subCategory?.toJson(),
