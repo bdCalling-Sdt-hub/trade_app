@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/helper/extension/base_extension.dart';
@@ -122,18 +123,20 @@ class PackageController extends GetxController {
   var packageLoading = Status.loading.obs;
   TopProductLoadingMethod(Status status) => packageLoading.value = status;
 
+  var userId;
   ApiClient apiClient = ApiClient();
-  RxList<Datum> packageList = <Datum>[].obs;
+  Rx<PackageModel> packageModel = PackageModel().obs;
   getPackage({BuildContext? context}) async {
     packageLoading(Status.loading);
-
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    userId = sharedPreferences.getString(AppConstants.userId)??"";
     var response = await apiClient.get(
-        url: ApiUrl.subscriptionAll.addBaseUrl, showResult: true);
+        url: '${ApiUrl.subscriptionAll.addBaseUrl}?userId=$userId', showResult: true);
 
     if (response.statusCode == 200) {
       // topProductList.value = TopProductDatum.fromJson(response.body["data"]);
-      packageList.value =
-          List<Datum>.from(response.body["data"].map((x) => Datum.fromJson(x)));
+     // packageList.value = List<Subscription>.from(response.body["subscriptions"].map((x) => Subscription.fromJson(x)));
+      packageModel.value = PackageModel.fromJson(response.body);
       packageLoading(Status.completed);
     } else {
       checkApi(response: response, context: context);

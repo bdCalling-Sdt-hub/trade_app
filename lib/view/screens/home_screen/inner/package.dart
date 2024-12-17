@@ -38,11 +38,11 @@ class Package extends StatelessWidget {
           );
 
         case Status.completed:
-          var packageList = packageController.packageList.value;
+          var packageList = packageController.packageModel.value.data?.subscriptions;
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(packageList.length ?? 0, (index) {
+              children: List.generate(packageList?.length ?? 0, (index) {
                 return Container(
                   margin: const EdgeInsets.only(right: 8),
                   width: MediaQuery.of(context).size.width * .43,
@@ -55,12 +55,12 @@ class Package extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomText(
-                        text: packageList[index].planName ?? "",
+                        text: packageList?[index].planName ?? "",
                         color: AppColors.white50,
                         fontWeight: FontWeight.w600,
                       ),
                       CustomText(
-                        text: (packageList[index].fee ?? 0).toString(),
+                        text: (packageList?[index].fee ?? 0).toString(),
                         color: AppColors.white50,
                         fontWeight: FontWeight.w700,
                         fontSize: 24.h,

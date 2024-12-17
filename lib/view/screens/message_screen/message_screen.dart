@@ -104,8 +104,8 @@ class MessageListCard extends StatelessWidget {
 
 class ChatBubble extends StatelessWidget {
   final MessageModel message;
-  final bool isSentByMe;
-  const ChatBubble({super.key, required this.message, required this.isSentByMe});
+  final bool isSentByMe ;
+  const ChatBubble({super.key, required this.message,required this.isSentByMe});
 
   @override
   Widget build(BuildContext context) {

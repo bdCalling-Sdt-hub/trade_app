@@ -49,13 +49,13 @@ class MembershipPackageScreen extends StatelessWidget {
             );
 
           case Status.completed:
-            var packageList = packageController.packageList.value;
+            var packageList = packageController.packageModel.value.data?.subscriptions;
             return SingleChildScrollView(
               padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
               child: Column(
-                children: List.generate(packageList.length, (index) {
+                children: List.generate(packageList?.length ?? 0, (index) {
                   var count = 1 + index;
-                  var data = packageList[index];
+                  var data = packageList?[index];
                   return Column(
                     children: [
                       Row(
@@ -67,7 +67,7 @@ class MembershipPackageScreen extends StatelessWidget {
                             right: 8.w,
                           ),
                           CustomText(
-                            text: "${data.planName ?? " "} Membership",
+                            text: "${data?.planName ?? " "} Membership",
                             fontSize: 16.h,
                             fontWeight: FontWeight.w500,
                           ),
@@ -80,7 +80,7 @@ class MembershipPackageScreen extends StatelessWidget {
                       ///<====================== package contain ============================>
                       GestureDetector(
                         onTap: () {
-                          context.pushNamed(RoutePath.packageDetailsScreen,extra: data.id ?? "");
+                          context.pushNamed(RoutePath.packageDetailsScreen,extra: data?.id ?? "");
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,
@@ -93,13 +93,13 @@ class MembershipPackageScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               CustomText(
-                                text: data.planName ?? "",
+                                text: data?.planName ?? "",
                                 color: AppColors.white50,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18.h,
                               ),
                               CustomText(
-                                text: "\$${data.fee ?? ""}",
+                                text: "\$${data?.fee ?? ""}",
                                 color: AppColors.white50,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 24.h,
@@ -120,7 +120,7 @@ class MembershipPackageScreen extends StatelessWidget {
                       ),
 
                       CustomText(
-                        text:  'From ${data.pointRangeStart ?? ""}-${data.pointRangeEnd ?? ""}',
+                        text:  'From ${data?.pointRangeStart ?? ""}-${data?.pointRangeEnd ?? ""}',
                         fontWeight: FontWeight.w500,
                         fontSize: 16.h,
                       ),
