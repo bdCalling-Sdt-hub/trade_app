@@ -1,6 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/helper/extension/base_extension.dart';
+import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/components/error_screen/error_screen.dart';
 import 'package:trade_app/view/screens/authentication/forgot_password/forgot_password_screen.dart';
 import 'package:trade_app/view/screens/authentication/otp/otp_screen.dart';
@@ -59,8 +61,13 @@ class AppRouter {
           path: RoutePath.splashScreen.addBasePath,
           builder: (context, state) => const SplashScreen(),
           redirect: (context, state) {
-            Future.delayed(const Duration(seconds: 1), () {
-              AppRouter.route.replaceNamed(RoutePath.signInScreen);
+            Future.delayed(const Duration(seconds: 1), () async{
+              bool? isRememberMe = await SharePrefsHelper.getBool(AppConstants.isRememberMe);
+              if (isRememberMe == true ) {
+                AppRouter.route.replaceNamed(RoutePath.homeScreen);
+              }   else {
+                AppRouter.route.replaceNamed(RoutePath.signInScreen);
+              }
             });
             return null;
           },

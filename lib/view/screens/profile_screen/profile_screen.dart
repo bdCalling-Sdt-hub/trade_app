@@ -7,6 +7,7 @@ import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
@@ -168,6 +169,7 @@ class ProfileScreen extends StatelessWidget {
                     CustomProfileCard(
                       isCevron: false,
                       onTap: () {
+                        SharePrefsHelper.remove(AppConstants.isRememberMe);
                         context.pushNamed(RoutePath.signInScreen);
                       },
                       text: AppStrings.logOut.tr,
