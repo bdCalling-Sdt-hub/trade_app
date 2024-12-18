@@ -50,6 +50,7 @@ class JustForYou extends StatelessWidget {
                       (index) {
                     return Container(
                       margin: EdgeInsets.only(right: 10.w),
+                      width: MediaQuery.of(context).size.width * .4,
                       child: CustomMyProduct(
                         isMargin: false,
                         isEdit: controller.isEdit,

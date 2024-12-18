@@ -15,7 +15,6 @@ import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
-import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class MyProductsScreen extends StatelessWidget {
   MyProductsScreen({super.key});

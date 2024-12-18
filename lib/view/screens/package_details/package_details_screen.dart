@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
+import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -31,11 +31,11 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
 
   @override
   void initState() {
-    packageController.getPackageDetails(id: widget.id, context: context);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      packageController.getPackageDetails(id: widget.id, context: context);
+    });
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +54,15 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
           case Status.internetError:
             return NoInternetScreen(
               onTap: () {
-                packageController.getPackageDetails(context: context, id: widget.id);
+                packageController.getPackageDetails(
+                    context: context, id: widget.id);
               },
             );
           case Status.error:
             return GeneralErrorScreen(
               onTap: () {
-                packageController.getPackageDetails(context: context, id: widget.id);
+                packageController.getPackageDetails(
+                    context: context, id: widget.id);
               },
             );
           case Status.noDataFound:
@@ -68,7 +70,6 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
               child: CustomText(text: AppStrings.noDataFound),
             );
           case Status.completed:
-
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 20.w),
               child: Column(
@@ -84,7 +85,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                       // ),
                       CustomText(
                         text:
-                        "${packageController.packageDetailsModel.value.data?.planName ?? ""} Membership",
+                            "${packageController.packageDetailsModel.value.data?.planName ?? ""} Membership",
                         fontSize: 16.h,
                         fontWeight: FontWeight.w500,
                       ),
@@ -97,7 +98,8 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                   ///<====================== package contain ============================>
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(vertical: 32.h, horizontal: 8.h),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 32.h, horizontal: 8.h),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: AppColors.blue500,
@@ -106,14 +108,14 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                       children: [
                         CustomText(
                           text:
-                          "${packageController.packageDetailsModel.value.data?.planName ?? ""}",
+                              "${packageController.packageDetailsModel.value.data?.planName ?? ""}",
                           color: AppColors.white50,
                           fontWeight: FontWeight.w600,
                           fontSize: 18.h,
                         ),
                         CustomText(
                           text:
-                          '\$${packageController.packageDetailsModel.value.data?.fee ?? 0}',
+                              '\$${packageController.packageDetailsModel.value.data?.fee ?? 0}',
                           color: AppColors.white50,
                           fontWeight: FontWeight.w700,
                           fontSize: 24.h,
@@ -137,7 +139,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                       alignment: Alignment.center,
                       child: CustomText(
                         text:
-                        'From ${packageController.packageDetailsModel.value.data?.pointRangeStart ?? ""}-${packageController.packageDetailsModel.value.data?.pointRangeEnd ?? ""} Points',
+                            'From ${packageController.packageDetailsModel.value.data?.pointRangeStart ?? ""}-${packageController.packageDetailsModel.value.data?.pointRangeEnd ?? ""} Points',
                         fontWeight: FontWeight.w500,
                         fontSize: 16.h,
                       )),
@@ -160,6 +162,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -175,9 +178,11 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             )
                           ],
                         ),
+
                         SizedBox(
                           height: 8.h,
                         ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -187,16 +192,18 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             ),
                             CustomText(
                               text:
-                              "${packageController.packageDetailsModel.value.data?.swapPoint ?? ""} points for each swap",
+                                  "${packageController.packageDetailsModel.value.data?.swapPoint ?? ""} points for each swap",
                               left: 8.w,
                               fontWeight: FontWeight.w500,
                               fontSize: 16.h,
                             )
                           ],
                         ),
+
                         SizedBox(
                           height: 8.h,
                         ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -206,16 +213,18 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             ),
                             CustomText(
                               text:
-                              "${packageController.packageDetailsModel.value.data?.positiveCommentPoint ?? ""} points for positive comments",
+                                  "${packageController.packageDetailsModel.value.data?.positiveCommentPoint ?? ""} points for positive comments",
                               left: 8.w,
                               fontWeight: FontWeight.w500,
                               fontSize: 16.h,
                             )
                           ],
                         ),
+
                         SizedBox(
                           height: 8.h,
                         ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -231,6 +240,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             )
                           ],
                         ),
+
                       ],
                     ),
                   )
@@ -243,10 +253,27 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
         padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
         child: CustomButton(
           onTap: () {
-            packageController.planType.value = packageController.packageDetailsModel.value.data?.planName ?? "";
-            packageController.planId.value = packageController.packageDetailsModel.value.data?.id ?? "";
-            packageController.amount.value =( packageController.packageDetailsModel.value.data?.fee ?? 0).toInt();
-            context.pushNamed(RoutePath.preApprovalQuestionScreen);
+            packageController.planType.value =
+                packageController.packageDetailsModel.value.data?.planName ??
+                    "";
+            packageController.planId.value =
+                packageController.packageDetailsModel.value.data?.id ?? "";
+            packageController.amount.value =
+                (packageController.packageDetailsModel.value.data?.fee ?? 0)
+                    .toInt();
+
+            if(packageController.packageDetailsModel.value.data?.planName == "Diamond" || packageController.packageDetailsModel.value.data?.planName == "Platinum"){
+              toastMessage(message: 'Need more points');
+            }else{
+              context.pushNamed(RoutePath.preApprovalQuestionScreen,
+                queryParameters: {
+                  "plan_id": packageController.planId.value ?? '',
+                  "amount": (packageController.amount.value ?? 0).toString(),
+                  "planType":packageController.packageDetailsModel.value.data?.planName  ?? '',
+                },
+              );
+            }
+
           },
           title: AppStrings.applyForMembership,
         ),

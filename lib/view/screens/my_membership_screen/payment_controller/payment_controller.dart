@@ -124,7 +124,7 @@ class PaymentController extends GetxController {
       "user": userId,
       "transaction_id": transactionId,
       "plan_id": planId,
-      "subscriptions_id": subscriptionId,
+      "package_id": subscriptionId,
     };
     var response = await apiClient.post(url: ApiUrl.successIntent.addBaseUrl, context: context!, body: body);
     if (response.statusCode == 200) {

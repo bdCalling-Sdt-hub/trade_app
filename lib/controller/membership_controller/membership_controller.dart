@@ -11,8 +11,33 @@ import 'package:trade_app/view/screens/my_membership_screen/points_earn_screen/p
 
 class MembershipController extends GetxController {
 
+  var currentPoints = 0.obs;
+
+  // Membership thresholds
+  final goldThreshold = 25000;
+  final platinumThreshold = 100000;
+  final diamondThreshold = 200000;
+
+  // Function to update points dynamically
+  void updatePoints(int points) {
+    currentPoints.value = points;
+  }
+
+  // // Function to determine membership type based on points
+  // String get membershipStatus {
+  //   if (currentPoints.value < goldThreshold) {
+  //     return 'Gold';
+  //   } else if (currentPoints.value < platinumThreshold) {
+  //     return 'Platinum';
+  //   } else if (currentPoints.value <= diamondThreshold) {
+  //     return 'Diamond';
+  //   } else {
+  //     return 'Diamond';
+  //   }
+  // }
+
   RxBool isLoader = false.obs;
-  var sliderValue = 50.0.obs;
+  var sliderValue = 100.0.obs;
 
   void updateSliderValue(double value) {
     sliderValue.value = value;

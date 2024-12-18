@@ -419,17 +419,34 @@ class AppRouter {
         GoRoute(
           name: RoutePath.preApprovalQuestionScreen,
           path: RoutePath.preApprovalQuestionScreen.addBasePath,
-          builder: (context, state) => PreApprovalQuestionScreen(),
+          builder: (context, state) {
+            final planId = state.uri.queryParameters["plan_id"] ?? "";
+            final amount = int.tryParse(state.uri.queryParameters["amount"] ?? "0") ?? 0;
+            final planType = state.uri.queryParameters["planType"] ?? "";
+
+            return PreApprovalQuestionScreen(planId: planId, amount: amount, planType: planType,);
+
+          },
         ),
         GoRoute(
           name: RoutePath.preApprovalQuestion2Screen,
           path: RoutePath.preApprovalQuestion2Screen.addBasePath,
-          builder: (context, state) => PreApprovalQuestion2Screen(),
+          builder: (context, state) {
+            final planId = state.uri.queryParameters["plan_id"] ?? "";
+            final amount = int.tryParse(state.uri.queryParameters["amount"] ?? "0") ?? 0;
+            final planType = state.uri.queryParameters["planType"] ?? "";
+            return PreApprovalQuestion2Screen(planId: planId, amount: amount, planType: planType,);
+          },
         ),
         GoRoute(
           name: RoutePath.preApprovalQuestion3Screen,
           path: RoutePath.preApprovalQuestion3Screen.addBasePath,
-          builder: (context, state) => PreApprovalQuestion3Screen(),
+          builder: (context, state) {
+            final planId = state.uri.queryParameters["plan_id"] ?? "";
+            final amount = int.tryParse(state.uri.queryParameters["amount"] ?? "0") ?? 0;
+            final planType = state.uri.queryParameters["planType"] ?? "";
+            return PreApprovalQuestion3Screen(planId: planId, amount: amount, planType: planType,);
+          },
         ),
       ]);
 

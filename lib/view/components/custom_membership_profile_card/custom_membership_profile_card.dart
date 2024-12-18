@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:range_slider_flutter/range_slider_flutter.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -8,8 +9,12 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
 class CustomMembershipProfileCard extends StatelessWidget {
+
+
+
   final String imageUrl;
   final String name;
+  final int points;
   final String membershipStatus;
   final MembershipController controller;
   final VoidCallback onTap;
@@ -19,7 +24,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
     required this.name,
     required this.membershipStatus,
     super.key,
-    required this.controller, required this.onTap,
+    required this.controller, required this.onTap, required this.points,
   });
 
   @override
@@ -68,29 +73,27 @@ class CustomMembershipProfileCard extends StatelessWidget {
                   ),
                 ],
               ),
-              // Slider(
-              //   value: controller.sliderValue.value,
-              //   onChanged: null, // Disable user interaction
-              //   min: 0,
-              //   max: 100000,
-              //   divisions: 3,
-              //   label: controller.sliderValue.value.toString(),
-              //   // activeColor: Colors.white,
-              //   // inactiveColor: Colors.white,
-              // ),
-              Slider(
-                //value: controller.sliderValue.value,
-                value: 100,
-                onChanged: (newValue) {
-                  controller.sliderValue.value = newValue;
-                },
+
+              RangeSliderFlutter(
+                values: [points.toDouble()],
+                max: controller.diamondThreshold.toDouble(),
                 min: 0,
-                max: 1000,
-                divisions: 3,
-                label: controller.sliderValue.value.toString(),
-                activeColor: AppColors.blue500, // Set your desired active color
-                inactiveColor: AppColors.white50, // Set your desired inactive color
+                rangeSlider: false,
+                tooltip: RangeSliderFlutterTooltip(
+                  alwaysShowTooltip: true,
+                  // boxStyle: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
+                  textStyle: TextStyle(color: Colors.blue),
+                ),
+                trackBar: RangeSliderFlutterTrackBar(
+                  activeTrackBarHeight: 6,
+                  activeTrackBar: BoxDecoration(color: Colors.blue),
+                  inactiveTrackBar: BoxDecoration(color: Colors.white),
+                ),
+                onDragging: (handlerIndex, lowerValue, upperValue) {
+                  controller.updatePoints(lowerValue.toInt());
+                },
               ),
+
 
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),

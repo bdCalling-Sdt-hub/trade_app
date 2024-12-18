@@ -12,8 +12,10 @@ import 'package:trade_app/view/screens/membership_package/package_controller.dar
 import 'package:trade_app/view/screens/questions/inner/question_submit_pop.dart';
 
 class PreApprovalQuestion3Screen extends StatelessWidget {
-  PreApprovalQuestion3Screen({super.key});
-
+  PreApprovalQuestion3Screen({super.key, required this.planId, required this.amount, required this.planType});
+  final String planId;
+  final int amount;
+  final String planType;
   final PackageController controller = Get.find<PackageController>();
 
   @override
@@ -135,8 +137,7 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ///<================================= submit button ====================================>
               CustomButton(
                 onTap: () {
-
-                  controller.question(context: context, payment_status: "Unpaid");
+                  controller.question(context: context, planId: planId, amount: (amount ?? 0).toString());
                   // showDialog(
                   //     context: context,
                   //     builder: (index) {

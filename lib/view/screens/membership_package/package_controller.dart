@@ -56,12 +56,14 @@ class PackageController extends GetxController {
   RxBool signUpLoading = false.obs;
   question({
     required BuildContext context,
-    required String payment_status,
+
+    required String planId,
+    required String amount,
   }) async {
     signUpLoading.value = true;
     Map<String, dynamic> body = {
-      "plan_id": planId.value,
-      "amount": "100",
+      "plan_id": planId,
+      "amount": amount,
       // "planStartDate": planStartDate,
       // "planEndDate": planEndDate,
       //"payment_status": payment_status,

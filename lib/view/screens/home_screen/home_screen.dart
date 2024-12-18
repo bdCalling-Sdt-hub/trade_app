@@ -213,6 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
 
+                SizedBox(height: 8.h,),
+
                 ///============================ just for you =============================>
                 JustForYou()
               ],

@@ -49,7 +49,8 @@ class MembershipPackageScreen extends StatelessWidget {
             );
 
           case Status.completed:
-            var packageList = packageController.packageModel.value.data?.subscriptions;
+            var packageList =
+                packageController.packageModel.value.data?.subscriptions;
             return SingleChildScrollView(
               padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
               child: Column(
@@ -80,12 +81,13 @@ class MembershipPackageScreen extends StatelessWidget {
                       ///<====================== package contain ============================>
                       GestureDetector(
                         onTap: () {
-                          context.pushNamed(RoutePath.packageDetailsScreen,extra: data?.id ?? "");
+                          context.pushNamed(RoutePath.packageDetailsScreen,
+                              extra: data?.id ?? "");
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,
-                          padding:
-                          EdgeInsets.symmetric(vertical: 24.h, horizontal: 8.h),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 24.h, horizontal: 8.h),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: AppColors.blue,
@@ -120,7 +122,8 @@ class MembershipPackageScreen extends StatelessWidget {
                       ),
 
                       CustomText(
-                        text:  'From ${data?.pointRangeStart ?? ""}-${data?.pointRangeEnd ?? ""}',
+                        text:
+                            'From ${data?.pointRangeStart ?? ""}-${data?.pointRangeEnd ?? ""}',
                         fontWeight: FontWeight.w500,
                         fontSize: 16.h,
                       ),

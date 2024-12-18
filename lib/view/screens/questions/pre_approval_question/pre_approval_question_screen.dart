@@ -17,7 +17,11 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
 class PreApprovalQuestionScreen extends StatelessWidget {
-  PreApprovalQuestionScreen({super.key});
+  PreApprovalQuestionScreen({super.key, required this.planId, required this.amount, required this.planType});
+
+  final String planId;
+  final int amount;
+  final String planType;
 
   final PackageController controller = Get.find<PackageController>();
   final PostController postController = Get.find<PostController>();
@@ -152,7 +156,14 @@ class PreApprovalQuestionScreen extends StatelessWidget {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    context.pushNamed(RoutePath.preApprovalQuestion2Screen);
+                    context.pushNamed(RoutePath.preApprovalQuestion2Screen,
+                      queryParameters: {
+                        "plan_id": planId ?? '',
+                        "amount": (amount ?? 0).toString(),
+                        "planType":planType  ?? '',
+                      },
+
+                    );
                   },
                   child: CustomDetailContainer(
                       color: AppColors.blue500,

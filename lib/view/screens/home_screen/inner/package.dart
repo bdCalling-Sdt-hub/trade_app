@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -43,38 +45,43 @@ class Package extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(packageList?.length ?? 0, (index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  width: MediaQuery.of(context).size.width * .43,
-                  padding:
-                      EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColors.blue,
-                  ),
-                  child: Column(
-                    children: [
-                      CustomText(
-                        text: packageList?[index].planName ?? "",
-                        color: AppColors.white50,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      CustomText(
-                        text: (packageList?[index].fee ?? 0).toString(),
-                        color: AppColors.white50,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24.h,
-                        top: 4.h,
-                        bottom: 4.h,
-                      ),
-                      CustomText(
-                        maxLines: 2,
-                        text: 'Per Month',
-                        color: AppColors.white50,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12.h,
-                      ),
-                    ],
+                return GestureDetector(
+                  onTap: (){
+                    context.pushNamed(RoutePath.packageDetailsScreen,extra: packageList?[index].id ?? "");
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 8),
+                    width: MediaQuery.of(context).size.width * .43,
+                    padding:
+                        EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.blue,
+                    ),
+                    child: Column(
+                      children: [
+                        CustomText(
+                          text: packageList?[index].planName ?? "",
+                          color: AppColors.white50,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        CustomText(
+                          text: (packageList?[index].fee ?? 0).toString(),
+                          color: AppColors.white50,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 24.h,
+                          top: 4.h,
+                          bottom: 4.h,
+                        ),
+                        CustomText(
+                          maxLines: 2,
+                          text: 'Per Month',
+                          color: AppColors.white50,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.h,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }),

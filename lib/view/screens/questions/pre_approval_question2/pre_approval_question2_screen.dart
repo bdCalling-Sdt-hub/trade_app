@@ -14,7 +14,10 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
 class PreApprovalQuestion2Screen extends StatelessWidget {
-  PreApprovalQuestion2Screen({super.key});
+  PreApprovalQuestion2Screen({super.key, required this.planId, required this.amount, required this.planType});
+  final String planId;
+  final int amount;
+  final String planType;
 
   PackageController controller = Get.find<PackageController>();
   @override
@@ -164,7 +167,14 @@ class PreApprovalQuestion2Screen extends StatelessWidget {
                       print(controller.amount.value);
 
 
-                      context.pushNamed(RoutePath.preApprovalQuestion3Screen);
+                      context.pushNamed(RoutePath.preApprovalQuestion3Screen,
+
+                        queryParameters: {
+                          "plan_id": planId ?? '',
+                          "amount": (amount ?? 0).toString(),
+                          "planType":planType  ?? '',
+                        },
+                      );
                     },
                     child: Container(
                       padding:

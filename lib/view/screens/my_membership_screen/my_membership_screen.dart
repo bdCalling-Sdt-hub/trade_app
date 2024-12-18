@@ -91,7 +91,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                       controller: membershipController,
                       onTap: () {
                         context.pushNamed(RoutePath.membershipDetailsScreen);
-                      },
+                      }, points: (data.data?.profile?.points ?? 0),
                     ),
 
                     ///=======================Total Points Earn=============
