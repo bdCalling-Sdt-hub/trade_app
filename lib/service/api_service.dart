@@ -23,10 +23,12 @@ final log = logger(ApiClient);
 
 typedef ServerResponse<T> = Future<Either<ErrorResponseModel, T>>;
 
-Map<String, String> basicHeaderInfo() {
+Future <Map<String, String>> basicHeaderInfo() async{
+  final token = await SharePrefsHelper.getString(AppConstants.token);
   return {
     HttpHeaders.acceptHeader: "application/json",
     HttpHeaders.contentTypeHeader: "application/json",
+    HttpHeaders.authorizationHeader: "Bearer $token",
   };
 }
 
@@ -70,7 +72,7 @@ class ApiClient {
       final response = await http
           .get(
             Uri.parse(url),
-            headers: isBasic ? basicHeaderInfo() : await bearerHeaderInfo(),
+            headers: isBasic ?await basicHeaderInfo() : await bearerHeaderInfo(),
           )
           .timeout(Duration(seconds: duration));
 
@@ -172,7 +174,7 @@ class ApiClient {
           .post(
             Uri.parse(url),
             body: jsonEncode(body),
-            headers: isBasic ? basicHeaderInfo() : await bearerHeaderInfo(),
+            headers: isBasic ?await basicHeaderInfo() : await bearerHeaderInfo(),
           )
           .timeout(Duration(seconds: duration));
 
@@ -272,7 +274,7 @@ class ApiClient {
           .patch(
             Uri.parse(url),
             body: jsonEncode(body),
-            headers: isBasic ? basicHeaderInfo() : await bearerHeaderInfo(),
+            headers: isBasic ? await basicHeaderInfo() : await bearerHeaderInfo(),
           )
           .timeout(Duration(seconds: duration));
 
@@ -363,7 +365,7 @@ class ApiClient {
       final response = await http
           .get(
             Uri.parse(url!).replace(queryParameters: body),
-            headers: isBasic! ? basicHeaderInfo() : await bearerHeaderInfo(),
+            headers: isBasic! ? await basicHeaderInfo() : await bearerHeaderInfo(),
           )
           .timeout(const Duration(seconds: 15));
 
@@ -450,7 +452,7 @@ class ApiClient {
         ..fields.addAll(
             body?.map((key, value) => MapEntry(key, value.toString())) ?? {})
         ..headers.addAll(
-          isBasic ? basicHeaderInfo() : await bearerHeaderInfo(),
+          isBasic ?await basicHeaderInfo() : await bearerHeaderInfo(),
         );
 
       if (multipartBody!.isNotEmpty) {
@@ -639,7 +641,7 @@ class ApiClient {
     }
 
     try {
-      var headers = isBasic! ? basicHeaderInfo() : await bearerHeaderInfo();
+      Map<String, String>? headers = isBasic! ?await basicHeaderInfo() : await bearerHeaderInfo();
 
       final response = await http
           .delete(
@@ -724,7 +726,7 @@ class ApiClient {
           .put(
             Uri.parse(url!),
             body: jsonEncode(body),
-            headers: isBasic! ? basicHeaderInfo() : await bearerHeaderInfo(),
+            headers: isBasic! ?await basicHeaderInfo() : await bearerHeaderInfo(),
           )
           .timeout(Duration(seconds: duration));
 

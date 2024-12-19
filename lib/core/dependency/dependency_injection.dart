@@ -10,6 +10,7 @@ import 'package:trade_app/view/screens/home_screen/home_controller/home_controll
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 import 'package:trade_app/view/screens/message_screen/MessgaeController/message_controller.dart';
 import 'package:trade_app/view/screens/my_membership_screen/payment_controller/payment_controller.dart';
+import 'package:trade_app/view/screens/notification_screen/notification_controller.dart';
 import 'package:trade_app/view/screens/swap_request_screen/swap_request_controller.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/terms_condition_controller.dart';
 
@@ -31,5 +32,6 @@ class DependencyInjection extends Bindings {
    Get.lazyPut(() => SwapRequestController(), fenix: true);
    Get.lazyPut(() => TermsConditionController(), fenix: true);
    Get.lazyPut(() => PaymentController(), fenix: true);
+   Get.lazyPut(() => NotificationController(), fenix: true);
   }
 }

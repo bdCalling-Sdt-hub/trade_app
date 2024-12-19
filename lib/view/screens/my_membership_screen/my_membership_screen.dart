@@ -85,7 +85,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                     membershipController.isLoader.value
                         ? const CustomLoader()
                         : CustomMembershipProfileCard(
-                      imageUrl: '${ApiUrl.baseUrl}/${data.data?.profile?.name ?? ""}',
+                      imageUrl: '${ApiUrl.baseUrl}${data.data?.profile?.profileImage ?? ""}',
                       name: data.data?.profile?.name ?? "",
                       membershipStatus: data.data?.profile?.userType ?? "",
                       controller: membershipController,

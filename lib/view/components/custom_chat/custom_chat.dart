@@ -29,6 +29,7 @@ class CustomChat extends StatelessWidget {
         )
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
             leading: CustomNetworkImage(
@@ -40,15 +41,15 @@ class CustomChat extends StatelessWidget {
             title: CustomText(
               textAlign: TextAlign.start,
               text: name,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+              fontSize: 14.h,
+              fontWeight: FontWeight.w600,
               color: AppColors.black500,
             ),
             subtitle: CustomText(
               textAlign: TextAlign.start,
               text: subTitle,
               fontSize: 12,
-              maxLines: 2,
+              maxLines: 3,
               fontWeight: FontWeight.w400,
               color: Colors.black,
             ),
@@ -56,7 +57,7 @@ class CustomChat extends StatelessWidget {
               text: time,
               color: Colors.black,
               fontWeight: FontWeight.w400,
-              fontSize: 12,
+              fontSize: 10,
             ),
           ),
         ],

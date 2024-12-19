@@ -112,11 +112,13 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
 
                   ],
                 ): membershipController.selectedIndex.value==1 ?
+
+
                   membershipController.memberShipDetailsModel.value.data!.userPoint! >= membershipController.memberShipDetailsModel.value.data!.pointRangeStart!.toInt() ?
                   Column(
                     children: [
                       CustomMembershipDetailsCard(
-                        userName: 'Mohammod Rakib',
+                        userName: 'Mohammed Rakib',
                         points: membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0,
                         membershipLevel: AppStrings.gold.tr,
                         sliderWidget: membershipController.isLoader.value
@@ -130,8 +132,28 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                           }, // Disable user interaction
                         ),
                         description:
-                        'Keep earning points to unlock exclusive benefits and privileges.'
-                            .tr,
+                        'Keep earning points to unlock exclusive benefits and privileges.'.tr,
+                      ),
+
+                      CustomText(
+                        text: AppStrings.swapPointsHistory.tr,
+                        color: AppColors.black500,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                      SizedBox(
+                        height: 22.h,
+                      ),
+
+                      ///========================Swap Point History=====================
+                      Column(
+                        children: List.generate(membershipController.memberShipDetailsModel.value.data?.result?.length ?? 0, (index) {
+                          return CustomSwapPointsRow(
+                              earnedPointsText: 'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
+                              date: '12/03/24',
+                              item1: membershipController.memberShipDetailsModel.value.data?.result?[index].productFrom?.title ?? '',
+                              item2: membershipController.memberShipDetailsModel.value.data?.result?[index].productTo?.title ?? '');
+                        }),
                       ),
                     ],
                   ):
@@ -181,6 +203,27 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                       description:
                       'Keep earning points to unlock exclusive benefits and privileges.'
                           .tr,
+                    ),
+
+                    CustomText(
+                      text: AppStrings.swapPointsHistory.tr,
+                      color: AppColors.black500,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                    SizedBox(
+                      height: 22.h,
+                    ),
+
+                    ///========================Swap Point History=====================
+                    Column(
+                      children: List.generate(membershipController.memberShipDetailsModel.value.data?.result?.length ?? 0, (index) {
+                        return CustomSwapPointsRow(
+                            earnedPointsText: 'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
+                            date: '12/03/24',
+                            item1: membershipController.memberShipDetailsModel.value.data?.result?[index].productFrom?.title ?? '',
+                            item2: membershipController.memberShipDetailsModel.value.data?.result?[index].productTo?.title ?? '');
+                      }),
                     ),
                   ],
                 ):

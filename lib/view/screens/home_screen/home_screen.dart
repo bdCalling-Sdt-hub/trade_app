@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trade_app/controller/membership_controller/membership_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/helper/const/const.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
@@ -30,6 +31,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.find<HomeController>();
   PackageController packageController = Get.find<PackageController>();
+  final MembershipController membershipController = Get.find<MembershipController>();
   @override
   void initState() {
     SharePrefsHelper.getBool(AppConstants.isRememberMe);
@@ -50,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       context.pushNamed(RoutePath.searchScreen);
                     },
-                    coinAmount: '22,850'),
+                    coinAmount: (membershipController.memberShipProfileModel.value.data?.point ?? 0).toString()),
 
                 SizedBox(height: 12.h,),
                 ///==============================Banner Image==========================>

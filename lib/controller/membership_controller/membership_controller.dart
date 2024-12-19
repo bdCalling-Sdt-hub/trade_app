@@ -16,8 +16,8 @@ class MembershipController extends GetxController {
 
   // Membership thresholds
   final goldThreshold = 25000;
-  final platinumThreshold = 100000;
-  final diamondThreshold = 200000;
+  final platinumThreshold = 10000;
+  final diamondThreshold = 2000;
 
   // Function to update points dynamically
   void updatePoints(int points) {

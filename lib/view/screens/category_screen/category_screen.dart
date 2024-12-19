@@ -37,7 +37,7 @@ class CategoryScreen extends StatelessWidget {
             return const CustomLoader();
           case Status.internetError:
             return NoInternetScreen(
-              onTap: () {
+              onTap: () {-
                 controller.getPopularCategory(
                   context: context,
                 );

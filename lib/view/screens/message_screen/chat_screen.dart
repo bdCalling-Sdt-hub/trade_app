@@ -66,7 +66,7 @@ class ChatScreen extends StatelessWidget {
                     },
                     child: CustomChat(
                       imageUrl:
-                          '${ApiUrl.baseUrl}/${chatList[index].participants?[0].profileImage ?? ""}',
+                          '${ApiUrl.baseUrl}${chatList[index].participants?[0].profileImage ?? ""}',
                       name: chatList[index].participants?[0].name ?? "",
                       subTitle: chatList[index].messages?[0].message ?? "",
                       time: DateFormat('yMMMd').format(
