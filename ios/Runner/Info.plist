@@ -46,24 +46,31 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 
+	<!-- Permissions -->
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>This app requires access to your photo library to select images.</string>
-
-    <key>NSCameraUsageDescription</key>
-    <string>This app requires access to your camera to take photos.</string>
-
-    <key>NSMicrophoneUsageDescription</key>
-    <string>This app requires access to your microphone for video recording.</string>
-
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>tel</string>
-    </array>
-
 	<key>NSCameraUsageDescription</key>
-    <string>Scan your card to add it automatically</string>
-    <key>NSCameraUsageDescription
-    &lt;string&gt;To scan cards&lt;/string&gt;</key>
-    <string>To scan cards</string>
+    <string>This app requires access to your camera for taking photos or scanning items.</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>This app requires access to your microphone for video and audio recording.</string>
+
+	<!-- URL Schemes -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel</string>
+		<string>http</string>
+		<string>https</string>
+	</array>
+
+	<!-- Stripe Configuration -->
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
+
+	<!-- Lottie and Animations -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
