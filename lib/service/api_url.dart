@@ -47,7 +47,7 @@ class ApiUrl {
   static const createPlan = "/plan/create-plan";
   static const paymentIntent = "/payment/payment-intent";
   static const planProfile = "/plan/profile";
-  static const swapHist = "/swap/swap-histoy";
+  static const swapHist = "/swap/swap-histoy-plan";
   static const successIntent = "/payment/success_intent";
   static const allPoints = "/plan/all-points";
   static const notification = "/notification/my-notifications";
