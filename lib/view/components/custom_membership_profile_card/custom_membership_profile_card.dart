@@ -9,9 +9,6 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
 class CustomMembershipProfileCard extends StatelessWidget {
-
-
-
   final String imageUrl;
   final String name;
   final int points;
@@ -24,12 +21,13 @@ class CustomMembershipProfileCard extends StatelessWidget {
     required this.name,
     required this.membershipStatus,
     super.key,
-    required this.controller, required this.onTap, required this.points,
+    required this.controller,
+    required this.onTap,
+    required this.points,
   });
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: onTap,
       child: Card(
@@ -61,6 +59,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
                         fontSize: 18,
                       ),
                       SizedBox(height: 4.h),
+
                       ///=====================Status=========
                       CustomText(
                         text: '${AppStrings.membershipStatus}'
@@ -73,28 +72,45 @@ class CustomMembershipProfileCard extends StatelessWidget {
                   ),
                 ],
               ),
-
-              RangeSliderFlutter(
-                values: [points.toDouble()],
-                max: controller.diamondThreshold.toDouble(),
-                min: 0,
-                rangeSlider: false,
-                tooltip: RangeSliderFlutterTooltip(
-                  alwaysShowTooltip: true,
-                  // boxStyle: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
-                  textStyle: TextStyle(color: Colors.blue),
-                ),
-                trackBar: RangeSliderFlutterTrackBar(
-                  activeTrackBarHeight: 6,
-                  activeTrackBar: BoxDecoration(color: Colors.blue),
-                  inactiveTrackBar: BoxDecoration(color: Colors.white),
-                ),
-                onDragging: (handlerIndex, lowerValue, upperValue) {
-                  controller.updatePoints(lowerValue.toInt());
-                },
+              Stack(
+                children: [
+                  RangeSliderFlutter(
+                    values: [points.toDouble()],
+                    max: controller.diamondThreshold.toDouble(),
+                    min: 0,
+                    rangeSlider: false,
+                    tooltip: RangeSliderFlutterTooltip(
+                      alwaysShowTooltip: true,
+                      // boxStyle: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
+                      textStyle: TextStyle(color: Colors.blue),
+                    ),
+                    trackBar: RangeSliderFlutterTrackBar(
+                      activeTrackBarHeight: 6,
+                      activeTrackBar: BoxDecoration(color: Colors.blue),
+                      inactiveTrackBar: BoxDecoration(color: Colors.white),
+                    ),
+                    onDragging: (handlerIndex, lowerValue, upperValue) {
+                      controller.updatePoints(lowerValue.toInt());
+                    },
+                  ),
+                  Positioned(
+                      top: 20,
+                      left: 100,
+                      child: Container(
+                        height: 30.h,
+                        width: 4.w,
+                        color: Colors.white,
+                      )),
+                  Positioned(
+                      top: 20,
+                      right: 100,
+                      child: Container(
+                        height: 30.h,
+                        width: 4.w,
+                        color: Colors.white,
+                      )),
+                ],
               ),
-
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
@@ -103,7 +119,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
                     ///=================Gold===========
                     Column(
                       children: [
-                         CustomText(
+                        CustomText(
                           text: AppStrings.gold.tr,
                           color: AppColors.white50,
                           fontSize: 12,
@@ -115,8 +131,10 @@ class CustomMembershipProfileCard extends StatelessWidget {
                           color: AppColors.black50,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                        ),                    ],
+                        ),
+                      ],
                     ),
+
                     ///==================Platinum=========
                     Column(
                       children: [
@@ -125,14 +143,17 @@ class CustomMembershipProfileCard extends StatelessWidget {
                           color: AppColors.white50,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                        ),                      SizedBox(height: 4.h),
+                        ),
+                        SizedBox(height: 4.h),
                         const CustomText(
                           text: '100,000',
                           color: AppColors.black50,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                        ),                     ],
+                        ),
+                      ],
                     ),
+
                     ///===================Diamond=========
                     Column(
                       children: [
@@ -141,7 +162,8 @@ class CustomMembershipProfileCard extends StatelessWidget {
                           color: AppColors.white50,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                        ),                    ],
+                        ),
+                      ],
                     ),
                   ],
                 ),

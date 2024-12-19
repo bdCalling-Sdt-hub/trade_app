@@ -66,21 +66,21 @@ class HomeAppbar extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 16.h,),
+        // SizedBox(height: 16.h,),
         ///<========================== search ============================>
-        CustomTextField(
-          onTap:onTap ,
-          fieldBorderColor: AppColors.gray300,
-          fillColor: AppColors.white200,
-          onChanged: (val){},
-          readOnly: true,
-          hintText: AppStrings.search.tr,
-          isPrefixIcon: true,
-          prefixIcon: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomImage(imageSrc: AppIcons.search,size: 24.sp,),
-          ),
-        )
+        // CustomTextField(
+        //   onTap:onTap ,
+        //   fieldBorderColor: AppColors.gray300,
+        //   fillColor: AppColors.white200,
+        //   onChanged: (val){},
+        //   readOnly: true,
+        //   hintText: AppStrings.search.tr,
+        //   isPrefixIcon: true,
+        //   prefixIcon: Padding(
+        //     padding: const EdgeInsets.all(8.0),
+        //     child: CustomImage(imageSrc: AppIcons.search,size: 24.sp,),
+        //   ),
+        // )
       ],
     );
   }

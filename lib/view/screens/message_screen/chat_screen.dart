@@ -18,9 +18,9 @@ import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/message_screen/MessgaeController/message_controller.dart';
 
 class ChatScreen extends StatelessWidget {
-    ChatScreen({super.key});
+  ChatScreen({super.key});
 
-    MessageController controller=Get.find<MessageController>();
+  MessageController controller = Get.find<MessageController>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ChatScreen extends StatelessWidget {
       backgroundColor: AppColors.white,
 
       ///=========================Chat  Appbar===============
-      appBar:  CustomAppBar(
+      appBar: CustomAppBar(
         appBarContent: AppStrings.chat.tr,
       ),
       bottomNavigationBar: const NavBar(currentIndex: 1),
@@ -61,16 +61,18 @@ class ChatScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                     onTap: () {
-                      context.pushNamed(RoutePath.messageScreen,extra: chatList[index].participants?[0].id);
+                      context.pushNamed(RoutePath.messageScreen,
+                          extra: chatList[index].participants?[0].id);
                     },
                     child: CustomChat(
-                      imageUrl: '${ApiUrl.baseUrl}/${chatList[index].participants?[0].profileImage ?? ""}',
+                      imageUrl:
+                          '${ApiUrl.baseUrl}/${chatList[index].participants?[0].profileImage ?? ""}',
                       name: chatList[index].participants?[0].name ?? "",
                       subTitle: chatList[index].messages?[0].message ?? "",
-                      time: DateFormat('yMMMd').format(chatList[index].messages?[0].createdAt?.toLocal() ?? DateTime.now())
-
-                      ,)
-                );
+                      time: DateFormat('yMMMd').format(
+                          chatList[index].messages?[0].createdAt?.toLocal() ??
+                              DateTime.now()),
+                    ));
               },
             );
         }

@@ -52,9 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     coinAmount: '22,850'),
 
+                SizedBox(height: 12.h,),
                 ///==============================Banner Image==========================>
                 CarouselSlider(
                   options: CarouselOptions(
+                    height: 130.h,
                     autoPlay: true,
                     autoPlayCurve: Curves.ease,
                     pageSnapping: false,
@@ -70,11 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
+
                           margin: EdgeInsets.only(left: 8.w),
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.sp),
                               image: DecorationImage(
                             image: NetworkImage(
-                                '${ApiUrl.baseUrl}${imagePath.image ?? ""}'),
+                                '${ApiUrl.baseUrl}${imagePath.image ?? ""}',),
+                                fit: BoxFit.cover
                           )),
                         );
                       },
@@ -82,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }).toList(),
                 ),
 
+                SizedBox(height: 12.h,),
                 ///============================ Smooth Indicator =============================>
                 Align(
                   alignment: Alignment.center,

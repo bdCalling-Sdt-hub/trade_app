@@ -15,11 +15,22 @@ import 'package:trade_app/view/components/custom_swap_points_row/custom_swap_poi
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_user_tab_bar/custom_user_tab_bar.dart';
 
-class MembershipDetailsScreen extends StatelessWidget {
+class MembershipDetailsScreen extends StatefulWidget {
   MembershipDetailsScreen({super.key});
 
-  final MembershipController membershipController =
-      Get.find<MembershipController>();
+  @override
+  State<MembershipDetailsScreen> createState() => _MembershipDetailsScreenState();
+}
+
+class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
+  final MembershipController membershipController = Get.find<MembershipController>();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      membershipController.getMemberShipDetails(planType: "Gold");
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +48,16 @@ class MembershipDetailsScreen extends StatelessWidget {
               CustomUserTabBar(
                 userList: membershipController.userList,
                 selectedIndex: membershipController.selectedIndex,
-                onTap: (index) =>
-                    membershipController.selectedIndex.value = index,
+                onTap: (index){
+                  membershipController.selectedIndex.value = index;
+                  if(index==0){
+                    membershipController.getMemberShipDetails(planType: "Gold");
+                  }else if(index == 1){
+                    membershipController.getMemberShipDetails(planType: "Platinum");
+                  }else if(index == 2){
+                    membershipController.getMemberShipDetails(planType: "Diamond");
+                  }
+                },
               ),
               SizedBox(
                 height: 15.h,
@@ -53,13 +72,14 @@ class MembershipDetailsScreen extends StatelessWidget {
                  ///========================Card this================
                  CustomMembershipDetailsCard(
                    userName: 'Mohammod Rakib',
-                   points: 20000,
+                   points: membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0,
                    membershipLevel: AppStrings.gold.tr,
                    sliderWidget: membershipController.isLoader.value
                        ? const CustomLoader()
                        : CustomSingleSlider(
-                     value:
-                     membershipController.singleSliderValue.value,
+                     max: (membershipController.memberShipDetailsModel.value.data?.pointRangeEnd ?? 0).toDouble(),
+                     min: (membershipController.memberShipDetailsModel.value.data?.pointRangeStart ?? 0).toDouble(),
+                     value:(membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0).toDouble(),
                      onChanged: (newValue) {
                        membershipController.sliderValue.value = newValue;
                 }, // Disable user interaction
@@ -68,6 +88,7 @@ class MembershipDetailsScreen extends StatelessWidget {
                    'Keep earning points to unlock exclusive benefits and privileges.'
                        .tr,
                  ),
+
                     CustomText(
                       text: AppStrings.swapPointsHistory.tr,
                       color: AppColors.black500,
@@ -80,18 +101,41 @@ class MembershipDetailsScreen extends StatelessWidget {
 
                     ///========================Swap Point History=====================
                     Column(
-                      children: List.generate(4, (index) {
-                        return const CustomSwapPointsRow(
-                            earnedPointsText: 'Earned 25 swap points',
+                      children: List.generate(membershipController.memberShipDetailsModel.value.data?.result?.length ?? 0, (index) {
+                        return CustomSwapPointsRow(
+                            earnedPointsText: 'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
                             date: '12/03/24',
-                            item1: 'Armani W233 Watch',
-                            item2: 'OnePlus V2 Android TV');
+                            item1: membershipController.memberShipDetailsModel.value.data?.result?[index].productFrom?.title ?? '',
+                            item2: membershipController.memberShipDetailsModel.value.data?.result?[index].productTo?.title ?? '');
                       }),
                     ),
 
                   ],
                 ): membershipController.selectedIndex.value==1 ?
-                const CustomDetailContainer(
+                  membershipController.memberShipDetailsModel.value.data!.userPoint! >= membershipController.memberShipDetailsModel.value.data!.pointRangeStart!.toInt() ?
+                  Column(
+                    children: [
+                      CustomMembershipDetailsCard(
+                        userName: 'Mohammod Rakib',
+                        points: membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0,
+                        membershipLevel: AppStrings.gold.tr,
+                        sliderWidget: membershipController.isLoader.value
+                            ? const CustomLoader()
+                            : CustomSingleSlider(
+                          max: (membershipController.memberShipDetailsModel.value.data?.pointRangeEnd ?? 0).toDouble(),
+                          min: (membershipController.memberShipDetailsModel.value.data?.pointRangeStart ?? 0).toDouble(),
+                          value:(membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0).toDouble(),
+                          onChanged: (newValue) {
+                            membershipController.sliderValue.value = newValue;
+                          }, // Disable user interaction
+                        ),
+                        description:
+                        'Keep earning points to unlock exclusive benefits and privileges.'
+                            .tr,
+                      ),
+                    ],
+                  ):
+                CustomDetailContainer(
                     height: 192,
                     color: AppColors.black500,
                     child: Column(
@@ -113,7 +157,33 @@ class MembershipDetailsScreen extends StatelessWidget {
                           maxLines: 2,
                         ),
                       ],
-                    )):membershipController.selectedIndex.value==2?
+                    ))
+                    :
+
+                membershipController.selectedIndex.value==2?
+                membershipController.memberShipDetailsModel.value.data!.userPoint! >= membershipController.memberShipDetailsModel.value.data!.pointRangeStart!.toInt() ?
+                Column(
+                  children: [
+                    CustomMembershipDetailsCard(
+                      userName: 'Mohammod Rakib',
+                      points: membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0,
+                      membershipLevel: AppStrings.gold.tr,
+                      sliderWidget: membershipController.isLoader.value
+                          ? const CustomLoader()
+                          : CustomSingleSlider(
+                        max: (membershipController.memberShipDetailsModel.value.data?.pointRangeEnd ?? 0).toDouble(),
+                        min: (membershipController.memberShipDetailsModel.value.data?.pointRangeStart ?? 0).toDouble(),
+                        value:(membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0).toDouble(),
+                        onChanged: (newValue) {
+                          membershipController.sliderValue.value = newValue;
+                        }, // Disable user interaction
+                      ),
+                      description:
+                      'Keep earning points to unlock exclusive benefits and privileges.'
+                          .tr,
+                    ),
+                  ],
+                ):
                 const CustomDetailContainer(
                     height: 192,
                     color: AppColors.black500,

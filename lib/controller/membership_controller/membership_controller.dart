@@ -6,6 +6,7 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
+import 'package:trade_app/view/screens/my_membership_screen/membership_details_model/membership_details_model.dart';
 import 'package:trade_app/view/screens/my_membership_screen/membership_profile_model/membership_profile_model.dart';
 import 'package:trade_app/view/screens/my_membership_screen/points_earn_screen/points_earn_model.dart';
 
@@ -128,6 +129,34 @@ class MembershipController extends GetxController {
 
     if (response.statusCode == 200) {
       pointsEarnModel.value = PointsEarnModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        setRxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        setRxRequestStatus(Status.noDataFound);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+    }
+  }
+
+  ///<=============================== get profile ================================>
+
+
+  Rx<MemberShipDetailsModel> memberShipDetailsModel = MemberShipDetailsModel().obs;
+
+  Future<void> getMemberShipDetails({BuildContext? context, required String planType}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
+
+    var response =
+    await apiClient.get(url: '${ApiUrl.swapHist.addBaseUrl}?planType=$planType', showResult: true);
+
+    if (response.statusCode == 200) {
+      memberShipDetailsModel.value = MemberShipDetailsModel.fromJson(response.body);
       setRxRequestStatus(Status.completed);
       update();
     } else {

@@ -23,7 +23,7 @@ class MessageController extends GetxController {
 
   final PagingController<int, MessageModel> pagingController = PagingController(firstPageKey: 1);
 
-  // Fetch paginated chat history
+  ///<============================ Fetch paginated chat history ====================================>
   Future<void> getAllChat({required int page, required String receiverId}) async {
     if (isLoadingMove.value) return;
     isLoadingMove.value = true;
@@ -52,7 +52,7 @@ class MessageController extends GetxController {
     }
   }
 
-  // Send a message via socket
+  ///<====================== Send a message via socket ============================>
   void sendMessage(String senderId) {
     if (SocketApi.socket.connected) {
       SocketApi.socket.emit('new-message', {
@@ -66,7 +66,7 @@ class MessageController extends GetxController {
     }
   }
 
-  // Listen for new messages
+  ///<========================== Listen for new messages ============================>
   void listenForNewMessages() {
     SocketApi.socket.on('new-message', (data) {
       final newMessage = MessageModel.fromJson(data);
@@ -85,6 +85,7 @@ class MessageController extends GetxController {
   var chatLoading = Status.loading.obs;
   ChatLoadingMethod(Status status) => chatLoading.value = status;
   RxList<ChatList> chatList = <ChatList>[].obs;
+
   getConversation({BuildContext? context}) async {
     chatLoading(Status.loading);
 
