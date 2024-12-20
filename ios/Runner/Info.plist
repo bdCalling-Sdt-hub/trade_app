@@ -53,6 +53,8 @@
     <string>This app requires access to your camera for taking photos or scanning items.</string>
 	<key>NSMicrophoneUsageDescription</key>
     <string>This app requires access to your microphone for video and audio recording.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to your location for better service delivery.</string>
 
 	<!-- URL Schemes -->
 	<key>LSApplicationQueriesSchemes</key>
@@ -65,12 +67,44 @@
 	<!-- Stripe Configuration -->
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
+	<key>STRIPE_PUBLISHABLE_KEY</key>
+    <string>pk_test_51Q69G2L8xn5o73J1fDJ9iprBk2h3Kjbj1zXs1Rll89x1qFFXPAtHqyZ667hyVpAIlUvIJRzzhDXmRxQ6r9tOeOlZ00mZDAdEoI</string>
 
-	<!-- Lottie and Animations -->
+	<!-- Background Modes -->
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
+
+	<!-- File Sharing -->
+	<key>UIFileSharingEnabled</key>
+    <true/>
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <true/>
+
+	<!-- Custom URL Scheme -->
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>your_scheme</string> <!-- Replace with your custom scheme -->
+        </array>
+      </dict>
+    </array>
+
+    <!-- Internet Connection Checker -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+
+    <!-- Lottie and Animations -->
+	<key>UIApplicationSupportsMultipleScenes</key>
+	<true/>
 </dict>
 </plist>
