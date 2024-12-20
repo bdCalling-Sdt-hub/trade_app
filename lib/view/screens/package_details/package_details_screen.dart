@@ -162,7 +162,6 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -178,11 +177,9 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             )
                           ],
                         ),
-
                         SizedBox(
                           height: 8.h,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -199,11 +196,9 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             )
                           ],
                         ),
-
                         SizedBox(
                           height: 8.h,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -220,11 +215,9 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             )
                           ],
                         ),
-
                         SizedBox(
                           height: 8.h,
                         ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -240,7 +233,6 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                             )
                           ],
                         ),
-
                       ],
                     ),
                   )
@@ -249,35 +241,42 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
             );
         }
       }),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
-        child: CustomButton(
-          onTap: () {
-            packageController.planType.value =
-                packageController.packageDetailsModel.value.data?.planName ??
-                    "";
-            packageController.planId.value =
-                packageController.packageDetailsModel.value.data?.id ?? "";
-            packageController.amount.value =
-                (packageController.packageDetailsModel.value.data?.fee ?? 0)
-                    .toInt();
+      bottomNavigationBar: Obx((){
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
+          child: packageController.packageDetailsModel.value.data?.planName ==
+              "Diamond" || packageController.packageDetailsModel.value.data?.planName ==
+              "Platinum"
+              ? SizedBox()
+              : CustomButton(
+            onTap: () {
+              packageController.planType.value = packageController
+                  .packageDetailsModel.value.data?.planName ??
+                  "";
+              packageController.planId.value =
+                  packageController.packageDetailsModel.value.data?.id ??
+                      "";
+              packageController.amount.value =
+                  (packageController.packageDetailsModel.value.data?.fee ??
+                      0)
+                      .toInt();
 
-            if(packageController.packageDetailsModel.value.data?.planName == "Diamond" || packageController.packageDetailsModel.value.data?.planName == "Platinum"){
-              toastMessage(message: 'Need more points');
-            }else{
-              context.pushNamed(RoutePath.preApprovalQuestionScreen,
+              context.pushNamed(
+                RoutePath.preApprovalQuestionScreen,
                 queryParameters: {
                   "plan_id": packageController.planId.value ?? '',
-                  "amount": (packageController.amount.value ?? 0).toString(),
-                  "planType":packageController.packageDetailsModel.value.data?.planName  ?? '',
+                  "amount":
+                  (packageController.amount.value ?? 0).toString(),
+                  "planType": packageController
+                      .packageDetailsModel.value.data?.planName ??
+                      '',
                 },
               );
-            }
-
-          },
-          title: AppStrings.applyForMembership,
-        ),
-      ),
+            },
+            title: AppStrings.applyForMembership,
+          ),
+        );
+      }),
     );
   }
 }

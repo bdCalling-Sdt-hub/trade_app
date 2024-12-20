@@ -23,7 +23,7 @@ class CustomHelpAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 243.h,
+
       width: MediaQuery.of(context).size.width,
       color: AppColors.blue500,
 
@@ -31,8 +31,8 @@ class CustomHelpAppBar extends StatelessWidget {
       child: Column(
         children: [
           ///====================================Top Section================================
-            SizedBox(
-              height: 30.h,
+          SizedBox(
+              height: 24.h,
             ),
           Row(
             children: [
@@ -61,31 +61,29 @@ class CustomHelpAppBar extends StatelessWidget {
 
             ],
           ),
-          SizedBox(
-            height: 30.h,
-          ),
-          ///======================How Can We Help YOu ============================
-           CustomText(
-            text: AppStrings.howCanWeHelpYou.tr,
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-            color: AppColors.white,),
-          SizedBox(
-            height: 16.h,
-          ),
-          ///====================================Search Section================================
-
-          CustomTextField(
-              fillColor: AppColors.white,
-              onTap: () {
-                // Get.toNamed(AppRoutes.searchScreen);
-              },
-              hintText: AppStrings.searchYourQuestionHere,
-              isPrefixIcon: true,
-            prefixIcon: const Icon(Icons.search,color: AppColors.gray700,),
-             ),
-
-
+          // SizedBox(
+          //   height: 30.h,
+          // ),
+          // ///======================How Can We Help YOu ============================
+          //  CustomText(
+          //   text: AppStrings.howCanWeHelpYou.tr,
+          //   fontWeight: FontWeight.w600,
+          //   fontSize: 20,
+          //   color: AppColors.white,),
+          // SizedBox(
+          //   height: 16.h,
+          // ),
+          // ///====================================Search Section================================
+          //
+          // CustomTextField(
+          //     fillColor: AppColors.white,
+          //     onTap: () {
+          //       // Get.toNamed(AppRoutes.searchScreen);
+          //     },
+          //     hintText: AppStrings.searchYourQuestionHere,
+          //     isPrefixIcon: true,
+          //   prefixIcon: const Icon(Icons.search,color: AppColors.gray700,),
+          //    ),
         ],
       ),
     );

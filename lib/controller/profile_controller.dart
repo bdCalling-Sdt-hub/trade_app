@@ -13,6 +13,7 @@ import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/screens/profile_screen/profile_model.dart';
+import 'package:trade_app/view/screens/setting_screen/help_center_screen/help_center_model.dart';
 import 'package:trade_app/view/screens/swap_history_screen/swap_history_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -282,10 +283,36 @@ class ProfileController extends GetxController {
     signUpLoading.refresh();
   }
 
+
+  Rx<HelpCenterModel> helpCenterModel = HelpCenterModel().obs;
+  Future<void> getFaq({BuildContext? context}) async {
+    setRxRequestStatus(Status.loading);
+    refresh();
+
+    var response =
+    await apiClient.get(url: ApiUrl.getFaq.addBaseUrl, showResult: true);
+
+    if (response.statusCode == 200) {
+      helpCenterModel.value = HelpCenterModel.fromJson(response.body);
+      setRxRequestStatus(Status.completed);
+      update();
+    } else {
+      checkApi(response: response, context: context);
+      if (response.statusCode == 503) {
+        setRxRequestStatus(Status.internetError);
+      } else if (response.statusCode == 404) {
+        setRxRequestStatus(Status.noDataFound);
+      } else {
+        setRxRequestStatus(Status.error);
+      }
+    }
+  }
+
   @override
   void onInit() {
     getSwapHistory();
     getProfile();
+    getFaq();
     super.onInit();
   }
 }

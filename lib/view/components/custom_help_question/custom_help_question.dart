@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/view/components/custom_expended_section/custom_expended_section.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
 class CustomHelpQuestion extends StatelessWidget {
-  CustomHelpQuestion({super.key, required this.faqList});
+  CustomHelpQuestion({super.key,});
+  final ProfileController profileController = Get.find<ProfileController>();
 
-  final List<Map<String, String>> faqList;
  final RxInt selectedFqw = 100000.obs;
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var data= profileController.helpCenterModel.value;
       return Column(
-        children: List.generate(faqList.length, (index) {
+        children: List.generate(data.data?.length ?? 0, (index) {
           return Padding(
             padding: EdgeInsets.only(bottom: 15.h),
             child: Column(
@@ -42,7 +44,7 @@ class CustomHelpQuestion extends StatelessWidget {
                         Expanded(
                             child: CustomText(
                               textAlign: TextAlign.left,
-                              text: faqList[index]["que"]!,
+                              text: data.data?[index].questions ?? "",
                               fontWeight: FontWeight.w500,
                             )),
                         IconButton(
@@ -87,8 +89,8 @@ class CustomHelpQuestion extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: CustomText(
-                        textAlign: TextAlign.left,
-                        text: faqList[index]["ans"]!,
+                        textAlign: TextAlign.start,
+                        text: data.data?[index].answer ?? "",
                         maxLines: 6,
                       ),
                     ))
