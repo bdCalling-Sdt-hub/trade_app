@@ -72,7 +72,6 @@ class CustomHelpQuestion extends StatelessWidget {
                 ),
 
                 ///==================== Ans Design =====================
-
                 index == selectedFqw.value
                     ? CustomExpandedSection(
                     expand: index ==selectedFqw.value

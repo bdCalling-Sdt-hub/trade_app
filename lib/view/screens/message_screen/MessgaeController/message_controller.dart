@@ -53,11 +53,12 @@ class MessageController extends GetxController {
   }
 
   ///<====================== Send a message via socket ============================>
-  void sendMessage(String senderId) {
+  void sendMessage(String senderId,File image) {
     if (SocketApi.socket.connected) {
       SocketApi.socket.emit('new-message', {
         'message': message.text,
         'receiverId': senderId,
+        'receiverId': image,
       });
       message.clear();
     } else {

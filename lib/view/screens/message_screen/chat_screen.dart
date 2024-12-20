@@ -62,12 +62,12 @@ class ChatScreen extends StatelessWidget {
                 return GestureDetector(
                     onTap: () {
                       context.pushNamed(RoutePath.messageScreen,
-                          extra: chatList[index].participants?[0].id);
+                          extra: chatList[index].participants?[0]?.id);
                     },
                     child: CustomChat(
                       imageUrl:
-                          '${ApiUrl.baseUrl}${chatList[index].participants?[0].profileImage ?? ""}',
-                      name: chatList[index].participants?[0].name ?? "",
+                          '${ApiUrl.baseUrl}${chatList[index].participants?[0]?.profileImage ?? ""}',
+                      name: chatList[index].participants?[0]?.name ?? "",
                       subTitle: chatList[index].messages?[0].message ?? "",
                       time: DateFormat('yMMMd').format(
                           chatList[index].messages?[0].createdAt?.toLocal() ??

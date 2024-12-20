@@ -55,7 +55,7 @@ class _MessageScreenState extends State<MessageScreen> {
         child: Column(
           children: [
             MessageListCard(controller: controller, scrollController: scrollController, receiverId: widget.receiverId,),
-            MessageInputField(senderId: widget.receiverId),
+            MessageInputField(senderId: widget.receiverId,),
           ],
         ),
       ),

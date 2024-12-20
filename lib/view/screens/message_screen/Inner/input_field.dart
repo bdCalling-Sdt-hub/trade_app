@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,7 +30,7 @@ class MessageInputField extends StatelessWidget {
             child: Row(
               children: [
                 ///=============================== Gallery Button ==========================
-
+                controller.imageFile.value == null ?
                 IconButton(
                   onPressed: () {
                     controller.selectImage();
@@ -37,6 +39,18 @@ class MessageInputField extends StatelessWidget {
                   icon: const Icon(
                     Icons.image_outlined,
                     size: 36,
+                  ),
+                ) :  Container(
+                  height: 36.h,
+                  width: 36.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: FileImage(
+                          File(controller
+                              .imageFile!.value.path),
+                        ),
+                        fit: BoxFit.cover),
                   ),
                 ),
                 //============================Text Input Field=====================
@@ -57,7 +71,8 @@ class MessageInputField extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (controller.message.value.text.isNotEmpty == true || controller.imagePath.value.isNotEmpty == true) {
-                      controller.sendMessage(senderId);
+                      controller.sendMessage(senderId,File(controller
+                          .imageFile!.value.path));
                     } else {
                       toastMessage(message: "Please write something");
                     }
