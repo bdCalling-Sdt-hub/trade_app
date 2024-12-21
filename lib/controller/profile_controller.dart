@@ -73,7 +73,6 @@ class ProfileController extends GetxController {
               MultipartBody("profile_image", File(imageFile!.value.path)),
             ],
           );
-    ;
 
     if (response.statusCode == 200) {
       firstNameController.clear();

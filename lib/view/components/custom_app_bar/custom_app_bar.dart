@@ -54,7 +54,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
               icon: const CustomImage(imageSrc: AppIcons.arrowLeftAlt),
               color: AppColors.blue,
               onPressed: () {
-                Navigator.of(context).pop();
+              //  Navigator.of(context).pop();
+                GoRouter.of(context).pop();
+
               },
             ),
             if (widget.appBarContent != null)

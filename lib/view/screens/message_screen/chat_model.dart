@@ -33,7 +33,7 @@ class ChatModel {
 }
 
 class ChatList {
-  Id? id;
+  String? id;
   List<Participant?>? participants;
   List<Message>? messages;
   DateTime? createdAt;
@@ -54,7 +54,7 @@ class ChatList {
   String toRawJson() => json.encode(toJson());
 
   factory ChatList.fromJson(Map<String, dynamic> json) => ChatList(
-    id: idValues.map[json["_id"]]!,
+    id: json["_id"],
     participants: json["participants"] == null ? [] : List<Participant?>.from(json["participants"]!.map((x) => x == null ? null : Participant.fromJson(x))),
     messages: json["messages"] == null ? [] : List<Message>.from(json["messages"]!.map((x) => Message.fromJson(x))),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
@@ -63,7 +63,7 @@ class ChatList {
   );
 
   Map<String, dynamic> toJson() => {
-    "_id": idValues.reverse[id],
+    "_id": id,
     "participants": participants == null ? [] : List<dynamic>.from(participants!.map((x) => x?.toJson())),
     "messages": messages == null ? [] : List<dynamic>.from(messages!.map((x) => x.toJson())),
     "createdAt": createdAt?.toIso8601String(),
@@ -72,21 +72,11 @@ class ChatList {
   };
 }
 
-enum Id {
-  THE_67614591_FE38_D1746_EF09_A22,
-  THE_67656365_B29_E0351627_A7783
-}
-
-final idValues = EnumValues({
-  "67614591fe38d1746ef09a22": Id.THE_67614591_FE38_D1746_EF09_A22,
-  "67656365b29e0351627a7783": Id.THE_67656365_B29_E0351627_A7783
-});
-
 class Message {
   String? id;
-  ReceiverId? senderId;
-  ReceiverId? receiverId;
-  Id? conversationId;
+  String? senderId;
+  String? receiverId;
+  String? conversationId;
   String? message;
   String? messageImg;
   DateTime? createdAt;
@@ -113,9 +103,9 @@ class Message {
 
   factory Message.fromJson(Map<String, dynamic> json) => Message(
     id: json["_id"],
-    senderId: receiverIdValues.map[json["senderId"]]!,
-    receiverId: receiverIdValues.map[json["receiverId"]]!,
-    conversationId: idValues.map[json["conversationId"]]!,
+    senderId: json["senderId"],
+    receiverId: json["receiverId"],
+    conversationId: json["conversationId"],
     message: json["message"],
     messageImg: json["message_img"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
@@ -126,9 +116,9 @@ class Message {
 
   Map<String, dynamic> toJson() => {
     "_id": id,
-    "senderId": receiverIdValues.reverse[senderId],
-    "receiverId": receiverIdValues.reverse[receiverId],
-    "conversationId": idValues.reverse[conversationId],
+    "senderId": senderId,
+    "receiverId": receiverId,
+    "conversationId": conversationId,
     "message": message,
     "message_img": messageImg,
     "createdAt": createdAt?.toIso8601String(),
@@ -138,20 +128,8 @@ class Message {
   };
 }
 
-enum ReceiverId {
-  THE_672718_A40_FB17_B271_D8_E5564,
-  THE_672_AFFDC8_E5_C6_C398_B0_A97_A4,
-  THE_67611_EDCFE38_D1746_EF04_C52
-}
-
-final receiverIdValues = EnumValues({
-  "672718a40fb17b271d8e5564": ReceiverId.THE_672718_A40_FB17_B271_D8_E5564,
-  "672affdc8e5c6c398b0a97a4": ReceiverId.THE_672_AFFDC8_E5_C6_C398_B0_A97_A4,
-  "67611edcfe38d1746ef04c52": ReceiverId.THE_67611_EDCFE38_D1746_EF04_C52
-});
-
 class Participant {
-  ReceiverId? id;
+  String? id;
   String? name;
   String? email;
   String? role;
@@ -172,7 +150,7 @@ class Participant {
   String toRawJson() => json.encode(toJson());
 
   factory Participant.fromJson(Map<String, dynamic> json) => Participant(
-    id: receiverIdValues.map[json["_id"]]!,
+    id: json["_id"],
     name: json["name"],
     email: json["email"],
     role: json["role"],
@@ -181,23 +159,11 @@ class Participant {
   );
 
   Map<String, dynamic> toJson() => {
-    "_id": receiverIdValues.reverse[id],
+    "_id": id,
     "name": name,
     "email": email,
     "role": role,
     "profile_image": profileImage,
     "type": type,
   };
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

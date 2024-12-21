@@ -9,8 +9,11 @@ import 'package:trade_app/view/components/custom_text_field/custom_text_field.da
 import 'package:trade_app/view/screens/message_screen/MessgaeController/message_controller.dart';
 
 class MessageInputField extends StatelessWidget {
-  MessageInputField({super.key, required this.senderId});
+  MessageInputField({Key? key, required this.senderId, required this.receiverId})
+      : super(key: key);
+
   final String senderId;
+  final String receiverId;
   final MessageController controller = Get.find<MessageController>();
 
   @override
@@ -29,50 +32,62 @@ class MessageInputField extends StatelessWidget {
             color: AppColors.white,
             child: Row(
               children: [
-                ///=============================== Gallery Button ==========================
-                controller.imageFile.value == null ?
-                IconButton(
-                  onPressed: () {
-                    controller.selectImage();
-                    controller.update();
-                  },
-                  icon: const Icon(
-                    Icons.image_outlined,
-                    size: 36,
-                  ),
-                ) :  Container(
-                  height: 36.h,
-                  width: 36.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: FileImage(
-                          File(controller
-                              .imageFile!.value.path),
+                //=============================== Gallery Button ==========================
+                Obx(() {
+                  return controller.imageFile.value == null
+                      ? IconButton(
+                    onPressed: () {
+                      controller.selectImage();
+                    },
+                    icon: const Icon(
+                      Icons.image_outlined,
+                      size: 36,
+                    ),
+                  )
+                      : GestureDetector(
+                    onTap: () {
+                    },
+                    child: Container(
+                      height: 36.h,
+                      width: 36.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: FileImage(
+                            File(controller.imageFile.value!.path),
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        fit: BoxFit.cover),
+                      ),
+                    ),
+                  );
+                }),
+
+                //============================ Text Input Field ==========================
+                Expanded(
+                  child: SizedBox(
+                    height: 50,
+                    child: CustomTextField(
+                      textInputAction: TextInputAction.done,
+                      hintText: "Write your message",
+                      textEditingController: controller.message,
+                      fieldBorderColor: Colors.amber,
+                      fillColor: Colors.transparent,
+                    ),
                   ),
                 ),
-                //============================Text Input Field=====================
-
-                Expanded(child: SizedBox(
-                  height: 50,
-                  child: CustomTextField(
-                    textInputAction: TextInputAction.done,
-                    hintText: "Write your message",
-                    textEditingController: controller.message,
-                    fieldBorderColor: Colors.amber,
-                    fillColor: Colors.transparent,
-                  ),
-                )),
 
                 //=============================== Send Button ==========================
                 GestureDetector(
                   onTap: () {
-                    if (controller.message.value.text.isNotEmpty == true || controller.imagePath.value.isNotEmpty == true) {
-                      controller.sendMessage(senderId);
+                    if (controller.message.text.isNotEmpty || controller.imageFile.value != null) {
+                      controller.sendMessageImage(
+                        context: context,
+                        receiverId: receiverId,
+                      );
+                      print('receiverId ==================== $receiverId');
                     } else {
-                      toastMessage(message: "Please write something");
+                      toastMessage(message: "Please write something or attach an image");
                     }
                   },
                   child: Container(
@@ -80,17 +95,18 @@ class MessageInputField extends StatelessWidget {
                     height: 48,
                     width: 48,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        color: Colors.white),
+                      borderRadius: BorderRadius.circular(4.r),
+                      color: Colors.white,
+                    ),
                     child: const Icon(
                       Icons.send_sharp,
                       color: Colors.black,
                     ),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

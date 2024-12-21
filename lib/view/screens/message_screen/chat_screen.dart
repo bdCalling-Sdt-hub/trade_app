@@ -68,10 +68,9 @@ class ChatScreen extends StatelessWidget {
                       imageUrl:
                           '${ApiUrl.baseUrl}${chatList[index].participants?[0]?.profileImage ?? ""}',
                       name: chatList[index].participants?[0]?.name ?? "",
-                      subTitle: chatList[index].messages?[0].message ?? "",
+                      subTitle: chatList[index].messages != null && chatList[index].messages!.isNotEmpty? chatList[index].messages!.first.message??"" :"",
                       time: DateFormat('yMMMd').format(
-                          chatList[index].messages?[0].createdAt?.toLocal() ??
-                              DateTime.now()),
+                          chatList[index].messages != null && chatList[index].messages!.isNotEmpty?chatList[index].messages?.first.createdAt?.toLocal() ?? DateTime.now():DateTime.now()),
                     ));
               },
             );
