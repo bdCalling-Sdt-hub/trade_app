@@ -40,6 +40,8 @@ PODS:
   - StripePayments (23.30.0):
     - StripeCore (= 23.30.0)
     - StripePayments/Stripe3DS2 (= 23.30.0)
+  - StripePayments/Stripe3DS2 (23.30.0):
+    - StripeCore (= 23.30.0)
   - StripePaymentSheet (23.30.0):
     - StripeApplePay (= 23.30.0)
     - StripeCore (= 23.30.0)
@@ -119,6 +121,6 @@ SPEC CHECKSUMS:
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
-PODFILE CHECKSUM: b407dc2adf6aa57c201fb028b2da08b516910799
+PODFILE CHECKSUM: 7cacb061f91b9f0745c3282b31e28f77515c49a4
 
 COCOAPODS: 1.16.2
