@@ -80,14 +80,17 @@ class MessageInputField extends StatelessWidget {
                 //=============================== Send Button ==========================
                 GestureDetector(
                   onTap: () {
-                    if (controller.message.text.isNotEmpty || controller.imageFile.value != null) {
+                    if(controller.imageFile.value != null){
                       controller.sendMessageImage(
                         context: context,
                         receiverId: receiverId,
                       );
-                      print('receiverId ==================== $receiverId');
-                    } else {
-                      toastMessage(message: "Please write something or attach an image");
+                    }else{
+                      if(controller.message.text.isNotEmpty){
+                        controller.sendMessage(senderId);
+                      }else{
+                        toastMessage(message: "Please enter a message....");
+                      }
                     }
                   },
                   child: Container(

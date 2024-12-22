@@ -127,8 +127,9 @@ class ChatBubble extends StatelessWidget {
     return Align(
       alignment: isSentByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Column(
+        crossAxisAlignment: isSentByMe ?CrossAxisAlignment.end: CrossAxisAlignment.start,
         children: [
-          Container(
+      message.message != null && message.message!.isNotEmpty?Container(
             margin: const EdgeInsets.symmetric(vertical: 5),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             decoration: BoxDecoration(
@@ -156,13 +157,13 @@ class ChatBubble extends StatelessWidget {
                     style: const TextStyle(color: Colors.white60, fontSize: 8)),
               ],
             ),
-          ),
-          CustomNetworkImage(
+          ):SizedBox(height: 12.h),
+          message.messageImg !=  null && message.messageImg!.isNotEmpty?CustomNetworkImage(
             imageUrl: '${ApiUrl.baseUrl}${message.messageImg ?? ""}',
             height: 150.h,
             width: 100.w,
             borderRadius: BorderRadius.circular(8.sp),
-          )
+          ):SizedBox()
         ],
       ),
     );

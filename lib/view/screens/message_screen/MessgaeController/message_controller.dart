@@ -24,8 +24,7 @@ class MessageController extends GetxController {
   MessageListLoadingMethod(Status status) => messageListLoading.value = status;
   RxString myId = "".obs;
 
-  final PagingController<int, MessageModel> pagingController =
-      PagingController(firstPageKey: 1);
+  final PagingController<int, MessageModel> pagingController = PagingController(firstPageKey: 1);
 
   ///<============================ Fetch paginated chat history ====================================>
   Future<void> getAllChat(
@@ -121,11 +120,10 @@ class MessageController extends GetxController {
 
   ///<========================== send message & image ==========================>
   RxBool sendMsgLoading = false.obs;
-  sendMessageImage({required BuildContext context,
-       String receiverId = ""}) async {
+  sendMessageImage({required BuildContext context, String receiverId = ""}) async {
     sendMsgLoading.value = true;
     Map<String, dynamic> body = {
-      "message": message.text,
+      "message": message.text.isNotEmpty?message.text:"",
       "receiverId": receiverId,
     };
 
