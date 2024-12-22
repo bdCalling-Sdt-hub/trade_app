@@ -13,15 +13,16 @@ import 'Inner/input_field.dart';
 import 'MessgaeController/message_controller.dart';
 
 class MessageScreen extends StatefulWidget {
-  MessageScreen({super.key, required this.receiverId});
+  MessageScreen({super.key, required this.receiverId, required this.name});
   final String receiverId;
+  final String name;
 
   @override
   State<MessageScreen> createState() => _MessageScreenState();
 }
 
 class _MessageScreenState extends State<MessageScreen> {
-  final MessageController controller = Get.find<MessageController>();
+  final MessageController controller = Get.put(MessageController());
   final ScrollController scrollController = ScrollController();
 
   @override
@@ -30,9 +31,15 @@ class _MessageScreenState extends State<MessageScreen> {
     initSocket();
   }
 
+  @override
+  void dispose() {
+    Get.delete<MessageController>();
+    super.dispose();
+  }
+
   void initSocket() async {
-    controller.pagingController.addPageRequestListener((pageKey) {
-      print("object");
+      controller.pagingController.addPageRequestListener((pageKey) {
+      print("object ${widget.receiverId}");
       controller.getAllChat(page: pageKey, receiverId: widget.receiverId);
     });
     await SocketApi.init();
@@ -44,7 +51,7 @@ class _MessageScreenState extends State<MessageScreen> {
     return Scaffold(
       backgroundColor: AppColors.blue50,
       appBar: CustomAppBar(
-        appBarContent: 'Robert Smith'.tr,
+        appBarContent: widget.name,
       ),
       body: RefreshIndicator(
         onRefresh: () async {

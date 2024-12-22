@@ -20,7 +20,7 @@ import 'package:trade_app/view/screens/message_screen/MessgaeController/message_
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key});
 
-  MessageController controller = Get.find<MessageController>();
+  final MessageController controller = Get.put(MessageController());
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +62,19 @@ class ChatScreen extends StatelessWidget {
                 return GestureDetector(
                     onTap: () {
                       context.pushNamed(RoutePath.messageScreen,
-                          extra: chatList[index].participants?[0]?.id ?? '');
+                          queryParameters: {
+                            "receiverID": chatList[index].participants?[0]?.id ?? '',
+                            "name":chatList[index].participants?[0]?.name ?? '',
+                          },
+                       );
                     },
                     child: CustomChat(
                       imageUrl:
                           '${ApiUrl.baseUrl}${chatList[index].participants?[0]?.profileImage ?? ""}',
                       name: chatList[index].participants?[0]?.name ?? "",
-                      subTitle: chatList[index].messages != null && chatList[index].messages!.isNotEmpty? chatList[index].messages!.first.message??"" :"",
+                      subTitle: chatList[index].messages != null && chatList[index].messages!.isNotEmpty? chatList[index].messages!.last.message??"" :"",
                       time: DateFormat('yMMMd').format(
-                          chatList[index].messages != null && chatList[index].messages!.isNotEmpty?chatList[index].messages?.first.createdAt?.toLocal() ?? DateTime.now():DateTime.now()),
+                          chatList[index].messages != null && chatList[index].messages!.isNotEmpty?chatList[index].messages?.last.createdAt?.toLocal() ?? DateTime.now():DateTime.now()),
                     ));
               },
             );

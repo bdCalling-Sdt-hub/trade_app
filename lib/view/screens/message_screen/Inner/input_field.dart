@@ -14,7 +14,7 @@ class MessageInputField extends StatelessWidget {
 
   final String senderId;
   final String receiverId;
-  final MessageController controller = Get.find<MessageController>();
+  final MessageController controller = Get.put(MessageController());
 
   @override
   Widget build(BuildContext context) {

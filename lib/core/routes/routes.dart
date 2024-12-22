@@ -104,7 +104,11 @@ class AppRouter {
         GoRoute(
           name: RoutePath.messageScreen,
           path: RoutePath.messageScreen.addBasePath,
-          builder: (context, state) => MessageScreen(receiverId: state.extra as String,),
+          builder: (context, state) {
+            final receiverID = state.uri.queryParameters["receiverID"] ?? "";
+            final name = state.uri.queryParameters["name"] ?? "";
+            return MessageScreen(receiverId: receiverID, name: name,);
+          },
         ),
 
         ///======================= signUpScreen Route =======================

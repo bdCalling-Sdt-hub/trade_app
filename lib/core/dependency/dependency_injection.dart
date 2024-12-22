@@ -20,7 +20,6 @@ class DependencyInjection extends Bindings {
   @override
   void dependencies() {
     ///<========================== User section ==============================>
-   Get.lazyPut(() => MessageController(), fenix: true);
    Get.lazyPut(() => AuthController(), fenix: true);
    Get.lazyPut(() => ProfileController(), fenix: true);
    Get.lazyPut(() => HomeController(), fenix: true);
