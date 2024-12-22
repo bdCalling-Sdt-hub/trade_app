@@ -55,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
             );
           case Status.completed:
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
