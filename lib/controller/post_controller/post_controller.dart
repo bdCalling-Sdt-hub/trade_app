@@ -352,7 +352,7 @@ class PostController extends GetxController {
 
   @override
   void onInit() {
-   // getMyProduct();
+   getMyProduct();
     super.onInit();
   }
 }

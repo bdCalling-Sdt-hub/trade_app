@@ -62,18 +62,18 @@ class ProfileScreen extends StatelessWidget {
                     ///===================Profile Image================
                     CustomNetworkImage(
                         borderRadius: BorderRadius.circular(100.r),
-                        imageUrl: controller.profileModel.value.data?.profileImage
+                        imageUrl: controller.profileModel.value.data?.result?.profileImage
                             ?.startsWith('https') ??
                             false
-                            ? controller.profileModel.value.data?.profileImage ??
+                            ? controller.profileModel.value.data?.result?.profileImage ??
                             ""
-                            : '${ApiUrl.baseUrl}${controller.profileModel.value.data?.profileImage?? ""}',
+                            : '${ApiUrl.baseUrl}${controller.profileModel.value.data?.result?.profileImage?? ""}',
                         height: 85.h,
                         width: 85.w),
 
                     ///=======================Name=================
                     CustomText(
-                      text: controller.profileModel.value.data?.name?? "",
+                      text: controller.profileModel.value.data?.result?.name?? "",
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                       color: AppColors.black500,
@@ -91,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                           color: AppColors.black200,
                         ),
                         CustomText(
-                          text: controller.profileModel.value.data?.userType?? "",
+                          text: controller.profileModel.value.data?.result?.userType?? "",
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                           color: AppColors.black200,

@@ -70,13 +70,13 @@ class AccountInfoScreen extends StatelessWidget {
                             ? CustomNetworkImage(
                             boxShape: BoxShape.circle,
                             imageUrl: profileController.profileModel.value
-                                .data?.profileImage
+                                .data?.result?.profileImage
                                 ?.startsWith('https') ??
                                 false
                                 ? profileController.profileModel.value
-                                .data?.profileImage ??
+                                .data?.result?.profileImage ??
                                 ""
-                                : '${ApiUrl.baseUrl}/${profileController.profileModel.value.data?.profileImage ?? ""}',
+                                : '${ApiUrl.baseUrl}/${profileController.profileModel.value.data?.result?.profileImage ?? ""}',
                             // imageUrl: AppImages.user3,
                             height: 90.w,
                             width: 90.w)

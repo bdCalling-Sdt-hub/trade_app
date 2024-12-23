@@ -33,6 +33,26 @@ class ProfileModel {
 }
 
 class Data {
+  Result? result;
+
+  Data({
+    this.result,
+  });
+
+  factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    result: json["result"] == null ? null : Result.fromJson(json["result"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "result": result?.toJson(),
+  };
+}
+
+class Result {
   String? id;
   String? name;
   String? email;
@@ -52,8 +72,12 @@ class Data {
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  String? address;
+  String? country;
+  String? zip;
+  DateTime? planExpatDate;
 
-  Data({
+  Result({
     this.id,
     this.name,
     this.email,
@@ -73,13 +97,17 @@ class Data {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.address,
+    this.country,
+    this.zip,
+    this.planExpatDate,
   });
 
-  factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
+  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["_id"],
     name: json["name"],
     email: json["email"],
@@ -99,6 +127,10 @@ class Data {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
+    address: json["address"],
+    country: json["country"],
+    zip: json["zip"],
+    planExpatDate: json["planExpatDate"] == null ? null : DateTime.parse(json["planExpatDate"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -121,5 +153,9 @@ class Data {
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
     "__v": v,
+    "address": address,
+    "country": country,
+    "zip": zip,
+    "planExpatDate": planExpatDate?.toIso8601String(),
   };
 }

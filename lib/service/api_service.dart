@@ -7,6 +7,7 @@ import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+//import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 import 'package:trade_app/core/network/connection_checker.dart';
 import 'package:trade_app/core/routes/route_path.dart';

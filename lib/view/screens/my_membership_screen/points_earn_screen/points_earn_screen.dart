@@ -29,14 +29,12 @@ final ProfileController profileController = Get.find<ProfileController>();
 @override
 void initState() {
   WidgetsBinding.instance.addPostFrameCallback((_) {
-    membershipController.getPointsEarn(userId: profileController.profileModel.value.data?.id ?? "",context: context);
+    membershipController.getPointsEarn(userId: profileController.profileModel.value.data?.result?.id ?? "",context: context);
   });
   super.initState();
 }
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: AppColors.white50,
       ///========================NavBar ===========
@@ -53,13 +51,13 @@ void initState() {
           case Status.internetError:
             return NoInternetScreen(
               onTap: () {
-                membershipController.getPointsEarn(context:context,userId: profileController.profileModel.value.data?.id ?? "");
+                membershipController.getPointsEarn(context:context,userId: profileController.profileModel.value.data?.result?.id ?? "");
               },
             );
           case Status.error:
             return GeneralErrorScreen(
               onTap: () {
-                membershipController.getPointsEarn(context:context,userId: profileController.profileModel.value.data?.id ?? "");
+                membershipController.getPointsEarn(context:context,userId: profileController.profileModel.value.data?.result?.id ?? "");
               },
             );
           case Status.noDataFound:

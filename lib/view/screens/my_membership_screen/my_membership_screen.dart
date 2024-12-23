@@ -39,7 +39,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-        membershipController.getMemberShipProfile(userId: profileController.profileModel.value.data?.id ?? "",context: context);
+        membershipController.getMemberShipProfile(userId: profileController.profileModel.value.data?.result?.id ?? "",context: context);
     });
     super.initState();
   }
@@ -63,13 +63,13 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
               case Status.internetError:
                 return NoInternetScreen(
                   onTap: () {
-                    membershipController.getMemberShipProfile(context:context,userId: profileController.profileModel.value.data?.id ?? "");
+                    membershipController.getMemberShipProfile(context:context,userId: profileController.profileModel.value.data?.result?.id ?? "");
                   },
                 );
               case Status.error:
                 return GeneralErrorScreen(
                   onTap: () {
-                    membershipController.getMemberShipProfile(context:context,userId: profileController.profileModel.value.data?.id ?? "");
+                    membershipController.getMemberShipProfile(context:context,userId: profileController.profileModel.value.data?.result?.id ?? "");
                   },
                 );
               case Status.noDataFound:
@@ -150,7 +150,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                           ),
                           CustomButton(
                             onTap: () {
-                              controller.makePayment(amount: data.data?.plan?.amount ?? 0, context: context, userId: profileController.profileModel.value.data?.id ?? "", planId: data.data?.plan?.id ?? "", subscriptionId: data.data?.plan?.planId?.id ?? "");
+                              controller.makePayment(amount: data.data?.plan?.amount ?? 0, context: context, userId: profileController.profileModel.value.data?.result?.id ?? "", planId: data.data?.plan?.id ?? "", subscriptionId: data.data?.plan?.planId?.id ?? "");
                             },
                             title: AppStrings.payNow.tr,
                           ),

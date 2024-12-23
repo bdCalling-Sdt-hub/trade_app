@@ -322,14 +322,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         : CustomButton(
                             onTap: () {
                               controller.swapProduct(
-                                  productUserID: productDetailsModel
-                                          .data?.product?.user?.id ??
-                                      "",
-                                  productProductID:
-                                      productDetailsModel.data?.product?.id ??
-                                          "",
-                                  myUserID:
-                                      controller.myProductList[0].user ?? "",
+                                  productUserID: productDetailsModel.data?.product?.user?.id ?? "",
+                                  productProductID: productDetailsModel.data?.product?.id ?? "",
+                                  myUserID: controller.myProductList[0].user ?? "",
                                   myProductId: myProductId,
                                   context: context);
                               print(myProductId);

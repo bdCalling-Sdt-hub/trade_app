@@ -43,9 +43,9 @@ class SettingScreen extends StatelessWidget {
               CustomProfileCard(
                 isCevron: true,
                 onTap: () {
-                  controller.firstNameController.text=controller.profileModel.value.data?.name?? "";
-                  controller.emailController.text=controller.profileModel.value.data?.email?? "";
-                  controller.phoneController.text=controller.profileModel.value.data?.phoneNumber?? "";
+                  controller.firstNameController.text=controller.profileModel.value.data?.result?.name?? "";
+                  controller.emailController.text=controller.profileModel.value.data?.result?.email?? "";
+                  controller.phoneController.text=controller.profileModel.value.data?.result?.phoneNumber?? "";
                    context.pushNamed(RoutePath.accountInfoScreen);
                 },
                 text: AppStrings.accountInfo.tr,

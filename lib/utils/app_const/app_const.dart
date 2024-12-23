@@ -3,7 +3,7 @@ class AppConstants {
 
   static String onBoard = "Onboard";
 
-  /// <====================== All Response Message Static==============================>
+  /// <====================== All Response Message StaticN ==============================>
 
   static String successfull = "Request Successfull";
   static String error = "Oops, something went wrong";
