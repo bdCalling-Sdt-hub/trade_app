@@ -9,6 +9,7 @@ import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
 import 'package:trade_app/service/api_url.dart';
+import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -31,7 +32,8 @@ class MyMembershipScreen extends StatefulWidget {
 }
 
 class _MyMembershipScreenState extends State<MyMembershipScreen> {
-  final MembershipController membershipController = Get.find<MembershipController>();
+  final MembershipController membershipController =
+      Get.find<MembershipController>();
 
   final PaymentController controller = Get.find<PaymentController>();
   final ProfileController profileController = Get.find<ProfileController>();
@@ -39,10 +41,13 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-        membershipController.getMemberShipProfile(userId: profileController.profileModel.value.data?.result?.id ?? "",context: context);
+      membershipController.getMemberShipProfile(
+          userId: profileController.profileModel.value.data?.result?.id ?? "",
+          context: context);
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,20 +61,28 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: SingleChildScrollView(
-          child:Obx(() {
+          child: Obx(() {
             switch (membershipController.rxRequestStatus.value) {
               case Status.loading:
                 return const CustomLoader();
               case Status.internetError:
                 return NoInternetScreen(
                   onTap: () {
-                    membershipController.getMemberShipProfile(context:context,userId: profileController.profileModel.value.data?.result?.id ?? "");
+                    membershipController.getMemberShipProfile(
+                        context: context,
+                        userId: profileController
+                                .profileModel.value.data?.result?.id ??
+                            "");
                   },
                 );
               case Status.error:
                 return GeneralErrorScreen(
                   onTap: () {
-                    membershipController.getMemberShipProfile(context:context,userId: profileController.profileModel.value.data?.result?.id ?? "");
+                    membershipController.getMemberShipProfile(
+                        context: context,
+                        userId: profileController
+                                .profileModel.value.data?.result?.id ??
+                            "");
                   },
                 );
               case Status.noDataFound:
@@ -77,7 +90,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                   child: CustomText(text: AppStrings.noDataFound),
                 );
               case Status.completed:
-                var data=membershipController.memberShipProfileModel.value;
+                var data = membershipController.memberShipProfileModel.value;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -85,14 +98,18 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                     membershipController.isLoader.value
                         ? const CustomLoader()
                         : CustomMembershipProfileCard(
-                      imageUrl: '${ApiUrl.baseUrl}${data.data?.profile?.profileImage ?? ""}',
-                      name: data.data?.profile?.name ?? "",
-                      membershipStatus: data.data?.profile?.userType ?? "",
-                      controller: membershipController,
-                      onTap: () {
-                        context.pushNamed(RoutePath.membershipDetailsScreen);
-                      }, points: (data.data?.profile?.points ?? 0),
-                    ),
+                            imageUrl:
+                                '${ApiUrl.baseUrl}${data.data?.profile?.profileImage ?? ""}',
+                            name: data.data?.profile?.name ?? "",
+                            membershipStatus:
+                                data.data?.profile?.userType ?? "",
+                            controller: membershipController,
+                            onTap: () {
+                              context
+                                  .pushNamed(RoutePath.membershipDetailsScreen);
+                            },
+                            points: (data.data?.profile?.points ?? 0),
+                          ),
 
                     ///=======================Total Points Earn=============
                     GestureDetector(
@@ -123,7 +140,8 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                               ],
                             ),
                             const Spacer(),
-                            const CustomImage(imageSrc: AppIcons.arrowForwardIos),
+                            const CustomImage(
+                                imageSrc: AppIcons.arrowForwardIos),
                           ],
                         ),
                       ),
@@ -141,19 +159,37 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                             fontSize: 16,
                             color: AppColors.gray900,
                           ),
-                            CustomText(
+                          CustomText(
                             text: '\$${data.data?.plan?.amount ?? 0}',
                             fontWeight: FontWeight.w700,
                             fontSize: 20,
                             color: AppColors.blue500,
                             bottom: 10,
                           ),
-                          CustomButton(
-                            onTap: () {
-                              controller.makePayment(amount: data.data?.plan?.amount ?? 0, context: context, userId: profileController.profileModel.value.data?.result?.id ?? "", planId: data.data?.plan?.id ?? "", subscriptionId: data.data?.plan?.planId?.id ?? "");
-                            },
-                            title: AppStrings.payNow.tr,
-                          ),
+
+                          ///<============================== pay now button ======================== >
+                          data.data?.plan?.status == "approved"
+                              ? CustomButton(
+                                  onTap: () {
+                                    controller.makePayment(
+                                        amount: data.data?.plan?.amount ?? 0,
+                                        context: context,
+                                        userId: profileController.profileModel
+                                                .value.data?.result?.id ??
+                                            "",
+                                        planId: data.data?.plan?.id ?? "",
+                                        subscriptionId:
+                                            data.data?.plan?.planId?.id ?? "");
+                                  },
+                                  title: AppStrings.payNow.tr,
+                                )
+                              : CustomButton(
+                                  onTap: () {
+                                    toastMessage(message: 'status did not approved');
+                                  },
+                                  fillColor: Colors.grey,
+                                  title: AppStrings.payNow,
+                                ),
                           CustomText(
                             textAlign: TextAlign.start,
                             text: AppStrings.payYourSubscriptionFeeInTime.tr,
@@ -194,7 +230,8 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                               Expanded(
                                 child: CustomText(
                                   textAlign: TextAlign.start,
-                                  text: membershipController.membershipItem[index],
+                                  text: membershipController
+                                      .membershipItem[index],
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14.sp,
                                   maxLines: 2,
