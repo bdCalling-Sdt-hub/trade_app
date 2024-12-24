@@ -6,6 +6,7 @@ import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/screens/search_screen/search_controller.dart';
 
 class CustomFilter extends StatelessWidget {
   final TextEditingController locationController;
@@ -17,8 +18,8 @@ class CustomFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SearchListController searchListController =
-    Get.find<SearchListController>();
+    final SearchesController searchListController =
+    Get.find<SearchesController>();
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
       child: Padding(
