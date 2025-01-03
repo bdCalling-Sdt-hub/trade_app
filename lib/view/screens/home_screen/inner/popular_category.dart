@@ -63,7 +63,7 @@ class PopularCategory extends StatelessWidget {
                         CustomText(
                           text: controller.popularCategoryList.value[index].name ?? "",
                           fontWeight: FontWeight.w500,
-                          fontSize: 16.w,
+                          fontSize: 14.w,
                           top: 8.h,
                         )
                       ],

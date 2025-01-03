@@ -53,7 +53,14 @@ class TopProductsScreen extends StatelessWidget {
             );
           case Status.completed:
             var topProductList = controller.topProductList.value;
-            return GridView.builder(
+            return topProductList.isEmpty ? Center(
+              child: CustomText(
+                text: 'No Data Found',
+                fontWeight: FontWeight.w500,
+                top: 8.h,
+                bottom: 8.h,
+              ),
+            ): GridView.builder(
               padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
               scrollDirection: Axis.vertical,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

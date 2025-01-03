@@ -41,7 +41,14 @@ class Package extends StatelessWidget {
 
         case Status.completed:
           var packageList = packageController.packageModel.value.data?.subscriptions;
-          return SingleChildScrollView(
+          return packageList!.isEmpty? Center(
+            child: CustomText(
+              text: 'No Data Found',
+              fontWeight: FontWeight.w500,
+              top: 8.h,
+              bottom: 8.h,
+            ),
+          ): SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: List.generate(packageList?.length ?? 0, (index) {

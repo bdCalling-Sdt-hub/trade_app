@@ -42,35 +42,48 @@ class TopProduct extends StatelessWidget {
 
         case Status.completed:
           var topProductList = controller.topProductList.value;
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(controller.topProductList.value.length,
-                  (index) {
-                return Container(
-                  width: MediaQuery.of(context).size.width * .4,
-                  margin: EdgeInsets.only(right: 10.w),
-                  child: CustomMyProduct(
-                    isMargin: false,
-                    isEdit: controller.isEdit,
-                    image:
-                        '${ApiUrl.baseUrl}${controller.topProductList.value[index].images?[0]}',
-                    name: controller.topProductList.value[index].title ?? "",
-                    onTap: () {
-                      context.pushNamed(RoutePath.productDetailsScreen,
-                        queryParameters: {
-                          "productId": controller.topProductList.value[index].id ?? '',
-                        },
+          return topProductList.isEmpty
+              ? Center(
+                  child: CustomText(
+                    text: 'No Data Found',
+                    fontWeight: FontWeight.w500,
+                    top: 8.h,
+                    bottom: 8.h,
+                  ),
+                )
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                        controller.topProductList.value.length, (index) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * .4,
+                        margin: EdgeInsets.only(right: 10.w),
+                        child: CustomMyProduct(
+                          isMargin: false,
+                          isEdit: controller.isEdit,
+                          image:
+                              '${ApiUrl.baseUrl}${controller.topProductList.value[index].images?[0]}',
+                          name: controller.topProductList.value[index].title ??
+                              "",
+                          onTap: () {
+                            context.pushNamed(
+                              RoutePath.productDetailsScreen,
+                              queryParameters: {
+                                "productId":
+                                    controller.topProductList.value[index].id ??
+                                        '',
+                              },
+                            );
+                          },
+                          value:
+                              '\$${controller.topProductList.value[index].productValue ?? ""}',
+                          editOnTap: () {},
+                        ),
                       );
-                    },
-                    value:
-                        '\$${controller.topProductList.value[index].productValue ?? ""}',
-                    editOnTap: () {},
+                    }),
                   ),
                 );
-              }),
-            ),
-          );
       }
     });
   }

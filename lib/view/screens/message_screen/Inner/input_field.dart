@@ -63,6 +63,7 @@ class MessageInputField extends StatelessWidget {
                   );
                 }),
 
+                SizedBox(width: 8.w,),
                 //============================ Text Input Field ==========================
                 Expanded(
                   child: SizedBox(

@@ -14,8 +14,8 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class JustForYou extends StatelessWidget {
-    JustForYou({super.key});
-    HomeController controller = Get.find<HomeController>();
+  JustForYou({super.key});
+  HomeController controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,35 +43,48 @@ class JustForYou extends StatelessWidget {
 
         case Status.completed:
           var topProductList = controller.justForYouList.value;
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(controller.justForYouList.value.length,
-                      (index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 10.w),
-                      width: MediaQuery.of(context).size.width * .4,
-                      child: CustomMyProduct(
-                        isMargin: false,
-                        isEdit: controller.isEdit,
-                        image:
-                        '${ApiUrl.baseUrl}${controller.justForYouList.value[index].images?[0]}',
-                        name: controller.justForYouList.value[index].title ?? "",
-                        onTap: () {
-                          context.pushNamed(RoutePath.productDetailsScreen,
-                            queryParameters: {
-                              "productId": controller.justForYouList.value[index].id ?? '',
-                            },
-                          );
-                        },
-                        value:
-                        '\$${controller.justForYouList.value[index].productValue ?? ""}',
-                        editOnTap: () {},
-                      ),
-                    );
-                  }),
-            ),
-          );
+          return topProductList.isEmpty
+              ? Center(
+                  child: CustomText(
+                    text: 'No Data Found',
+                    fontWeight: FontWeight.w500,
+                    top: 8.h,
+                    bottom: 8.h,
+                  ),
+                )
+              : SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                        controller.justForYouList.value.length, (index) {
+                      return Container(
+                        margin: EdgeInsets.only(right: 10.w),
+                        width: MediaQuery.of(context).size.width * .4,
+                        child: CustomMyProduct(
+                          isMargin: false,
+                          isEdit: controller.isEdit,
+                          image:
+                              '${ApiUrl.baseUrl}${controller.justForYouList.value[index].images?[0]}',
+                          name: controller.justForYouList.value[index].title ??
+                              "",
+                          onTap: () {
+                            context.pushNamed(
+                              RoutePath.productDetailsScreen,
+                              queryParameters: {
+                                "productId":
+                                    controller.justForYouList.value[index].id ??
+                                        '',
+                              },
+                            );
+                          },
+                          value:
+                              '\$${controller.justForYouList.value[index].productValue ?? ""}',
+                          editOnTap: () {},
+                        ),
+                      );
+                    }),
+                  ),
+                );
       }
     });
   }

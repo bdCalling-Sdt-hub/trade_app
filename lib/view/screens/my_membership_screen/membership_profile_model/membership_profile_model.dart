@@ -115,7 +115,7 @@ class Plan {
 class PlanId {
   String? id;
   String? planName;
-  double? fee;
+  int? fee;
   int? pointRangeStart;
   int? pointRangeEnd;
   int? swapPoint;

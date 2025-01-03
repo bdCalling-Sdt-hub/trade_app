@@ -168,8 +168,8 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                           ),
 
                           ///<============================== pay now button ======================== >
-                          data.data?.plan?.status == "approved"
-                              ? CustomButton(
+                          data.data?.plan?.status == "approved" ?
+                          CustomButton(
                                   onTap: () {
                                     controller.makePayment(
                                         amount: data.data?.plan?.amount ?? 0,
@@ -185,7 +185,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                                 )
                               : CustomButton(
                                   onTap: () {
-                                    toastMessage(message: 'status did not approved');
+                                    toastMessage(message: 'Waiting for admin approval',color: Colors.red);
                                   },
                                   fillColor: Colors.grey,
                                   title: AppStrings.payNow,
@@ -230,8 +230,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                               Expanded(
                                 child: CustomText(
                                   textAlign: TextAlign.start,
-                                  text: membershipController
-                                      .membershipItem[index],
+                                  text: membershipController.membershipItem[index],
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14.sp,
                                   maxLines: 2,

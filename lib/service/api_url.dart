@@ -1,7 +1,8 @@
 class ApiUrl {
-  static const baseUrl = "http://103.145.138.200:5071";
+ //static const baseUrl = "http://103.145.138.200:5071";
+  static const baseUrl = "https://backend.swiftswapp.com";
   static const imageBaseUrl = '$baseUrl/';
-  static socketUrl({required String userID}) => 'http://103.145.138.200:5071?id=$userID';
+  static socketUrl({required String userID}) => 'https://backend.swiftswapp.com?id=$userID';
 
   /// ============================ Auth ==============================>
   static const register = "/auth/register";
