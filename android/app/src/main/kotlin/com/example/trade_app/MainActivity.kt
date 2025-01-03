@@ -1,4 +1,4 @@
-package com.example.trade_app
+package com.jorge.trade_app
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterFragmentActivity
