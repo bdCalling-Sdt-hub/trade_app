@@ -51,7 +51,14 @@ class MyProductsScreen extends StatelessWidget {
             );
           case Status.completed:
             var myProductList = controller.myProductList.value;
-            return Padding(
+            return myProductList.isEmpty ? Center(
+              child: CustomText(
+                text: 'No Data Found',
+                fontWeight: FontWeight.w500,
+                top: 8.h,
+                bottom: 8.h,
+              ),
+            ): Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
               ),

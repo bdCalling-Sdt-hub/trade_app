@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -54,7 +55,15 @@ class SwapHistoryScreen extends StatelessWidget {
             );
           case Status.completed:
             var swapHistoryList = controller.swapHistoryList.value;
-            return Padding(
+            return swapHistoryList.isEmpty ?
+            Center(
+              child: CustomText(
+                text: 'No Data Found',
+                fontWeight: FontWeight.w500,
+                top: 8.h,
+                bottom: 8.h,
+              ),
+            ): Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: SingleChildScrollView(
                 child: Column(

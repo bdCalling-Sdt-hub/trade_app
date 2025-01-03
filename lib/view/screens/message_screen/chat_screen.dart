@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -56,7 +57,14 @@ class ChatScreen extends StatelessWidget {
 
           case Status.completed:
             var chatList = controller.chatList.value;
-            return ListView.builder(
+            return chatList.isEmpty ?Center(
+              child: CustomText(
+                text: 'No Data Found',
+                fontWeight: FontWeight.w500,
+                top: 8.h,
+                bottom: 8.h,
+              ),
+            ):  ListView.builder(
               itemCount: chatList.length,
               itemBuilder: (context, index) {
                 return GestureDetector(

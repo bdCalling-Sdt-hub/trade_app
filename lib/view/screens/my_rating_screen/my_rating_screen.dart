@@ -17,31 +17,6 @@ import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/terms_and_condition_screen/terms_condition_controller.dart';
 
 class MyRatingScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> ratingsData = [
-    {
-      'name': 'Sakib Ahmed',
-      'date': '12/06/24',
-      'imageUrl': AppConstants.userNtr, // Replace with actual image URL
-      'rating': 5,
-      'review':
-          'I highly recommend this swapper for anyone in need of a reliable service. My overall experience with it has been exceptionally positive.',
-    },
-    {
-      'name': 'Imtiaz Rahman',
-      'date': '08/06/24',
-      'imageUrl': AppConstants.userNtr, // Replace with actual image URL
-      'rating': 4,
-      'review': 'I recommend this swapper for an overall excellent experience.',
-    },
-    {
-      'name': 'Rakib Hossain',
-      'date': '04/06/24',
-      'imageUrl': 'https://via.placeholder.com/150',
-      'rating': 5,
-      'review': 'Recommended swapper. Overall good experience.',
-    },
-  ];
-
   TermsConditionController controller = Get.find<TermsConditionController>();
 
   MyRatingScreen({super.key});
@@ -77,7 +52,6 @@ class MyRatingScreen extends StatelessWidget {
                 child: CustomText(text: AppStrings.noDataFound),
               );
             case Status.completed:
-
               return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: SingleChildScrollView(
@@ -102,7 +76,9 @@ class MyRatingScreen extends StatelessWidget {
                                 ),
                                 CustomText(
                                   textAlign: TextAlign.start,
-                                  text: ' ${controller.myRatingModel.value.data?.averageRating ?? 0.0}/5.0'.tr,
+                                  text:
+                                      ' ${controller.myRatingModel.value.data?.averageRating ?? 0.0}/5.0'
+                                          .tr,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18,
                                   color: AppColors.black500,
@@ -117,18 +93,39 @@ class MyRatingScreen extends StatelessWidget {
                           color: AppColors.black500,
                           bottom: 19,
                         ),
-                        Column(
-                          children: List.generate(controller.ratingList.length, (index) {
-
-                            return CustomRatingCard(
-                              name: controller.ratingList.value[index].swapOwner?.name ?? "",
-                              date:DateFormat('yMMMd').format(controller.ratingList.value[index].swapOwner!.createdAt!.toLocal()),
-                              imageUrl: '${ApiUrl.baseUrl}${controller.ratingList.value[index].swapOwner?.profileImage ?? ""}',
-                              rating: (controller.ratingList.value[index].ratting ??  0.0).toInt(),
-                              review: controller.ratingList.value[index].comment ?? "",
-                            );
-                          }),
-                        )
+                        controller.ratingList.isEmpty
+                            ? Center(
+                                child: CustomText(
+                                  text: 'No Data Found',
+                                  fontWeight: FontWeight.w500,
+                                  top: 200.h,
+                                ),
+                              )
+                            : Column(
+                                children: List.generate(
+                                    controller.ratingList.length, (index) {
+                                  return CustomRatingCard(
+                                    name: controller.ratingList.value[index]
+                                            .swapOwner?.name ??
+                                        "",
+                                    date: DateFormat('yMMMd').format(controller
+                                        .ratingList
+                                        .value[index]
+                                        .swapOwner!
+                                        .createdAt!
+                                        .toLocal()),
+                                    imageUrl:
+                                        '${ApiUrl.baseUrl}${controller.ratingList.value[index].swapOwner?.profileImage ?? ""}',
+                                    rating: (controller.ratingList.value[index]
+                                                .ratting ??
+                                            0.0)
+                                        .toInt(),
+                                    review: controller
+                                            .ratingList.value[index].comment ??
+                                        "",
+                                  );
+                                }),
+                              )
                       ],
                     ),
                   ));
