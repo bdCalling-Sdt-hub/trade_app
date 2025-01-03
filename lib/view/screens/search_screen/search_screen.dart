@@ -97,7 +97,14 @@ class SearchScreen extends StatelessWidget {
                   // ),
 
                   Expanded(
-                      child: GridView.builder(
+                      child:  controller.searchList.isEmpty ?  Center(
+                        child: CustomText(
+                          text: 'No Data Found',
+                          fontWeight: FontWeight.w500,
+                          top: 8.h,
+                          bottom: 8.h,
+                        ),
+                      ): GridView.builder(
                         padding: EdgeInsets.symmetric(vertical: 16.h,),
                         scrollDirection: Axis.vertical,
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
