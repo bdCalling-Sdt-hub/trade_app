@@ -83,7 +83,6 @@ class PaymentController extends GetxController {
         await Stripe.instance.presentPaymentSheet();
 
         /// >><><><><><><<><><><><><><> Send response in server <><><><><><><><><><<><><><><><><<
-
         makeOrder(
           price: amount,
           transactionId: paymentIntentData['transactionId'] ?? "",

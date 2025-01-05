@@ -7,6 +7,8 @@ class SharedPreferenceValue {
   static const String email = "email";
   static const String isRemember = "isRemember";
   static const String isOnboarding = "isOnboarding";
+  static const String fcmToken = "fcmToken";
+
 }
 
 class SharePrefsHelper {

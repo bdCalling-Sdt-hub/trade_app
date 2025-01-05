@@ -2,6 +2,7 @@ class AppConstants {
   static String bearerToken = "BearerToken";
 
   static String onBoard = "Onboard";
+  static String oneSignalAPI = "acb07d0e-4c4f-4fcc-a38f-96f4500a283b";
 
   /// <====================== All Response Message StaticN ==============================>
 
@@ -11,6 +12,7 @@ class AppConstants {
   static String userStatus = "userStatus";
   static String rememberMe = "rememberMe";
   static String token = "token";
+  static const String fcmToken = "fcmToken";
   static String userId = "UserId";
   static var chatId = "chatID";
   static String isRememberMe = "isRememberMe";

@@ -16,6 +16,7 @@
 
 import UIKit
 import Flutter
+import Firebase
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -25,6 +26,9 @@ import Flutter
     ) -> Bool {
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
-    }
+    }-> Bool {
+         FirebaseApp.configure()
+         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+       }
 }
 

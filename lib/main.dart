@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
 import 'package:trade_app/core/routes/routes.dart';
@@ -15,11 +17,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance();
   DeviceUtils.lockDevicePortrait();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   DependencyInjection di = DependencyInjection();
   di.dependencies();
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessageBackgroundHandler);
 
   SocketApi.init();
   //SystemUtil.setStatusBarColor(color: Colors.transparent);
@@ -28,6 +34,11 @@ Future<void> main() async {
   runApp(
     const MyApp(),
   );
+}
+
+@pragma("vm:entry-point")
+Future<void> _firebaseMessageBackgroundHandler(RemoteMessage message) async {
+  print("Background handler triggered");
 }
 
 class MyApp extends StatelessWidget {
@@ -48,3 +59,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+// <key>FirebaseMessagingAutoInitEnabled</key>
+// <true/>
+// <key>GIDClientID</key>
+// <string>29380520069-7mbf1qdbsme8fk4kvd9v2d5311a3kmj3.apps.googleusercontent.com</string>
+// <key>GIDServerClientID</key>
+// <string>29380520069-oavk8pbsl0v6ogdqa8sihj0j4gp5pmlb.apps.googleusercontent.com</string>
+// <key>GoogleService-Info</key>

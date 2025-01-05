@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/global/push_notification.dart';
 import 'package:trade_app/helper/const/const.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/service/api_url.dart';
@@ -29,11 +30,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   HomeController controller = Get.find<HomeController>();
   PackageController packageController = Get.find<PackageController>();
   final MembershipController membershipController = Get.find<MembershipController>();
   @override
   void initState() {
+    PushNotificationHandle.firebaseInit();
+    PushNotificationHandle.firebaseListenNotification(context: context);
     SharePrefsHelper.getBool(AppConstants.isRememberMe);
     super.initState();
   }
