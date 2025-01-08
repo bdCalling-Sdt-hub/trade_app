@@ -22,7 +22,7 @@ class AuthController extends GetxController {
 
   ///<=========================== Sign in controller========================>
   TextEditingController signInEmail =
-      TextEditingController(text: 'retev81494@evasud.com');
+      TextEditingController(text: 'nadimhasannh48@gmail.com');
   TextEditingController passWordSignIn =
       TextEditingController(text: 'Nadim12345');
 

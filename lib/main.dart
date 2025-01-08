@@ -4,14 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
 import 'package:trade_app/core/routes/routes.dart';
 import 'package:trade_app/dependency_injection/path.dart';
 import 'package:trade_app/service/socket_service.dart';
 import 'package:trade_app/view/components/device_utils/device_utils.dart';
+
 import 'firebase_options.dart';
+
+@pragma("vm:entry-point")
+Future<void> _firebaseMessageBackgroundHandler(RemoteMessage message) async {
+  print("Background handler triggered");
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,10 +41,6 @@ Future<void> main() async {
   );
 }
 
-@pragma("vm:entry-point")
-Future<void> _firebaseMessageBackgroundHandler(RemoteMessage message) async {
-  print("Background handler triggered");
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

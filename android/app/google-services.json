@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:366258149926:android:83e5d787786c21f3a624e7",
+        "mobilesdk_app_id": "1:366258149926:android:5e668ed31dbdfe4aa624e7",
         "android_client_info": {
-          "package_name": "com.jorge.trade_app"
+          "package_name": "com.trade.jorgedejesus"
         }
       },
       "oauth_client": [],

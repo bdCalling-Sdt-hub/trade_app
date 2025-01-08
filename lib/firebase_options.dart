@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAR9lREShRENIKPuP7DOsgNWWy9qIxPTlE',
-    appId: '1:366258149926:android:83e5d787786c21f3a624e7',
+    appId: '1:366258149926:android:5e668ed31dbdfe4aa624e7',
     messagingSenderId: '366258149926',
     projectId: 'tradeapp-1f732',
     storageBucket: 'tradeapp-1f732.firebasestorage.app',
@@ -59,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCPbsBUuspc1I6qReJHlF4_HaQQCKo3mo8',
-    appId: '1:366258149926:ios:136d64da2832978aa624e7',
+    appId: '1:366258149926:ios:5ce21627f2305a83a624e7',
     messagingSenderId: '366258149926',
     projectId: 'tradeapp-1f732',
     storageBucket: 'tradeapp-1f732.firebasestorage.app',
-    iosBundleId: 'com.example.tradeApp',
+    iosBundleId: 'com.trade.jorgedejesus',
   );
 }
