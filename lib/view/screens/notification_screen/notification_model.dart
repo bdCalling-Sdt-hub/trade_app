@@ -34,7 +34,7 @@ class NotificationModel {
 
 class Datum {
   String? id;
-  User? user;
+  String? user;
   String? title;
   String? message;
   bool? status;
@@ -61,7 +61,7 @@ class Datum {
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["_id"],
-    user: userValues.map[json["user"]]!,
+    user: json["user"]!,
     title: json["title"]!,
     message: json["message"],
     status: json["status"],
@@ -73,7 +73,7 @@ class Datum {
 
   Map<String, dynamic> toJson() => {
     "_id": id,
-    "user": userValues.reverse[user],
+    "user": user,
     "title": title,
     "message": message,
     "status": status,
@@ -84,13 +84,6 @@ class Datum {
   };
 }
 
-enum User {
-  THE_672718_A40_FB17_B271_D8_E5564
-}
-
-final userValues = EnumValues({
-  "672718a40fb17b271d8e5564": User.THE_672718_A40_FB17_B271_D8_E5564
-});
 
 class EnumValues<T> {
   Map<String, T> map;

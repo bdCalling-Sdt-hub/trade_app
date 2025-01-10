@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/core/routes/route_path.dart';
@@ -43,12 +45,21 @@ class AuthController extends GetxController {
   signIn({required BuildContext context}) async {
     signInLoading.value = true;
 
+    String? fcmToken;
+
+    if (Platform.isIOS) {
+      fcmToken = await FirebaseMessaging.instance.getAPNSToken();
+    } else {
+      fcmToken = await FirebaseMessaging.instance.getToken();
+    }
+
     var body = {
       "email": signInEmail.value.text,
-      "password": passWordSignIn.value.text
+      "password": passWordSignIn.value.text,
+      "deviceToken" : fcmToken.toString()
     };
     var response = await apiClient.post(
-        showResult: false,
+        showResult: true,
         context: context,
         body: body,
         isBasic: true,
@@ -61,7 +72,7 @@ class AuthController extends GetxController {
       toastMessage(message: response.body["message"]);
     } else {
       // ignore: use_build_context_synchronously
-      checkApi(response: response, context: context);
+     // checkApi(response: response, context: context);
     }
 
     signInLoading.value = false;
@@ -153,9 +164,18 @@ class AuthController extends GetxController {
   RxString signUpOtp = ''.obs;
   signUpOtpVerify({required BuildContext context}) async {
     verifyLoading.value = true;
+
+    String? fcmToken;
+
+    if (Platform.isIOS) {
+      fcmToken = await FirebaseMessaging.instance.getAPNSToken();
+    } else {
+      fcmToken = await FirebaseMessaging.instance.getToken();
+    }
     var body = {
       "userEmail": emailSignUp.value.text,
-      "activation_code": signUpOtp.value
+      "activation_code": signUpOtp.value,
+      "deviceToken": fcmToken.toString(),
     };
 
     var response = await apiClient.post(

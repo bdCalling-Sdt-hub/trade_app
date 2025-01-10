@@ -149,39 +149,51 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                           ///<======================= post by name =======================>
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             
                             children: [
-                              Row(
-                                children: [
-                                  CustomText(
-                                    text: AppStrings.postBy,
-                                    right: 4.w,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      context.pushNamed(RoutePath.otherProfile);
-                                    },
-                                    child: CustomText(
-                                      text:
-                                          "${productDetailsModel.data?.product?.user?.name ?? ""} - ${productDetailsModel.data?.product?.user?.userType ?? ""}",
-                                      fontWeight: FontWeight.w500,
-                                      decoration: TextDecoration.underline,
-                                      color: AppColors.blue500,
+                              Expanded(
+                                flex: 3,
+                                child: Row(
+                                  children: [
+                                    CustomText(
+                                      text: AppStrings.postBy,
+                                      right: 4.w,
                                     ),
-                                  ),
-                                ],
+                                    GestureDetector(
+                                      onTap: () {
+                                        context.pushNamed(RoutePath.otherProfile);
+                                      },
+                                      child: CustomText(
+                                        text:
+                                            "${productDetailsModel.data?.product?.user?.name ?? ""} - ${productDetailsModel.data?.product?.user?.userType ?? ""}",
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline,
+                                        color: AppColors.blue500,
+                                        maxLines: 2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Row(
-                                children: [
-                                  CustomImage(
-                                    imageSrc: AppIcons.locationOn,
-                                    imageColor: AppColors.black500,
-                                  ),
-                                  CustomText(
-                                      text: productDetailsModel
-                                              .data?.product?.address ??
-                                          "")
-                                ],
+                              Expanded(
+                                flex: 2,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CustomImage(
+                                      imageSrc: AppIcons.locationOn,
+                                      imageColor: AppColors.black500,
+                                    ),
+                                    Flexible(
+                                      child: CustomText(
+                                        maxLines: 2,
+                                          textAlign: TextAlign.start,
+                                          text: productDetailsModel
+                                                  .data?.product?.address ??
+                                              ""),
+                                    )
+                                  ],
+                                ),
                               )
                             ],
                           )
