@@ -54,5 +54,6 @@ class RoutePath {
   static const String chatScreen = "ChatScreen";
   static const String postScreen = "PostScreen";
   static const String profileScreen = "ProfileScreen";
+  static const String audioScreen = "AudioScreen";
 
 }

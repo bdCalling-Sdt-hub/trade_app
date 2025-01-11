@@ -4,6 +4,7 @@ import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/components/error_screen/error_screen.dart';
+import 'package:trade_app/view/screens/audio/audio_screen.dart';
 import 'package:trade_app/view/screens/authentication/forgot_password/forgot_password_screen.dart';
 import 'package:trade_app/view/screens/authentication/otp/otp_screen.dart';
 import 'package:trade_app/view/screens/authentication/reset_password/reset_password_screen.dart';
@@ -98,6 +99,13 @@ class AppRouter {
           name: RoutePath.signInScreen,
           path: RoutePath.signInScreen.addBasePath,
           builder: (context, state) => SignInScreen(),
+        ),
+
+        ///======================= signInScreen Route =======================
+        GoRoute(
+          name: RoutePath.audioScreen,
+          path: RoutePath.audioScreen.addBasePath,
+          builder: (context, state) => AudioScreen(),
         ),
 
         ///======================= messageScreen Route =======================

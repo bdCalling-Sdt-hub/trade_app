@@ -164,6 +164,17 @@ class ProfileScreen extends StatelessWidget {
                       text: AppStrings.settings.tr,
                       leadingIcon: AppIcons.settings,
                     ),
+
+                    ///==================== audio ================
+                    CustomProfileCard(
+                      isCevron: true,
+                      onTap: () {
+                        context.pushNamed(RoutePath.audioScreen);
+
+                      },
+                      text: "Audio",
+                      leadingIcon: AppIcons.checkCircle,
+                    ),
                     ///====================LogOut================
                     CustomProfileCard(
                       isCevron: false,
