@@ -4,6 +4,8 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 
 /*class AudioScreen extends StatefulWidget {
   const AudioScreen({Key? key}) : super(key: key);
@@ -300,8 +302,9 @@ class _AudioScreenState extends State<AudioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Audio Player'),
+      backgroundColor: AppColors.white,
+      appBar: CustomAppBar(
+        appBarContent: 'Audio',
       ),
       body: Center(
         child: Column(
