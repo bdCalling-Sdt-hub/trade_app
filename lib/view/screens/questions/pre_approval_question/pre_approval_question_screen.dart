@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,15 @@ import 'package:trade_app/view/components/custom_dropdown/custom_dropdown.dart';
 import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
+import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
 class PreApprovalQuestionScreen extends StatelessWidget {
-  PreApprovalQuestionScreen({super.key, required this.planId, required this.amount, required this.planType});
+  PreApprovalQuestionScreen(
+      {super.key,
+      required this.planId,
+      required this.amount,
+      required this.planType});
 
   final String planId;
   final int amount;
@@ -75,9 +81,44 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                   controller: controller.passwordController),
 
               ///<================================= email ====================================>
-              CustomFromCard(
-                  title: AppStrings.email,
-                  controller: controller.emailController),
+              // CustomFromCard(
+              //     validator: (value) {
+              //       if (value!.isEmpty) {
+              //         return AppStrings.fieldCantBeEmpty.tr;
+              //       } else if (!AppStrings.emailRegexp
+              //           .hasMatch(controller.emailController.text)) {
+              //         return AppStrings.enterValidEmail;
+              //       } else {
+              //         return null;
+              //       }
+              //     },
+              //     title: AppStrings.email,
+              //     controller: controller.emailController),
+              CustomText(
+                textAlign: TextAlign.start,
+                color: AppColors.black500,
+                text: AppStrings.email,
+                fontWeight: FontWeight.w500,
+                fontSize: 16.sp,
+                bottom: 8.h,
+                maxLines: 2,
+              ),
+              CustomTextField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return AppStrings.fieldCantBeEmpty.tr;
+                    } else if (!AppStrings.emailRegexp
+                        .hasMatch(controller.emailController.text)) {
+                      return AppStrings.enterValidEmail;
+                    } else {
+                      return null;
+                    }
+                  },
+                  textEditingController: controller.emailController),
+
+              SizedBox(
+                height: 12.h,
+              ),
 
               ///<================================= phoneNumber ====================================>
               CustomFromCard(
@@ -94,24 +135,47 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                 bottom: 8.h,
                 maxLines: 2,
               ),
-              CustomDropdown(
-                dropdownName: 'developer',
-                length: 2,
-                title: AppStrings.profession,
-                textColor: AppColors.white200,
-                controller: postController.professionController,
-                isDropdownVisible: postController.isProfession.value,
-                onTap: () {
-                  postController.isProfession.value =
-                      !postController.isProfession.value;
+              // CustomDropdown(
+              //   dropdownName: 'developer',
+              //   length: 2,
+              //   title: AppStrings.profession,
+              //   textColor: AppColors.white200,
+              //   controller: postController.professionController,
+              //   isDropdownVisible: postController.isProfession.value,
+              //   onTap: () {
+              //     postController.isProfession.value =
+              //         !postController.isProfession.value;
+              //   },
+              //   options: postController.profession,
+              //   onSelect: (index) {
+              //     postController.selectProfession.value = index;
+              //     postController.professionController.text = postController
+              //         .profession[postController.selectProfession.value];
+              //     postController.isProfession.value = false;
+              //     postController.isProfession.refresh();
+              //   },
+              // ),
+              DropdownButtonFormField2<String>(
+                isExpanded: true,
+                value: postController.profession.first,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  // Add more decoration..
+                ),
+                items: postController.profession.map((item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(item, style: const TextStyle(fontSize: 14)),
+                )).toList(),
+                onChanged: (value) {
+                  if(value != null){
+                    controller.professionController.text = value;
+                  }
                 },
-                options: postController.profession,
-                onSelect: (index) {
-                  postController.selectProfession.value = index;
-                  postController.professionController.text = postController
-                      .profession[postController.selectProfession.value];
-                  postController.isProfession.value = false;
-                  postController.isProfession.refresh();
+                onSaved: (value) {
+
                 },
               ),
               CustomText(
@@ -126,24 +190,27 @@ class PreApprovalQuestionScreen extends StatelessWidget {
               ),
 
               ///<================================= whatYourReligion ====================================>
-              CustomDropdown(
-                dropdownName: 'Islam',
-                length: 2,
-                title: AppStrings.whatYourReligion,
-                textColor: AppColors.white200,
-                controller: controller.religionController,
-                isDropdownVisible: postController.isSubCategories.value,
-                onTap: () {
-                  postController.isSubCategories.value =
-                      !postController.isSubCategories.value;
+              DropdownButtonFormField2<String>(
+                isExpanded: true,
+                value: postController.religion.first,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  // Add more decoration..
+                ),
+                items: postController.religion.map((item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(item, style: const TextStyle(fontSize: 14)),
+                )).toList(),
+                onChanged: (value) {
+                  if(value != null){
+                    controller.religionController.text = value;
+                  }
                 },
-                options: postController.religion,
-                onSelect: (index) {
-                  postController.selectedCategory.value = index;
-                  controller.religionController.text = postController
-                      .religion[postController.selectedCategory.value];
-                  postController.isSubCategories.value = false;
-                  postController.isSubCategories.refresh();
+                onSaved: (value) {
+
                 },
               ),
 
@@ -152,17 +219,16 @@ class PreApprovalQuestionScreen extends StatelessWidget {
               ),
 
               ///<================================= next button ====================================>
-
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    context.pushNamed(RoutePath.preApprovalQuestion2Screen,
+                    context.pushNamed(
+                      RoutePath.preApprovalQuestion2Screen,
                       queryParameters: {
                         "plan_id": planId ?? '',
                         "amount": (amount ?? 0).toString(),
-                        "planType":planType  ?? '',
+                        "planType": planType ?? '',
                       },
-
                     );
                   },
                   child: CustomDetailContainer(

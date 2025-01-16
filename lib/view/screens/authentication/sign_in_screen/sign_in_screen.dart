@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -14,11 +15,32 @@ import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   final AuthController controller = Get.find<AuthController>();
+
   final formKey = GlobalKey<FormState>();
+  final TextEditingController _urlController = TextEditingController();
+  String? _savedVideoUrl;
+
+
+  Future<void> _saveUrl() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('youtube_url', _urlController.text);
+    setState(() {
+      _savedVideoUrl = _urlController.text;
+      _urlController.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,6 +238,30 @@ class SignInScreen extends StatelessWidget {
                     height: 24.h,
                   ),
 
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: CustomTextField(
+                  //         textEditingController: _urlController,
+                  //         hintText: 'Enter youtube video url',
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 8.w),
+                  //     ElevatedButton(
+                  //       onPressed: () {
+                  //         if (_urlController.text.isNotEmpty) {
+                  //           _saveUrl();
+                  //         }
+                  //       },
+                  //       child: Text("Save"),
+                  //     ),
+                  //   ],
+                  // ),
+
+                  SizedBox(
+                    height: 24.h,
+                  ),
+
                   ///<======================================= dontHaveAnAccount ======================================>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -241,6 +287,7 @@ class SignInScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:trade_app/controller/membership_controller/membership_controller
 import 'package:trade_app/controller/post_controller/post_controller.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/controller/search_controller/search_controller.dart';
+import 'package:trade_app/global/general_controller/general_controller.dart';
 import 'package:trade_app/global/push_notification.dart';
 import 'package:trade_app/view/screens/authentication/auth_controller/auth_controller.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
@@ -35,5 +36,6 @@ class DependencyInjection extends Bindings {
    Get.lazyPut(() => PaymentController(), fenix: true);
    Get.lazyPut(() => NotificationController(), fenix: true);
    Get.lazyPut(() => SearchesController(), fenix: true);
+   Get.lazyPut(() => GeneralController(), fenix: true);
   }
 }

@@ -1,8 +1,11 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
+import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
@@ -15,6 +18,7 @@ import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:trade_app/view/screens/category_screen/model/sub_category_model.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class PostEditScreen extends StatefulWidget {
@@ -50,9 +54,10 @@ class _PostEditScreenState extends State<PostEditScreen> {
     super.initState();
   }
 
-  var subCateId;
   @override
   Widget build(BuildContext context) {
+    print(postController.image);
+    print(postController.selectedCategoryValue.value);
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: const NavBar(currentIndex: 3),
@@ -135,7 +140,7 @@ class _PostEditScreenState extends State<PostEditScreen> {
                   //   },
                   // ),
 
-                  CustomTextField(
+/*                  CustomTextField(
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return AppStrings.fieldCantBeEmpty;
@@ -160,9 +165,21 @@ class _PostEditScreenState extends State<PostEditScreen> {
                           ? Colors.black
                           : Colors.blue,
                     ),
-                  ),
-
-                  controller.isDropdownVisible.value
+                  ),*/
+                Obx((){
+                  return Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 12),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.gray200),
+                      borderRadius: BorderRadius.circular(5),
+                      // Add more decoration..
+                    ),
+                    child: Text(postController.selectedCategoryValue.value.name??""),
+                  );
+                }),
+                  
+/*                  controller.isDropdownVisible.value
                       ? Align(
                           alignment: Alignment.bottomRight,
                           child: Container(
@@ -173,19 +190,15 @@ class _PostEditScreenState extends State<PostEditScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: List.generate(
-                                controller.subCategoryList!.length,
+                                controller.subCategoryList.length,
                                 (index) => GestureDetector(
                                   onTap: () {
                                     controller.isDropdownVisible.value =
                                         !controller.isDropdownVisible.value;
 
                                     postController.subCategoriesController
-                                        .text = controller
-                                            .subCategoryList[index].name ??
-                                        "";
-                                    subCateId =
-                                        controller.subCategoryList[index].id ??
-                                            "";
+                                        .text = controller.subCategoryList[index].name ??"";
+
                                     controller.isDropdownVisible.refresh();
                                   },
                                   child: Padding(
@@ -194,9 +207,7 @@ class _PostEditScreenState extends State<PostEditScreen> {
                                       decoration: const BoxDecoration(
                                           color: AppColors.white200),
                                       child: CustomText(
-                                        text: controller
-                                                .subCategoryList[index].name ??
-                                            "",
+                                        text: controller.subCategoryList[index].name ?? "",
                                         fontWeight: FontWeight.w500,
                                         bottom: 4.h,
                                         color: AppColors.black500,
@@ -210,7 +221,7 @@ class _PostEditScreenState extends State<PostEditScreen> {
                         )
                       : const SizedBox(
                           height: 10,
-                        ),
+                        ),*/
                   CustomFromCard(
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -294,6 +305,7 @@ class _PostEditScreenState extends State<PostEditScreen> {
                     ),
                   ),
                   SizedBox(height: 10.h),
+                  postController.selectedImagesMulti.isNotEmpty?
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -325,8 +337,70 @@ class _PostEditScreenState extends State<PostEditScreen> {
                                 right: 5,
                                 child: GestureDetector(
                                   onTap: () {
-                                    postController.selectedImagesMulti
-                                        .removeAt(index);
+                                    postController.selectedImagesMulti.removeAt(index);
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red.withOpacity(0.8),
+                                    ),
+                                    child: const Icon(
+                                      Icons.cancel,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ): postController.image.isNotEmpty?Container(
+                    margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 5.w),
+                    height: 100.h,
+                    width: 100.w,
+                    // Set a width for the image container
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage("${ApiUrl.baseUrl}${postController.image.value}"),
+                      ),
+                    ),
+                  ):SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                        postController.selectedImagesMulti.length,
+                            (index) {
+                          final imageFile =
+                          postController.selectedImagesMulti[index];
+
+                          return Stack(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 5.h, horizontal: 5.w),
+                                height: 100.h,
+                                width: 100.w,
+                                // Set a width for the image container
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: FileImage(imageFile),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 5,
+                                right: 5,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    postController.selectedImagesMulti.removeAt(index);
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -354,11 +428,10 @@ class _PostEditScreenState extends State<PostEditScreen> {
                       : CustomButton(
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-                              print('======================$subCateId');
                               postController.updateProduct(
                                   context: context,
                                   catId: widget.catId,
-                                  subCatId: subCateId,
+                                  subCatId: postController.selectedCategoryValue.value.id??"",
                                   userID: widget.userId,
                                   productId: widget.productId);
                             }

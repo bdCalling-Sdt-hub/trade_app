@@ -137,7 +137,7 @@ class HomeController extends GetxController {
 
   RxBool isDropdownVisible=false.obs;
 
-  RxList<SubDatum> subCategoryList = <SubDatum>[].obs;
+  RxList<SubCategoryModelForEdit> subCategoryList = <SubCategoryModelForEdit>[].obs;
   getSubCategory({BuildContext? context,String category=''}) async {
     SubCategoryLoadingMethod(Status.loading);
 
@@ -145,8 +145,11 @@ class HomeController extends GetxController {
         url: '${ApiUrl.getSubCategory.addBaseUrl}?category=$category', showResult: true);
 
     if (response.statusCode == 200) {
-      subCategoryList.value = List<SubDatum>.from(
-          response.body["data"].map((x) => SubDatum.fromJson(x)));
+      final data = List<SubDatum>.from(response.body["data"].map((x) => SubDatum.fromJson(x)));
+
+      data.forEach((item){
+        subCategoryList.add(SubCategoryModelForEdit(item.id, item.name, item.category?.id));
+      });
 
       print("masum==============${response.body["data"]}");
       SubCategoryLoadingMethod(Status.completed);
@@ -250,4 +253,10 @@ class HomeController extends GetxController {
     scrollController.addListener(addScrollListener);
     super.onInit();
   }
+}
+class SubCategoryModelForEdit{
+  final String? id;
+  final String? name;
+  final String? categoryId;
+  SubCategoryModelForEdit(this.id, this.name, this.categoryId);
 }

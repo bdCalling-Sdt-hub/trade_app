@@ -83,7 +83,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                             queryParameters: {
                               "catId": subCategoryList[index].id ?? "",
                               "subName": subCategoryList[index].name ?? "",
-                              "subCatId": subCategoryList[index].category?.id ?? "",
+                              "subCatId": subCategoryList[index].categoryId?? "",
                             },
                           );
 

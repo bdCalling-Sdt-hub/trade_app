@@ -15,6 +15,8 @@ import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_my_products/custom_my_product.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:trade_app/view/screens/category_screen/model/sub_category_model.dart';
+import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 
 class MyProductsScreen extends StatelessWidget {
   MyProductsScreen({super.key});
@@ -109,6 +111,12 @@ class MyProductsScreen extends StatelessWidget {
                             controller.conditionController.text=myProductList[index].condition ?? '';
                             controller.descriptionController.text=myProductList[index].description ?? '';
                              controller.addressController.text= myProductList[index].address ?? '';
+                             controller.selectedCategoryValue.value = SubCategoryModelForEdit(
+                                 myProductList[index].subCategory?.id,
+                                 myProductList[index].subCategory?.name,
+                                 myProductList[index].category?.id,
+                             );
+                            controller.image.value = myProductList.isNotEmpty? myProductList[index].images != null && myProductList[index].images!.isNotEmpty?myProductList[index].images!.first:"":"";
                              controller.productValueController.text= (myProductList[index].productValue ?? 0).toString();
                             context.pushNamed(RoutePath.postEditScreen,
                               queryParameters: {

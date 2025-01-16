@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
+import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
+import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
@@ -33,14 +35,16 @@ class _PostAddScreenState extends State<PostAddScreen> {
   HomeController controller = Get.find<HomeController>();
 
   final formKey = GlobalKey<FormState>();
+  var userID;
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  void initState(){
+    WidgetsBinding.instance.addPostFrameCallback((_)async {
       controller.getSubCategory(context: context,category: widget.catName);
+      userID=await SharePrefsHelper.getString(AppConstants.userId);
     });
     super.initState();
   }
-  var  subCateId;
+  var subCateId;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -331,7 +335,7 @@ class _PostAddScreenState extends State<PostAddScreen> {
                 postController.addProductLoading.value?const CustomLoader():  CustomButton(
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                         postController.addProduct(context: context,catId: widget.catId,subCatId: subCateId,userID: '67134188f4a6206f732f46f6');
+                         postController.addProduct(context: context,catId: widget.catId,subCatId: subCateId,userID: userID);
                       }
                     },
                     title: AppStrings.postAd,

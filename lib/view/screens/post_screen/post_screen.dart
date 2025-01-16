@@ -75,7 +75,7 @@ class PostScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
-                      mainAxisExtent: 160,
+                      mainAxisExtent: 180,
                     ),
                     itemCount: popularCategoryList.length,
                     physics: const BouncingScrollPhysics(), // Allow scrolling
@@ -90,11 +90,8 @@ class PostScreen extends StatelessWidget {
                             },
                           );
                         },
-                        image:
-                            '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
-                        name:
-                            controller.popularCategoryList.value[index].name ??
-                                "",
+                        image: '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
+                        name: controller.popularCategoryList.value[index].name ?? "",
                       );
                     },
                   ),

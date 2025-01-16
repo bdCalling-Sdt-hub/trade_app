@@ -11,12 +11,13 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
+import 'package:trade_app/view/screens/category_screen/model/sub_category_model.dart';
+import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
 import 'package:trade_app/view/screens/my_products_screen/model/my_product_model.dart';
 import 'package:trade_app/view/screens/product_details/product_details_model.dart';
 
 class PostController extends GetxController {
-  TextEditingController productCategoryController =
-      TextEditingController(text: 'Mobile Accessories');
+  TextEditingController productCategoryController = TextEditingController(text: 'Mobile Accessories');
   TextEditingController subCategoryController = TextEditingController();
   TextEditingController productTitleController = TextEditingController();
   TextEditingController conditionController = TextEditingController();
@@ -47,6 +48,7 @@ class PostController extends GetxController {
 
   ///============================Single Image picker method================
   RxString image = "".obs;
+  Rx<SubCategoryModelForEdit> selectedCategoryValue = SubCategoryModelForEdit("", "", "").obs;
 
   Rx<File> imageFile = File("").obs;
 
@@ -56,7 +58,6 @@ class PostController extends GetxController {
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 15);
     if (getImages != null) {
       imageFile.value = File(getImages.path);
-      image.value = getImages.path;
     }
   }
 
@@ -67,7 +68,7 @@ class PostController extends GetxController {
   void pickMultiImage() async {
     try {
       final pickedFiles = await picker.pickMultiImage(
-        imageQuality: 80,
+        imageQuality: 15,
       );
 
       if (pickedFiles.isEmpty) {
@@ -147,8 +148,10 @@ class PostController extends GetxController {
       descriptionController.clear();
       productValueController.clear();
       addressController.clear();
+      image.value = "";
       addProductLoading.value = false;
       multipartBodyList.clear();
+      getMyProduct(context: context);
       AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
     } else {
       checkApi(response: response, context: context);
@@ -195,6 +198,7 @@ class PostController extends GetxController {
       );
     }
 
+    print(selectedImagesMulti.isEmpty);
     var response = selectedImagesMulti.isEmpty
         ? await apiClient.patch(
             url: '${ApiUrl.editProduct.addBaseUrl}/$productId',
@@ -215,8 +219,9 @@ class PostController extends GetxController {
       productValueController.clear();
       addressController.clear();
       addProductLoading.value = false;
+      image.value = "";
       array.clear();
-
+      getMyProduct(context: context);
       AppRouter.route.replaceNamed(RoutePath.myProductsScreen);
     } else {
       checkApi(response: response, context: context);
@@ -267,7 +272,6 @@ class PostController extends GetxController {
     if (response.statusCode == 200) {
       myProductList.value =
           List<Datum>.from(response.body["data"].map((x) => Datum.fromJson(x)));
-      getMyProduct(context: context);
       MyProductLoadingMethod(Status.completed);
     } else {
       checkApi(response: response, context: context);

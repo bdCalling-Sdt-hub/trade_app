@@ -107,12 +107,14 @@ class PackageController extends GetxController {
     );
 
     if (response.statusCode == 200) {
+      toastMessage(message: response.body["message"]);
       AppRouter.route.pushNamed(RoutePath.homeScreen);
     } else if (response.statusCode == 402) {
       toastMessage(message: response.body["message"]);
     } else {
-      // ignore: use_build_context_synchronously
-      //checkApi(response: response, context: context);
+     // toastMessage(message: response.body["message"]);
+
+      checkApi(response: response, context: context);
     }
 
     signUpLoading.value = false;

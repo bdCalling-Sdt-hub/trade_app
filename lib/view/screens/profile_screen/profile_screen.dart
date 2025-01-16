@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
+import 'package:trade_app/global/general_controller/general_controller.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/service/api_url.dart';
@@ -19,13 +21,90 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_profile_card/custom_profile_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
     ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
     final ProfileController controller = Get.find<ProfileController>();
+    final GeneralController generalController = Get.find<GeneralController>();
+
+    String? _savedVideoUrl;
+    YoutubePlayerController? _youtubeController;
+    bool _isPlaying = true;
+
+
+    @override
+    void initState() {
+      super.initState();
+      //_loadSavedUrl();
+    }
+
+    // void _togglePlayPause() {
+    //   if (_youtubeController != null) {
+    //     if (_isPlaying) {
+    //       _youtubeController!.pause();
+    //     } else {
+    //       _youtubeController!.play();
+    //     }
+    //     setState(() {
+    //       _isPlaying = !_isPlaying; // Toggle play state
+    //     });
+    //   }
+    // }
+    // // Load the saved URL from SharedPreferences
+    // Future<void> _loadSavedUrl() async {
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   setState(() {
+    //     _savedVideoUrl = prefs.getString('youtube_url');
+    //     if (_savedVideoUrl != null) {
+    //       _initializePlayer(_savedVideoUrl!);
+    //     }
+    //   });
+    // }
+    //
+    //
+    // // Initialize the YouTube player for audio playback
+    // void _initializePlayer(String url) {
+    //   final videoId = YoutubePlayer.convertUrlToId(url);
+    //   if (videoId != null) {
+    //     // _youtubeController?.dispose(); // Dispose the previous controller if any
+    //     _youtubeController = YoutubePlayerController(
+    //       initialVideoId: videoId,
+    //       flags: YoutubePlayerFlags(
+    //         autoPlay: false,
+    //         mute: false,
+    //         hideThumbnail: true, // Hide thumbnail to avoid showing visuals
+    //         controlsVisibleAtStart: false, // Hide video controls
+    //         disableDragSeek: true, // Disable seeking
+    //         loop: true, // Enable looping video
+    //         showLiveFullscreenButton: false, // Disable fullscreen button
+    //         enableCaption: false, // Disable captions
+    //       ),
+    //     );
+    //     setState(() {
+    //       _isPlaying =false;
+    //     }); // Update the state to reflect the new controller
+    //   }
+    // }
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (){
+      //     generalController.togglePlayPause;
+      //     _isPlaying =! _isPlaying;
+      //   },
+      //   child: Icon(
+      //     _isPlaying ? Icons.pause_circle : Icons.play_circle,
+      //   ),
+      // ),
       backgroundColor: AppColors.white,
       bottomNavigationBar: const NavBar(currentIndex: 4),
 
@@ -185,6 +264,14 @@ class ProfileScreen extends StatelessWidget {
                       text: AppStrings.logOut.tr,
                       leadingIcon: AppIcons.vector,
                     ),
+                    // SizedBox(
+                    //   height: 0,
+                    //   child: YoutubePlayer(
+                    //     controller: generalController.youtubeController!,
+                    //     showVideoProgressIndicator: false,
+                    //     bottomActions: [], // Hide all bottom actions
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
