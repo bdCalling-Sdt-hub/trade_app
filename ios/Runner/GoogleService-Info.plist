@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.trade.jorgedejesus</string>
+	<string>com.swipswap.jorge</string>
 	<key>PROJECT_ID</key>
 	<string>tradeapp-1f732</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:366258149926:ios:5ce21627f2305a83a624e7</string>
+	<string>1:366258149926:ios:4f0740fd852fdd3da624e7</string>
 </dict>
 </plist>

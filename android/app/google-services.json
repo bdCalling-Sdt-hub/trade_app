@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:366258149926:android:5e668ed31dbdfe4aa624e7",
+        "mobilesdk_app_id": "1:366258149926:android:bd2111e8851e08c0a624e7",
         "android_client_info": {
-          "package_name": "com.trade.jorgedejesus"
+          "package_name": "com.swipswap.jorge"
         }
       },
       "oauth_client": [],
