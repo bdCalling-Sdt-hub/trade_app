@@ -84,7 +84,9 @@ class _SubCategoryProductsState extends State<SubCategoryProducts> {
                   //   bottom: 10,
                   // ),
                   Expanded(
-                    child: GridView.builder(
+                    child:subCategoryProductList.isEmpty ?  Center(
+                      child: CustomText(text: AppStrings.noDataFound),
+                    ): GridView.builder(
                        controller: controller.scrollController,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,

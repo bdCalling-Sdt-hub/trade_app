@@ -152,7 +152,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                              
                             children: [
                               Expanded(
-                                flex: 3,
+                                flex: 2,
                                 child: Row(
                                   children: [
                                     CustomText(
@@ -161,11 +161,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        context.pushNamed(RoutePath.otherProfile);
+                                        context.pushNamed(RoutePath.otherProfile,extra: productDetailsModel.data?.product?.user?.id ?? 0);
                                       },
                                       child: CustomText(
                                         text:
-                                            "${productDetailsModel.data?.product?.user?.name ?? ""} - ${productDetailsModel.data?.product?.user?.userType ?? ""}",
+                                            "${productDetailsModel.data?.product?.user?.name ?? ""}-${productDetailsModel.data?.product?.user?.userType ?? ""}",
                                         fontWeight: FontWeight.w500,
                                         decoration: TextDecoration.underline,
                                         color: AppColors.blue500,
@@ -176,7 +176,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 ),
                               ),
                               Expanded(
-                                flex: 2,
+                                flex: 1,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [

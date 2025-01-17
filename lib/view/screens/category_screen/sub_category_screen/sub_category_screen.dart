@@ -70,51 +70,53 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
               child: CustomText(text: AppStrings.noDataFound),
             ): Padding(
               padding:   EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                children: [
-                  Column(
-                    children: List.generate(
-                        subCategoryList.length, (index) {
-                      var data = subCategoryList[index];
-                      return GestureDetector(
-                        onTap: () {
-                          context.pushNamed(
-                            RoutePath.subCategoryProducts,
-                            queryParameters: {
-                              "catId": subCategoryList[index].id ?? "",
-                              "subName": subCategoryList[index].name ?? "",
-                              "subCatId": subCategoryList[index].categoryId?? "",
-                            },
-                          );
-
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  CustomText(
-                                    text: subCategoryList[index].name ?? "",
-                                    color: AppColors.black500,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                  const Spacer(),
-                                  const CustomImage(imageSrc: AppIcons.chevronForward),
-                                ],
-                              ),
-                              const Divider(
-                                color: AppColors.black50,
-                                thickness: 1,
-                              ),
-                            ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Column(
+                      children: List.generate(
+                          subCategoryList.length, (index) {
+                        var data = subCategoryList[index];
+                        return GestureDetector(
+                          onTap: () {
+                            context.pushNamed(
+                              RoutePath.subCategoryProducts,
+                              queryParameters: {
+                                "catId": subCategoryList[index].id ?? "",
+                                "subName": subCategoryList[index].name ?? "",
+                                "subCatId": subCategoryList[index].categoryId?? "",
+                              },
+                            );
+                
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    CustomText(
+                                      text: subCategoryList[index].name ?? "",
+                                      color: AppColors.black500,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                    ),
+                                    const Spacer(),
+                                    const CustomImage(imageSrc: AppIcons.chevronForward),
+                                  ],
+                                ),
+                                const Divider(
+                                  color: AppColors.black50,
+                                  thickness: 1,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    }),
-                  ),
-                ],
+                        );
+                      }),
+                    ),
+                  ],
+                ),
               ),
             );
         }

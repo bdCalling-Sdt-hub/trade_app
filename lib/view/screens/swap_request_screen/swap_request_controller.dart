@@ -201,7 +201,6 @@ class SwapRequestController extends GetxController {
   Future<void> getPartnerProfile({BuildContext? context,required String partnerId}) async {
     setRxRequestStatus(Status.loading);
     refresh();
-
     var response =
         await apiClient.get(url: '${ApiUrl.partnerProfile.addBaseUrl}/$partnerId', showResult: true);
 

@@ -90,13 +90,13 @@ class _OtherProfileState extends State<OtherProfile> {
                           CustomOtherProfileHeader(
                             imageUrl: AppConstants.userNtr,
                             name: partnerProfileModel.data?.profile?.name ?? "",
-                            rating: partnerProfileModel.data?.averageRating ?? 0.0,
+                            rating:  0.0,
                             membershipStatus: 'Gold',
                           ),
                           SizedBox(height: 10.h),
-                            CustomOtherProfileLocation(
-                            location: '${partnerProfileModel.data?.profile?.city ?? ""} ${partnerProfileModel.data?.profile?.address ?? ""}',
-                          ),
+                          //   CustomOtherProfileLocation(
+                          //   location: '${partnerProfileModel.data?.profile?.city ?? ""} ${partnerProfileModel.data?.profile?.address ?? ""}',
+                          // ),
                           SizedBox(height: 10.h),
                             CustomOtherProfileDate(
                             memberSince: partnerProfileModel.data?.profile?.createdAt.toString() ?? "",
@@ -150,29 +150,29 @@ class _OtherProfileState extends State<OtherProfile> {
                         );
                       }),
                     ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: _toggleExpanded,
-                        child: CustomDetailContainer(
-                          color: AppColors.white50,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomText(
-                                text: _isExpanded ? 'ViewLess' : AppStrings.viewAll,
-                                color: AppColors.blue500,
-                              ),
-                              Icon(
-                                _isExpanded
-                                    ? Icons.keyboard_arrow_up_rounded
-                                    : Icons.keyboard_arrow_down_rounded,
-                                color: AppColors.blue500,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Center(
+                    //   child: GestureDetector(
+                    //     onTap: _toggleExpanded,
+                    //     child: CustomDetailContainer(
+                    //       color: AppColors.white50,
+                    //       child: Row(
+                    //         mainAxisSize: MainAxisSize.min,
+                    //         children: [
+                    //           CustomText(
+                    //             text: _isExpanded ? 'ViewLess' : AppStrings.viewAll,
+                    //             color: AppColors.blue500,
+                    //           ),
+                    //           Icon(
+                    //             _isExpanded
+                    //                 ? Icons.keyboard_arrow_up_rounded
+                    //                 : Icons.keyboard_arrow_down_rounded,
+                    //             color: AppColors.blue500,
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
