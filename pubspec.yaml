@@ -78,8 +78,8 @@ dependencies:
   just_audio: any
   just_audio_background: any
 
-  youtube_player_flutter: ^8.0.0
-  flutter_inappwebview: any
+
+
 
   file_picker: any
 

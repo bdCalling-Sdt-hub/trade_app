@@ -21,7 +21,7 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_profile_card/custom_profile_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 class ProfileScreen extends StatefulWidget {
     ProfileScreen({super.key});
@@ -33,10 +33,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
     final ProfileController controller = Get.find<ProfileController>();
     final GeneralController generalController = Get.find<GeneralController>();
-
-    String? _savedVideoUrl;
-    YoutubePlayerController? _youtubeController;
-    bool _isPlaying = true;
+    //
+    // String? _savedVideoUrl;
+    // YoutubePlayerController? _youtubeController;
+    // bool _isPlaying = true;
 
 
     @override

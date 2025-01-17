@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 class GeneralController extends GetxController {
   RxBool isEnglish = true.obs;
@@ -100,57 +100,57 @@ class GeneralController extends GetxController {
 
     return "";
   }
-  String? _savedVideoUrl;
-  YoutubePlayerController? youtubeController;
-  bool _isPlaying = true;
-
-  void togglePlayPause() {
-    if (youtubeController != null) {
-      if (_isPlaying) {
-        youtubeController!.pause();
-      } else {
-        youtubeController!.play();
-      }
-      _isPlaying =! _isPlaying;
-      update();
-    }
-  }
-  // Load the saved URL from SharedPreferences
-  Future<void> _loadSavedUrl() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _savedVideoUrl = prefs.getString('youtube_url');
-    if (_savedVideoUrl != null) {
-      _initializePlayer(_savedVideoUrl!);
-    }
-  }
-
-
-  // Initialize the YouTube player for audio playback
-  void _initializePlayer(String url) {
-    final videoId = YoutubePlayer.convertUrlToId(url);
-    if (videoId != null) {
-      // _youtubeController?.dispose(); // Dispose the previous controller if any
-      youtubeController = YoutubePlayerController(
-        initialVideoId: videoId,
-        flags: YoutubePlayerFlags(
-          autoPlay: false,
-          mute: false,
-          hideThumbnail: true, // Hide thumbnail to avoid showing visuals
-          controlsVisibleAtStart: false, // Hide video controls
-          disableDragSeek: true, // Disable seeking
-          loop: true, // Enable looping video
-          showLiveFullscreenButton: false, // Disable fullscreen button
-          enableCaption: false, // Disable captions
-        ),
-      );
-      _isPlaying =false;
-      update();
-    }
-  }
+  // String? _savedVideoUrl;
+  // YoutubePlayerController? youtubeController;
+  // bool _isPlaying = true;
+  //
+  // void togglePlayPause() {
+  //   if (youtubeController != null) {
+  //     if (_isPlaying) {
+  //       youtubeController!.pause();
+  //     } else {
+  //       youtubeController!.play();
+  //     }
+  //     _isPlaying =! _isPlaying;
+  //     update();
+  //   }
+  // }
+  // // Load the saved URL from SharedPreferences
+  // Future<void> _loadSavedUrl() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   _savedVideoUrl = prefs.getString('youtube_url');
+  //   if (_savedVideoUrl != null) {
+  //     _initializePlayer(_savedVideoUrl!);
+  //   }
+  // }
+  //
+  //
+  // // Initialize the YouTube player for audio playback
+  // void _initializePlayer(String url) {
+  //   final videoId = YoutubePlayer.convertUrlToId(url);
+  //   if (videoId != null) {
+  //     // _youtubeController?.dispose(); // Dispose the previous controller if any
+  //     youtubeController = YoutubePlayerController(
+  //       initialVideoId: videoId,
+  //       flags: YoutubePlayerFlags(
+  //         autoPlay: false,
+  //         mute: false,
+  //         hideThumbnail: true, // Hide thumbnail to avoid showing visuals
+  //         controlsVisibleAtStart: false, // Hide video controls
+  //         disableDragSeek: true, // Disable seeking
+  //         loop: true, // Enable looping video
+  //         showLiveFullscreenButton: false, // Disable fullscreen button
+  //         enableCaption: false, // Disable captions
+  //       ),
+  //     );
+  //     _isPlaying =false;
+  //     update();
+  //   }
+  // }
 
   @override
   void onInit() {
-    _loadSavedUrl();
+    // _loadSavedUrl();
     super.onInit();
   }
 }

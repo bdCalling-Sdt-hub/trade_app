@@ -7,7 +7,7 @@ import 'package:audio_session/audio_session.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 import '../../components/custom_text_field/custom_text_field.dart';
 
