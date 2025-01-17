@@ -103,9 +103,9 @@ void initState() {
                         color: AppColors.black500,
                         bottom: 10,
                       ),
-                      Column(
-                        children: List.generate(data.data!.details!.length, (index) {
-
+                         Column(
+                        children: List.generate(data.data?.details?.length ?? 0, (index) {
+                        //data.data!.details!.isEmpty ? CustomText(text: "No Data Found"):
                           return Padding(
                             padding: EdgeInsets.symmetric(vertical: 5.h),
                             child: Container(

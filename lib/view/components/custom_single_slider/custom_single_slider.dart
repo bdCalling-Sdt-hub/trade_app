@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:range_slider_flutter/range_slider_flutter.dart';
 
 class CustomSingleSlider extends StatelessWidget {
   final double value;
@@ -19,34 +18,18 @@ class CustomSingleSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-    //   RangeSliderFlutter(
-    //   values: [value],
-    //   max: max,
-    //   min: min,
-    //   rangeSlider: false,
-    //   tooltip: RangeSliderFlutterTooltip(
-    //     alwaysShowTooltip: true,
-    //     // boxStyle: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
-    //     textStyle: TextStyle(color: Colors.blue),
-    //   ),
-    //   trackBar: RangeSliderFlutterTrackBar(
-    //     activeTrackBarHeight: 6,
-    //     activeTrackBar: BoxDecoration(color: Colors.blue),
-    //     inactiveTrackBar: BoxDecoration(color: Colors.white),
-    //   ),
-    //   onDragging: (handlerIndex, lowerValue, upperValue) {
-    //    // controller.updatePoints(lowerValue.toInt());
-    //     onChanged
-    //   },
-    // );
-      Slider(
-        value: value >= min && value <= max ? value : min,
+    // Ensure min is less than or equal to max
+    final effectiveMin = min <= max ? min : max;
+    final effectiveMax = max >= min ? max : min;
+    final effectiveValue = value >= effectiveMin && value <= effectiveMax ? value : effectiveMin;
+
+    return Slider(
+      value: effectiveValue,
       onChanged: onChanged,
-      min: min,
-      max: max,
+      min: effectiveMin,
+      max: effectiveMax,
       divisions: divisions,
-      label: value.toString(),
+      label: effectiveValue.toString(),
       activeColor: Colors.blue,
       inactiveColor: Colors.white,
     );

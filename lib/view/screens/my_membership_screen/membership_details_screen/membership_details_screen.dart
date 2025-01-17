@@ -19,14 +19,16 @@ class MembershipDetailsScreen extends StatefulWidget {
   MembershipDetailsScreen({super.key});
 
   @override
-  State<MembershipDetailsScreen> createState() => _MembershipDetailsScreenState();
+  State<MembershipDetailsScreen> createState() =>
+      _MembershipDetailsScreenState();
 }
 
 class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
-  final MembershipController membershipController = Get.find<MembershipController>();
+  final MembershipController membershipController =
+      Get.find<MembershipController>();
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       membershipController.getMemberShipDetails(planType: "Gold");
     });
     super.initState();
@@ -48,14 +50,16 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
               CustomUserTabBar(
                 userList: membershipController.userList,
                 selectedIndex: membershipController.selectedIndex,
-                onTap: (index){
+                onTap: (index) {
                   membershipController.selectedIndex.value = index;
-                  if(index==0){
+                  if (index == 0) {
                     membershipController.getMemberShipDetails(planType: "Gold");
-                  }else if(index == 1){
-                    membershipController.getMemberShipDetails(planType: "Platinum");
-                  }else if(index == 2){
-                    membershipController.getMemberShipDetails(planType: "Diamond");
+                  } else if (index == 1) {
+                    membershipController.getMemberShipDetails(
+                        planType: "Platinum");
+                  } else if (index == 2) {
+                    membershipController.getMemberShipDetails(
+                        planType: "Diamond");
                   }
                 },
               ),
@@ -65,191 +69,341 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child:                 membershipController.selectedIndex.value==0?
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                 ///========================Card this================
-                 CustomMembershipDetailsCard(
-                   userName: 'Mohammod Rakib',
-                   points: membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0,
-                   membershipLevel: AppStrings.gold.tr,
-                   sliderWidget: membershipController.isLoader.value
-                       ? const CustomLoader()
-                       : CustomSingleSlider(
-                     max: (membershipController.memberShipDetailsModel.value.data?.pointRangeEnd ?? 0).toDouble(),
-                     min: (membershipController.memberShipDetailsModel.value.data?.pointRangeStart ?? 0).toDouble(),
-                     value:(membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0).toDouble(),
-                     onChanged: (newValue) {
-                       membershipController.sliderValue.value = newValue;
-                }, // Disable user interaction
-                   ),
-                   description:
-                   'Keep earning points to unlock exclusive benefits and privileges.'
-                       .tr,
-                 ),
+                child: membershipController.selectedIndex.value == 0
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ///========================Card this================
+                          CustomMembershipDetailsCard(
+                            userName: 'Mohammod Rakib',
+                            points: membershipController.memberShipDetailsModel
+                                    .value.data?.userPoint ??
+                                0,
+                            membershipLevel: AppStrings.gold.tr,
+                            sliderWidget: membershipController.isLoader.value
+                                ? const CustomLoader()
+                                : CustomSingleSlider(
+                                    max: (membershipController
+                                                .memberShipDetailsModel
+                                                .value
+                                                .data
+                                                ?.pointRangeEnd ??
+                                            0)
+                                        .toDouble(),
+                                    min: (membershipController
+                                                .memberShipDetailsModel
+                                                .value
+                                                .data
+                                                ?.pointRangeStart ??
+                                            0)
+                                        .toDouble(),
+                                    value: (membershipController
+                                                .memberShipDetailsModel
+                                                .value
+                                                .data
+                                                ?.userPoint ??
+                                            0)
+                                        .toDouble(),
+                                    onChanged: (newValue) {
+                                      membershipController.sliderValue.value =
+                                          newValue;
+                                    }, // Disable user interaction
+                                  ),
+                            description:
+                                'Keep earning points to unlock exclusive benefits and privileges.'
+                                    .tr,
+                          ),
 
-                    CustomText(
-                      text: AppStrings.swapPointsHistory.tr,
-                      color: AppColors.black500,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                    SizedBox(
-                      height: 22.h,
-                    ),
+                          CustomText(
+                            text: AppStrings.swapPointsHistory.tr,
+                            color: AppColors.black500,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                          SizedBox(
+                            height: 22.h,
+                          ),
 
-                    ///========================Swap Point History=====================
-                    Column(
-                      children: List.generate(membershipController.memberShipDetailsModel.value.data?.result?.length ?? 0, (index) {
-                        return CustomSwapPointsRow(
-                            earnedPointsText: 'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
-                            date: '12/03/24',
-                            item1: membershipController.memberShipDetailsModel.value.data?.result?[index].productFrom?.title ?? '',
-                            item2: membershipController.memberShipDetailsModel.value.data?.result?[index].productTo?.title ?? '');
-                      }),
-                    ),
+                          ///========================Swap Point History=====================
+                          membershipController.memberShipDetailsModel.value
+                                  .data!.result!.isEmpty
+                              ? Center(child: CustomText(text: 'No Data Found',top: 100.h,))
+                              : Column(
+                                  children: List.generate(
+                                      membershipController
+                                              .memberShipDetailsModel
+                                              .value
+                                              .data
+                                              ?.result
+                                              ?.length ??
+                                          0, (index) {
+                                    return CustomSwapPointsRow(
+                                        earnedPointsText:
+                                            'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
+                                        date: '12/03/24',
+                                        item1: membershipController
+                                                .memberShipDetailsModel
+                                                .value
+                                                .data
+                                                ?.result?[index]
+                                                .productFrom
+                                                ?.title ??
+                                            '',
+                                        item2: membershipController
+                                                .memberShipDetailsModel
+                                                .value
+                                                .data
+                                                ?.result?[index]
+                                                .productTo
+                                                ?.title ??
+                                            '');
+                                  }),
+                                ),
+                        ],
+                      )
+                    : membershipController.selectedIndex.value == 1
+                        ? membershipController.memberShipDetailsModel.value
+                                    .data!.userPoint! >=
+                                membershipController.memberShipDetailsModel
+                                    .value.data!.pointRangeStart!
+                                    .toInt()
+                            ? Column(
+                                children: [
+                                  CustomMembershipDetailsCard(
+                                    userName: 'Mohammed Rakib',
+                                    points: membershipController
+                                            .memberShipDetailsModel
+                                            .value
+                                            .data
+                                            ?.userPoint ??
+                                        0,
+                                    membershipLevel: AppStrings.gold.tr,
+                                    sliderWidget:
+                                        membershipController.isLoader.value
+                                            ? const CustomLoader()
+                                            : CustomSingleSlider(
+                                                max: (membershipController
+                                                            .memberShipDetailsModel
+                                                            .value
+                                                            .data
+                                                            ?.pointRangeEnd ??
+                                                        0)
+                                                    .toDouble(),
+                                                min: (membershipController
+                                                            .memberShipDetailsModel
+                                                            .value
+                                                            .data
+                                                            ?.pointRangeStart ??
+                                                        0)
+                                                    .toDouble(),
+                                                value: (membershipController
+                                                            .memberShipDetailsModel
+                                                            .value
+                                                            .data
+                                                            ?.userPoint ??
+                                                        0)
+                                                    .toDouble(),
+                                                onChanged: (newValue) {
+                                                  membershipController
+                                                      .sliderValue
+                                                      .value = newValue;
+                                                }, // Disable user interaction
+                                              ),
+                                    description:
+                                        'Keep earning points to unlock exclusive benefits and privileges.'
+                                            .tr,
+                                  ),
 
-                  ],
-                ): membershipController.selectedIndex.value==1 ?
+                                  CustomText(
+                                    text: AppStrings.swapPointsHistory.tr,
+                                    color: AppColors.black500,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
+                                  SizedBox(
+                                    height: 22.h,
+                                  ),
 
+                                  ///========================Swap Point History=====================
+                                  Column(
+                                    children: List.generate(
+                                        membershipController
+                                                .memberShipDetailsModel
+                                                .value
+                                                .data
+                                                ?.result
+                                                ?.length ??
+                                            0, (index) {
+                                      return CustomSwapPointsRow(
+                                          earnedPointsText:
+                                              'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
+                                          date: '12/03/24',
+                                          item1: membershipController
+                                                  .memberShipDetailsModel
+                                                  .value
+                                                  .data
+                                                  ?.result?[index]
+                                                  .productFrom
+                                                  ?.title ??
+                                              '',
+                                          item2: membershipController
+                                                  .memberShipDetailsModel
+                                                  .value
+                                                  .data
+                                                  ?.result?[index]
+                                                  .productTo
+                                                  ?.title ??
+                                              '');
+                                    }),
+                                  ),
+                                ],
+                              )
+                            : CustomDetailContainer(
+                                height: 192,
+                                color: AppColors.black500,
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    CustomImage(
+                                      imageSrc: AppIcons.lock,
+                                      size: 40,
+                                      imageColor: AppColors.white500,
+                                    ),
+                                    CustomText(
+                                      top: 20,
+                                      text:
+                                          'You are just 3,150 points away from upgrading to Platinum member status!',
+                                      color: AppColors.white50,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      maxLines: 2,
+                                    ),
+                                  ],
+                                ))
+                        : membershipController.selectedIndex.value == 2
+                            ? membershipController.memberShipDetailsModel.value
+                                        .data!.userPoint! >=
+                                    membershipController.memberShipDetailsModel
+                                        .value.data!.pointRangeStart!
+                                        .toInt()
+                                ? Column(
+                                    children: [
+                                      CustomMembershipDetailsCard(
+                                        userName: 'Mohammod Rakib',
+                                        points: membershipController
+                                                .memberShipDetailsModel
+                                                .value
+                                                .data
+                                                ?.userPoint ??
+                                            0,
+                                        membershipLevel: AppStrings.gold.tr,
+                                        sliderWidget:
+                                            membershipController.isLoader.value
+                                                ? const CustomLoader()
+                                                : CustomSingleSlider(
+                                                    max: (membershipController
+                                                                .memberShipDetailsModel
+                                                                .value
+                                                                .data
+                                                                ?.pointRangeEnd ??
+                                                            0)
+                                                        .toDouble(),
+                                                    min: (membershipController
+                                                                .memberShipDetailsModel
+                                                                .value
+                                                                .data
+                                                                ?.pointRangeStart ??
+                                                            0)
+                                                        .toDouble(),
+                                                    value: (membershipController
+                                                                .memberShipDetailsModel
+                                                                .value
+                                                                .data
+                                                                ?.userPoint ??
+                                                            0)
+                                                        .toDouble(),
+                                                    onChanged: (newValue) {
+                                                      membershipController
+                                                          .sliderValue
+                                                          .value = newValue;
+                                                    }, // Disable user interaction
+                                                  ),
+                                        description:
+                                            'Keep earning points to unlock exclusive benefits and privileges.'
+                                                .tr,
+                                      ),
 
-                  membershipController.memberShipDetailsModel.value.data!.userPoint! >= membershipController.memberShipDetailsModel.value.data!.pointRangeStart!.toInt() ?
-                  Column(
-                    children: [
-                      CustomMembershipDetailsCard(
-                        userName: 'Mohammed Rakib',
-                        points: membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0,
-                        membershipLevel: AppStrings.gold.tr,
-                        sliderWidget: membershipController.isLoader.value
-                            ? const CustomLoader()
-                            : CustomSingleSlider(
-                          max: (membershipController.memberShipDetailsModel.value.data?.pointRangeEnd ?? 0).toDouble(),
-                          min: (membershipController.memberShipDetailsModel.value.data?.pointRangeStart ?? 0).toDouble(),
-                          value:(membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0).toDouble(),
-                          onChanged: (newValue) {
-                            membershipController.sliderValue.value = newValue;
-                          }, // Disable user interaction
-                        ),
-                        description:
-                        'Keep earning points to unlock exclusive benefits and privileges.'.tr,
-                      ),
+                                      CustomText(
+                                        text: AppStrings.swapPointsHistory.tr,
+                                        color: AppColors.black500,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                      ),
+                                      SizedBox(
+                                        height: 22.h,
+                                      ),
 
-                      CustomText(
-                        text: AppStrings.swapPointsHistory.tr,
-                        color: AppColors.black500,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                      ),
-                      SizedBox(
-                        height: 22.h,
-                      ),
-
-                      ///========================Swap Point History=====================
-                      Column(
-                        children: List.generate(membershipController.memberShipDetailsModel.value.data?.result?.length ?? 0, (index) {
-                          return CustomSwapPointsRow(
-                              earnedPointsText: 'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
-                              date: '12/03/24',
-                              item1: membershipController.memberShipDetailsModel.value.data?.result?[index].productFrom?.title ?? '',
-                              item2: membershipController.memberShipDetailsModel.value.data?.result?[index].productTo?.title ?? '');
-                        }),
-                      ),
-                    ],
-                  ):
-                CustomDetailContainer(
-                    height: 192,
-                    color: AppColors.black500,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        CustomImage(
-                          imageSrc: AppIcons.lock,
-                          size: 40,
-                          imageColor: AppColors.white500,
-                        ),
-                        CustomText(
-                          top: 20,
-                          text: 'You are just 3,150 points away from upgrading to Platinum member status!',
-                          color: AppColors.white50,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          maxLines: 2,
-                        ),
-                      ],
-                    ))
-                    :
-
-                membershipController.selectedIndex.value==2?
-                membershipController.memberShipDetailsModel.value.data!.userPoint! >= membershipController.memberShipDetailsModel.value.data!.pointRangeStart!.toInt() ?
-                Column(
-                  children: [
-                    CustomMembershipDetailsCard(
-                      userName: 'Mohammod Rakib',
-                      points: membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0,
-                      membershipLevel: AppStrings.gold.tr,
-                      sliderWidget: membershipController.isLoader.value
-                          ? const CustomLoader()
-                          : CustomSingleSlider(
-                        max: (membershipController.memberShipDetailsModel.value.data?.pointRangeEnd ?? 0).toDouble(),
-                        min: (membershipController.memberShipDetailsModel.value.data?.pointRangeStart ?? 0).toDouble(),
-                        value:(membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0).toDouble(),
-                        onChanged: (newValue) {
-                          membershipController.sliderValue.value = newValue;
-                        }, // Disable user interaction
-                      ),
-                      description:
-                      'Keep earning points to unlock exclusive benefits and privileges.'
-                          .tr,
-                    ),
-
-                    CustomText(
-                      text: AppStrings.swapPointsHistory.tr,
-                      color: AppColors.black500,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                    SizedBox(
-                      height: 22.h,
-                    ),
-
-                    ///========================Swap Point History=====================
-                    Column(
-                      children: List.generate(membershipController.memberShipDetailsModel.value.data?.result?.length ?? 0, (index) {
-                        return CustomSwapPointsRow(
-                            earnedPointsText: 'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
-                            date: '12/03/24',
-                            item1: membershipController.memberShipDetailsModel.value.data?.result?[index].productFrom?.title ?? '',
-                            item2: membershipController.memberShipDetailsModel.value.data?.result?[index].productTo?.title ?? '');
-                      }),
-                    ),
-                  ],
-                ):
-                const CustomDetailContainer(
-                    height: 192,
-                    color: AppColors.black500,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        CustomImage(
-                          imageSrc: AppIcons.lock,
-                          size: 40,
-                          imageColor: AppColors.white500,
-                        ),
-                        CustomText(
-                          top: 20,
-                          text: 'You are just 3,150 points away from upgrading to Platinum member status!',
-                          color: AppColors.white50,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          maxLines: 2,
-                        ),
-                      ],
-                    )):const SizedBox() ,
+                                      ///========================Swap Point History=====================
+                                      Column(
+                                        children: List.generate(
+                                            membershipController
+                                                    .memberShipDetailsModel
+                                                    .value
+                                                    .data
+                                                    ?.result
+                                                    ?.length ??
+                                                0, (index) {
+                                          return CustomSwapPointsRow(
+                                              earnedPointsText:
+                                                  'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
+                                              date: '12/03/24',
+                                              item1: membershipController
+                                                      .memberShipDetailsModel
+                                                      .value
+                                                      .data
+                                                      ?.result?[index]
+                                                      .productFrom
+                                                      ?.title ??
+                                                  '',
+                                              item2: membershipController
+                                                      .memberShipDetailsModel
+                                                      .value
+                                                      .data
+                                                      ?.result?[index]
+                                                      .productTo
+                                                      ?.title ??
+                                                  '');
+                                        }),
+                                      ),
+                                    ],
+                                  )
+                                : const CustomDetailContainer(
+                                    height: 192,
+                                    color: AppColors.black500,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        CustomImage(
+                                          imageSrc: AppIcons.lock,
+                                          size: 40,
+                                          imageColor: AppColors.white500,
+                                        ),
+                                        CustomText(
+                                          top: 20,
+                                          text:
+                                              'You are just 3,150 points away from upgrading to Platinum member status!',
+                                          color: AppColors.white50,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12,
+                                          maxLines: 2,
+                                        ),
+                                      ],
+                                    ))
+                            : const SizedBox(),
               ),
             ],
           ),
