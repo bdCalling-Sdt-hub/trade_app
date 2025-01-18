@@ -25,17 +25,18 @@ class SubCategoryScreen extends StatefulWidget {
   @override
   State<SubCategoryScreen> createState() => _SubCategoryScreenState();
 }
-class _SubCategoryScreenState extends State<SubCategoryScreen> {
 
+class _SubCategoryScreenState extends State<SubCategoryScreen> {
   HomeController controller = Get.find<HomeController>();
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.getSubCategory(context: context,category: widget.cateName);
+      controller.getSubCategory(context: context, category: widget.cateName);
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,13 +52,15 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
           case Status.internetError:
             return NoInternetScreen(
               onTap: () {
-                controller.getSubCategory(context: context,category: widget.cateName);
+                controller.getSubCategory(
+                    context: context, category: widget.cateName);
               },
             );
           case Status.error:
             return GeneralErrorScreen(
               onTap: () {
-                controller.getSubCategory(context: context,category: widget.cateName);
+                controller.getSubCategory(
+                    context: context, category: widget.cateName);
               },
             );
           case Status.noDataFound:
@@ -66,59 +69,66 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             );
           case Status.completed:
             var subCategoryList = controller.subCategoryList.value;
-            return subCategoryList.isEmpty ?  Center(
-              child: CustomText(text: AppStrings.noDataFound),
-            ): Padding(
-              padding:   EdgeInsets.symmetric(horizontal: 20.w),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Column(
-                      children: List.generate(
-                          subCategoryList.length, (index) {
-                        var data = subCategoryList[index];
-                        return GestureDetector(
-                          onTap: () {
-                            context.pushNamed(
-                              RoutePath.subCategoryProducts,
-                              queryParameters: {
-                                "catId": subCategoryList[index].id ?? "",
-                                "subName": subCategoryList[index].name ?? "",
-                                "subCatId": subCategoryList[index].categoryId?? "",
-                              },
-                            );
-                
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    CustomText(
-                                      text: subCategoryList[index].name ?? "",
-                                      color: AppColors.black500,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                    ),
-                                    const Spacer(),
-                                    const CustomImage(imageSrc: AppIcons.chevronForward),
-                                  ],
+            return subCategoryList.isEmpty
+                ? Center(
+                    child: CustomText(text: AppStrings.noDataFound),
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Column(
+                            children:
+                                List.generate(subCategoryList.length, (index) {
+                              var data = subCategoryList[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  context.pushNamed(
+                                    RoutePath.subCategoryProducts,
+                                    queryParameters: {
+                                      "catId": subCategoryList[index].id ?? "",
+                                      "subName":
+                                          subCategoryList[index].name ?? "",
+                                      "subCatId":
+                                          subCategoryList[index].categoryId ??
+                                              "",
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          CustomText(
+                                            text: subCategoryList[index].name ??
+                                                "",
+                                            color: AppColors.black500,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15,
+                                          ),
+                                          const Spacer(),
+                                          const CustomImage(
+                                              imageSrc:
+                                                  AppIcons.chevronForward),
+                                        ],
+                                      ),
+                                      const Divider(
+                                        color: AppColors.black50,
+                                        thickness: 1,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                const Divider(
-                                  color: AppColors.black50,
-                                  thickness: 1,
-                                ),
-                              ],
-                            ),
+                              );
+                            }),
                           ),
-                        );
-                      }),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            );
+                  );
         }
       }),
     );

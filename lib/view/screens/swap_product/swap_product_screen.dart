@@ -139,7 +139,7 @@ class _SwapProductScreenState extends State<SwapProductScreen> {
                                 CustomText(text: AppStrings.postBy,right: 4.w,),
                                 GestureDetector(
                                     onTap: (){
-                                      context.pushNamed(RoutePath.otherProfile);
+                                     // context.pushNamed(RoutePath.otherProfile);
                                     },
                                     child:   CustomText(text: "${swapProductDetailsModel.data?.userTo?.name ?? "" } ${'(Gold)'}",fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: AppColors.blue500,)),
                               ],

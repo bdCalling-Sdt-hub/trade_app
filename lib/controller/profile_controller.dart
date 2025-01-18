@@ -259,6 +259,7 @@ class ProfileController extends GetxController {
       "swapId": swapId,
       "ratting": rating,
       "comment": commentController.value.text,
+      // "swapOwner": ownerId
     };
 
     var response = await apiClient.post(

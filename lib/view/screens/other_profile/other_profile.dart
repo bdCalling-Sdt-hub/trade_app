@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
 import 'package:trade_app/service/api_url.dart';
@@ -29,7 +32,7 @@ class OtherProfile extends StatefulWidget {
 
 class _OtherProfileState extends State<OtherProfile> {
   bool _isExpanded = false;
-  SwapRequestController controller=Get.find<SwapRequestController>();
+  SwapRequestController controller = Get.find<SwapRequestController>();
 
   void _toggleExpanded() {
     setState(() {
@@ -40,7 +43,8 @@ class _OtherProfileState extends State<OtherProfile> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-       controller.getPartnerProfile(partnerId: widget.partnerId,context: context);
+      controller.getPartnerProfile(
+          partnerId: widget.partnerId, context: context);
     });
     super.initState();
   }
@@ -52,7 +56,8 @@ class _OtherProfileState extends State<OtherProfile> {
 
       ///======================Other Profile Appbar============
       appBar: CustomAppBar(
-        appBarContent: controller.partnerProfileModel.value.data?.profile?.name ?? "",
+        appBarContent:
+            controller.partnerProfileModel.value.data?.profile?.name ?? "",
       ),
       body: Obx(() {
         switch (controller.rxRequestStatus.value) {
@@ -61,13 +66,15 @@ class _OtherProfileState extends State<OtherProfile> {
           case Status.internetError:
             return NoInternetScreen(
               onTap: () {
-                controller.getPartnerProfile(context: context, partnerId: widget.partnerId);
+                controller.getPartnerProfile(
+                    context: context, partnerId: widget.partnerId);
               },
             );
           case Status.error:
             return GeneralErrorScreen(
               onTap: () {
-                controller.getPartnerProfile(context: context, partnerId: widget.partnerId);
+                controller.getPartnerProfile(
+                    context: context, partnerId: widget.partnerId);
               },
             );
           case Status.noDataFound:
@@ -88,23 +95,29 @@ class _OtherProfileState extends State<OtherProfile> {
                       child: Column(
                         children: [
                           CustomOtherProfileHeader(
-                            imageUrl: AppConstants.userNtr,
+                            imageUrl: "${ApiUrl.baseUrl}${partnerProfileModel.data?.profile?.profileImage ?? ""}",
                             name: partnerProfileModel.data?.profile?.name ?? "",
-                            rating:  0.0,
-                            membershipStatus: 'Gold',
+                            rating:
+                                (partnerProfileModel.data?.averageRating ?? 0)
+                                    .toDouble(),
+                            membershipStatus:
+                                partnerProfileModel.data?.profile?.userType ??
+                                    "",
                           ),
                           SizedBox(height: 10.h),
                           //   CustomOtherProfileLocation(
                           //   location: '${partnerProfileModel.data?.profile?.city ?? ""} ${partnerProfileModel.data?.profile?.address ?? ""}',
                           // ),
                           SizedBox(height: 10.h),
-                            CustomOtherProfileDate(
-                            memberSince: partnerProfileModel.data?.profile?.createdAt.toString() ?? "",
-                            lastSiteVisit: '24 Jun, 2024',
+                          CustomOtherProfileDate(
+                            memberSince:DateFormat('yMMMd').format(partnerProfileModel.data?.profile?.createdAt?.toLocal() ?? DateTime.now()),
+                            lastSiteVisit: '01001',
                           ),
                         ],
                       ),
                     ),
+
+                    SizedBox(height: 20.h),
 
                     ///=====================Available Items for Swap===============
                     const CustomText(
@@ -113,17 +126,28 @@ class _OtherProfileState extends State<OtherProfile> {
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                    SizedBox(height: 20.h),
+
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(partnerProfileModel.data!.product!.length, (index) {
+                        children: List.generate(
+                            partnerProfileModel.data!.product!.length, (index) {
                           return CustomMyProduct(
                             isMargin: true,
-                            image: '${ApiUrl.baseUrl}${partnerProfileModel.data?.product?[index].images?[0] ?? ""}',
-                            name: partnerProfileModel.data?.product?[index].title ?? "",
-                            onTap: () {},
-                            value: '\$${ partnerProfileModel.data?.product?[index].productValue ?? ""}',
+                            image:
+                                '${ApiUrl.baseUrl}${partnerProfileModel.data?.product?[index].images?[0] ?? ""}',
+                            name: partnerProfileModel
+                                    .data?.product?[index].title ??
+                                "",
+                            onTap: () {
+                              context.pushNamed(RoutePath.productDetailsScreen,
+                                queryParameters: {
+                                  "productId": partnerProfileModel.data?.product?[index].id ?? '',
+                                },
+                              );
+                            },
+                            value:
+                                '\$${partnerProfileModel.data?.product?[index].productValue ?? ""}',
                             editOnTap: () {},
                           );
                         }),
@@ -139,14 +163,21 @@ class _OtherProfileState extends State<OtherProfile> {
                       fontWeight: FontWeight.w500,
                     ),
                     Column(
-                      children: List.generate( partnerProfileModel.data!.ratting!.length, (index) {
+                      children: List.generate(
+                          partnerProfileModel.data!.ratting!.length, (index) {
                         return CustomRatingCard(
-                          name: partnerProfileModel.data?.ratting?[index].user?.name ?? "",
-                          date: partnerProfileModel.data?.ratting?[index].user?.createdAt.toString() ?? "",
-                          imageUrl: AppConstants.userNtr,
-                          rating: (partnerProfileModel.data?.ratting?[index].ratting ?? 0.0).toInt(),
-
-                          review: partnerProfileModel.data?.ratting?[index].comment ?? '',
+                          name: partnerProfileModel
+                                  .data?.ratting?[index].user?.name ??
+                              "",
+                          date: DateFormat('yMMMd').format(partnerProfileModel.data?.ratting?[index].user?.createdAt?.toLocal() ?? DateTime.now()),
+                          imageUrl: "${ApiUrl.baseUrl}${partnerProfileModel.data?.ratting?[index].user?.profileImage ?? ""}",
+                          rating: (partnerProfileModel
+                                      .data?.ratting?[index].ratting ??
+                                  0.0)
+                              .toInt(),
+                          review: partnerProfileModel
+                                  .data?.ratting?[index].comment ??
+                              '',
                         );
                       }),
                     ),

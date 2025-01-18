@@ -33,7 +33,10 @@ class SwapHistoryScreen extends StatelessWidget {
       appBar: CustomAppBar(
         appBarContent: AppStrings.swapHistory.tr,
       ),
-      body: Obx(() {
+      body: RefreshIndicator(onRefresh: ()async{
+       await controller.getSwapHistory(context: context);
+      },
+      child: Obx(() {
         switch (controller.myProductLoading.value) {
           case Status.loading:
             return const CustomLoader();
@@ -71,31 +74,32 @@ class SwapHistoryScreen extends StatelessWidget {
                   children: [
                     Column(
                         children:
-                            List.generate(swapHistoryList.length, (index) {
-                      return CustomSwapHistory(
-                        onTapName: () {
-                          context.pushNamed(RoutePath.otherProfile);
-                        },
-                        image: '${ApiUrl.baseUrl}${swapHistoryList[index].productFrom?.user?.profileImage ?? ""}',
-                        name:
+                        List.generate(swapHistoryList.length, (index) {
+                          return CustomSwapHistory(
+                            onTapName: () {
+                              context.pushNamed(RoutePath.otherProfile);
+                            },
+                            image: '${ApiUrl.baseUrl}${swapHistoryList[index].productFrom?.user?.profileImage ?? ""}',
+                            name:
                             swapHistoryList[index].productFrom?.user?.name ?? "",
-                        date:DateFormat('yMMMd').format(swapHistoryList[index].createdAt!.toLocal()),
-                        onTap: () {
-                          showDialog(context: context, builder: (context){
-                            return  CustomReviewDialog(swapId: swapHistoryList[index].id?? "",);
-                          });
-                        },
-                        firstProductName: swapHistoryList[index].productFrom?.title ?? "",
-                        exchangeProductName:
+                            date:DateFormat('yMMMd').format(swapHistoryList[index].createdAt!.toLocal()),
+                            onTap: () {
+                              showDialog(context: context, builder: (context){
+                                return  CustomReviewDialog(swapId: swapHistoryList[index].id?? "",);
+                              });
+                            },
+                            firstProductName: swapHistoryList[index].productFrom?.title ?? "",
+                            exchangeProductName:
                             swapHistoryList[index].productTo?.title ?? "",
-                      );
-                    }))
+                          );
+                        }))
                   ],
                 ),
               ),
             );
         }
       }),
+      ),
     );
   }
 

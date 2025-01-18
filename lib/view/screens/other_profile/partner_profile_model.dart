@@ -1,3 +1,4 @@
+
 class PartnerProfileModel {
   final int? statusCode;
   final bool? success;
@@ -17,14 +18,13 @@ class PartnerProfileModel {
     message: json["message"],
     data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
-
 }
 
 class Data {
   final Profile? profile;
   final List<Product>? product;
-  final List<dynamic>? ratting;
-  final AverageRating? averageRating;
+  final List<Ratting>? ratting;
+  final int? averageRating;
 
   Data({
     this.profile,
@@ -36,26 +36,10 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     profile: json["profile"] == null ? null : Profile.fromJson(json["profile"]),
     product: json["product"] == null ? [] : List<Product>.from(json["product"]!.map((x) => Product.fromJson(x))),
-    ratting: json["ratting"] == null ? [] : List<dynamic>.from(json["ratting"]!.map((x) => x)),
-    averageRating: json["average_rating"] == null ? null : AverageRating.fromJson(json["average_rating"]),
+    ratting: json["ratting"] == null ? [] : List<Ratting>.from(json["ratting"]!.map((x) => Ratting.fromJson(x))),
+    averageRating: json["average_rating"],
   );
 
-}
-
-class AverageRating {
-  final String? message;
-
-  AverageRating({
-    this.message,
-  });
-
-  factory AverageRating.fromJson(Map<String, dynamic> json) => AverageRating(
-    message: json["message"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "message": message,
-  };
 }
 
 class Product {
@@ -109,6 +93,7 @@ class Profile {
   final String? name;
   final String? email;
   final String? phoneNumber;
+  final String? deviceToken;
   final int? points;
   final String? role;
   final String? userType;
@@ -124,7 +109,6 @@ class Profile {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final int? v;
-  final String? deviceToken;
   final DateTime? planExpatDate;
 
   Profile({
@@ -132,6 +116,7 @@ class Profile {
     this.name,
     this.email,
     this.phoneNumber,
+    this.deviceToken,
     this.points,
     this.role,
     this.userType,
@@ -147,7 +132,6 @@ class Profile {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.deviceToken,
     this.planExpatDate,
   });
 
@@ -156,6 +140,7 @@ class Profile {
     name: json["name"],
     email: json["email"],
     phoneNumber: json["phone_number"],
+    deviceToken: json["deviceToken"],
     points: json["points"],
     role: json["role"],
     userType: json["userType"],
@@ -171,8 +156,93 @@ class Profile {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    deviceToken: json["deviceToken"],
     planExpatDate: json["planExpatDate"] == null ? null : DateTime.parse(json["planExpatDate"]),
+  );
+
+}
+
+class Ratting {
+  final String? id;
+  final Profile? user;
+  final Swap? swap;
+  final Profile? swapOwner;
+  final String? comment;
+  final int? ratting;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
+
+  Ratting({
+    this.id,
+    this.user,
+    this.swap,
+    this.swapOwner,
+    this.comment,
+    this.ratting,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  factory Ratting.fromJson(Map<String, dynamic> json) => Ratting(
+    id: json["_id"],
+    user: json["user"] == null ? null : Profile.fromJson(json["user"]),
+    swap: json["swap"] == null ? null : Swap.fromJson(json["swap"]),
+    swapOwner: json["swapOwner"] == null ? null : Profile.fromJson(json["swapOwner"]),
+    comment: json["comment"],
+    ratting: json["ratting"],
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+  );
+
+}
+
+class Swap {
+  final String? id;
+  final String? userFrom;
+  final String? userTo;
+  final String? productFrom;
+  final String? productTo;
+  final String? isApproved;
+  final String? planType;
+  final List<String>? ratting;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
+  final int? swapUserFromPoint;
+  final int? swapUserToPoint;
+
+  Swap({
+    this.id,
+    this.userFrom,
+    this.userTo,
+    this.productFrom,
+    this.productTo,
+    this.isApproved,
+    this.planType,
+    this.ratting,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.swapUserFromPoint,
+    this.swapUserToPoint,
+  });
+
+  factory Swap.fromJson(Map<String, dynamic> json) => Swap(
+    id: json["_id"],
+    userFrom: json["userFrom"],
+    userTo: json["userTo"],
+    productFrom: json["productFrom"],
+    productTo: json["productTo"],
+    isApproved: json["isApproved"],
+    planType: json["plan_type"],
+    ratting: json["ratting"] == null ? [] : List<String>.from(json["ratting"]!.map((x) => x)),
+    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    v: json["__v"],
+    swapUserFromPoint: json["swapUserFromPoint"],
+    swapUserToPoint: json["swapUserToPoint"],
   );
 
 }

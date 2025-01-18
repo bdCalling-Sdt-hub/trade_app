@@ -54,6 +54,9 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                 bottom: 16.h,
               ),
 
+              SizedBox(
+                height: controller.size.value.toDouble(),
+              ),
               ///<================================= name ====================================>
               CustomFromCard(
                   title: AppStrings.name,

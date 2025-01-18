@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/service/api_service.dart';
 import 'package:trade_app/service/api_url.dart';
@@ -11,6 +12,7 @@ import 'package:trade_app/view/screens/swap_request_screen/model/swap_my_request
 import 'package:url_launcher/url_launcher.dart';
 
 class SwapRequestController extends GetxController {
+  ProfileController profileController=Get.find<ProfileController>();
   RxInt selectedTabIndex = 0.obs;
 
   ApiClient apiClient = ApiClient();
@@ -107,6 +109,7 @@ class SwapRequestController extends GetxController {
 
     if (response.statusCode == 200) {
       getSwapTheirRequest();
+      profileController.getSwapHistory(context: context);
       // AppRouter.route.replaceNamed(RoutePath.profileScreen);
     } else {
       checkApi(response: response, context: context);

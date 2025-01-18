@@ -15,6 +15,7 @@ import 'package:trade_app/view/screens/membership_package/package_details_model.
 import 'package:trade_app/view/screens/membership_package/package_model.dart';
 
 class PackageController extends GetxController {
+  RxInt size=0.obs;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController placeBirthController = TextEditingController();
   final TextEditingController licenseNoController = TextEditingController();
@@ -123,7 +124,7 @@ class PackageController extends GetxController {
 
   /// ======================= TopProduct List =========================>
 
-  RxInt size = 0.obs;
+
   var packageLoading = Status.loading.obs;
   TopProductLoadingMethod(Status status) => packageLoading.value = status;
 
