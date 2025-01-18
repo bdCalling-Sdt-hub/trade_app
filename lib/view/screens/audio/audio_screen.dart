@@ -1,16 +1,17 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
 import '../../components/custom_text_field/custom_text_field.dart';
-
+/*
 class AudioScreen extends StatefulWidget {
   const AudioScreen({Key? key}) : super(key: key);
 
@@ -182,9 +183,9 @@ class _AudioScreenState extends State<AudioScreen> {
     final seconds = twoDigits(duration.inSeconds.remainder(60));
     return '${twoDigits(duration.inHours)}:$minutes:$seconds';
   }
-}
+}*/
 
-/*class YouTubeVideoApp extends StatefulWidget {
+class YouTubeVideoApp extends StatefulWidget {
   @override
   _YouTubeVideoAppState createState() => _YouTubeVideoAppState();
 }
@@ -346,7 +347,7 @@ class _YouTubeVideoAppState extends State<YouTubeVideoApp> {
       ),
     );
   }
-}*/
+}
 
 
 

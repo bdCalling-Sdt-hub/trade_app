@@ -44,7 +44,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           children: [
             GestureDetector(
               onTap: (){
-                 context.pushNamed(RoutePath.homeScreen);
+                 context.pushNamed(RoutePath.navBar, extra: 0);
               },
               child: const CustomImage(
                   imageSrc: AppIcons.logo,

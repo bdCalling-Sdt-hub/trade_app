@@ -17,7 +17,7 @@ class QuestionSubmitPop extends StatefulWidget {
 class _QuestionSubmitPopState extends State<QuestionSubmitPop> {
   navigate() async {
     Future.delayed(const Duration(seconds: 2), () {
-       context.pushNamed(RoutePath.homeScreen);
+       context.pushNamed(RoutePath.navBar, extra: 0);
     });
   }
 

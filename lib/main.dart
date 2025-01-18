@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/core/dependency/dependency_injection.dart';
 import 'package:trade_app/core/routes/routes.dart';
@@ -20,12 +19,6 @@ Future<void> _firebaseMessageBackgroundHandler(RemoteMessage message) async {
 }
 
 Future<void> main() async {
-  await JustAudioBackground.init(
-    androidNotificationChannelId: "com.ryanheise.audio_service.podcast.audio_player",
-    androidNotificationChannelName: 'Audio playback',
-    androidNotificationOngoing: true,
-  );
-
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance();
   DeviceUtils.lockDevicePortrait();

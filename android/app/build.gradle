@@ -28,7 +28,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.swipswap.jorge"
-    compileSdk 34
+    compileSdk 35
     ndkVersion "25.1.8937393"
 
     kotlinOptions {
@@ -46,8 +46,8 @@ android {
         applicationId = "com.swipswap.jorge"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdkVersion 23
+        targetSdkVersion 35
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

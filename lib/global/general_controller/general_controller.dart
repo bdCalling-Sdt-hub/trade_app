@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
-class GeneralController extends GetxController {
+class GeneralController extends GetxController implements GetxService {
   RxBool isEnglish = true.obs;
 
   // List<String> languages = [
@@ -100,57 +102,75 @@ class GeneralController extends GetxController {
 
     return "";
   }
-  // String? _savedVideoUrl;
-  // YoutubePlayerController? youtubeController;
-  // bool _isPlaying = true;
-  //
-  // void togglePlayPause() {
-  //   if (youtubeController != null) {
-  //     if (_isPlaying) {
-  //       youtubeController!.pause();
-  //     } else {
-  //       youtubeController!.play();
-  //     }
-  //     _isPlaying =! _isPlaying;
-  //     update();
-  //   }
-  // }
-  // // Load the saved URL from SharedPreferences
-  // Future<void> _loadSavedUrl() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   _savedVideoUrl = prefs.getString('youtube_url');
-  //   if (_savedVideoUrl != null) {
-  //     _initializePlayer(_savedVideoUrl!);
-  //   }
-  // }
-  //
-  //
-  // // Initialize the YouTube player for audio playback
-  // void _initializePlayer(String url) {
-  //   final videoId = YoutubePlayer.convertUrlToId(url);
-  //   if (videoId != null) {
-  //     // _youtubeController?.dispose(); // Dispose the previous controller if any
-  //     youtubeController = YoutubePlayerController(
-  //       initialVideoId: videoId,
-  //       flags: YoutubePlayerFlags(
-  //         autoPlay: false,
-  //         mute: false,
-  //         hideThumbnail: true, // Hide thumbnail to avoid showing visuals
-  //         controlsVisibleAtStart: false, // Hide video controls
-  //         disableDragSeek: true, // Disable seeking
-  //         loop: true, // Enable looping video
-  //         showLiveFullscreenButton: false, // Disable fullscreen button
-  //         enableCaption: false, // Disable captions
-  //       ),
-  //     );
-  //     _isPlaying =false;
-  //     update();
-  //   }
+  String? _savedVideoUrl;
+  YoutubePlayerController? youtubeController;
+  bool isPlaying = true;
+
+  void togglePlayPause() {
+    if (youtubeController != null) {
+      if (isPlaying) {
+        youtubeController?.pause();
+      } else {
+        youtubeController?.play();
+      }
+      isPlaying =! isPlaying;
+      update();
+    }else{
+      print("object");
+    }
+  }
+  // Load the saved URL from SharedPreferences
+  Future<void> loadSavedUrl() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _savedVideoUrl = prefs.getString('youtube_url');
+    if (_savedVideoUrl != null) {
+      _initializePlayer(_savedVideoUrl!);
+    }
+  }
+
+
+  // Initialize the YouTube player for audio playback
+  void _initializePlayer(String url) {
+    final videoId = YoutubePlayer.convertUrlToId(url);
+    if (videoId != null) {
+      // _youtubeController?.dispose(); // Dispose the previous controller if any
+      youtubeController = YoutubePlayerController(
+        initialVideoId: videoId,
+        flags: YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+          hideThumbnail: true, // Hide thumbnail to avoid showing visuals
+          controlsVisibleAtStart: false, // Hide video controls
+          disableDragSeek: true, // Disable seeking
+          loop: true, // Enable looping video
+          showLiveFullscreenButton: false, // Disable fullscreen button
+          enableCaption: false, // Disable captions
+        ),
+      );
+      isPlaying =false;
+      update();
+    }
+  }
+
+  late final AudioPlayer _player;
+
+  // @override
+  // Future<void> onStart(Map<String, dynamic>? params) async {
+  //   _player = AudioPlayer();
+  //   await _player.setUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ'); // Replace with YouTube audio URL or stream URL
+  //   _player.play();
+  //   _player.positionStream.listen((position) {
+  //     playbackState.add(playbackState.value.copyWith(
+  //       position: position,
+  //       bufferedPosition: _player.bufferedPosition,
+  //       playing: _player.playing,
+  //     ));
+  //   });
   // }
 
   @override
   void onInit() {
-    // _loadSavedUrl();
+     loadSavedUrl();
     super.onInit();
   }
 }

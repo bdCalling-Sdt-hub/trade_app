@@ -109,7 +109,7 @@ class PackageController extends GetxController {
 
     if (response.statusCode == 200) {
       toastMessage(message: response.body["message"]);
-      AppRouter.route.pushNamed(RoutePath.homeScreen);
+      AppRouter.route.pushNamed(RoutePath.navBar, extra: 0);
     } else if (response.statusCode == 402) {
       toastMessage(message: response.body["message"]);
     } else {

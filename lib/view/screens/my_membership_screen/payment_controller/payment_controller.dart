@@ -1,13 +1,8 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
-import 'package:trade_app/controller/post_controller/post_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/core/routes/routes.dart';
-import 'package:trade_app/dependency_injection/path.dart';
 import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/service/api_service.dart';
@@ -15,7 +10,6 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
-import 'package:trade_app/view/screens/my_membership_screen/membership_profile_model/membership_profile_model.dart';
 
 class PaymentController extends GetxController {
 
@@ -48,7 +42,6 @@ class PaymentController extends GetxController {
         return {};
       }
     } catch (error) {
-      Get.snackbar("Error", error.toString());
       print(error);
       return {};
     }
@@ -93,7 +86,6 @@ class PaymentController extends GetxController {
       }
     } catch (e) {
       debugPrint("Error ================>>>>>>>>>>>>>${e.toString()}");
-      toastMessage(message: "Error $e");
     }
   }
 
@@ -127,7 +119,7 @@ class PaymentController extends GetxController {
     };
     var response = await apiClient.post(url: ApiUrl.successIntent.addBaseUrl, context: context!, body: body);
     if (response.statusCode == 200) {
-      AppRouter.route.pushNamed(RoutePath.homeScreen);
+      AppRouter.route.pushNamed(RoutePath.navBar, extra: 0);
 
       toastMessage(message: response.body["message"]);
     } else {

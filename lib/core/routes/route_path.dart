@@ -5,6 +5,7 @@ class RoutePath {
   static const String splashScreen = 'splashScreen';
 
   static const String errorScreen = 'errorScreen';
+  static const String navBar = 'navBar';
 
   static const String signInScreen = "SignInScreen";
   static const String messageScreen = "MessageScreen";
@@ -55,5 +56,6 @@ class RoutePath {
   static const String postScreen = "PostScreen";
   static const String profileScreen = "ProfileScreen";
   static const String audioScreen = "AudioScreen";
+  static const String youTubeVideoApp = "YouTubeVideoApp";
 
 }

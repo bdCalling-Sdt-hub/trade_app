@@ -67,7 +67,7 @@ class AuthController extends GetxController {
 
     if (response.statusCode == 200) {
       saveInformation(response: response);
-      AppRouter.route.replaceNamed(RoutePath.homeScreen);
+      AppRouter.route.replaceNamed(RoutePath.navBar, extra: 0);
     } else if (response.statusCode == 404) {
       toastMessage(message: response.body["message"]);
     } else {

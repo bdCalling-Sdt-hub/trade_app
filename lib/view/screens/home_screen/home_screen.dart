@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/global/general_controller/general_controller.dart';
 import 'package:trade_app/global/push_notification.dart';
 import 'package:trade_app/helper/const/const.dart';
+import 'package:trade_app/helper/network_image/network_image.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeController controller = Get.find<HomeController>();
   PackageController packageController = Get.find<PackageController>();
   final MembershipController membershipController = Get.find<MembershipController>();
+  GeneralController generalController =Get.find<GeneralController>();
   @override
   void initState() {
     PushNotificationHandle.firebaseInit();
@@ -44,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: const NavBar(currentIndex: 0),
         backgroundColor: AppColors.white,
         body: Obx(() {
           return SingleChildScrollView(
@@ -78,15 +80,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
-
                           margin: EdgeInsets.only(left: 8.w),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.sp),
-                              image: DecorationImage(
-                            image: NetworkImage(
-                                '${ApiUrl.baseUrl}${imagePath.image ?? ""}',),
-                                fit: BoxFit.cover
-                          )),
+                          ),
+                          child: CustomNetworkImage(imageUrl: '${ApiUrl.baseUrl}${imagePath.image ?? ""}',),
                         );
                       },
                     );

@@ -4,6 +4,7 @@ import 'package:trade_app/helper/extension/base_extension.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/view/components/error_screen/error_screen.dart';
+import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/audio/audio_screen.dart';
 import 'package:trade_app/view/screens/authentication/forgot_password/forgot_password_screen.dart';
 import 'package:trade_app/view/screens/authentication/otp/otp_screen.dart';
@@ -65,7 +66,7 @@ class AppRouter {
             Future.delayed(const Duration(seconds: 1), () async{
               bool? isRememberMe = await SharePrefsHelper.getBool(AppConstants.isRememberMe);
               if (isRememberMe == true ) {
-                AppRouter.route.replaceNamed(RoutePath.homeScreen);
+                AppRouter.route.replaceNamed(RoutePath.navBar, extra: 0);
               }   else {
                 AppRouter.route.replaceNamed(RoutePath.signInScreen);
               }
@@ -79,6 +80,11 @@ class AppRouter {
           name: RoutePath.errorScreen,
           path: RoutePath.errorScreen.addBasePath,
           builder: (context, state) => const ErrorPage(),
+        ),
+        GoRoute(
+          name: RoutePath.navBar,
+          path: RoutePath.navBar.addBasePath,
+          builder: (context, state) => NavBar(currentIndex: (state.extra??0) as int),
         ),
 
         ///======================= erroe Route =======================
@@ -102,10 +108,15 @@ class AppRouter {
         ),
 
         ///======================= signInScreen Route =======================
+        // GoRoute(
+        //   name: RoutePath.audioScreen,
+        //   path: RoutePath.audioScreen.addBasePath,
+        //   builder: (context, state) => AudioScreen(),
+        // ),
         GoRoute(
-          name: RoutePath.audioScreen,
-          path: RoutePath.audioScreen.addBasePath,
-          builder: (context, state) => AudioScreen(),
+          name: RoutePath.youTubeVideoApp,
+          path: RoutePath.youTubeVideoApp.addBasePath,
+          builder: (context, state) => YouTubeVideoApp(),
         ),
 
         ///======================= messageScreen Route =======================

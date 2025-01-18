@@ -25,7 +25,6 @@ class PostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: const NavBar(currentIndex: 3),
 
       ///===================Categories appbar===============
       appBar: CustomAppBar(

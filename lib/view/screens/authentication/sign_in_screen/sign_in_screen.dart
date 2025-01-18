@@ -238,25 +238,25 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 24.h,
                   ),
 
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: CustomTextField(
-                  //         textEditingController: _urlController,
-                  //         hintText: 'Enter youtube video url',
-                  //       ),
-                  //     ),
-                  //     SizedBox(width: 8.w),
-                  //     ElevatedButton(
-                  //       onPressed: () {
-                  //         if (_urlController.text.isNotEmpty) {
-                  //           _saveUrl();
-                  //         }
-                  //       },
-                  //       child: Text("Save"),
-                  //     ),
-                  //   ],
-                  // ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextField(
+                          textEditingController: _urlController,
+                          hintText: 'Enter youtube video url',
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_urlController.text.isNotEmpty) {
+                            _saveUrl();
+                          }
+                        },
+                        child: Text("Save"),
+                      ),
+                    ],
+                  ),
 
                   SizedBox(
                     height: 24.h,

@@ -354,24 +354,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
                     ///============================ similarProducts =============================>
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomText(
                           text: AppStrings.similarProducts.tr,
                           fontSize: 16.h,
                           fontWeight: FontWeight.w500,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            context.pushNamed(RoutePath.categoryScreen);
-                          },
-                          child: CustomText(
-                            text: AppStrings.viewAll,
-                            fontSize: 18.h,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.blue500,
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     context.pushNamed(RoutePath.categoryScreen);
+                        //   },
+                        //   child: CustomText(
+                        //     text: AppStrings.viewAll,
+                        //     fontSize: 18.h,
+                        //     fontWeight: FontWeight.w500,
+                        //     color: AppColors.blue500,
+                        //   ),
+                        // ),
                       ],
                     ),
                     SizedBox(
@@ -394,8 +394,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       .data?.similarProduct?[index].title ??
                                   "",
                               onTap: () {
-                                context
-                                    .pushNamed(RoutePath.productDetailsScreen);
+                                context.pushNamed(RoutePath.productDetailsScreen,
+                                    queryParameters: {
+                                    "productId": productDetailsModel.data?.similarProduct?[index].id ?? '',
+                                    });
                               },
                               value:
                                   '\$${productDetailsModel.data?.similarProduct?[index].productValue ?? ""}',

@@ -23,7 +23,7 @@ class NavBar extends StatefulWidget {
 }
 
 class _UserNavBarState extends State<NavBar> {
-  late int bottomNavIndex;
+  int bottomNavIndex = 0;
 
   ///=======================UnselectedIcon====================
   final List<String> unselectedIcon = [
@@ -57,70 +57,34 @@ class _UserNavBarState extends State<NavBar> {
     super.initState();
   }
 
+  List<Widget> screens = [
+    HomeScreen(),
+    ChatScreen(),
+    CategoryScreen(),
+    PostScreen(),
+    ProfileScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      color: Colors.white,
-      height: 95.h,
-      width: MediaQuery.of(context).size.width,
-      alignment: Alignment.center,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(
-          unselectedIcon.length,
-          (index) => InkWell(
-            onTap: () => onTap(index),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  index == bottomNavIndex
-                      ? selectedIcon[index]
-                      : unselectedIcon[index],
-                  height: 24.h,
-                  width: 24.w,
-                  // ignore: deprecated_member_use
-                  color:
-                      index == bottomNavIndex ? AppColors.blue : Colors.black,
-                ),
-                SizedBox(height: 4.h),
-                CustomText(
-                  text: userNavText[index],
-                  color:
-                      index == bottomNavIndex ? AppColors.blue : Colors.black,
-                ),
-              ],
-            ),
-          ),
-        ),
+    return Scaffold(
+      body: IndexedStack(
+        index: bottomNavIndex,
+        children: screens,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index){
+          bottomNavIndex = index;
+          setState(() {
+
+          });
+        },
+        items: List.generate(userNavText.length, (index)=>BottomNavigationBarItem(
+            icon: SvgPicture.asset(unselectedIcon[index]),
+          activeIcon: SvgPicture.asset(selectedIcon[index]),
+          label: userNavText[index],
+        )),
       ),
     );
-  }
-
-  void onTap(int index) {
-    if (index != bottomNavIndex) {
-      switch (index) {
-        case 0:
-           context.pushReplacementNamed(RoutePath.homeScreen);
-          break;
-        case 1:
-         // Get.to(() => const ChatScreen());
-          context.pushReplacementNamed(RoutePath.chatScreen);
-          break;
-        case 2:
-         // Get.to(() => CategoryScreen());
-          context.pushReplacementNamed(RoutePath.categoryScreen);
-          break;
-        case 3:
-         // Get.to(() => const PostScreen());
-          context.pushReplacementNamed(RoutePath.postScreen);
-          break;
-        case 4:
-         // Get.to(() => const ProfileScreen());
-          context.pushReplacementNamed(RoutePath.profileScreen);
-      }
-    }
   }
 }

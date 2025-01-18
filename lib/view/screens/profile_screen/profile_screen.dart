@@ -21,6 +21,7 @@ import 'package:trade_app/view/components/custom_netwrok_image/custom_network_im
 import 'package:trade_app/view/components/custom_profile_card/custom_profile_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -33,80 +34,31 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
     final ProfileController controller = Get.find<ProfileController>();
     final GeneralController generalController = Get.find<GeneralController>();
-    //
-    // String? _savedVideoUrl;
-    // YoutubePlayerController? _youtubeController;
-    // bool _isPlaying = true;
 
 
     @override
     void initState() {
       super.initState();
-      //_loadSavedUrl();
+     // generalController.loadSavedUrl();
     }
-
-    // void _togglePlayPause() {
-    //   if (_youtubeController != null) {
-    //     if (_isPlaying) {
-    //       _youtubeController!.pause();
-    //     } else {
-    //       _youtubeController!.play();
-    //     }
-    //     setState(() {
-    //       _isPlaying = !_isPlaying; // Toggle play state
-    //     });
-    //   }
-    // }
-    // // Load the saved URL from SharedPreferences
-    // Future<void> _loadSavedUrl() async {
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   setState(() {
-    //     _savedVideoUrl = prefs.getString('youtube_url');
-    //     if (_savedVideoUrl != null) {
-    //       _initializePlayer(_savedVideoUrl!);
-    //     }
-    //   });
-    // }
-    //
-    //
-    // // Initialize the YouTube player for audio playback
-    // void _initializePlayer(String url) {
-    //   final videoId = YoutubePlayer.convertUrlToId(url);
-    //   if (videoId != null) {
-    //     // _youtubeController?.dispose(); // Dispose the previous controller if any
-    //     _youtubeController = YoutubePlayerController(
-    //       initialVideoId: videoId,
-    //       flags: YoutubePlayerFlags(
-    //         autoPlay: false,
-    //         mute: false,
-    //         hideThumbnail: true, // Hide thumbnail to avoid showing visuals
-    //         controlsVisibleAtStart: false, // Hide video controls
-    //         disableDragSeek: true, // Disable seeking
-    //         loop: true, // Enable looping video
-    //         showLiveFullscreenButton: false, // Disable fullscreen button
-    //         enableCaption: false, // Disable captions
-    //       ),
-    //     );
-    //     setState(() {
-    //       _isPlaying =false;
-    //     }); // Update the state to reflect the new controller
-    //   }
-    // }
     
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: (){
-      //     generalController.togglePlayPause;
-      //     _isPlaying =! _isPlaying;
-      //   },
-      //   child: Icon(
-      //     _isPlaying ? Icons.pause_circle : Icons.play_circle,
-      //   ),
-      // ),
+      floatingActionButton: GetBuilder<GeneralController>(
+        builder: (generalController) {
+          return FloatingActionButton(
+            onPressed: (){
+              generalController.togglePlayPause();
+             // generalController.update();
+            },
+            child: Icon(
+              generalController.isPlaying ? Icons.pause_circle : Icons.play_circle,
+            ),
+          );
+        }
+      ),
       backgroundColor: AppColors.white,
-      bottomNavigationBar: const NavBar(currentIndex: 4),
 
       ///==================My Profile Appbar===============
       appBar: CustomAppBar(
@@ -248,7 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CustomProfileCard(
                       isCevron: true,
                       onTap: () {
-                        context.pushNamed(RoutePath.audioScreen);
+                        context.pushNamed(RoutePath.youTubeVideoApp);
 
                       },
                       text: "Audio",
@@ -264,14 +216,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       text: AppStrings.logOut.tr,
                       leadingIcon: AppIcons.vector,
                     ),
-                    // SizedBox(
-                    //   height: 0,
-                    //   child: YoutubePlayer(
-                    //     controller: generalController.youtubeController!,
-                    //     showVideoProgressIndicator: false,
-                    //     bottomActions: [], // Hide all bottom actions
-                    //   ),
-                    // ),
+                    generalController.youtubeController != null
+                        ? YoutubePlayer(
+                      controller: generalController.youtubeController!,
+                      showVideoProgressIndicator: false,
+
+                      bottomActions: [], // Hide all bottom actions
+                    ) : Center(child: CircularProgressIndicator()) // Show a loading indicator while the controller is null
+
                   ],
                 ),
               ),
