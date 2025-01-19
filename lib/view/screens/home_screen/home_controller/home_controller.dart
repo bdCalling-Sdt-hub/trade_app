@@ -106,7 +106,7 @@ class HomeController extends GetxController {
 
   /// ======================= Banner List =========================>
   var banner = Status.loading.obs;
-  BannerLoadingMethod(Status status) => banner.value = status;
+  BannerLoading(Status status) => banner.value = status;
 
   RxList<SliderDatum> bannerList = <SliderDatum>[].obs;
   getBanner({BuildContext? context}) async {
@@ -140,6 +140,7 @@ class HomeController extends GetxController {
   RxList<SubCategoryModelForEdit> subCategoryList = <SubCategoryModelForEdit>[].obs;
   getSubCategory({BuildContext? context,String category=''}) async {
     SubCategoryLoadingMethod(Status.loading);
+    subCategoryList.clear();
 
     var response = await apiClient.get(
         url: '${ApiUrl.getSubCategory.addBaseUrl}?category=$category', showResult: true);

@@ -1,10 +1,9 @@
-import 'dart:convert';
 
 class MemberShipProfileModel {
-  int? statusCode;
-  bool? success;
-  String? message;
-  Data? data;
+  final int? statusCode;
+  final bool? success;
+  final String? message;
+  final Data? data;
 
   MemberShipProfileModel({
     this.statusCode,
@@ -13,10 +12,6 @@ class MemberShipProfileModel {
     this.data,
   });
 
-  factory MemberShipProfileModel.fromRawJson(String str) => MemberShipProfileModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory MemberShipProfileModel.fromJson(Map<String, dynamic> json) => MemberShipProfileModel(
     statusCode: json["statusCode"],
     success: json["success"],
@@ -24,52 +19,40 @@ class MemberShipProfileModel {
     data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
-  Map<String, dynamic> toJson() => {
-    "statusCode": statusCode,
-    "success": success,
-    "message": message,
-    "data": data?.toJson(),
-  };
 }
 
 class Data {
-  Profile? profile;
-  Plan? plan;
-  int? point;
+  final Profile? profile;
+  final Plan? plan;
+  final int? point;
+  final List<PlanePoint>? planePoint;
 
   Data({
     this.profile,
     this.plan,
     this.point,
+    this.planePoint,
   });
-
-  factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     profile: json["profile"] == null ? null : Profile.fromJson(json["profile"]),
     plan: json["plan"] == null ? null : Plan.fromJson(json["plan"]),
     point: json["point"],
+    planePoint: json["planePoint"] == null ? [] : List<PlanePoint>.from(json["planePoint"]!.map((x) => PlanePoint.fromJson(x))),
   );
 
-  Map<String, dynamic> toJson() => {
-    "profile": profile?.toJson(),
-    "plan": plan?.toJson(),
-    "point": point,
-  };
 }
 
 class Plan {
-  String? id;
-  PlanId? planId;
-  int? amount;
-  DateTime? planStartDate;
-  DateTime? planEndDate;
-  String? planType;
-  String? status;
-  String? name;
-  String? email;
+  final String? id;
+  final PlanId? planId;
+  final int? amount;
+  final DateTime? planStartDate;
+  final DateTime? planEndDate;
+  final String? planType;
+  final String? status;
+  final String? name;
+  final String? email;
 
   Plan({
     this.id,
@@ -83,10 +66,6 @@ class Plan {
     this.email,
   });
 
-  factory Plan.fromRawJson(String str) => Plan.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory Plan.fromJson(Map<String, dynamic> json) => Plan(
     id: json["_id"],
     planId: json["plan_id"] == null ? null : PlanId.fromJson(json["plan_id"]),
@@ -99,32 +78,22 @@ class Plan {
     email: json["email"],
   );
 
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "plan_id": planId?.toJson(),
-    "amount": amount,
-    "planStartDate": planStartDate?.toIso8601String(),
-    "planEndDate": planEndDate?.toIso8601String(),
-    "plan_type": planType,
-    "status": status,
-    "name": name,
-    "email": email,
-  };
 }
 
 class PlanId {
-  String? id;
-  String? planName;
-  double? fee;
-  int? pointRangeStart;
-  int? pointRangeEnd;
-  int? swapPoint;
-  int? positiveCommentPoint;
-  int? negativeCommentPoint;
-  dynamic duration;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
+  final String? id;
+  final String? planName;
+  final double? fee;
+  final int? pointRangeStart;
+  final int? pointRangeEnd;
+  final int? swapPoint;
+  final int? positiveCommentPoint;
+  final int? negativeCommentPoint;
+  final int? productPriceLimit;
+  final dynamic duration;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
 
   PlanId({
     this.id,
@@ -135,25 +104,23 @@ class PlanId {
     this.swapPoint,
     this.positiveCommentPoint,
     this.negativeCommentPoint,
+    this.productPriceLimit,
     this.duration,
     this.createdAt,
     this.updatedAt,
     this.v,
   });
 
-  factory PlanId.fromRawJson(String str) => PlanId.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory PlanId.fromJson(Map<String, dynamic> json) => PlanId(
     id: json["_id"],
     planName: json["planName"],
-    fee: json["fee"],
+    fee: json["fee"]?.toDouble(),
     pointRangeStart: json["pointRangeStart"],
     pointRangeEnd: json["pointRangeEnd"],
     swapPoint: json["swapPoint"],
     positiveCommentPoint: json["positiveCommentPoint"],
     negativeCommentPoint: json["negativeCommentPoint"],
+    productPriceLimit: json["productPriceLimit"],
     duration: json["duration"],
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
@@ -169,6 +136,7 @@ class PlanId {
     "swapPoint": swapPoint,
     "positiveCommentPoint": positiveCommentPoint,
     "negativeCommentPoint": negativeCommentPoint,
+    "productPriceLimit": productPriceLimit,
     "duration": duration,
     "createdAt": createdAt?.toIso8601String(),
     "updatedAt": updatedAt?.toIso8601String(),
@@ -176,30 +144,50 @@ class PlanId {
   };
 }
 
+class PlanePoint {
+  final String? id;
+  final String? planName;
+  final int? pointRangeStart;
+  final int? pointRangeEnd;
+
+  PlanePoint({
+    this.id,
+    this.planName,
+    this.pointRangeStart,
+    this.pointRangeEnd,
+  });
+
+  factory PlanePoint.fromJson(Map<String, dynamic> json) => PlanePoint(
+    id: json["_id"],
+    planName: json["planName"],
+    pointRangeStart: json["pointRangeStart"],
+    pointRangeEnd: json["pointRangeEnd"],
+  );
+
+}
+
 class Profile {
-  String? id;
-  String? name;
-  String? email;
-  String? phoneNumber;
-  int? points;
-  String? role;
-  String? userType;
-  String? profileImage;
-  String? coverImage;
-  bool? isPaid;
-  String? activationCode;
-  bool? isBlock;
-  bool? isActive;
-  bool? isApproved;
-  bool? isSubscribed;
-  DateTime? expirationTime;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
-  String? address;
-  String? country;
-  String? zip;
-  DateTime? planExpatDate;
+  final String? id;
+  final String? name;
+  final String? email;
+  final String? phoneNumber;
+  final int? points;
+  final String? role;
+  final String? userType;
+  final String? profileImage;
+  final String? coverImage;
+  final bool? isPaid;
+  final String? activationCode;
+  final bool? isBlock;
+  final bool? isActive;
+  final bool? isApproved;
+  final bool? isSubscribed;
+  final DateTime? expirationTime;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
+  final String? deviceToken;
+  final DateTime? planExpatDate;
 
   Profile({
     this.id,
@@ -221,15 +209,9 @@ class Profile {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.address,
-    this.country,
-    this.zip,
+    this.deviceToken,
     this.planExpatDate,
   });
-
-  factory Profile.fromRawJson(String str) => Profile.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Profile.fromJson(Map<String, dynamic> json) => Profile(
     id: json["_id"],
@@ -251,35 +233,8 @@ class Profile {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    address: json["address"],
-    country: json["country"],
-    zip: json["zip"],
+    deviceToken: json["deviceToken"],
     planExpatDate: json["planExpatDate"] == null ? null : DateTime.parse(json["planExpatDate"]),
   );
 
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "name": name,
-    "email": email,
-    "phone_number": phoneNumber,
-    "points": points,
-    "role": role,
-    "userType": userType,
-    "profile_image": profileImage,
-    "cover_image": coverImage,
-    "isPaid": isPaid,
-    "activationCode": activationCode,
-    "is_block": isBlock,
-    "isActive": isActive,
-    "isApproved": isApproved,
-    "isSubscribed": isSubscribed,
-    "expirationTime": expirationTime?.toIso8601String(),
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-    "address": address,
-    "country": country,
-    "zip": zip,
-    "planExpatDate": planExpatDate?.toIso8601String(),
-  };
 }

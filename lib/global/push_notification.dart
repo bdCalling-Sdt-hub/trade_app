@@ -20,9 +20,9 @@ class PushNotificationHandle {
       alert: true,
       announcement: true,
       badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
       sound: true,
     );
 

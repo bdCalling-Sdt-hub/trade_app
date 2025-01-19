@@ -18,6 +18,59 @@ import 'package:trade_app/view/screens/swap_history_screen/swap_history_model.da
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController {
+
+  List<Map<String,String>> helpList=[
+    {
+      'ans':'What is a product swap?',
+      'que': 'A product swap allows users to exchange items they no longer need for something they want, without using money.'
+    },
+    {
+      'ans':'Is there a fee to use this platform?',
+      'que': 'No, our platform is free to use for listing and swapping items.'
+    },
+    {
+      'ans':'What types of products can I swap?',
+      'que': 'You can swap almost anything, such as electronics, clothing, furniture, books, or even services, as long as it complies with our terms and conditions.'
+    },
+    {
+      'ans':'How do I contact someone for a swap?',
+      'que': 'Use the chat feature on the platform to discuss the details and finalize the swap arrangement.'
+    },
+    {
+      'ans':'What if the product I receive is not as described?',
+      'que': 'Please report the issue to our support team. We encourage users to share accurate descriptions and images of their items.'
+    },
+    {
+      'ans':'Are there safety guidelines for meeting in person to exchange items?',
+      'que': 'Yes, we recommend meeting in public places and bringing a friend for added safety when exchanging items in person.'
+    },
+    {
+      'ans':'How do I list a product for swapping?',
+      'que': 'You can create a listing by uploading photos of your item, adding a description, and specifying what you are looking to swap it for.'
+    },
+    {
+      'ans':'How do I find products available for swapping?',
+      'que': 'Browse the available items by category, location, or search keywords to find what you are looking for.'
+    },
+    {
+      'ans':'What happens if I don’t find a suitable swap?',
+      'que': 'You can keep your listing active until a suitable swap offer comes through. You may also explore other categories for options.'
+    }, {
+      'ans':'Is there a rating or review system?',
+      'que': 'Yes, users can leave ratings and reviews for each other to ensure trust and transparency in the swapping process.'
+    },
+    {
+      'ans':'Can I swap products with users in other locations?',
+      'que': 'Yes, but you’ll need to discuss and agree on shipping arrangements with the other user.'
+    },
+    {
+      'ans':'What items are prohibited on this platform?',
+      'que': 'Prohibited items include illegal substances, weapons, stolen goods, and items that violate intellectual property rights. Please refer to our full list of prohibited items in the terms and conditions.'
+    },
+
+  ];
+
+  RxInt selectedFqw = 100000.obs;
   ///============================Image picker method================
   RxString image = "".obs;
 

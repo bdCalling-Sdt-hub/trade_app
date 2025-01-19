@@ -81,7 +81,14 @@ class JustForYou extends StatelessWidget {
                           name: controller.justForYouList.value[index].title ??
                               "",
                           onTap: () {
-                            context.pushNamed(RoutePath.productDetailsScreen);
+                            context.pushNamed(
+                              RoutePath.productDetailsScreen,
+                              queryParameters: {
+                                "productId":
+                                controller.justForYouList.value[index].id ??
+                                    '',
+                              },
+                            );
                           },
                           value:
                               '\$${controller.justForYouList.value[index].productValue ?? ""}',

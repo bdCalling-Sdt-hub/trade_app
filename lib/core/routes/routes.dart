@@ -95,7 +95,6 @@ class AppRouter {
             final productId = state.uri.queryParameters["productId"] ?? "";
             return ProductDetailsScreen(
               productId: productId,
-
             );
           },
         ),

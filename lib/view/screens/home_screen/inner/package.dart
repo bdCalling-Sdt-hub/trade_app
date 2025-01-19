@@ -72,14 +72,35 @@ class Package extends StatelessWidget {
                           color: AppColors.white50,
                           fontWeight: FontWeight.w600,
                         ),
-                        CustomText(
+                      index==0? CustomText(
                           text: (packageList?[index].fee ?? 0).toString(),
                           color: AppColors.white50,
                           fontWeight: FontWeight.w700,
                           fontSize: 24.h,
                           top: 4.h,
                           bottom: 4.h,
-                        ),
+                        ): index==1?  CustomText(
+                        text: (packageList?[index].fee ?? 0).toString(),
+                        color: AppColors.white50,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24.h,
+                        top: 4.h,
+                        bottom: 4.h,
+                      ): index==2?  CustomText(
+                        text: (packageList?[index].pointRangeStart ?? 0).toString(),
+                        color: AppColors.white50,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24.h,
+                        top: 4.h,
+                        bottom: 4.h,
+                      ): index==3?  CustomText(
+                        text: (packageList?[index].pointRangeStart ?? 0).toString(),
+                        color: AppColors.white50,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24.h,
+                        top: 4.h,
+                        bottom: 4.h,
+                      ):SizedBox(),
                         CustomText(
                           maxLines: 2,
                           text: 'Per Month',

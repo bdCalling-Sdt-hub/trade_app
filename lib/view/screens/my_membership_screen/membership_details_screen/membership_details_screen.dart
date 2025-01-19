@@ -126,9 +126,10 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
 
                           ///========================Swap Point History=====================
                           membershipController.memberShipDetailsModel.value
-                                  .data!.result!.isEmpty
+                              .data?.result?.isEmpty != null
                               ? Center(child: CustomText(text: 'No Data Found',top: 100.h,))
-                              : Column(
+                              :
+                           Column(
                                   children: List.generate(
                                       membershipController
                                               .memberShipDetailsModel
@@ -162,11 +163,8 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                         ],
                       )
                     : membershipController.selectedIndex.value == 1
-                        ? membershipController.memberShipDetailsModel.value
-                                    .data!.userPoint! >=
-                                membershipController.memberShipDetailsModel
-                                    .value.data!.pointRangeStart!
-                                    .toInt()
+                    ? (membershipController.memberShipDetailsModel.value.data?.userPoint ?? 0) >=
+                    (membershipController.memberShipDetailsModel.value.data?.pointRangeStart?.toInt() ?? 0)
                             ? Column(
                                 children: [
                                   CustomMembershipDetailsCard(

@@ -18,6 +18,7 @@ import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:trade_app/view/screens/home_screen/home_controller/home_controller.dart';
+import 'package:trade_app/view/screens/home_screen/inner/banner.dart';
 import 'package:trade_app/view/screens/home_screen/inner/home_appbar.dart';
 import 'package:trade_app/view/screens/home_screen/inner/just_for_you.dart';
 import 'package:trade_app/view/screens/home_screen/inner/package.dart';
@@ -68,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     coinAmount: (profileController.profileModel.value.data?.point ?? 0).toString()),
 
                 SizedBox(height: 12.h,),
-                ///==============================Banner Image==========================>
+              /*  ///==============================Banner Image==========================>
                 CarouselSlider(
                   options: CarouselOptions(
                     height: 130.h,
@@ -106,6 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: controller.pageController.value,
                       count: controller.bannerList.length),
                 ),
+
+                */
+                BannerList(),
 
                 SizedBox(
                   height: 16.h,

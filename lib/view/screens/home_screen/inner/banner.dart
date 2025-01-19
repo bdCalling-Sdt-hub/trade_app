@@ -18,7 +18,7 @@ class BannerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      switch (controller.justForYouLoading.value) {
+      switch (controller.banner.value) {
         case Status.loading:
           return const CustomLoader();
         case Status.internetError:
@@ -40,51 +40,48 @@ class BannerList extends StatelessWidget {
           );
 
         case Status.completed:
-          var topProductList = controller.justForYouList.value;
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Column(
-              children: [
-                ///==============================Banner Image==========================>
-                CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    autoPlayCurve: Curves.ease,
-                    pageSnapping: false,
-                    //viewportFraction: 1,
-                    onPageChanged: (int index, reason) {
-                      controller.bannerIndex.value = index;
 
-                      controller.pageController.value = PageController(
-                          initialPage: controller.bannerIndex.value);
+          return Column(
+            children: [
+              ///==============================Banner Image==========================>
+              CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true,
+                  autoPlayCurve: Curves.ease,
+                  pageSnapping: false,
+                  //viewportFraction: 1,
+                  onPageChanged: (int index, reason) {
+                    controller.bannerIndex.value = index;
+
+                    controller.pageController.value = PageController(
+                        initialPage: controller.bannerIndex.value);
+                  },
+                ),
+                items: controller.bannerList.value.map((imagePath) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        margin: EdgeInsets.only(left: 8.w),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  '${ApiUrl.baseUrl}${imagePath.image ?? ""}'),
+                            )
+                        ),
+                      );
                     },
-                  ),
-                  items: controller.bannerList.value.map((imagePath) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          margin: EdgeInsets.only(left: 8.w),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                    '${ApiUrl.baseUrl}${imagePath.image ?? ""}'),
-                              )
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
+                  );
+                }).toList(),
+              ),
 
-                ///============================ Smooth Indicator =============================>
-                Align(
-                  alignment: Alignment.center,
-                  child: ConstValue.indicator(
-                      controller: controller.pageController.value,
-                      count: controller.bannerList.length),
-                ),
-              ],
-            ),
+              ///============================ Smooth Indicator =============================>
+              Align(
+                alignment: Alignment.center,
+                child: ConstValue.indicator(
+                    controller: controller.pageController.value,
+                    count: controller.bannerList.length),
+              ),
+            ],
           );
       }
     });

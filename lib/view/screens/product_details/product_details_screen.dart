@@ -267,7 +267,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       bottom: 16.h,
                     ),
 
-                    CustomTextField(
+                    controller.myProductList.isEmpty ? Center(child: CustomText(text: 'No Product Found',fontWeight: FontWeight.w500,fontSize: 16.h,color: Colors.red,)):  CustomTextField(
                       onTap: () {
                         controller.isSwap.value = !controller.isSwap.value;
                         controller.isSwap.refresh();
@@ -309,10 +309,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         child: Container(
                                           decoration: const BoxDecoration(),
                                           child: CustomText(
-                                            text: controller
-                                                    .myProductList[index]
-                                                    .title ??
-                                                "",
+                                            text: controller.myProductList[index].title ?? "",
                                             fontWeight: FontWeight.w500,
                                             bottom: 4.h,
                                           ),
