@@ -28,7 +28,9 @@ Future<void> main() async {
   );
 
   DependencyInjection di = DependencyInjection();
+
   di.dependencies();
+  initDependencies();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessageBackgroundHandler);
 
@@ -36,7 +38,6 @@ Future<void> main() async {
   //SystemUtil.setStatusBarColor(color: Colors.transparent);
   Stripe.publishableKey =
       "pk_test_51Q69G2L8xn5o73J1fDJ9iprBk2h3Kjbj1zXs1Rll89x1qFFXPAtHqyZ667hyVpAIlUvIJRzzhDXmRxQ6r9tOeOlZ00mZDAdEoI";
-  initDependencies();
   runApp(
     const MyApp(),
   );

@@ -7,6 +7,9 @@ Future<void> initDependencies() async {
   // _initLogin();
 
   serviceLocator.registerFactory(() => InternetConnection());
+  serviceLocator.registerFactory<YoutubePlayerController>(() =>   YoutubePlayerController(initialVideoId: ''));
+
+  // serviceLocator.registerFactory(() => GeneralController());
 
   /// core
   serviceLocator.registerFactory<ConnectionChecker>(

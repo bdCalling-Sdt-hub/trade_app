@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/controller/profile_controller.dart';
-
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/general_controller/general_controller.dart';
@@ -23,47 +21,47 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-
 class ProfileScreen extends StatefulWidget {
-    ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-    final ProfileController controller = Get.find<ProfileController>();
-    final GeneralController generalController = Get.find<GeneralController>();
+  final ProfileController controller = Get.find<ProfileController>();
+  final GeneralController generalController = Get.find<GeneralController>();
 
+  @override
+  void initState() {
+    super.initState();
+    // generalController.loadSavedUrl();
+  }
 
-    @override
-    void initState() {
-      super.initState();
-     // generalController.loadSavedUrl();
-    }
-    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: GetBuilder<GeneralController>(
-        builder: (generalController) {
-          return FloatingActionButton(
-            onPressed: (){
-              generalController.togglePlayPause();
-             // generalController.update();
-            },
-            child: Icon(
-              generalController.isPlaying ? Icons.pause_circle : Icons.play_circle,
-            ),
-          );
-        }
-      ),
+      floatingActionButton:
+          GetBuilder<GeneralController>(builder: (generalController) {
+        return FloatingActionButton(
+          onPressed: () {
+            generalController.togglePlayPause();
+            // generalController.update();
+          },
+          child: Icon(
+            generalController.isPlaying
+                ? Icons.pause_circle
+                : Icons.play_circle,
+          ),
+        );
+      }),
       backgroundColor: AppColors.white,
 
       ///==================My Profile Appbar===============
       appBar: CustomAppBar(
         appBarContent: AppStrings.myProfile.tr,
       ),
+      bottomNavigationBar: NavBar(currentIndex: 4),
       body: Obx(() {
         switch (controller.rxRequestStatus.value) {
           case Status.loading:
@@ -93,18 +91,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ///===================Profile Image================
                     CustomNetworkImage(
                         borderRadius: BorderRadius.circular(100.r),
-                        imageUrl: controller.profileModel.value.data?.result?.profileImage
-                            ?.startsWith('https') ??
-                            false
-                            ? controller.profileModel.value.data?.result?.profileImage ??
-                            ""
-                            : '${ApiUrl.baseUrl}${controller.profileModel.value.data?.result?.profileImage?? ""}',
+                        imageUrl: controller.profileModel.value.data?.result
+                                    ?.profileImage
+                                    ?.startsWith('https') ??
+                                false
+                            ? controller.profileModel.value.data?.result
+                                    ?.profileImage ??
+                                ""
+                            : '${ApiUrl.baseUrl}${controller.profileModel.value.data?.result?.profileImage ?? ""}',
                         height: 85.h,
                         width: 85.w),
 
                     ///=======================Name=================
                     CustomText(
-                      text: controller.profileModel.value.data?.result?.name?? "",
+                      text: controller.profileModel.value.data?.result?.name ??
+                          "",
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                       color: AppColors.black500,
@@ -122,7 +123,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: AppColors.black200,
                         ),
                         CustomText(
-                          text: controller.profileModel.value.data?.result?.userType?? "",
+                          text: controller
+                                  .profileModel.value.data?.result?.userType ??
+                              "",
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                           color: AppColors.black200,
@@ -136,11 +139,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ///=========================myMembership==============
                     CustomProfileCard(
                       onTap: () {
-                        context.pushNamed(RoutePath.myMembershipScreen,);
-
+                        context.pushNamed(
+                          RoutePath.myMembershipScreen,
+                        );
                       },
                       text: AppStrings.myMembership.tr,
-                      leadingIcon: AppIcons.cardMembership, isCevron: true,
+                      leadingIcon: AppIcons.cardMembership,
+                      isCevron: true,
                     ),
 
                     ///=====================My Products===============
@@ -148,7 +153,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       isCevron: true,
                       onTap: () {
                         context.pushNamed(RoutePath.myProductsScreen);
-
                       },
                       text: AppStrings.myProducts.tr,
                       leadingIcon: AppIcons.package_2,
@@ -179,7 +183,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       isCevron: true,
                       onTap: () {
                         context.pushNamed(RoutePath.myRatingScreen);
-
                       },
                       text: AppStrings.myRatingAndComments.tr,
                       leadingIcon: AppIcons.reviews,
@@ -190,7 +193,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       isCevron: true,
                       onTap: () {
                         context.pushNamed(RoutePath.settingScreen);
-
                       },
                       text: AppStrings.settings.tr,
                       leadingIcon: AppIcons.settings,
@@ -201,11 +203,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       isCevron: true,
                       onTap: () {
                         context.pushNamed(RoutePath.youTubeVideoApp);
-
                       },
                       text: "Audio",
                       leadingIcon: AppIcons.checkCircle,
                     ),
+
                     ///====================LogOut================
                     CustomProfileCard(
                       isCevron: false,
@@ -217,13 +219,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       leadingIcon: AppIcons.vector,
                     ),
                     generalController.youtubeController != null
-                        ? YoutubePlayer(
-                      controller: generalController.youtubeController!,
-                      showVideoProgressIndicator: false,
+                        ? SizedBox(
+                            height: 100,
+                            child: YoutubePlayer(
+                              controller: generalController.youtubeController!,
+                              showVideoProgressIndicator: false,
 
-                      bottomActions: [], // Hide all bottom actions
-                    ) : Center(child: CircularProgressIndicator()) // Show a loading indicator while the controller is null
-
+                              bottomActions: [], // Hide all bottom actions
+                            ),
+                          )
+                        : Center(
+                            child:
+                                SizedBox()) // Show a loading indicator while the controller is null
                   ],
                 ),
               ),

@@ -23,6 +23,7 @@ import 'package:trade_app/view/screens/home_screen/inner/package.dart';
 import 'package:trade_app/view/screens/home_screen/inner/popular_category.dart';
 import 'package:trade_app/view/screens/home_screen/inner/top_product.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.white,
+        bottomNavigationBar: NavBar(currentIndex: 0),
         body: Obx(() {
           return SingleChildScrollView(
             padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 20.w),
@@ -226,7 +228,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 8.h,),
 
                 ///============================ just for you =============================>
-                JustForYou()
+                JustForYou(),
+
+                // generalController.youtubeController != null
+                //     ? SizedBox(
+                //   height: 100,
+                //   child: YoutubePlayer(
+                //     controller: generalController.youtubeController!,
+                //     showVideoProgressIndicator: false,
+                //
+                //     bottomActions: [], // Hide all bottom actions
+                //   ),
+                // )
+                //     : Center(
+                //     child:
+                //     SizedBox())
               ],
             ),
           );

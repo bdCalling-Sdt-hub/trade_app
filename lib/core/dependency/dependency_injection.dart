@@ -37,5 +37,7 @@ class DependencyInjection extends Bindings {
    Get.lazyPut(() => NotificationController(), fenix: true);
    Get.lazyPut(() => SearchesController(), fenix: true);
    Get.lazyPut(() => GeneralController(), fenix: true);
+   //Get.put(GeneralController(), permanent: true);
+
   }
 }

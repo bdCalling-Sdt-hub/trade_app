@@ -30,6 +30,7 @@ class PostScreen extends StatelessWidget {
       appBar: CustomAppBar(
         appBarContent: AppStrings.postAnAd.tr,
       ),
+      bottomNavigationBar: NavBar(currentIndex: 3),
       body: Obx(() {
         switch (controller.popularCategory.value) {
           case Status.loading:

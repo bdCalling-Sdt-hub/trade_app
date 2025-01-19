@@ -66,7 +66,7 @@ class AppRouter {
             Future.delayed(const Duration(seconds: 1), () async{
               bool? isRememberMe = await SharePrefsHelper.getBool(AppConstants.isRememberMe);
               if (isRememberMe == true ) {
-                AppRouter.route.replaceNamed(RoutePath.navBar, extra: 0);
+                AppRouter.route.replaceNamed(RoutePath.homeScreen);
               }   else {
                 AppRouter.route.replaceNamed(RoutePath.signInScreen);
               }

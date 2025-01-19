@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trade_app/dependency_injection/path.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
@@ -33,7 +34,7 @@ class GeneralController extends GetxController implements GetxService {
 
     if (date != null) {
       // Format the date to "25 Aug 2024"
-      String formattedDate = DateFormat('d MMM y').format(date);
+      String formattedDate = DateFormat('dMMMy').format(date);
 
       // debugPrint("Picked Date ----->>>>>> $pickedDate");
       return pickedDate.value = formattedDate;
@@ -88,6 +89,8 @@ class GeneralController extends GetxController implements GetxService {
   ///========================== Pick Image ========================
   Rx<File> imageFile = File("").obs;
   RxString imagePath = "".obs;
+
+
   Future<String> selectImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? getImages =
@@ -103,7 +106,7 @@ class GeneralController extends GetxController implements GetxService {
     return "";
   }
   String? _savedVideoUrl;
-  YoutubePlayerController? youtubeController;
+   YoutubePlayerController youtubeController = serviceLocator();
   bool isPlaying = true;
 
   void togglePlayPause() {
@@ -152,22 +155,10 @@ class GeneralController extends GetxController implements GetxService {
     }
   }
 
-  late final AudioPlayer _player;
 
-  // @override
-  // Future<void> onStart(Map<String, dynamic>? params) async {
-  //   _player = AudioPlayer();
-  //   await _player.setUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ'); // Replace with YouTube audio URL or stream URL
-  //   _player.play();
-  //   _player.positionStream.listen((position) {
-  //     playbackState.add(playbackState.value.copyWith(
-  //       position: position,
-  //       bufferedPosition: _player.bufferedPosition,
-  //       playing: _player.playing,
-  //     ));
-  //   });
-  // }
 
+  RxDouble dragabbleHorizontal = 20.0.obs;
+  RxDouble dragabbleVerticel = 100.0.obs;
   @override
   void onInit() {
      loadSavedUrl();

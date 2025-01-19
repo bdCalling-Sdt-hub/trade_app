@@ -32,6 +32,7 @@ class ChatScreen extends StatelessWidget {
       appBar: CustomAppBar(
         appBarContent: AppStrings.chat.tr,
       ),
+      bottomNavigationBar: NavBar(currentIndex: 1),
       body: Obx(() {
         switch (controller.chatLoading.value) {
           case Status.loading:

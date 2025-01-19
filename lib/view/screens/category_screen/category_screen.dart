@@ -30,13 +30,14 @@ class CategoryScreen extends StatelessWidget {
       appBar: CustomAppBar(
         appBarContent: AppStrings.categories.tr,
       ),
+      bottomNavigationBar: NavBar(currentIndex: 2),
       body: Obx(() {
         switch (controller.popularCategory.value) {
           case Status.loading:
             return const CustomLoader();
           case Status.internetError:
             return NoInternetScreen(
-              onTap: () {-
+              onTap: () {
                 controller.getPopularCategory(
                   context: context,
                 );
