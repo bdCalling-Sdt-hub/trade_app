@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // generalController.loadSavedUrl();
+     generalController.loadSavedUrl();
   }
 
   @override
@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return FloatingActionButton(
           onPressed: () {
             generalController.togglePlayPause();
-            // generalController.update();
+            generalController.update();
           },
           child: Icon(
             generalController.isPlaying
@@ -62,181 +62,186 @@ class _ProfileScreenState extends State<ProfileScreen> {
         appBarContent: AppStrings.myProfile.tr,
       ),
       bottomNavigationBar: NavBar(currentIndex: 4),
-      body: Obx(() {
-        switch (controller.rxRequestStatus.value) {
-          case Status.loading:
-            return const CustomLoader();
-          case Status.internetError:
-            return NoInternetScreen(
-              onTap: () {
-                controller.getProfile(context: context);
-              },
-            );
-          case Status.error:
-            return GeneralErrorScreen(
-              onTap: () {
-                controller.getProfile(context: context);
-              },
-            );
-          case Status.noDataFound:
-            return Center(
-              child: CustomText(text: AppStrings.noDataFound),
-            );
-          case Status.completed:
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ///===================Profile Image================
-                    CustomNetworkImage(
-                        borderRadius: BorderRadius.circular(100.r),
-                        imageUrl: controller.profileModel.value.data?.result
-                                    ?.profileImage
-                                    ?.startsWith('https') ??
-                                false
-                            ? controller.profileModel.value.data?.result
-                                    ?.profileImage ??
-                                ""
-                            : '${ApiUrl.baseUrl}${controller.profileModel.value.data?.result?.profileImage ?? ""}',
-                        height: 85.h,
-                        width: 85.w),
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          await generalController.loadSavedUrl();
+        },
+        child: Obx(() {
+          switch (controller.rxRequestStatus.value) {
+            case Status.loading:
+              return const CustomLoader();
+            case Status.internetError:
+              return NoInternetScreen(
+                onTap: () {
+                  controller.getProfile(context: context);
+                },
+              );
+            case Status.error:
+              return GeneralErrorScreen(
+                onTap: () {
+                  controller.getProfile(context: context);
+                },
+              );
+            case Status.noDataFound:
+              return Center(
+                child: CustomText(text: AppStrings.noDataFound),
+              );
+            case Status.completed:
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ///===================Profile Image================
+                      CustomNetworkImage(
+                          borderRadius: BorderRadius.circular(100.r),
+                          imageUrl: controller.profileModel.value.data?.result
+                                      ?.profileImage
+                                      ?.startsWith('https') ??
+                                  false
+                              ? controller.profileModel.value.data?.result
+                                      ?.profileImage ??
+                                  ""
+                              : '${ApiUrl.baseUrl}${controller.profileModel.value.data?.result?.profileImage ?? ""}',
+                          height: 85.h,
+                          width: 85.w),
 
-                    ///=======================Name=================
-                    CustomText(
-                      text: controller.profileModel.value.data?.result?.name ??
-                          "",
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: AppColors.black500,
-                    ),
+                      ///=======================Name=================
+                      CustomText(
+                        text: controller.profileModel.value.data?.result?.name ??
+                            "",
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: AppColors.black500,
+                      ),
 
-                    ///===================Status==============
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(
-                          text: AppStrings.membershipStatus.tr,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                          color: AppColors.black200,
-                        ),
-                        CustomText(
-                          text: controller
-                                  .profileModel.value.data?.result?.userType ??
-                              "",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                          color: AppColors.black200,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 29.h,
-                    ),
+                      ///===================Status==============
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomText(
+                            text: AppStrings.membershipStatus.tr,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                            color: AppColors.black200,
+                          ),
+                          CustomText(
+                            text: controller
+                                    .profileModel.value.data?.result?.userType ??
+                                "",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                            color: AppColors.black200,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 29.h,
+                      ),
 
-                    ///=========================myMembership==============
-                    CustomProfileCard(
-                      onTap: () {
-                        context.pushNamed(
-                          RoutePath.myMembershipScreen,
-                        );
-                      },
-                      text: AppStrings.myMembership.tr,
-                      leadingIcon: AppIcons.cardMembership,
-                      isCevron: true,
-                    ),
+                      ///=========================myMembership==============
+                      CustomProfileCard(
+                        onTap: () {
+                          context.pushNamed(
+                            RoutePath.myMembershipScreen,
+                          );
+                        },
+                        text: AppStrings.myMembership.tr,
+                        leadingIcon: AppIcons.cardMembership,
+                        isCevron: true,
+                      ),
 
-                    ///=====================My Products===============
-                    CustomProfileCard(
-                      isCevron: true,
-                      onTap: () {
-                        context.pushNamed(RoutePath.myProductsScreen);
-                      },
-                      text: AppStrings.myProducts.tr,
-                      leadingIcon: AppIcons.package_2,
-                    ),
+                      ///=====================My Products===============
+                      CustomProfileCard(
+                        isCevron: true,
+                        onTap: () {
+                          context.pushNamed(RoutePath.myProductsScreen);
+                        },
+                        text: AppStrings.myProducts.tr,
+                        leadingIcon: AppIcons.package_2,
+                      ),
 
-                    ///====================Swap Request================
-                    CustomProfileCard(
-                      isCevron: true,
-                      onTap: () {
-                        context.pushNamed(RoutePath.swapRequestScreen);
-                      },
-                      text: AppStrings.swapRequests.tr,
-                      leadingIcon: AppIcons.swapHoriz,
-                    ),
+                      ///====================Swap Request================
+                      CustomProfileCard(
+                        isCevron: true,
+                        onTap: () {
+                          context.pushNamed(RoutePath.swapRequestScreen);
+                        },
+                        text: AppStrings.swapRequests.tr,
+                        leadingIcon: AppIcons.swapHoriz,
+                      ),
 
-                    ///<===================== Swap History =======================>
-                    CustomProfileCard(
-                      isCevron: true,
-                      onTap: () {
-                        context.pushNamed(RoutePath.swapHistoryScreen);
-                      },
-                      text: AppStrings.swapHistory.tr,
-                      leadingIcon: AppIcons.history,
-                    ),
+                      ///<===================== Swap History =======================>
+                      CustomProfileCard(
+                        isCevron: true,
+                        onTap: () {
+                          context.pushNamed(RoutePath.swapHistoryScreen);
+                        },
+                        text: AppStrings.swapHistory.tr,
+                        leadingIcon: AppIcons.history,
+                      ),
 
-                    ///====================myRatingAndComments================
-                    CustomProfileCard(
-                      isCevron: true,
-                      onTap: () {
-                        context.pushNamed(RoutePath.myRatingScreen);
-                      },
-                      text: AppStrings.myRatingAndComments.tr,
-                      leadingIcon: AppIcons.reviews,
-                    ),
+                      ///====================myRatingAndComments================
+                      CustomProfileCard(
+                        isCevron: true,
+                        onTap: () {
+                          context.pushNamed(RoutePath.myRatingScreen);
+                        },
+                        text: AppStrings.myRatingAndComments.tr,
+                        leadingIcon: AppIcons.reviews,
+                      ),
 
-                    ///====================settings================
-                    CustomProfileCard(
-                      isCevron: true,
-                      onTap: () {
-                        context.pushNamed(RoutePath.settingScreen);
-                      },
-                      text: AppStrings.settings.tr,
-                      leadingIcon: AppIcons.settings,
-                    ),
+                      ///====================settings================
+                      CustomProfileCard(
+                        isCevron: true,
+                        onTap: () {
+                          context.pushNamed(RoutePath.settingScreen);
+                        },
+                        text: AppStrings.settings.tr,
+                        leadingIcon: AppIcons.settings,
+                      ),
 
-                    ///==================== audio ================
-                    CustomProfileCard(
-                      isCevron: true,
-                      onTap: () {
-                        context.pushNamed(RoutePath.youTubeVideoApp);
-                      },
-                      text: "Audio",
-                      leadingIcon: AppIcons.checkCircle,
-                    ),
+                      ///==================== audio ================
+                      CustomProfileCard(
+                        isCevron: true,
+                        onTap: () {
+                          context.pushNamed(RoutePath.youTubeVideoApp);
+                        },
+                        text: "Audio",
+                        leadingIcon: AppIcons.checkCircle,
+                      ),
 
-                    ///====================LogOut================
-                    CustomProfileCard(
-                      isCevron: false,
-                      onTap: () {
-                        SharePrefsHelper.remove(AppConstants.isRememberMe);
-                        context.pushNamed(RoutePath.signInScreen);
-                      },
-                      text: AppStrings.logOut.tr,
-                      leadingIcon: AppIcons.vector,
-                    ),
-                    generalController.youtubeController != null
-                        ? SizedBox(
-                            height: 100,
-                            child: YoutubePlayer(
-                              controller: generalController.youtubeController!,
-                              showVideoProgressIndicator: false,
+                      ///====================LogOut================
+                      CustomProfileCard(
+                        isCevron: false,
+                        onTap: () {
+                          SharePrefsHelper.remove(AppConstants.isRememberMe);
+                          context.pushNamed(RoutePath.signInScreen);
+                        },
+                        text: AppStrings.logOut.tr,
+                        leadingIcon: AppIcons.vector,
+                      ),
+                      generalController.youtubeController != null
+                          ? SizedBox(
+                              height: 100,
+                              child: YoutubePlayer(
+                                controller: generalController.youtubeController!,
+                                showVideoProgressIndicator: false,
 
-                              bottomActions: [], // Hide all bottom actions
-                            ),
-                          )
-                        : Center(
-                            child:
-                                SizedBox()) // Show a loading indicator while the controller is null
-                  ],
+                                bottomActions: [], // Hide all bottom actions
+                              ),
+                            )
+                          : Center(
+                              child:
+                                  SizedBox()) // Show a loading indicator while the controller is null
+                    ],
+                  ),
                 ),
-              ),
-            );
-        }
-      }),
+              );
+          }
+        }),
+      ),
     );
   }
 }

@@ -31,7 +31,7 @@ class GeneralErrorScreen extends StatelessWidget {
               onPressed: onTap,
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  minimumSize: Size(Get.width / 1.6, 40.h),
+                  // minimumSize: Size(Get.width / 1.6, 40.h),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                     topRight: Radius.circular(32.r),

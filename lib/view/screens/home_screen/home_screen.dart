@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
+import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/general_controller/general_controller.dart';
 import 'package:trade_app/global/push_notification.dart';
@@ -35,14 +36,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   HomeController controller = Get.find<HomeController>();
-  PackageController packageController = Get.find<PackageController>();
-  final MembershipController membershipController = Get.find<MembershipController>();
+  final ProfileController profileController = Get.find<ProfileController>();
+
+
   GeneralController generalController =Get.find<GeneralController>();
   @override
   void initState() {
     PushNotificationHandle.firebaseInit();
     PushNotificationHandle.firebaseListenNotification(context: context);
     SharePrefsHelper.getBool(AppConstants.isRememberMe);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      profileController.getProfile(context: context);
+    });
     super.initState();
   }
   @override
@@ -60,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       context.pushNamed(RoutePath.searchScreen);
                     },
-                    coinAmount: (membershipController.memberShipProfileModel.value.data?.point ?? 0).toString()),
+                    coinAmount: (profileController.profileModel.value.data?.point ?? 0).toString()),
 
                 SizedBox(height: 12.h,),
                 ///==============================Banner Image==========================>

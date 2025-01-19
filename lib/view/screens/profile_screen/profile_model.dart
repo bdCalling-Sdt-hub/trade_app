@@ -1,10 +1,9 @@
-import 'dart:convert';
 
 class ProfileModel {
-  int? statusCode;
-  bool? success;
-  String? message;
-  Data? data;
+  final int? statusCode;
+  final bool? success;
+  final String? message;
+  final Data? data;
 
   ProfileModel({
     this.statusCode,
@@ -13,10 +12,6 @@ class ProfileModel {
     this.data,
   });
 
-  factory ProfileModel.fromRawJson(String str) => ProfileModel.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
     statusCode: json["statusCode"],
     success: json["success"],
@@ -24,58 +19,54 @@ class ProfileModel {
     data: json["data"] == null ? null : Data.fromJson(json["data"]),
   );
 
-  Map<String, dynamic> toJson() => {
-    "statusCode": statusCode,
-    "success": success,
-    "message": message,
-    "data": data?.toJson(),
-  };
 }
 
 class Data {
-  Result? result;
+  final Result? result;
+  final DateTime? planStartDate;
+  final DateTime? planEndDate;
+  final int? ratting;
+  final int? point;
 
   Data({
     this.result,
+    this.planStartDate,
+    this.planEndDate,
+    this.ratting,
+    this.point,
   });
-
-  factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     result: json["result"] == null ? null : Result.fromJson(json["result"]),
+    planStartDate: json["planStartDate"] == null ? null : DateTime.parse(json["planStartDate"]),
+    planEndDate: json["planEndDate"] == null ? null : DateTime.parse(json["planEndDate"]),
+    ratting: json["ratting"],
+    point: json["point"],
   );
-
-  Map<String, dynamic> toJson() => {
-    "result": result?.toJson(),
-  };
 }
 
 class Result {
-  String? id;
-  String? name;
-  String? email;
-  String? phoneNumber;
-  int? points;
-  String? role;
-  String? userType;
-  String? profileImage;
-  String? coverImage;
-  bool? isPaid;
-  String? activationCode;
-  bool? isBlock;
-  bool? isActive;
-  bool? isApproved;
-  bool? isSubscribed;
-  DateTime? expirationTime;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? v;
-  String? address;
-  String? country;
-  String? zip;
-  DateTime? planExpatDate;
+  final String? id;
+  final String? name;
+  final String? email;
+  final String? phoneNumber;
+  final int? points;
+  final String? role;
+  final String? userType;
+  final String? profileImage;
+  final String? coverImage;
+  final bool? isPaid;
+  final String? activationCode;
+  final bool? isBlock;
+  final bool? isActive;
+  final bool? isApproved;
+  final bool? isSubscribed;
+  final DateTime? expirationTime;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
+  final String? deviceToken;
+  final DateTime? planExpatDate;
 
   Result({
     this.id,
@@ -97,15 +88,9 @@ class Result {
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.address,
-    this.country,
-    this.zip,
+    this.deviceToken,
     this.planExpatDate,
   });
-
-  factory Result.fromRawJson(String str) => Result.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["_id"],
@@ -127,35 +112,7 @@ class Result {
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
     updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    address: json["address"],
-    country: json["country"],
-    zip: json["zip"],
+    deviceToken: json["deviceToken"],
     planExpatDate: json["planExpatDate"] == null ? null : DateTime.parse(json["planExpatDate"]),
   );
-
-  Map<String, dynamic> toJson() => {
-    "_id": id,
-    "name": name,
-    "email": email,
-    "phone_number": phoneNumber,
-    "points": points,
-    "role": role,
-    "userType": userType,
-    "profile_image": profileImage,
-    "cover_image": coverImage,
-    "isPaid": isPaid,
-    "activationCode": activationCode,
-    "is_block": isBlock,
-    "isActive": isActive,
-    "isApproved": isApproved,
-    "isSubscribed": isSubscribed,
-    "expirationTime": expirationTime?.toIso8601String(),
-    "createdAt": createdAt?.toIso8601String(),
-    "updatedAt": updatedAt?.toIso8601String(),
-    "__v": v,
-    "address": address,
-    "country": country,
-    "zip": zip,
-    "planExpatDate": planExpatDate?.toIso8601String(),
-  };
 }
