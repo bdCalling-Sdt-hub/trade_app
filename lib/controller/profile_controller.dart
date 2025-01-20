@@ -70,6 +70,85 @@ class ProfileController extends GetxController {
 
   ];
 
+  TextEditingController reportController =TextEditingController();
+
+  ///============================Multi Image picker method ================
+  RxList<File> selectedImagesMulti = <File>[].obs;
+  final ImagePicker picker = ImagePicker();
+ // ApiClient apiClient = serviceLocator();
+  void pickMultiImage() async {
+    try {
+      final pickedFiles = await picker.pickMultiImage(
+        imageQuality: 15,
+      );
+
+      if (pickedFiles.isEmpty) {
+        Get.snackbar('No Images Selected', 'No images were selected.');
+        selectedImagesMulti.clear();
+        return;
+      }
+
+      if (pickedFiles.length > 6) {
+        Get.snackbar(
+            'Image Limit Exceeded', 'You can only select up to 6 images.');
+        return;
+      }
+
+      selectedImagesMulti.clear();
+      for (var xFile in pickedFiles) {
+        if (selectedImagesMulti.length < 6) {
+          selectedImagesMulti.add(File(xFile.path));
+        } else {
+          Get.snackbar(
+              '', 'You can only pick up to 6 images for each product.');
+          break;
+        }
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'An error occurred while picking images: $e');
+    } finally {
+      // Notify listeners of changes
+      update();
+    }
+  }
+
+  RxBool reportLoading = false.obs;
+  reportAdd({required BuildContext context,required String swapId,required String againstUser}) async {
+    reportLoading.value = true;
+
+    update();
+    Map<String, dynamic> body = {
+      "againstUser": againstUser,
+      "description": reportController.text,
+      "swapId" : swapId
+    };
+    List<MultipartBody> multipartBodyList = selectedImagesMulti.map((file) {
+      return MultipartBody("reportImage", file);
+    }).toList();
+    var response = selectedImagesMulti.isEmpty
+        ? await apiClient.post(
+        url: ApiUrl.createReport.addBaseUrl, context: context, body: body,showResult: true)
+        : await apiClient.multipartRequest(
+        url: ApiUrl.createReport.addBaseUrl,
+        reqType: 'Post',
+        body: body,
+        multipartBody: multipartBodyList,
+        showResult: true
+    );
+
+    if (response.statusCode == 200) {
+      reportController.clear();
+      multipartBodyList.clear();
+      toastMessage(message: response.body["message"]);
+      AppRouter.route.pushNamed(RoutePath.swapHistoryScreen);
+    } else {
+      checkApi(response: response, context: context);
+    }
+    reportLoading.value = false;
+  }
+
+
+
   RxInt selectedFqw = 100000.obs;
   ///============================Image picker method================
   RxString image = "".obs;
@@ -301,13 +380,14 @@ class ProfileController extends GetxController {
   }
 
   ///<========================== change password ===========================>
-
+  RxBool reviewLoading = false.obs;
   final TextEditingController commentController = TextEditingController();
   reviewRating(
       {required BuildContext context,
       required double rating,
       required String swapId}) async {
-    signUpLoading.value = true;
+    reviewLoading.value = true;
+
     Map<String, dynamic> body = {
       "swapId": swapId,
       "ratting": rating,
@@ -322,7 +402,11 @@ class ProfileController extends GetxController {
     );
 
     if (response.statusCode == 200) {
+
+      commentController.clear();
+      toastMessage(message: response.body["message"]);
       AppRouter.route.pushNamed(RoutePath.swapHistoryScreen);
+
     }
     else if (response.statusCode == 402) {
       toastMessage(message: response.body["message"]);
@@ -332,8 +416,8 @@ class ProfileController extends GetxController {
       checkApi(response: response, context: context);
     }
 
-    signUpLoading.value = false;
-    signUpLoading.refresh();
+    reviewLoading.value = false;
+
   }
 
 

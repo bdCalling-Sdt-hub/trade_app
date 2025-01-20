@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:trade_app/core/routes/route_path.dart';
+import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
@@ -24,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Obx((){
+      body: Obx(() {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 44.h),
           child: SingleChildScrollView(
@@ -140,27 +141,27 @@ class SignUpScreen extends StatelessWidget {
                     icon: AppIcons.lock,
                     isPassword: true,
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: 8.h),
 
                   ///===================Checkbox here=================
-                  _buildTermsAndConditions(controller),
-                  SizedBox(height: 24.h),
+                  _buildTermsAndConditions(controller: controller, context: context),
+                  SizedBox(height: 8.h),
 
                   ///=========================Sign Up Button=============
                   controller.verifyLoading.value
                       ? Align(
-                    alignment: Alignment.center,
-                    child: Lottie.asset('assets/lottie/loading.json',
-                        width: context.width / 6, fit: BoxFit.cover),
-                  )
-                      : CustomButton(
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        controller.signup(context: context);
-                      }
-                    },
-                    title: AppStrings.signUp.tr,
-                  ),
+                          alignment: Alignment.center,
+                          child: Lottie.asset('assets/lottie/loading.json',
+                              width: context.width / 6, fit: BoxFit.cover),
+                        )
+                      :  CustomButton(
+                          onTap: () {
+                              if (formKey.currentState!.validate()) {
+                                controller.isTerms == false? toastMessage(message: 'Required the term condition'):    controller.signup(context: context);
+                            }
+                          },
+                          title: AppStrings.signUp.tr,
+                        ),
                   SizedBox(height: 24.h),
 
                   ///================Already Have a Account===============
@@ -193,37 +194,55 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTermsAndConditions(AuthController controller) {
-    return GestureDetector(
-      onTap: () {
-        controller.isTerms = !controller.isTerms;
-        controller.update();
-      },
-      child: Row(
+  Widget _buildTermsAndConditions({required AuthController controller,required BuildContext context}) {
+    return GetBuilder<AuthController>(builder: (controller) {
+      return Row(
         children: [
-          Container(
-            alignment: Alignment.center,
-            height: 18,
-            width: 18,
-            decoration: BoxDecoration(
-              color: AppColors.blue500,
-              borderRadius: BorderRadius.circular(4),
+          GestureDetector(
+            onTap: () {
+              controller.isTerms = !controller.isTerms;
+              controller.update();
+            },
+            child: Row(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  height: 18,
+                  width: 18,
+                  decoration: BoxDecoration(
+                    color: AppColors.blue500,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: controller.isTerms
+                      ? const Icon(
+                          Icons.check,
+                          color: AppColors.white50,
+                          size: 14,
+                        )
+                      : const SizedBox(),
+                ),
+                CustomText(
+                  left: 8.w,
+                  fontWeight: FontWeight.w400,
+                  text: AppStrings.iAgreeWithTheTermsAnd.tr,
+                ),
+              ],
             ),
-            child: controller.isTerms
-                ? const Icon(
-                    Icons.check,
-                    color: AppColors.white50,
-                    size: 14,
-                  )
-                : const SizedBox(),
           ),
-          CustomText(
-            left: 8.w,
-            fontWeight: FontWeight.w400,
-            text: AppStrings.iAgreeWithTheTermsAnd.tr,
-          ),
+          IconButton(
+            icon: CustomText(
+              text: 'terms and condition',
+              fontSize: 16.h,
+              fontWeight: FontWeight.w500,
+              decoration: TextDecoration.underline,
+
+            ),
+            onPressed: () {
+              context.pushNamed(RoutePath.termsAndConditionScreen);
+            },
+          )
         ],
-      ),
-    );
+      );
+    });
   }
 }

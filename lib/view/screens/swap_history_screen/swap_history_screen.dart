@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:trade_app/controller/profile_controller.dart';
-
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
 import 'package:trade_app/global/no_internet/no_internet.dart';
@@ -18,6 +17,7 @@ import 'package:trade_app/view/components/custom_review_dialoge/custom_review_di
 import 'package:trade_app/view/components/custom_swap_history/custom_swap_history.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:trade_app/view/screens/swap_history_screen/report_popup.dart';
 
 class SwapHistoryScreen extends StatelessWidget {
   SwapHistoryScreen({super.key});
@@ -90,7 +90,11 @@ class SwapHistoryScreen extends StatelessWidget {
                             },
                             firstProductName: swapHistoryList[index].productFrom?.title ?? "",
                             exchangeProductName:
-                            swapHistoryList[index].productTo?.title ?? "",
+                            swapHistoryList[index].productTo?.title ?? "", onReport: () {
+                            showDialog(context: context, builder: (context){
+                              return  ReportPopup(againstUser: swapHistoryList[index].userFrom ?? "", swapId: swapHistoryList[index].id ?? "",);
+                            });
+                          },
                           );
                         }))
                   ],

@@ -10,8 +10,7 @@ import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_button/custom_button.dart';
 import 'package:trade_app/view/components/custom_details_container/custom_details_container.dart';
-import 'package:trade_app/view/components/custom_dropdown/custom_dropdown.dart';
-import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
+ import 'package:trade_app/view/components/custom_from_card/custom_from_card.dart';
 import 'package:trade_app/view/components/custom_image/custom_image.dart';
 import 'package:trade_app/view/components/custom_loader/custom_loader.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
@@ -329,6 +328,8 @@ class _PostAddScreenState extends State<PostAddScreen> {
                       ),
                     ),
                   ),
+
+
                   SizedBox(
                     height: 20.h,
                   ),

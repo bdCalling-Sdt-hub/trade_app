@@ -88,8 +88,7 @@ class MembershipPackageScreen extends StatelessWidget {
                       ///<====================== package contain ============================>
                       GestureDetector(
                         onTap: () {
-                          context.pushNamed(RoutePath.packageDetailsScreen,
-                              extra: data?.id ?? "");
+                          context.pushNamed(RoutePath.packageDetailsScreen, extra: data?.id ?? "");
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width,
@@ -107,14 +106,48 @@ class MembershipPackageScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18.h,
                               ),
+                              // CustomText(
+                              //   text: "\$${data?.fee ?? ""}",
+                              //   color: AppColors.white50,
+                              //   fontWeight: FontWeight.w700,
+                              //   fontSize: 24.h,
+                              //   top: 8.h,
+                              //   bottom: 8.h,
+                              // ),
                               CustomText(
-                                text: "\$${data?.fee ?? ""}",
+                                text: packageList?[index].planName ?? "",
+                                color: AppColors.white50,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              index==0? CustomText(
+                                text: "\$${(packageList?[index].fee ?? 0).toString()}",
                                 color: AppColors.white50,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 24.h,
-                                top: 8.h,
-                                bottom: 8.h,
-                              ),
+                                top: 4.h,
+                                bottom: 4.h,
+                              ): index==1?  CustomText(
+                                text: "\$${(packageList?[index].fee ?? 0).toString()}",
+                                color: AppColors.white50,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24.h,
+                                top: 4.h,
+                                bottom: 4.h,
+                              ): index==2?  CustomText(
+                                text: ((packageList?[index].pointRangeStart ?? 0) + 1).toString() ,
+                                color: AppColors.white50,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24.h,
+                                top: 4.h,
+                                bottom: 4.h,
+                              ): index==3?  CustomText(
+                                text: (packageList?[index].pointRangeStart ?? 0).toString(),
+                                color: AppColors.white50,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24.h,
+                                top: 4.h,
+                                bottom: 4.h,
+                              ):SizedBox(),
                               CustomText(
                                 text: "Per Month",
                                 color: AppColors.white50,

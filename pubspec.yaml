@@ -77,8 +77,7 @@ dependencies:
   audio_video_progress_bar: ^2.0.3
   just_audio: any
 
-  youtube_player_flutter: ^8.0.0
-  flutter_inappwebview: any
+  youtube_player_flutter: ^9.1.1
 
 
 

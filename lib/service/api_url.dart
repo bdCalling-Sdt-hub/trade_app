@@ -23,6 +23,7 @@ class ApiUrl {
   static const allAdds = "/adds/all-adds";
   static const getSubProduct = "/product/get-all";
   static const addProduct = "/product/add-product";
+  static const createReport = "/swap/create-report";
   static const myProduct = "/product/my-products";
   static const editProduct = "/product/edit";
   static const deleteProduct = "/product/delete";

@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/helper/prefs_helper/prefs_helper.dart';
+import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -251,6 +252,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () {
                           if (_urlController.text.isNotEmpty) {
                             _saveUrl();
+                            toastMessage(message: 'Video Added Successfully');
+                            print('object');
                           }
                         },
                         child: Text("Save"),

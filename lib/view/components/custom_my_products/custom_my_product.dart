@@ -37,6 +37,7 @@ class CustomMyProduct extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: MediaQuery.of(context).size.width *.4,
         margin: isMargin ? const EdgeInsets.all(10) : null,
         padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.h),
         decoration: BoxDecoration(

@@ -56,7 +56,7 @@ class AppStrings {
   static const String reTypeYourPassword = "Retype your password";
   static const String alreadyHaveAnAccount = "Already have an account?";
   static const String iAgreeWithTheTermsAnd =
-      "I agree with the terms and condition";
+      "I agree with the ";
   static const String pleaseSignInToContinueAccess =
       "Please sign in to continue access";
   static const String enterYourEmailAndWeWillSendYou =

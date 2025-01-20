@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-     generalController.loadSavedUrl();
+    generalController.loadSavedUrl();
   }
 
   @override
@@ -63,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       bottomNavigationBar: NavBar(currentIndex: 4),
       body: RefreshIndicator(
-        onRefresh: ()async{
+        onRefresh: () async {
           await generalController.loadSavedUrl();
         },
         child: Obx(() {
@@ -88,7 +88,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               );
             case Status.completed:
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -108,8 +109,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       ///=======================Name=================
                       CustomText(
-                        text: controller.profileModel.value.data?.result?.name ??
-                            "",
+                        text:
+                            controller.profileModel.value.data?.result?.name ??
+                                "",
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: AppColors.black500,
@@ -127,8 +129,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: AppColors.black200,
                           ),
                           CustomText(
-                            text: controller
-                                    .profileModel.value.data?.result?.userType ??
+                            text: controller.profileModel.value.data?.result
+                                    ?.userType ??
                                 "",
                             fontWeight: FontWeight.w500,
                             fontSize: 12,
@@ -217,6 +219,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         isCevron: false,
                         onTap: () {
                           SharePrefsHelper.remove(AppConstants.isRememberMe);
+                          SharePrefsHelper.remove(AppConstants.token);
                           context.pushNamed(RoutePath.signInScreen);
                         },
                         text: AppStrings.logOut.tr,
@@ -224,17 +227,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       generalController.youtubeController != null
                           ? SizedBox(
-                              height: 100,
+                              height: 0,
                               child: YoutubePlayer(
                                 controller: generalController.youtubeController!,
                                 showVideoProgressIndicator: false,
-
-                                bottomActions: [], // Hide all bottom actions
+                                bottomActions: [],
                               ),
                             )
-                          : Center(
-                              child:
-                                  SizedBox()) // Show a loading indicator while the controller is null
+                          : Center(child: SizedBox())
                     ],
                   ),
                 ),

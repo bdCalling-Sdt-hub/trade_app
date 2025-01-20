@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -19,7 +21,6 @@ class CustomReviewDialog extends StatefulWidget {
   final String swapId;
 
   @override
-  // ignore: library_private_types_in_public_api
   _CustomReviewDialogState createState() => _CustomReviewDialogState();
 }
 
@@ -45,7 +46,7 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
                 const Spacer(),
                 IconButton(
                     onPressed: () {
-                      navigator?.pop();
+                      context.pop();
                     },
                     icon: const CustomImage(
                       imageSrc: AppIcons.closeSmall,
@@ -62,7 +63,6 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
                     fontSize: 18,
                     color: AppColors.black500,
                     bottom: 15,
-                    top: 12,
                   ),
                 ],
               ),
@@ -112,7 +112,13 @@ class _CustomReviewDialogState extends State<CustomReviewDialog> {
             ),
 
             ///====================Submit Button===========
-            Padding(
+            controller.reviewLoading.value
+                ? Align(
+              alignment: Alignment.center,
+              child: Lottie.asset('assets/lottie/loading.json',
+                  width: context.width / 6, fit: BoxFit.cover),
+            )
+                :   Padding(
               padding: EdgeInsets.only(top: 10.h),
               child: CustomButton(
                 onTap: () {

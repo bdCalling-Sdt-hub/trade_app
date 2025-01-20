@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +15,6 @@ import 'package:trade_app/service/api_url.dart';
 import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
-import 'package:trade_app/utils/app_strings/app_strings.dart';
 
 class AuthController extends GetxController {
   ApiClient apiClient = serviceLocator();
@@ -108,6 +106,13 @@ class AuthController extends GetxController {
         url: ApiUrl.register.addBaseUrl);
 
     if (response.statusCode == 200) {
+      firstNameController.clear();
+      lastNameController.clear();
+      emailSignUp.clear();
+      phoneSignUp.clear();
+      addressSignUp.clear();
+      passSignUp.clear();
+      confirmPassController.clear();
       secondsRemaining.value = 60;
       secondsRemaining.refresh();
       startTimer();

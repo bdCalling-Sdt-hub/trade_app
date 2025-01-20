@@ -18,6 +18,7 @@ class CustomSwapHistory extends StatelessWidget {
   final String exchangeProductName;
   final Color backgroundColor;
   final VoidCallback onTap;
+  final VoidCallback onReport;
   final VoidCallback onTapName;
 
   const CustomSwapHistory({
@@ -29,7 +30,7 @@ class CustomSwapHistory extends StatelessWidget {
     required this.onTap,
     required this.firstProductName,
     required this.exchangeProductName,
-    required this.onTapName,
+    required this.onTapName, required this.onReport,
   });
 
   @override
@@ -46,12 +47,28 @@ class CustomSwapHistory extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(
-                bottom: 10,
-                text: AppStrings.swappedWith.tr,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black500,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                    bottom: 10,
+                    text: AppStrings.swappedWith.tr,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.black500,
+                  ),
+                  IconButton(
+
+                    onPressed: onReport,
+                    icon: Container(
+                      padding: EdgeInsets.all(6.sp),
+                        decoration: BoxDecoration(
+                          color: Colors.white24,
+                          shape: BoxShape.circle
+                        ),
+                        child: CustomImage(imageSrc: AppIcons.flag,imageType: ImageType.svg,size: 18.sp,)),
+                  )
+                ],
               ),
               Row(
                 children: [
@@ -111,8 +128,8 @@ class CustomSwapHistory extends StatelessWidget {
                 children: [
                   CustomText(
                     text: firstProductName,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 14.h,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.black500,
                   ),
                   const CustomImage(
@@ -121,8 +138,8 @@ class CustomSwapHistory extends StatelessWidget {
                   ),
                   CustomText(
                     text: exchangeProductName,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 14.h,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.black500,
                   ),
                 ],

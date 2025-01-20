@@ -113,6 +113,7 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                           fontWeight: FontWeight.w600,
                           fontSize: 18.h,
                         ),
+                      if(!['Platinum','Diamond'].contains(packageController.packageDetailsModel.value.data?.planName))
                         CustomText(
                           text:
                               '\$${packageController.packageDetailsModel.value.data?.fee ?? 0}',
@@ -122,6 +123,16 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                           top: 16.h,
                           bottom: 16.h,
                         ),
+                        if(['Platinum','Diamond'].contains(packageController.packageDetailsModel.value.data?.planName))
+                          CustomText(
+                            text:
+                            '${packageController.packageDetailsModel.value.data?.pointRangeStart ?? 0}',
+                            color: AppColors.white50,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24.h,
+                            top: 16.h,
+                            bottom: 16.h,
+                          ),
                         CustomText(
                           text: 'Per Month',
                           color: AppColors.white50,
