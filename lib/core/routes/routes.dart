@@ -311,7 +311,16 @@ class AppRouter {
         GoRoute(
           name: RoutePath.membershipDetailsScreen,
           path: RoutePath.membershipDetailsScreen.addBasePath,
-          builder: (context, state) => MembershipDetailsScreen(),
+          builder: (context, state) {
+            final name = state.uri.queryParameters["name"] ?? "";
+            final point = state.uri.queryParameters["point"] ?? "0";
+            final userType = state.uri.queryParameters["userType"] ?? "0";
+
+            return MembershipDetailsScreen(name: name, point: int.parse(point.toString()), userType: userType,
+
+            );
+          },
+
         ),
 
         ///======================= searchScreen Route =======================

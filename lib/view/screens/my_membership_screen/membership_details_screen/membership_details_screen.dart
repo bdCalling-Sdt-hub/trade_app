@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
@@ -16,7 +17,11 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_user_tab_bar/custom_user_tab_bar.dart';
 
 class MembershipDetailsScreen extends StatefulWidget {
-  MembershipDetailsScreen({super.key});
+  MembershipDetailsScreen({super.key, required this.name, required this.point, required this.userType});
+
+  final String name;
+  final String userType;
+  final int point;
 
   @override
   State<MembershipDetailsScreen> createState() =>
@@ -29,7 +34,7 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      membershipController.getMemberShipDetails(planType: "Gold");
+      membershipController.getMemberShipDetails(planType: widget.userType);
     });
     super.initState();
   }
@@ -75,40 +80,49 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                         children: [
                           ///========================Card this================
                           CustomMembershipDetailsCard(
-                            userName: 'Mohammod Rakib',
-                            points: membershipController.memberShipDetailsModel
-                                    .value.data?.userPoint ??
-                                0,
+                            userName: widget.name,
+                            points: widget.point,
                             membershipLevel: AppStrings.gold.tr,
                             sliderWidget: membershipController.isLoader.value
                                 ? const CustomLoader()
-                                : CustomSingleSlider(
-                                    max: (membershipController
-                                                .memberShipDetailsModel
-                                                .value
-                                                .data
-                                                ?.pointRangeEnd ??
-                                            0)
-                                        .toDouble(),
-                                    min: (membershipController
-                                                .memberShipDetailsModel
-                                                .value
-                                                .data
-                                                ?.pointRangeStart ??
-                                            0)
-                                        .toDouble(),
-                                    value: (membershipController
-                                                .memberShipDetailsModel
-                                                .value
-                                                .data
-                                                ?.userPoint ??
-                                            0)
-                                        .toDouble(),
-                                    onChanged: (newValue) {
-                                      membershipController.sliderValue.value =
-                                          newValue;
-                                    }, // Disable user interaction
-                                  ),
+                                : Slider(
+                              value: widget.point.toDouble(),
+                              // onChanged: (double value){},
+                              min: widget.point.toDouble(),
+                              max: (membershipController
+                                  .memberShipDetailsModel
+                                  .value
+                                  .data
+                                  ?.pointRangeEnd ??
+                                  0)
+                                  .toDouble(),
+                              divisions: 1,
+                              label: widget.point.toString(),
+                              activeColor: Colors.blue,
+                              inactiveColor: Colors.white, onChanged: (double value) {  },
+                            ),
+                            // CustomSingleSlider(
+                            //         max: (membershipController
+                            //                     .memberShipDetailsModel
+                            //                     .value
+                            //                     .data
+                            //                     ?.pointRangeEnd ??
+                            //                 0)
+                            //             .toDouble(),
+                            //         min:1000,
+                            //         // (membershipController
+                            //         //             .memberShipDetailsModel
+                            //         //             .value
+                            //         //             .data
+                            //         //             ?.pointRangeStart ??
+                            //         //         0)
+                            //         //     .toDouble(),
+                            //         value: widget.point.toDouble(),
+                            //         onChanged: (newValue) {
+                            //           membershipController.sliderValue.value =
+                            //               newValue;
+                            //         }, // Disable user interaction
+                            //       )
                             description:
                                 'Keep earning points to unlock exclusive benefits and privileges.'
                                     .tr,
@@ -125,10 +139,10 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                           ),
 
                           ///========================Swap Point History=====================
-                          membershipController.memberShipDetailsModel.value
-                              .data?.result?.isEmpty != null
-                              ? Center(child: CustomText(text: 'No Data Found',top: 100.h,))
-                              :
+                          // membershipController.memberShipDetailsModel.value
+                          //     .data?.result!.isEmpty
+                          //     ? Center(child: CustomText(text: 'No Data Found',top: 100.h,))
+                          //     :
                            Column(
                                   children: List.generate(
                                       membershipController
@@ -141,7 +155,13 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                                     return CustomSwapPointsRow(
                                         earnedPointsText:
                                             'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
-                                        date: '12/03/24',
+                                        date:DateFormat('yMMMd').format(membershipController
+                                            .memberShipDetailsModel
+                                            .value
+                                            .data
+                                            ?.result?[index].createdAt?.toLocal() ?? DateTime.now())
+
+                                        ,
                                         item1: membershipController
                                                 .memberShipDetailsModel
                                                 .value

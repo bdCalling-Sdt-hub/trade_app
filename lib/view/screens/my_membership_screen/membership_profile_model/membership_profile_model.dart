@@ -24,7 +24,7 @@ class MemberShipProfileModel {
 class Data {
   final Profile? profile;
   final Plan? plan;
-  final int? point;
+  final num? point;
   final List<PlanePoint>? planePoint;
 
   Data({

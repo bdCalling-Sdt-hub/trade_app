@@ -117,7 +117,11 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                               controller: membershipController,
                               onTap: () {
                                 context
-                                    .pushNamed(RoutePath.membershipDetailsScreen);
+                                    .pushNamed(RoutePath.membershipDetailsScreen,queryParameters: {
+                                      'name' : data.data?.profile?.name ?? "",
+                                      'point' : (data.data?.point ?? 0).toString(),
+                                      'userType' : data.data?.profile?.userType ?? ""
+                                });
                               },
                               points: (data.data?.profile?.points ?? 0),
                             ),
