@@ -108,7 +108,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       firstNameController.clear();
       lastNameController.clear();
-      emailSignUp.clear();
+      // emailSignUp.clear();
       phoneSignUp.clear();
       addressSignUp.clear();
       passSignUp.clear();

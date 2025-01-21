@@ -123,10 +123,20 @@ class _PackageDetailsScreenState extends State<PackageDetailsScreen> {
                           top: 16.h,
                           bottom: 16.h,
                         ),
-                        if(['Platinum','Diamond'].contains(packageController.packageDetailsModel.value.data?.planName))
+                        if(['Platinum'].contains(packageController.packageDetailsModel.value.data?.planName))
                           CustomText(
                             text:
-                            '${packageController.packageDetailsModel.value.data?.pointRangeStart ?? 0}',
+                            '${(packageController.packageDetailsModel.value.data?.pointRangeStart ?? 0)+1}',
+                            color: AppColors.white50,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 24.h,
+                            top: 16.h,
+                            bottom: 16.h,
+                          ),
+                        if(['Diamond'].contains(packageController.packageDetailsModel.value.data?.planName))
+                          CustomText(
+                            text:
+                            '${(packageController.packageDetailsModel.value.data?.pointRangeStart ?? 0)}',
                             color: AppColors.white50,
                             fontWeight: FontWeight.w700,
                             fontSize: 24.h,

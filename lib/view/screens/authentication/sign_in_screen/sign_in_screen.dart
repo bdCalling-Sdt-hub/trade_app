@@ -244,7 +244,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       Expanded(
                         child: CustomTextField(
                           textEditingController: _urlController,
-                          hintText: 'Enter youtube video url',
+                          hintText: 'Enter youtube url(optional)',
                         ),
                       ),
                       SizedBox(width: 8.w),

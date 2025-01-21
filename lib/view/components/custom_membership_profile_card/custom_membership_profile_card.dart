@@ -6,9 +6,10 @@ import 'package:trade_app/controller/membership_controller/membership_controller
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_netwrok_image/custom_network_image.dart';
+import 'package:trade_app/view/components/custom_single_slider/custom_single_slider.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 
-class CustomMembershipProfileCard extends StatelessWidget {
+class CustomMembershipProfileCard extends StatefulWidget {
   final String imageUrl;
   final String name;
   final int points;
@@ -16,7 +17,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
   final MembershipController controller;
   final VoidCallback onTap;
 
-  const CustomMembershipProfileCard({
+    CustomMembershipProfileCard({
     required this.imageUrl,
     required this.name,
     required this.membershipStatus,
@@ -27,9 +28,17 @@ class CustomMembershipProfileCard extends StatelessWidget {
   });
 
   @override
+  State<CustomMembershipProfileCard> createState() => _CustomMembershipProfileCardState();
+}
+
+class _CustomMembershipProfileCardState extends State<CustomMembershipProfileCard> {
+  final MembershipController membershipController =
+  Get.find<MembershipController>();
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.r),
@@ -44,7 +53,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
                   ///=====================Image=========
                   CustomNetworkImage(
                       boxShape: BoxShape.circle,
-                      imageUrl: imageUrl,
+                      imageUrl: widget.imageUrl,
                       height: 49.h,
                       width: 49.w),
                   SizedBox(width: 16.w),
@@ -53,7 +62,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
                     children: [
                       ///===================Name=========
                       CustomText(
-                        text: name,
+                        text: widget.name,
                         color: AppColors.white50,
                         fontWeight: FontWeight.w700,
                         fontSize: 18,
@@ -63,7 +72,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
                       ///=====================Status=========
                       CustomText(
                         text: '${AppStrings.membershipStatus}'
-                            '$membershipStatus',
+                            '${widget.membershipStatus}',
                         color: AppColors.white50,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -74,26 +83,37 @@ class CustomMembershipProfileCard extends StatelessWidget {
               ),
               Stack(
                 children: [
-                  RangeSliderFlutter(
-                    values: [points.toDouble()],
-                    max: controller.diamondThreshold.toDouble(),
-                    min: 0,
-                    rangeSlider: false,
-                    tooltip: RangeSliderFlutterTooltip(
-                      alwaysShowTooltip: true,
-                      // boxStyle: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
-                      textStyle: TextStyle(color: Colors.blue),
+                  // RangeSliderFlutter(
+                  //   values: [points.toDouble()],
+                  //   max: controller.diamondThreshold.toDouble(),
+                  //   min: 0,
+                  //   rangeSlider: false,
+                  //   tooltip: RangeSliderFlutterTooltip(
+                  //     alwaysShowTooltip: true,
+                  //     // boxStyle: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4)),
+                  //     textStyle: TextStyle(color: Colors.blue),
+                  //   ),
+                  //   trackBar: RangeSliderFlutterTrackBar(
+                  //     activeTrackBarHeight: 6,
+                  //     activeTrackBar: BoxDecoration(color: Colors.blue),
+                  //     inactiveTrackBar: BoxDecoration(color: Colors.white),
+                  //   ),
+                  //   onDragging: (handlerIndex, lowerValue, upperValue) {
+                  //     controller.updatePoints(lowerValue.toInt());
+                  //   },
+                  // ),
+
+                    Slider(
+                      value:  (membershipController.memberShipProfileModel.value.data?.point??0).toDouble(),
+                      onChanged: (double value){},
+                      min: 0,
+                      max: (membershipController.memberShipProfileModel.value.data?.plan?.planId?.pointRangeEnd??0).toDouble(),
+                      divisions: 3,
+                      label: '${(membershipController.memberShipProfileModel.value.data?.point ?? 0).toInt()}',
+                      activeColor: Colors.blue,
+                      inactiveColor: Colors.white,
                     ),
-                    trackBar: RangeSliderFlutterTrackBar(
-                      activeTrackBarHeight: 6,
-                      activeTrackBar: BoxDecoration(color: Colors.blue),
-                      inactiveTrackBar: BoxDecoration(color: Colors.white),
-                    ),
-                    onDragging: (handlerIndex, lowerValue, upperValue) {
-                      controller.updatePoints(lowerValue.toInt());
-                    },
-                  ),
-                  Positioned(
+                  /*Positioned(
                       top: 20,
                       left: 100,
                       child: Container(
@@ -108,7 +128,7 @@ class CustomMembershipProfileCard extends StatelessWidget {
                         height: 30.h,
                         width: 4.w,
                         color: Colors.white,
-                      )),
+                      )),*/
                 ],
               ),
               Padding(
@@ -126,8 +146,8 @@ class CustomMembershipProfileCard extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                         SizedBox(height: 4.h),
-                        const CustomText(
-                          text: '25,000',
+                          CustomText(
+                          text: ((membershipController.memberShipProfileModel.value.data?.planePoint?[1].pointRangeEnd ?? 0)+1).toString(),
                           color: AppColors.black50,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -145,8 +165,8 @@ class CustomMembershipProfileCard extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                         SizedBox(height: 4.h),
-                        const CustomText(
-                          text: '100,000',
+                        CustomText(
+                          text: ((membershipController.memberShipProfileModel.value.data?.planePoint?[2].pointRangeEnd ?? 0)+1).toString(),
                           color: AppColors.black50,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
