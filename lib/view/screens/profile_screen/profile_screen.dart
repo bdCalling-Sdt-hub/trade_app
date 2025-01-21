@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/controller/profile_controller.dart';
 import 'package:trade_app/core/routes/route_path.dart';
 import 'package:trade_app/global/error_screen/error_screen.dart';
@@ -41,20 +42,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          GetBuilder<GeneralController>(builder: (generalController) {
-        return FloatingActionButton(
-          onPressed: () {
-            generalController.togglePlayPause();
-            generalController.update();
-          },
-          child: Icon(
-            generalController.isPlaying
-                ? Icons.pause_circle
-                : Icons.play_circle,
-          ),
-        );
-      }),
+      // floatingActionButton:
+      //     GetBuilder<GeneralController>(builder: (generalController) {
+      //   return FloatingActionButton(
+      //     onPressed: () {
+      //       generalController.togglePlayPause();
+      //       generalController.update();
+      //     },
+      //     child: Icon(
+      //       generalController.isPlaying
+      //           ? Icons.pause_circle
+      //           : Icons.play_circle,
+      //     ),
+      //   );
+      // }),
       backgroundColor: AppColors.white,
 
       ///==================My Profile Appbar===============
@@ -217,24 +218,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ///====================LogOut================
                       CustomProfileCard(
                         isCevron: false,
-                        onTap: () {
-                          SharePrefsHelper.remove(AppConstants.isRememberMe);
-                          SharePrefsHelper.remove(AppConstants.token);
+                        onTap: () async{
+                          // SharePrefsHelper.remove('youtube_url');
+                          // SharePrefsHelper.remove(AppConstants.isRememberMe);
+                          // SharePrefsHelper.remove(AppConstants.token);
+                          var pref=await SharedPreferences.getInstance();
+                          pref.clear();
                           context.pushNamed(RoutePath.signInScreen);
                         },
                         text: AppStrings.logOut.tr,
                         leadingIcon: AppIcons.vector,
                       ),
-                      generalController.youtubeController != null
-                          ? SizedBox(
-                              height: 0,
-                              child: YoutubePlayer(
-                                controller: generalController.youtubeController!,
-                                showVideoProgressIndicator: false,
-                                bottomActions: [],
-                              ),
-                            )
-                          : Center(child: SizedBox())
+                      // generalController.youtubeController != null
+                      //     ? SizedBox(
+                      //         height: 100,
+                      //         child: YoutubePlayer(
+                      //           controller: generalController.youtubeController!,
+                      //           showVideoProgressIndicator: false,
+                      //           bottomActions: [],
+                      //         ),
+                      //       )
+                      //     : Center(child: SizedBox())
                     ],
                   ),
                 ),

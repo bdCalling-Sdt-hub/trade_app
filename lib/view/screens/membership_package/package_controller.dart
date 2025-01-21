@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trade_app/core/routes/route_path.dart';
@@ -15,6 +16,30 @@ import 'package:trade_app/view/screens/membership_package/package_details_model.
 import 'package:trade_app/view/screens/membership_package/package_model.dart';
 
 class PackageController extends GetxController {
+
+  var selectedDate = DateTime.now().obs; // Make selectedDate observable
+
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate.value,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            datePickerTheme: DatePickerThemeData(
+              // Customize as needed
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null && picked != selectedDate.value) {
+      selectedDate.value = picked; // Update the observable value
+    }
+  }
   RxInt size=0.obs;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController placeBirthController = TextEditingController();
@@ -25,8 +50,10 @@ class PackageController extends GetxController {
   final TextEditingController professionController = TextEditingController();
   final TextEditingController religionController = TextEditingController();
   final TextEditingController regionController = TextEditingController();
-  final TextEditingController destinationStartController =
-      TextEditingController();
+
+
+
+
   final TextEditingController stateStartController = TextEditingController();
   final TextEditingController countryStartController = TextEditingController();
   final TextEditingController countyStartController = TextEditingController();
@@ -37,6 +64,7 @@ class PackageController extends GetxController {
   final TextEditingController countyEndController = TextEditingController();
   final TextEditingController dateTravelController = TextEditingController();
   final TextEditingController swapAboutController = TextEditingController();
+  final TextEditingController destinationStartTravel = TextEditingController();
 
   final RxString selectedPets = "Yes".obs;
   final RxString selectedChildren = "Yes".obs;
@@ -70,7 +98,7 @@ class PackageController extends GetxController {
       //"payment_status": payment_status,
       "plan_type": planType.value,
       "name": nameController.value.text,
-      "date_of_birth": destinationStartController.value.text,
+      "date_of_birth": selectedDate.toString(),
       "place_of_birth": placeBirthController.value.text,
       "license_number": licenseNoController.value.text,
       "passport_number": passwordController.value.text,
@@ -89,7 +117,7 @@ class PackageController extends GetxController {
       "aboutSwap": swapAboutController.text,
       "departureArrival": departureArrival.value,
       "datesOfTravel": dateTravelController.value.text,
-      "startDestination": destinationStartController.value.text,
+      "startDestination": destinationStartTravel.value.text,
       "startState": stateStartController.value.text,
       "travelStartCounty": countyStartController.value.text,
       "travelStartCountry": countryStartController.value.text,
@@ -109,7 +137,7 @@ class PackageController extends GetxController {
 
     if (response.statusCode == 200) {
       toastMessage(message: response.body["message"]);
-      AppRouter.route.pushNamed(RoutePath.navBar, extra: 0);
+      AppRouter.route.pushNamed(RoutePath.homeScreen);
     } else if (response.statusCode == 402) {
       toastMessage(message: response.body["message"]);
     } else {

@@ -17,7 +17,6 @@ import 'firebase_options.dart';
 Future<void> _firebaseMessageBackgroundHandler(RemoteMessage message) async {
   print("Background handler triggered");
 }
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferences.getInstance();

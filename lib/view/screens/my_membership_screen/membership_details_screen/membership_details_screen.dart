@@ -88,18 +88,18 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                                 : Slider(
                               value: widget.point.toDouble(),
                               // onChanged: (double value){},
-                              min: widget.point.toDouble(),
+                              min: 0,
                               max: (membershipController
                                   .memberShipDetailsModel
                                   .value
                                   .data
                                   ?.pointRangeEnd ??
-                                  0)
+                                  24999)
                                   .toDouble(),
                               divisions: 1,
                               label: widget.point.toString(),
                               activeColor: Colors.blue,
-                              inactiveColor: Colors.white, onChanged: (double value) {  },
+                              inactiveColor: Colors.white, onChanged: (double value) {},
                             ),
                             // CustomSingleSlider(
                             //         max: (membershipController
@@ -188,7 +188,7 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                             ? Column(
                                 children: [
                                   CustomMembershipDetailsCard(
-                                    userName: 'Mohammed Rakib',
+                                    userName: widget.name,
                                     points: membershipController
                                             .memberShipDetailsModel
                                             .value
@@ -309,7 +309,7 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                                 ? Column(
                                     children: [
                                       CustomMembershipDetailsCard(
-                                        userName: 'Mohammod Rakib',
+                                        userName: widget.name,
                                         points: membershipController
                                                 .memberShipDetailsModel
                                                 .value
@@ -376,7 +376,11 @@ class _MembershipDetailsScreenState extends State<MembershipDetailsScreen> {
                                           return CustomSwapPointsRow(
                                               earnedPointsText:
                                                   'Earned ${membershipController.memberShipDetailsModel.value.data?.result?[index].myPoints ?? 0} swap points',
-                                              date: '12/03/24',
+                                              date: DateFormat().format(membershipController
+                                                  .memberShipDetailsModel
+                                                  .value
+                                                  .data
+                                                  ?.result?[index].createdAt ??DateTime.now()),
                                               item1: membershipController
                                                       .memberShipDetailsModel
                                                       .value

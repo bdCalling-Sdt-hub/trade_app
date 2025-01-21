@@ -74,6 +74,9 @@ class BannerList extends StatelessWidget {
                 }).toList(),
               ),
 
+              SizedBox(
+                height: 16.h,
+              ),
               ///============================ Smooth Indicator =============================>
               Align(
                 alignment: Alignment.center,

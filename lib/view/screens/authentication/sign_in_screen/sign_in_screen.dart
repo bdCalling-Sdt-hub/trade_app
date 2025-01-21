@@ -239,7 +239,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 24.h,
                   ),
 
-                  Row(
+                 /* Row(
                     children: [
                       Expanded(
                         child: CustomTextField(
@@ -259,7 +259,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Text("Save"),
                       ),
                     ],
-                  ),
+                  ),*/
 
                   SizedBox(
                     height: 24.h,

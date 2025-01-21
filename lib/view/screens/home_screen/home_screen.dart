@@ -35,12 +35,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   HomeController controller = Get.find<HomeController>();
   final ProfileController profileController = Get.find<ProfileController>();
-
-
-  GeneralController generalController =Get.find<GeneralController>();
   @override
   void initState() {
     PushNotificationHandle.firebaseInit();
@@ -111,9 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 */
                 BannerList(),
 
-                SizedBox(
-                  height: 16.h,
-                ),
 
                 ///============================ popularCategory =============================>
                 Row(
@@ -239,19 +232,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ///============================ just for you =============================>
                 JustForYou(),
 
-                // generalController.youtubeController != null
-                //     ? SizedBox(
-                //   height: 100,
-                //   child: YoutubePlayer(
-                //     controller: generalController.youtubeController!,
-                //     showVideoProgressIndicator: false,
-                //
-                //     bottomActions: [], // Hide all bottom actions
-                //   ),
-                // )
-                //     : Center(
-                //     child:
-                //     SizedBox())
               ],
             ),
           );

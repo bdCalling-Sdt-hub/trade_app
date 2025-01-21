@@ -106,7 +106,7 @@ class _CustomMembershipProfileCardState extends State<CustomMembershipProfileCar
                     Slider(
                       value:  (membershipController.memberShipProfileModel.value.data?.point??0).toDouble(),
                       onChanged: (double value){},
-                      min: (membershipController.memberShipProfileModel.value.data?.point??0).toDouble(),
+                      min: 0,
                       max: (membershipController.memberShipProfileModel.value.data?.plan?.planId?.pointRangeEnd??0).toDouble(),
                       divisions: 3,
                       label: '${(membershipController.memberShipProfileModel.value.data?.point ?? 0).toInt()}',

@@ -100,7 +100,7 @@ class MessageListCard extends StatelessWidget {
         child: PagedListView<int, MessageModel>(
           pagingController: controller.pagingController,
           scrollController: scrollController,
-          //reverse: true,
+          reverse: true,
           builderDelegate: PagedChildBuilderDelegate<MessageModel>(
             itemBuilder: (context, message, index) {
               print(

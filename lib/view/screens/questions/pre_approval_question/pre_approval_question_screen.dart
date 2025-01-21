@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:trade_app/controller/post_controller/post_controller.dart';
 
 import 'package:trade_app/core/routes/route_path.dart';
@@ -18,7 +19,7 @@ import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/custom_text_field/custom_text_field.dart';
 import 'package:trade_app/view/screens/membership_package/package_controller.dart';
 
-class PreApprovalQuestionScreen extends StatelessWidget {
+class PreApprovalQuestionScreen extends StatefulWidget {
   PreApprovalQuestionScreen(
       {super.key,
       required this.planId,
@@ -29,8 +30,16 @@ class PreApprovalQuestionScreen extends StatelessWidget {
   final int amount;
   final String planType;
 
+  @override
+  State<PreApprovalQuestionScreen> createState() => _PreApprovalQuestionScreenState();
+}
+
+class _PreApprovalQuestionScreenState extends State<PreApprovalQuestionScreen> {
   final PackageController controller = Get.find<PackageController>();
+
   final PostController postController = Get.find<PostController>();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +72,40 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                   controller: controller.nameController),
 
               ///<================================= dateOfBirth ====================================>
-              CustomFromCard(
-                  onTap: () {},
-                  title: AppStrings.dateOfBirth,
-                  controller: controller.destinationStartController),
+              // CustomFromCard(
+              //     onTap: () {},
+              //     title: AppStrings.dateOfBirth,
+              //     controller: controller.destinationStartController),
+
+              CustomText(text: 'Date of Birth',fontWeight: FontWeight.w500,fontSize: 16.h,bottom: 8.h,),
+              GestureDetector(
+                onTap: () {
+                  controller.selectDate(context);
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding:
+                  EdgeInsets.symmetric(vertical: 16.h, horizontal: 8.w),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.sp),
+                      border: Border.all(
+                        width: 1, color: Colors.grey,)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                          textAlign: TextAlign.start,
+                          text: DateFormat('yMMMd').format(controller.selectedDate.value.toLocal())
+                      ),
+                      const Icon(
+                        Icons.date_range,
+                        color: AppColors.white700,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 8.h,),
 
               ///<================================= placeOfBirth ====================================>
               CustomFromCard(
@@ -228,9 +267,9 @@ class PreApprovalQuestionScreen extends StatelessWidget {
                     context.pushNamed(
                       RoutePath.preApprovalQuestion2Screen,
                       queryParameters: {
-                        "plan_id": planId ?? '',
-                        "amount": (amount ?? 0).toString(),
-                        "planType": planType ?? '',
+                        "plan_id": widget.planId ?? '',
+                        "amount": (widget.amount ?? 0).toString(),
+                        "planType": widget.planType ?? '',
                       },
                     );
                   },

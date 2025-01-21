@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';
 import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
@@ -59,8 +60,9 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ///<================================= destination ====================================>
 
               CustomFromCard(
-                  title: AppStrings.destination,
-                  controller: controller.destinationStartController),
+                  title: AppStrings.destination, controller: controller.destinationStartTravel,
+                  //controller: controller.destinationStartController
+              ),
 
               ///<================================= state ====================================>
               CustomFromCard(
@@ -135,7 +137,11 @@ class PreApprovalQuestion3Screen extends StatelessWidget {
               ),
 
               ///<================================= submit button ====================================>
-              CustomButton(
+            controller.signUpLoading.value ? Align(
+              alignment: Alignment.center,
+              child: Lottie.asset('assets/lottie/loading.json',
+                  width: context.width / 6, fit: BoxFit.cover),
+            ):  CustomButton(
                 onTap: () {
                   controller.question(context: context, planId: planId, amount: (amount ?? 0).toString());
                   // showDialog(

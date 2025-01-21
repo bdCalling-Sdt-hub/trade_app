@@ -174,21 +174,13 @@ class _UserNavBarState extends State<NavBar> {
     super.initState();
   }
 
-GeneralController generalController = Get.find<GeneralController>();
-
-
-
+  GeneralController generalController = Get.find<GeneralController>();
 
   @override
   Widget build(BuildContext context) {
-
-
     return Stack(
       clipBehavior: Clip.none,
-
-
-        fit: StackFit.loose,
-
+      fit: StackFit.loose,
       children: [
         // youtubeController != null
         //     ? SizedBox(
@@ -204,7 +196,6 @@ GeneralController generalController = Get.find<GeneralController>();
         //     child:
         //     SizedBox()),
         Container(
-
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           color: Colors.white,
           height: 95.h,
@@ -215,12 +206,10 @@ GeneralController generalController = Get.find<GeneralController>();
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(
               unselectedIcon.length,
-                  (index) => InkWell(
+              (index) => InkWell(
                 onTap: () {
-
-
-    onTap(index);
-    },
+                  onTap(index);
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -231,14 +220,16 @@ GeneralController generalController = Get.find<GeneralController>();
                       height: 24.h,
                       width: 24.w,
                       // ignore: deprecated_member_use
-                      color:
-                      index == bottomNavIndex ? AppColors.blue : Colors.black,
+                      color: index == bottomNavIndex
+                          ? AppColors.blue
+                          : Colors.black,
                     ),
                     SizedBox(height: 4.h),
                     CustomText(
                       text: userNavText[index],
-                      color:
-                      index == bottomNavIndex ? AppColors.blue : Colors.black,
+                      color: index == bottomNavIndex
+                          ? AppColors.blue
+                          : Colors.black,
                     ),
                   ],
                 ),
@@ -314,16 +305,7 @@ GeneralController generalController = Get.find<GeneralController>();
         //     ),
         //   );
         // }),
-
       ],
-
-
-
-
-
-
-
-
     );
   }
 
@@ -334,19 +316,19 @@ GeneralController generalController = Get.find<GeneralController>();
           context.pushNamed(RoutePath.homeScreen);
           break;
         case 1:
-        // Get.to(() => const ChatScreen());
+          // Get.to(() => const ChatScreen());
           context.pushNamed(RoutePath.chatScreen);
           break;
         case 2:
-        // Get.to(() => CategoryScreen());
+          // Get.to(() => CategoryScreen());
           context.pushNamed(RoutePath.categoryScreen);
           break;
         case 3:
-        // Get.to(() => const PostScreen());
+          // Get.to(() => const PostScreen());
           context.pushNamed(RoutePath.postScreen);
           break;
         case 4:
-        // Get.to(() => const ProfileScreen());
+          // Get.to(() => const ProfileScreen());
           context.pushNamed(RoutePath.profileScreen);
       }
     }
