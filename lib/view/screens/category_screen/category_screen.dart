@@ -71,18 +71,11 @@ class CategoryScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return CustomCategories(
                   onTap: () {
-                    print(controller
-                        .popularCategoryList.value[index].name ??
-                        "");
-
+                    print(controller.popularCategoryList.value[index].name ?? "");
                     context.pushNamed(RoutePath.subCategoryScreen,extra: controller.popularCategoryList.value[index].name ?? '');
-
                   },
-                  image:
-                  '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
-                  name:
-                  controller.popularCategoryList.value[index].name ??
-                      "",
+                  image: '${ApiUrl.baseUrl}${controller.popularCategoryList.value[index].image ?? ''}',
+                  name: controller.popularCategoryList.value[index].name ?? "",
                 );
               },
             );

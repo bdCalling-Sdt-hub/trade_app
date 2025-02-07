@@ -10,6 +10,7 @@ class ApiUrl {
   static const resend = "/auth/resend-active";
   static const activeUser = "/auth/activate-user";
   static const login = "/auth/login";
+  static const deleteAccount = "/auth/delete-account";
   static const forgotPassword = "/auth/forgot-password";
   static const resendVerify = "/auth/resend-verify";
   static const verifyOtp = "/auth/verify-otp";

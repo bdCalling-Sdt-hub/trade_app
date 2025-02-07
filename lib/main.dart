@@ -35,6 +35,7 @@ Future<void> main() async {
 
   SocketApi.init();
   //SystemUtil.setStatusBarColor(color: Colors.transparent);
+
   Stripe.publishableKey =
       "pk_test_51Q69G2L8xn5o73J1fDJ9iprBk2h3Kjbj1zXs1Rll89x1qFFXPAtHqyZ667hyVpAIlUvIJRzzhDXmRxQ6r9tOeOlZ00mZDAdEoI";
   runApp(
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
         routeInformationParser: AppRouter.route.routeInformationParser,
         routerDelegate: AppRouter.route.routerDelegate,
         routeInformationProvider: AppRouter.route.routeInformationProvider,
+        //transitionDuration: Duration(seconds: 1),
       ),
     );
   }

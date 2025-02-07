@@ -33,6 +33,14 @@ Future <Map<String, String>> basicHeaderInfo() async{
   };
 }
 
+Future<Map<String, String>> bearerHeaderInfoForDelete() async {
+  final token = await SharePrefsHelper.getString(AppConstants.token);
+  print(token);
+  return {
+    HttpHeaders.authorizationHeader: "Bearer $token",
+  };
+}
+
 Future<Map<String, String>> bearerHeaderInfo() async {
   DBHelper dbHelper = serviceLocator();
   final token = await SharePrefsHelper.getString(AppConstants.token);
@@ -626,7 +634,9 @@ class ApiClient {
       {String? url,
       bool isBasic = false,
       int duration = 30,
-      bool showResult = false,
+        Map<String, dynamic>? body,
+       // Map<String, String>? headers,
+        bool showResult = false,
       required BuildContext context}) async {
     /// ======================- Check Internet ===================
 
@@ -646,8 +656,9 @@ class ApiClient {
 
       final response = await http
           .delete(
+        body: body,
             Uri.parse(url!),
-            headers: headers,
+            headers: await bearerHeaderInfoForDelete(),
           )
           .timeout(Duration(seconds: duration));
 

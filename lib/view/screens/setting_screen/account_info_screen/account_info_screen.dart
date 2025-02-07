@@ -34,7 +34,7 @@ class AccountInfoScreen extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: SingleChildScrollView(
-            child:Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
@@ -66,21 +66,8 @@ class AccountInfoScreen extends StatelessWidget {
                           border: Border.all(
                               width: 1.sp, color: AppColors.white700),
                         ),
-                        child: profileController.imageFile.value == null
-                            ? CustomNetworkImage(
-                            boxShape: BoxShape.circle,
-                            imageUrl: profileController.profileModel.value.data?.result
-                                ?.profileImage
-                                ?.startsWith('https') ??
-                                false
-                                ? profileController.profileModel.value.data?.result
-                                ?.profileImage ??
-                                ""
-                                : '${ApiUrl.baseUrl}${profileController.profileModel.value.data?.result?.profileImage ?? ""}',
-                            // imageUrl: AppImages.user3,
-                            height: 90.w,
-                            width: 90.w)
-                            : Container(
+                        child: profileController.imageFile.value != null
+                            ?Container(
                           height: 90.w,
                           width: 90.w,
                           decoration: BoxDecoration(
@@ -92,7 +79,13 @@ class AccountInfoScreen extends StatelessWidget {
                                 ),
                                 fit: BoxFit.cover),
                           ),
-                        ),
+                        )
+                            :  CustomNetworkImage(
+                            boxShape: BoxShape.circle,
+                            imageUrl:  '${ApiUrl.baseUrl}${profileController.profileModel.value.data?.result?.profileImage ?? ""}',
+                            // imageUrl: AppImages.user3,
+                            height: 90.w,
+                            width: 90.w),
                       )),
                 ),
                 SizedBox(
@@ -111,6 +104,7 @@ class AccountInfoScreen extends StatelessWidget {
 
                 ///==========================email==============
                 CustomFromCard(
+                    readOnly: true,
                     title: AppStrings.email.tr,
                     controller: profileController.emailController),
 
@@ -126,11 +120,11 @@ class AccountInfoScreen extends StatelessWidget {
                 profileController.profileUpdateLoading.value
                     ? const CustomLoader()
                     : CustomButton(
-                  onTap: () {
-                    profileController.updateProfile(context: context);
-                  },
-                  title: AppStrings.update.tr,
-                )
+                        onTap: () {
+                          profileController.updateProfile(context: context);
+                        },
+                        title: AppStrings.update.tr,
+                      )
               ],
             ),
           ),

@@ -19,63 +19,76 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ProfileController extends GetxController {
 
-  List<Map<String,String>> helpList=[
+
+  List<Map<String, String>> helpList = [
     {
-      'ans':'What is a product swap?',
-      'que': 'A product swap allows users to exchange items they no longer need for something they want, without using money.'
+      'ans': 'What is a product swap?',
+      'que':
+          'A product swap allows users to exchange items they no longer need for something they want, without using money.'
     },
     {
-      'ans':'Is there a fee to use this platform?',
+      'ans': 'Is there a fee to use this platform?',
       'que': 'No, our platform is free to use for listing and swapping items.'
     },
     {
-      'ans':'What types of products can I swap?',
-      'que': 'You can swap almost anything, such as electronics, clothing, furniture, books, or even services, as long as it complies with our terms and conditions.'
+      'ans': 'What types of products can I swap?',
+      'que':
+          'You can swap almost anything, such as electronics, clothing, furniture, books, or even services, as long as it complies with our terms and conditions.'
     },
     {
-      'ans':'How do I contact someone for a swap?',
-      'que': 'Use the chat feature on the platform to discuss the details and finalize the swap arrangement.'
+      'ans': 'How do I contact someone for a swap?',
+      'que':
+          'Use the chat feature on the platform to discuss the details and finalize the swap arrangement.'
     },
     {
-      'ans':'What if the product I receive is not as described?',
-      'que': 'Please report the issue to our support team. We encourage users to share accurate descriptions and images of their items.'
+      'ans': 'What if the product I receive is not as described?',
+      'que':
+          'Please report the issue to our support team. We encourage users to share accurate descriptions and images of their items.'
     },
     {
-      'ans':'Are there safety guidelines for meeting in person to exchange items?',
-      'que': 'Yes, we recommend meeting in public places and bringing a friend for added safety when exchanging items in person.'
+      'ans':
+          'Are there safety guidelines for meeting in person to exchange items?',
+      'que':
+          'Yes, we recommend meeting in public places and bringing a friend for added safety when exchanging items in person.'
     },
     {
-      'ans':'How do I list a product for swapping?',
-      'que': 'You can create a listing by uploading photos of your item, adding a description, and specifying what you are looking to swap it for.'
+      'ans': 'How do I list a product for swapping?',
+      'que':
+          'You can create a listing by uploading photos of your item, adding a description, and specifying what you are looking to swap it for.'
     },
     {
-      'ans':'How do I find products available for swapping?',
-      'que': 'Browse the available items by category, location, or search keywords to find what you are looking for.'
+      'ans': 'How do I find products available for swapping?',
+      'que':
+          'Browse the available items by category, location, or search keywords to find what you are looking for.'
     },
     {
-      'ans':'What happens if I don’t find a suitable swap?',
-      'que': 'You can keep your listing active until a suitable swap offer comes through. You may also explore other categories for options.'
-    }, {
-      'ans':'Is there a rating or review system?',
-      'que': 'Yes, users can leave ratings and reviews for each other to ensure trust and transparency in the swapping process.'
+      'ans': 'What happens if I don’t find a suitable swap?',
+      'que':
+          'You can keep your listing active until a suitable swap offer comes through. You may also explore other categories for options.'
     },
     {
-      'ans':'Can I swap products with users in other locations?',
-      'que': 'Yes, but you’ll need to discuss and agree on shipping arrangements with the other user.'
+      'ans': 'Is there a rating or review system?',
+      'que':
+          'Yes, users can leave ratings and reviews for each other to ensure trust and transparency in the swapping process.'
     },
     {
-      'ans':'What items are prohibited on this platform?',
-      'que': 'Prohibited items include illegal substances, weapons, stolen goods, and items that violate intellectual property rights. Please refer to our full list of prohibited items in the terms and conditions.'
+      'ans': 'Can I swap products with users in other locations?',
+      'que':
+          'Yes, but you’ll need to discuss and agree on shipping arrangements with the other user.'
     },
-
+    {
+      'ans': 'What items are prohibited on this platform?',
+      'que':
+          'Prohibited items include illegal substances, weapons, stolen goods, and items that violate intellectual property rights. Please refer to our full list of prohibited items in the terms and conditions.'
+    },
   ];
 
-  TextEditingController reportController =TextEditingController();
+  TextEditingController reportController = TextEditingController();
 
   ///============================Multi Image picker method ================
   RxList<File> selectedImagesMulti = <File>[].obs;
   final ImagePicker picker = ImagePicker();
- // ApiClient apiClient = serviceLocator();
+  // ApiClient apiClient = serviceLocator();
   void pickMultiImage() async {
     try {
       final pickedFiles = await picker.pickMultiImage(
@@ -113,28 +126,33 @@ class ProfileController extends GetxController {
   }
 
   RxBool reportLoading = false.obs;
-  reportAdd({required BuildContext context,required String swapId,required String againstUser}) async {
+  reportAdd(
+      {required BuildContext context,
+      required String swapId,
+      required String againstUser}) async {
     reportLoading.value = true;
 
     update();
     Map<String, dynamic> body = {
       "againstUser": againstUser,
       "description": reportController.text,
-      "swapId" : swapId
+      "swapId": swapId
     };
     List<MultipartBody> multipartBodyList = selectedImagesMulti.map((file) {
       return MultipartBody("reportImage", file);
     }).toList();
     var response = selectedImagesMulti.isEmpty
         ? await apiClient.post(
-        url: ApiUrl.createReport.addBaseUrl, context: context, body: body,showResult: true)
+            url: ApiUrl.createReport.addBaseUrl,
+            context: context,
+            body: body,
+            showResult: true)
         : await apiClient.multipartRequest(
-        url: ApiUrl.createReport.addBaseUrl,
-        reqType: 'Post',
-        body: body,
-        multipartBody: multipartBodyList,
-        showResult: true
-    );
+            url: ApiUrl.createReport.addBaseUrl,
+            reqType: 'Post',
+            body: body,
+            multipartBody: multipartBodyList,
+            showResult: true);
 
     if (response.statusCode == 200) {
       reportController.clear();
@@ -147,9 +165,8 @@ class ProfileController extends GetxController {
     reportLoading.value = false;
   }
 
-
-
   RxInt selectedFqw = 100000.obs;
+
   ///============================Image picker method================
   RxString image = "".obs;
 
@@ -402,24 +419,18 @@ class ProfileController extends GetxController {
     );
 
     if (response.statusCode == 200) {
-
       commentController.clear();
       toastMessage(message: response.body["message"]);
       AppRouter.route.pushNamed(RoutePath.swapHistoryScreen);
-
-    }
-    else if (response.statusCode == 402) {
+    } else if (response.statusCode == 402) {
       toastMessage(message: response.body["message"]);
-
     } else {
       // ignore: use_build_context_synchronously
       checkApi(response: response, context: context);
     }
 
     reviewLoading.value = false;
-
   }
-
 
   Rx<HelpCenterModel> helpCenterModel = HelpCenterModel().obs;
   Future<void> getFaq({BuildContext? context}) async {
@@ -427,7 +438,7 @@ class ProfileController extends GetxController {
     refresh();
 
     var response =
-    await apiClient.get(url: ApiUrl.getFaq.addBaseUrl, showResult: true);
+        await apiClient.get(url: ApiUrl.getFaq.addBaseUrl, showResult: true);
 
     if (response.statusCode == 200) {
       helpCenterModel.value = HelpCenterModel.fromJson(response.body);

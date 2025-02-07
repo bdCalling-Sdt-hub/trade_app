@@ -200,7 +200,7 @@ class _MyMembershipScreenState extends State<MyMembershipScreen> {
                                   )
                                 : CustomButton(
                                     onTap: () {
-                                      toastMessage(message: 'Waiting for admin approval',color: Colors.red);
+                                      toastMessage(message: 'You can apply for membership for subscription.',color: Colors.red);
                                     },
                                     fillColor: Colors.grey,
                                     title: AppStrings.payNow,

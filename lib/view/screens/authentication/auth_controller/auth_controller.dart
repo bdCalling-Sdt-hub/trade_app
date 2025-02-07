@@ -25,6 +25,9 @@ class AuthController extends GetxController {
       TextEditingController(text: 'nadimhasannh48@gmail.com');
   TextEditingController passWordSignIn =
       TextEditingController(text: 'Nadim12345');
+  TextEditingController passDelete = TextEditingController();
+
+  RxInt size=0.obs;
 
   saveInformation({required Response<dynamic> response}) {
     // dbHelper.storeTokenUserdata(
@@ -104,7 +107,6 @@ class AuthController extends GetxController {
         body: body,
         isBasic: true,
         url: ApiUrl.register.addBaseUrl);
-
     if (response.statusCode == 200) {
       firstNameController.clear();
       lastNameController.clear();
@@ -124,6 +126,38 @@ class AuthController extends GetxController {
 
     signUpLoading.value = false;
     signUpLoading.refresh();
+  }
+
+  deleteAccount({required BuildContext context}) async {
+    signInLoading.value = true;
+
+
+    var body = {
+      "email": signInEmail.value.text,
+      "password": passWordSignIn.value.text,
+    };
+    var response = await apiClient.delete(
+        showResult: true,
+        context: context,
+        body: body,
+
+       // isBasic: true,
+        url: ApiUrl.deleteAccount.addBaseUrl);
+
+    if (response.statusCode == 200) {
+      AppRouter.route.replaceNamed(RoutePath.signInScreen);
+      toastMessage(message: response.body["message"]);
+      signInEmail.clear();
+      passWordSignIn.clear();
+    } else if (response.statusCode == 404) {
+      toastMessage(message: response.body["message"]);
+    } else {
+      // ignore: use_build_context_synchronously
+      // checkApi(response: response, context: context);
+    }
+
+    signInLoading.value = false;
+    signInLoading.refresh();
   }
 
   /// ===================== Resent OTP ======================

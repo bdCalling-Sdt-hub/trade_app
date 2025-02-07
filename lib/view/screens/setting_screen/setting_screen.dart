@@ -11,6 +11,7 @@ import 'package:trade_app/view/components/custom_app_bar/custom_app_bar.dart';
 import 'package:trade_app/view/components/custom_profile_card/custom_profile_card.dart';
 import 'package:trade_app/view/components/custom_text/custom_text.dart';
 import 'package:trade_app/view/components/nav_bar/nav_bar.dart';
+import 'package:trade_app/view/screens/setting_screen/delete_popup.dart';
 
 class SettingScreen extends StatelessWidget {
      SettingScreen({super.key});
@@ -112,6 +113,18 @@ class SettingScreen extends StatelessWidget {
                 },
                 text: AppStrings.helpCenter.tr,
                 leadingIcon: AppIcons.help,
+              ),
+
+              ///==================== delete account ================
+              CustomProfileCard(
+                isCevron: true,
+                onTap: () {
+                  showDialog(context: context, builder: (context){
+                    return DeletePopup();
+                  });
+                },
+                text: 'Delete Account',
+                leadingIcon: AppIcons.settings,
               ),
             ],
           )
