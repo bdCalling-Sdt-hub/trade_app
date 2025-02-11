@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_icons/app_icons.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -13,19 +15,18 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     this.cursorColor = Colors.black,
-    this.inputTextStyle,
+    this.inputTextStyle = const TextStyle(height: 1),
     this.textAlignVertical = TextAlignVertical.center,
     this.textAlign = TextAlign.start,
     this.onChanged,
     this.maxLines = 1,
     this.validator,
     this.hintText,
-    this.hintStyle,
-    this.fillColor = Colors.red,
+    this.fillColor = const Color(0xffFFFFFF),
     this.suffixIcon,
     this.suffixIconColor,
     this.fieldBorderRadius = 8,
-    this.fieldBorderColor = const Color(0xffB5D8EE),
+    this.fieldBorderColor = AppColors.black300,
     this.isPassword = false,
     this.isPrefixIcon = true,
     this.readOnly = false,
@@ -47,7 +48,6 @@ class CustomTextField extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final FormFieldValidator<String>? validator;
   final String? hintText;
-  final TextStyle? hintStyle;
   final Color? fillColor;
   final Color? suffixIconColor;
   final Widget? suffixIcon;
@@ -71,6 +71,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorHeight: 20,
       onTap: widget.onTap,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       inputFormatters: widget.inputFormatters,
@@ -90,24 +91,29 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textAlign: widget.textAlign,
       textAlignVertical: widget.textAlignVertical,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
         errorMaxLines: 2,
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle,
+        hintStyle: TextStyle(
+            height: 1,
+            color: AppColors.black200,
+            fontWeight: FontWeight.w400,
+            fontSize: 16.h),
         fillColor: widget.fillColor,
         filled: true,
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? GestureDetector(
-          onTap: toggle,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: SvgPicture.asset(
-              obscureText ? AppIcons.eyeOff : AppIcons.eye,
-              height: 22,
-              width: 22,
-            ),
-          ),
-        )
+                onTap: toggle,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: SvgPicture.asset(
+                    obscureText ? AppIcons.eyeOff : AppIcons.eye,
+                    height: 22,
+                    width: 22,
+                  ),
+                ),
+              )
             : widget.suffixIcon,
         suffixIconColor: widget.suffixIconColor,
         border: OutlineInputBorder(

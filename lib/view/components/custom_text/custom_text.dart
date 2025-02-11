@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:trade_app/utils/app_colors/app_colors.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText(
@@ -10,9 +12,9 @@ class CustomText extends StatelessWidget {
         this.right = 0,
         this.top = 0,
         this.bottom = 0,
-        this.fontSize = 12,
-        this.fontWeight = FontWeight.w300,
-        this.color = Colors.amber,
+        this.fontSize = 14,
+        this.fontWeight = FontWeight.w400,
+        this.color = AppColors.black500,
         required this.text,
         this.overflow = TextOverflow.ellipsis,
         this.decoration
@@ -43,14 +45,13 @@ class CustomText extends StatelessWidget {
         text,
         maxLines: maxLines,
         overflow: overflow,
-        style: TextStyle(
+        style: GoogleFonts.inter(
           fontSize: fontSize.w,
           fontWeight: fontWeight,
           color: color,
           decoration: decoration,
-          decorationColor: Colors.black,
+          decorationColor: AppColors.blue500,
           decorationThickness:2,
-
         ),
       ),
     );
