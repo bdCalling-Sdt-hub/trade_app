@@ -2,123 +2,82 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleDevelopmentRegion</key>
-    <string>$(DEVELOPMENT_LANGUAGE)</string>
-    <key>CFBundleDisplayName</key>
-    <string>SwiftSwap</string>
-    <key>CFBundleExecutable</key>
-    <string>$(EXECUTABLE_NAME)</string>
-    <key>CFBundleIdentifier</key>
-    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-    <key>CFBundleInfoDictionaryVersion</key>
-    <string>6.0</string>
-    <key>CFBundleName</key>
-    <string>trade_app</string>
-    <key>CFBundlePackageType</key>
-    <string>APPL</string>
-    <key>CFBundleShortVersionString</key>
-    <string>$(FLUTTER_BUILD_NAME)</string>
-    <key>CFBundleSignature</key>
-    <string>????</string>
-    <key>CFBundleVersion</key>
-    <string>$(FLUTTER_BUILD_NUMBER)</string>
-    <key>LSRequiresIPhoneOS</key>
-    <true/>
-    <key>UILaunchStoryboardName</key>
-    <string>LaunchScreen</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Trade App</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>SwiftSwap</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 
-    <!-- Supported Orientations -->
-    <key>UISupportedInterfaceOrientations</key>
-    <array>
-        <string>UIInterfaceOrientationPortrait</string>
-        <string>UIInterfaceOrientationLandscapeLeft</string>
-        <string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
-
-    <key>UISupportedInterfaceOrientations~ipad</key>
-    <array>
-        <string>UIInterfaceOrientationPortrait</string>
-        <string>UIInterfaceOrientationPortraitUpsideDown</string>
-        <string>UIInterfaceOrientationLandscapeLeft</string>
-        <string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
-
-    <!-- Permissions -->
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>This app requires access to your photo library.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>This app requires access to your camera for taking photos or scanning items.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>This app requires access to your microphone for video and audio recording.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>This app needs access to your location for better service delivery.</string>
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>We need your location to check connectivity for network-dependent features.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>We need your location to check connectivity for network-dependent features.</string>
-
-    <!-- URL Schemes -->
+    <!------ URL Launcher --------------->
     <key>LSApplicationQueriesSchemes</key>
     <array>
-        <string>tel</string>
-        <string>http</string>
-        <string>https</string>
+      <string>tel</string>
     </array>
 
-    <!-- Stripe Configuration -->
+    <!------ Stripe -->
     <key>NSCameraUsageDescription</key>
-    <string>Scan your card to add it automatically.</string>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-    <key>NSExceptionDomains</key>
-    <dict>
-        <key>stripe.com</key>
-        <dict>
-            <key>NSExceptionAllowsInsecureHTTPLoads</key>
-            <true/>
-            <key>NSIncludesSubdomains</key>
-            <true/>
-        </dict>
-    </dict>
+    <string>Scan your card to add it automatically</string>
 
-    <key>STRIPE_PUBLISHABLE_KEY</key>
-    <string>pk_test_51Q69G2L8xn5o73J1fDJ9iprBk2h3Kjbj1zXs1Rll89x1qFFXPAtHqyZ667hyVpAIlUvIJRzzhDXmRxQ6r9tOeOlZ00mZDAdEoI</string>
-
-
-    <!-- File Sharing -->
-    <key>UIFileSharingEnabled</key>
-    <true/>
-    <key>LSSupportsOpeningDocumentsInPlace</key>
-    <true/>
-
-    <!-- Internet Connection Checker -->
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
-
-    <!-- Flutter Analytics -->
-    <key>NSUserTrackingUsageDescription</key>
-    <string>This identifier will be used to deliver personalized ads to you.</string>
-
-    <!-- Firebase Messaging -->
+    <!-- Firebase -->
     <key>FirebaseAppDelegateProxyEnabled</key>
     <false/>
-    <key>NSUserNotificationUsageDescription</key>
-    <string>We use notifications to inform you of important updates.</string>
 
-    <!-- Flutter Webview -->
-    <key>io.flutter.embedded_views_preview</key>
-    <true/>
+    <!-- Local Notifications -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+        <string>audio</string>
+    </array>
 
-    <!-- microphone access & contact access -->
-    <key>NSContactsUsageDescription</key>
-    <string>This app requires access to your contacts to function properly.</string>
+    <!-- Merchant -->
+    <key>merchant.com.swipswap.jorge</key>
+    <string>merchant.com.swipswap.jorge</string>
+
+    <!-- Privacy - Missing Purpose Strings -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires access to your photo library to allow you to upload and select images.</string>
 
     <key>NSMicrophoneUsageDescription</key>
-    <string>This app requires microphone access for voice features.</string>
-
+    <string>This app requires access to your microphone for voice and audio-related features.</string>
 
 </dict>
 </plist>

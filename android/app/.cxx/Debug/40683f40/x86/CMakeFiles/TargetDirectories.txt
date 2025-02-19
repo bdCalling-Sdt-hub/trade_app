@@ -1,0 +1,2 @@
+/Users/sdtbdc/Desktop/trade_app/android/app/.cxx/Debug/40683f40/x86/CMakeFiles/edit_cache.dir
+/Users/sdtbdc/Desktop/trade_app/android/app/.cxx/Debug/40683f40/x86/CMakeFiles/rebuild_cache.dir

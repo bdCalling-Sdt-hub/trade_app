@@ -23,7 +23,7 @@ class PackageController extends GetxController {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate.value,
-      firstDate: DateTime(2015, 8),
+      firstDate: DateTime(1800, 8),
       lastDate: DateTime(2101),
       builder: (BuildContext context, Widget? child) {
         return Theme(

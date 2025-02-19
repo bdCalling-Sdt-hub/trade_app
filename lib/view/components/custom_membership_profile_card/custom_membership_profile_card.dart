@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:range_slider_flutter/range_slider_flutter.dart';
 import 'package:trade_app/controller/membership_controller/membership_controller.dart';
 import 'package:trade_app/utils/app_colors/app_colors.dart';
 import 'package:trade_app/utils/app_strings/app_strings.dart';

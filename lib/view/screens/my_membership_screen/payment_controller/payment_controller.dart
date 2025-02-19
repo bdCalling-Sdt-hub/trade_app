@@ -11,7 +11,7 @@ import 'package:trade_app/service/check_api.dart';
 import 'package:trade_app/utils/ToastMsg/toast_message.dart';
 import 'package:trade_app/utils/app_const/app_const.dart';
 
-class PaymentController extends GetxController {
+/*class PaymentController extends GetxController {
 
   ApiClient apiClient = ApiClient();
 
@@ -66,10 +66,11 @@ class PaymentController extends GetxController {
         print('================== ${paymentIntentData.isNotEmpty}');
         await Stripe.instance.initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
-          merchantDisplayName: 'Nadim',
+          merchantDisplayName: 'Swift Swap',
           paymentIntentClientSecret: paymentIntentData['client_secret'],
           allowsDelayedPaymentMethods: true,
           style: ThemeMode.light,
+
         )).onError((e,s){
           print('===================== error response ${e}');
         });
@@ -81,7 +82,6 @@ class PaymentController extends GetxController {
           transactionId: paymentIntentData['transactionId'] ?? "",
           context: context, userId: userId, planId: planId, subscriptionId: subscriptionId,
         );
-
         toastMessage(message: "Payment Successful");
       }
     } catch (e) {
@@ -120,6 +120,142 @@ class PaymentController extends GetxController {
     var response = await apiClient.post(url: ApiUrl.successIntent.addBaseUrl, context: context!, body: body);
     if (response.statusCode == 200) {
       AppRouter.route.pushNamed(RoutePath.navBar, extra: 0);
+
+      toastMessage(message: response.body["message"]);
+    } else {
+      checkApi(response: response, context: context);
+    }
+  }
+}*/
+
+class PaymentController extends GetxController {
+
+  ApiClient apiClient = ApiClient();
+
+  ///========================= Create Payment Intent =========================
+  Map<String, dynamic> value = {};
+  Future<Map<String, dynamic>> createPaymentIntent(
+      {required int price, required BuildContext context}) async {
+    //  var bearerToken = await SharePrefsHelper.getString(AppConstants.bearerToken);
+    // var mainHeaders = {
+    //   'Content-Type': 'application/json',
+    //   //'Accept': 'application/json',
+    //   'Authorization': 'Bearer $bearerToken'
+    // };
+    Map<String,dynamic> body = {
+      "amount": price,
+    };
+    try {
+      var response = await apiClient.post(
+        url: ApiUrl.paymentIntent.addBaseUrl, context: context, body: body,showResult: true,);
+      debugPrint("Payment Intent body ${response.statusCode}");
+
+      if (response.statusCode == 200) {
+        print('================== ${response.body["data"]}');
+        return response.body["data"];
+      } else {
+        // checkApi(response: response, context: context);
+        toastMessage(message: 'response error');
+        return {};
+      }
+    } catch (error) {
+      print(error);
+      return {};
+    }
+  }
+
+  ///========================= Make Payment =========================
+
+  Future<void> makePayment({
+    required int amount,
+    required String userId,
+    required String planId,
+    required String subscriptionId,
+    required BuildContext context,
+  }) async {
+    try {
+      // Step 1: Create Payment Intent
+      Map<String, dynamic> paymentIntentData =
+      await createPaymentIntent(price: amount, context: context);
+
+
+      if (paymentIntentData.isNotEmpty) {
+        print('================== ${paymentIntentData.isNotEmpty}');
+
+        final bool applePaySupported = await Stripe.instance.isPlatformPaySupported();
+        if (!applePaySupported) {
+          throw Exception('Apple Pay is not available on this device.');
+        }
+
+
+
+        // Step 2: Initialize Payment Sheet with Apple Pay support
+        await Stripe.instance.initPaymentSheet(
+          paymentSheetParameters: SetupPaymentSheetParameters(
+            merchantDisplayName: 'Swift Swap',
+            paymentIntentClientSecret: paymentIntentData['client_secret'],
+            allowsDelayedPaymentMethods: true,
+            style: ThemeMode.light,
+            applePay: PaymentSheetApplePay(merchantCountryCode: "US"),
+          ),
+        ).onError((e, s) {
+          print('===================== error response ${e}');
+        });
+
+        // Step 3: Present Payment Sheet
+        await Stripe.instance.presentPaymentSheet();
+
+        // Step 4: Send response to the server
+        makeOrder(
+          price: amount,
+          transactionId: paymentIntentData['transactionId'] ?? "",
+          context: context,
+          userId: userId,
+          planId: planId,
+          subscriptionId: subscriptionId,
+        );
+
+        toastMessage(message: "Payment Successful");
+      }
+    } catch (e) {
+      debugPrint("Error ================>>>>>>>>>>>>>${e.toString()}");
+    }
+  }
+
+
+
+
+  ///============================ Send Response to server ==============================
+
+  makeOrder({
+
+    required int price,
+
+    required String transactionId,
+    required String userId,
+    required String planId,
+    required String subscriptionId,
+    required BuildContext context,
+  }) async {
+    var bearerToken =
+    await SharePrefsHelper.getString(AppConstants.bearerToken);
+
+    var mainHeaders = {
+      'Content-Type': 'application/json',
+      //'Accept': 'application/json',
+      'Authorization': 'Bearer $bearerToken'
+    };
+
+    Map<String, dynamic> body = {
+      "amount": price,
+      "user": userId,
+      "transaction_id": transactionId,
+      "plan_id": planId,
+      "package_id": subscriptionId,
+    };
+    var response = await apiClient.post(url: ApiUrl.successIntent.addBaseUrl, context: context!, body: body);
+    if (response.statusCode == 200) {
+      AppRouter.route.pushNamed(RoutePath.homeScreen);
 
       toastMessage(message: response.body["message"]);
     } else {
